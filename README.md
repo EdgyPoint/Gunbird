@@ -1,14 +1,14 @@
 # Gunbird
 
-Ganbaado
+For information about the game, check the wiki on this repository: https://github.com/EdgyPoint/Project-1/wiki.
 
 ## Installation
 
-Execute the executable
+Unzip the folder in whatever directory you prefer.
 
 ## Usage
 
-TODO: Write usage instructions
+Execute "Gunbird.exe".
 
 ## Contributing
 
@@ -24,8 +24,8 @@ TODO: Write history
 
 ## Credits
 
-TODO: Write credits
+Edgypoint
 
 ## License
 
-TODO: Write license
+Unlicensed
