@@ -24,8 +24,13 @@ TODO: Write history
 
 ## Credits
 
+Psikyo
 Edgypoint
+Ratkid Studio
+Watermelon $quad
+Coded Dreams
+Frozensloth Studios
 
 ## License
 
-Unlicensed
+We don't own any rights over Gunbird and its intellectual properties. The credit for the game goes entirely to Psikyo, currently property of X-Nauts. 
