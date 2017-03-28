@@ -30,8 +30,8 @@ bool ModuleMineScene::Start()
 	LOG("Loading mine scene");
 
 	graphics = App->textures->Load("assets/images/Mine Background.png");
-	App->audio->Load("assets/bgm/Gunbird OST Mine.ogg");
-
+	music = App->audio->Load("assets/bgm/Gunbird OST Mine.ogg");
+	Mix_PlayMusic(music, -1);
 	return true;
 }
 

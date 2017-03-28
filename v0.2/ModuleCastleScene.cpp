@@ -30,7 +30,8 @@ bool ModuleCastleScene::Start()
 	LOG("Loading castle scene");
 
 	graphics = App->textures->Load("assets/images/Castle Background.png");
-	App->audio->Load("assets/bgm/Gunbird OST Castle.ogg");
+	music = App->audio->Load("assets/bgm/Gunbird OST Castle.ogg");
+	Mix_PlayMusic(music, -1);
 	return true;
 }
 
