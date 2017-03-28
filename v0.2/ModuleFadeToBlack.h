@@ -13,6 +13,7 @@ public:
 	bool Start();
 	update_status Update();
 	bool FadeToBlack(Module* module_off, Module* module_on, float time = 2.0f);
+	bool fading = false;
 
 private:
 
@@ -28,6 +29,7 @@ private:
 	SDL_Rect screen;
 	Module* module_disabling;
 	Module* module_enabling;
+
 };
 
 #endif //__MODULEFADETOBLACK_H__

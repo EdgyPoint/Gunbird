@@ -3,21 +3,19 @@
 #include "ModuleRender.h"
 #include "ModuleInput.h"
 #include "ModuleTextures.h"
-#include "ModuleSceneKen.h"
-#include "ModuleSceneHonda.h"
+#include "ModuleScoreScene.h"
 #include "ModulePlayer.h"
 #include "ModuleFadeToBlack.h"
 
 Application::Application()
 {
 	modules[0] = window = new ModuleWindow();
-	modules[1] = render = new ModuleRender();
-	modules[2] = input = new ModuleInput();
+	modules[1] = input = new ModuleInput();
+	modules[2] = render = new ModuleRender();
 	modules[3] = textures = new ModuleTextures();
-	modules[4] = scene_honda = new ModuleSceneHonda();
-	modules[5] = scene_ken = new ModuleSceneKen();
-	modules[6] = player = new ModulePlayer();
-	modules[7] = fade = new ModuleFadeToBlack();
+	modules[4] = scene_score = new ModuleScoreScene();
+	modules[5] = player = new ModulePlayer();
+	modules[6] = fade = new ModuleFadeToBlack();
 }	
 
 Application::~Application()
@@ -33,7 +31,7 @@ bool Application::Init()
 	// Player will be enabled on the first update of a new scene
 	player->Disable();
 	// Disable the map that you do not start with
-	scene_honda->Disable();
+
 
 	for(int i = 0; i < NUM_MODULES && ret == true; ++i)
 		ret = modules[i]->Init();

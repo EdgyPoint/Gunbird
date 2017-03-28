@@ -3,8 +3,8 @@
 #include "Application.h"
 #include "ModuleFadeToBlack.h"
 #include "ModuleRender.h"
-#include "ModuleSceneHonda.h"
-#include "ModuleSceneKen.h"
+
+#include "ModuleScoreScene.h"
 #include "SDL/include/SDL_render.h"
 #include "SDL/include/SDL_timer.h"
 
@@ -56,8 +56,7 @@ update_status ModuleFadeToBlack::Update()
 
 			if (now >= total_time)
 			{
-				App->scene_honda->fading = false;
-				App->scene_ken->fading = false;
+				fading = false;
 				current_step = fade_step::none;
 			}
 			 
