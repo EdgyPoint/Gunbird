@@ -3,7 +3,7 @@
 #include "Application.h"
 #include "ModuleFadeToBlack.h"
 #include "ModuleRender.h"
-
+#include "ModuleMineScene.h"
 #include "ModuleScoreScene.h"
 #include "SDL/include/SDL_render.h"
 #include "SDL/include/SDL_timer.h"

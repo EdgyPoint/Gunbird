@@ -53,6 +53,9 @@
     <ClInclude Include="ModuleScoreScene.h">
       <Filter>Modules</Filter>
     </ClInclude>
+    <ClInclude Include="ModuleMineScene.h">
+      <Filter>Modules</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -83,6 +86,9 @@
       <Filter>Modules</Filter>
     </ClCompile>
     <ClCompile Include="ModuleScoreScene.cpp">
+      <Filter>Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleMineScene.cpp">
       <Filter>Modules</Filter>
     </ClCompile>
   </ItemGroup>

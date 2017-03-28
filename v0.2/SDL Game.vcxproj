@@ -76,6 +76,7 @@
     <ClInclude Include="Module.h" />
     <ClInclude Include="ModuleFadeToBlack.h" />
     <ClInclude Include="ModuleInput.h" />
+    <ClInclude Include="ModuleMineScene.h" />
     <ClInclude Include="ModulePlayer.h" />
     <ClInclude Include="ModuleRender.h" />
     <ClInclude Include="ModuleScoreScene.h" />
@@ -89,6 +90,7 @@
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="ModuleFadeToBlack.cpp" />
     <ClCompile Include="ModuleInput.cpp" />
+    <ClCompile Include="ModuleMineScene.cpp" />
     <ClCompile Include="ModulePlayer.cpp" />
     <ClCompile Include="ModuleRender.cpp" />
     <ClCompile Include="ModuleScoreScene.cpp" />

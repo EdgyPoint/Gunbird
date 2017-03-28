@@ -1,14 +1,3 @@
-﻿  Application.cpp
-  Generating Code...
-  Compiling...
-  ModuleWindow.cpp
-  ModuleTextures.cpp
-  ModuleScoreScene.cpp
-  ModuleRender.cpp
-  ModulePlayer.cpp
-  ModuleInput.cpp
-  ModuleFadeToBlack.cpp
-  Main.cpp
-  Generating Code...
-  SDL Game.vcxproj -> C:\Users\jaumesv1\Documents\GitHub\Project-1\v0.2\Debug\SDL5 Handout.exe
-  SDL Game.vcxproj -> C:\Users\jaumesv1\Documents\GitHub\Project-1\v0.2\Debug\SDL5 Handout.pdb (Full PDB)
+﻿  ModuleScoreScene.cpp
+  SDL Game.vcxproj -> C:\Users\lorienpl\Documents\GitHub\Project-1\v0.2\Debug\SDL5 Handout.exe
+  SDL Game.vcxproj -> C:\Users\lorienpl\Documents\GitHub\Project-1\v0.2\Debug\SDL5 Handout.pdb (Full PDB)

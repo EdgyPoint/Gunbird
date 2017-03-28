@@ -6,15 +6,16 @@
 #include "ModuleRender.h"
 #include "ModuleFadeToBlack.h"
 #include "ModuleScoreScene.h"
-#include "ModuleIntro.h"
-//#include "ModuleIntro"
+#include "ModuleMineScene.h"
+#include "SDL/include/SDL.h"
+
 
 // Reference at https://www.youtube.com/watch?v=OEhmUuehGOA
 
 ModuleScoreScene::ModuleScoreScene()
 {
 	background.h = 320;
-	background.w = 224;
+	background.w = 234;
 	background.x = 0;
 	background.y = 0;
 }
@@ -36,7 +37,7 @@ bool ModuleScoreScene::Start()
 bool ModuleScoreScene::CleanUp()
 {
 	LOG("Unloading score scene");
-
+	SDL_DestroyTexture(graphics);
 
 	return true;
 }
@@ -50,7 +51,7 @@ update_status ModuleScoreScene::Update()
 
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] && fading == false)
 	{
-		App->fade->FadeToBlack(this, App->intro, 2.0f);
+		App->fade->FadeToBlack(this, App->scene_mine, 2.0f);
 		App->fade->fading = true;
 	}
 	// TODO 2: make so pressing SPACE the HONDA stage is loaded

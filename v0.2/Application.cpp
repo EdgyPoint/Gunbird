@@ -3,6 +3,7 @@
 #include "ModuleRender.h"
 #include "ModuleInput.h"
 #include "ModuleTextures.h"
+#include "ModuleMineScene.h"
 #include "ModuleScoreScene.h"
 #include "ModulePlayer.h"
 #include "ModuleFadeToBlack.h"
@@ -13,9 +14,10 @@ Application::Application()
 	modules[1] = input = new ModuleInput();
 	modules[2] = render = new ModuleRender();
 	modules[3] = textures = new ModuleTextures();
-	modules[4] = scene_score = new ModuleScoreScene();
-	modules[5] = player = new ModulePlayer();
-	modules[6] = fade = new ModuleFadeToBlack();
+	modules[4] = scene_mine = new ModuleMineScene();
+	modules[5] = scene_score = new ModuleScoreScene();
+	modules[6] = player = new ModulePlayer();
+	modules[7] = fade = new ModuleFadeToBlack();
 }	
 
 Application::~Application()
@@ -29,7 +31,7 @@ bool Application::Init()
 	bool ret = true;
 
 	// Player will be enabled on the first update of a new scene
-	player->Disable();
+	scene_score->Disable();
 	// Disable the map that you do not start with
 
 
