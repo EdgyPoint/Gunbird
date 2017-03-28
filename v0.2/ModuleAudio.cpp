@@ -7,7 +7,7 @@
 
 ModuleAudio::ModuleAudio()
 {
-	audio[last];
+	audio;
 }
 
 ModuleAudio::~ModuleAudio()
@@ -35,7 +35,7 @@ bool ModuleAudio::CleanUp()
 {
 	LOG("Freeing audio");
 
-	Mix_FreeMusic(audio[last]);
+	Mix_FreeMusic(audio);
 
 	//Mix_FreeMusic();//Free mixer
 	Mix_Quit();
@@ -44,12 +44,12 @@ bool ModuleAudio::CleanUp()
 
 Mix_Music* const ModuleAudio::Load(const char* path)
 {
-	audio[last] = Mix_LoadMUS(path);
-	if (audio[last] == NULL)
+	audio = Mix_LoadMUS(path);
+	if (audio == NULL)
 	{
 		LOG("An error has ocurred when loading the sound: %s", SDL_GetError())
 	}
 
-	return audio[last];
+	return audio;
 }
 

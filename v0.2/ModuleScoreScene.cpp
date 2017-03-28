@@ -32,8 +32,8 @@ bool ModuleScoreScene::Start()
 	LOG("Loading score scene");
 
 	graphics = App->textures->Load("assets/images/Score Screen.png");
-	music = App->audio->Load("assets/bgm/Gunbird OST Character Selection.ogg");
-	Mix_PlayMusic(music, -1);
+	App->audio->audio = App->audio->Load("assets/bgm/Gunbird OST Character Selection.ogg");
+	Mix_PlayMusic(App->audio->audio, -1);
 	return true;
 }
 

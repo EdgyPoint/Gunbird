@@ -6,7 +6,6 @@
 #include "Globals.h"
 
 struct SDL_Texture;
-struct Mix_Music;
 
 class ModuleIntroScene : public Module
 {
@@ -21,7 +20,6 @@ public:
 public:
 
 	SDL_Texture* graphics = nullptr;
-	Mix_Music* music = nullptr;
 	SDL_Rect background;
 	bool fading = false;
 };

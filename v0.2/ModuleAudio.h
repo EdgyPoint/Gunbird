@@ -23,7 +23,7 @@ public:
 	bool CleanUp();
 
 public:
-	Mix_Music* audio[MAX_SONGS];
+	Mix_Music* audio;
 	uint last = 0;
 };
 

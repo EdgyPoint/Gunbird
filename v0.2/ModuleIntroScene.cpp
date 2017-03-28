@@ -32,8 +32,8 @@ bool ModuleIntroScene::Start()
 	LOG("Loading intro scene");
 
 	graphics = App->textures->Load("assets/images/Intro Screen.png");
-	music = App->audio->Load("assets/bgm/Gunbird OST Character Selection.ogg");
-	Mix_PlayMusic(music, -1);
+	App->audio->audio = App->audio->Load("assets/bgm/Gunbird OST Character Selection.ogg");
+	Mix_PlayMusic(App->audio->audio, -1);
 	return true;
 }
 
@@ -42,7 +42,7 @@ bool ModuleIntroScene::CleanUp()
 {
 	LOG("Unloading intro scene");
 	SDL_DestroyTexture(graphics);
-
+	
 	return true;
 }
 
