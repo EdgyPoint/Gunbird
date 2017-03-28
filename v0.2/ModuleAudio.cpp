@@ -26,12 +26,7 @@ bool ModuleAudio::Init()
 		LOG("An error while opening the audio has ocurred: %s", SDL_GetError())
 	}
 
-	ModuleAudio::Load("assets/bgm/Gunbird OST Castle.ogg");
-
-	if (Mix_PlayMusic(audio[last], -1) == -1)
-	{
-		LOG("An error has ocurred while reproducing the audio %s", SDL_GetError())
-	}
+	
 
 	return true;
 }

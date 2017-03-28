@@ -9,6 +9,7 @@
 #include "ModuleCastleScene.h"
 #include "ModuleMineScene.h"
 #include "ModuleScoreScene.h"
+#include "ModuleAudio.h"
 #include "SDL/include/SDL.h"
 
 
@@ -29,7 +30,7 @@ bool ModuleCastleScene::Start()
 	LOG("Loading castle scene");
 
 	graphics = App->textures->Load("assets/images/Castle Background.png");
-
+	App->audio->Load("assets/bgm/Gunbird OST Castle.ogg");
 	return true;
 }
 

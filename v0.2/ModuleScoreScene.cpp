@@ -9,6 +9,7 @@
 #include "ModuleFadeToBlack.h"
 #include "ModuleScoreScene.h"
 #include "ModuleMineScene.h"
+#include "ModuleAudio.h"
 #include "SDL/include/SDL.h"
 
 
@@ -31,6 +32,7 @@ bool ModuleScoreScene::Start()
 	LOG("Loading score scene");
 
 	graphics = App->textures->Load("assets/images/Score Screen.png");
+	App->audio->Load("assets/bgm/Gunbird OST Character Selection.ogg");
 
 	return true;
 }
