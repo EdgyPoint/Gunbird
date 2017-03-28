@@ -8,6 +8,7 @@
 class ModuleWindow;
 class ModuleInput;
 class ModuleTextures;
+class ModuleAudio;
 class ModuleRender;
 class ModuleIntroScene;
 class ModuleCastleScene;
@@ -26,6 +27,7 @@ public:
 	ModuleRender* render;
 	ModuleInput* input;
 	ModuleTextures* textures;
+	ModuleAudio* audio;
 	ModuleIntroScene* scene_intro;
 	ModuleCastleScene* scene_castle;
 	ModuleMineScene* scene_mine;
