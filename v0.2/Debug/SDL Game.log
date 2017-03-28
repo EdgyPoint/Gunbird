@@ -1,18 +1,3 @@
-﻿  Application.cpp
-  Generando código...
-  Compilando...
-  ModuleWindow.cpp
-  ModuleTextures.cpp
-  ModuleScoreScene.cpp
-  ModuleRender.cpp
-  ModulePlayer.cpp
-  ModuleMineScene.cpp
-  ModuleIntroScene.cpp
-  ModuleInput.cpp
-  ModuleFadeToBlack.cpp
-  ModuleCastleScene.cpp
-  ModuleAudio.cpp
-  Main.cpp
-  Generando código...
-  SDL Game.vcxproj -> D:\Github repositories\Project-1\v0.2\Debug\SDL5 Handout.exe
-  SDL Game.vcxproj -> D:\Github repositories\Project-1\v0.2\Debug\SDL5 Handout.pdb (Full PDB)
+﻿  ModuleAudio.cpp
+  SDL Game.vcxproj -> C:\Users\Kistofe\Documents\GitHub\Project-1\v0.2\Debug\SDL5 Handout.exe
+  SDL Game.vcxproj -> C:\Users\Kistofe\Documents\GitHub\Project-1\v0.2\Debug\SDL5 Handout.pdb (Full PDB)
