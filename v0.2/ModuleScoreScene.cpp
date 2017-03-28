@@ -4,6 +4,8 @@
 #include "ModulePlayer.h"
 #include "ModuleInput.h"
 #include "ModuleRender.h"
+#include "ModuleIntroScene.h"
+#include "ModuleCastleScene.h"
 #include "ModuleFadeToBlack.h"
 #include "ModuleScoreScene.h"
 #include "ModuleMineScene.h"
@@ -51,7 +53,7 @@ update_status ModuleScoreScene::Update()
 
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] && fading == false)
 	{
-		App->fade->FadeToBlack(this, App->scene_mine, 2.0f);
+		App->fade->FadeToBlack(this, App->scene_intro, 2.0f);
 		App->fade->fading = true;
 	}
 	// TODO 2: make so pressing SPACE the HONDA stage is loaded

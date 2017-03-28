@@ -56,6 +56,12 @@
     <ClInclude Include="ModuleMineScene.h">
       <Filter>Modules</Filter>
     </ClInclude>
+    <ClInclude Include="ModuleCastleScene.h">
+      <Filter>Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleIntroScene.h">
+      <Filter>Modules</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -89,6 +95,12 @@
       <Filter>Modules</Filter>
     </ClCompile>
     <ClCompile Include="ModuleMineScene.cpp">
+      <Filter>Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleCastleScene.cpp">
+      <Filter>Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleIntroScene.cpp">
       <Filter>Modules</Filter>
     </ClCompile>
   </ItemGroup>

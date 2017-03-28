@@ -5,6 +5,8 @@
 #include "ModuleInput.h"
 #include "ModuleRender.h"
 #include "ModuleFadeToBlack.h"
+#include "ModuleIntroScene.h"
+#include "ModuleCastleScene.h"
 #include "ModuleMineScene.h"
 #include "ModuleScoreScene.h"
 #include "SDL/include/SDL.h"
