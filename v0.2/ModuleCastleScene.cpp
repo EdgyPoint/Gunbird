@@ -47,7 +47,7 @@ bool ModuleCastleScene::CleanUp()
 // Update: draw background
 update_status ModuleCastleScene::Update()
 {
-	yflag += 5;
+	yflag += 1;
 
 
 	// Draw everything --------------------------------------

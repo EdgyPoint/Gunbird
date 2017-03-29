@@ -21,6 +21,10 @@ ModuleIntroScene::ModuleIntroScene()
 	background.w = 234;
 	background.x = 0;
 	background.y = 0;
+
+	startbutton.PushBack({ 0, 320, 68, 13});
+	startbutton.PushBack({ 0, 333, 68, 13 });
+	startbutton.speed = 0.03f;
 }
 
 ModuleIntroScene::~ModuleIntroScene()
@@ -32,7 +36,7 @@ bool ModuleIntroScene::Start()
 	LOG("Loading intro scene");
 
 	graphics = App->textures->Load("assets/images/Intro Screen.png");
-	App->audio->audio = App->audio->Load("assets/bgm/Gunbird OST Character Selection.ogg");
+	App->audio->audio = App->audio->Load("assets/bgm/castle.ogg");
 	Mix_PlayMusic(App->audio->audio, -1);
 	return true;
 }
@@ -52,6 +56,8 @@ update_status ModuleIntroScene::Update()
 
 	// Draw everything --------------------------------------
 	App->render->Blit(graphics, 0, 0, &background, 0.75f); // sea and sky
+
+	App->render->Blit(graphics, 75, 224, &(startbutton.GetCurrentFrame()), 0.01f);
 
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] && fading == false)
 	{

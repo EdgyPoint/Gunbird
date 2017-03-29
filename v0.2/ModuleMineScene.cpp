@@ -47,7 +47,7 @@ bool ModuleMineScene::CleanUp()
 // Update: draw background
 update_status ModuleMineScene::Update()
 {
-	yflag += 5;
+	yflag += 1;
 	
 
 	// Draw everything --------------------------------------
