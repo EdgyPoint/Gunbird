@@ -18,7 +18,7 @@
 ModuleIntroScene::ModuleIntroScene()
 {
 	background.h = 320;
-	background.w = 234;
+	background.w = 224;
 	background.x = 0;
 	background.y = 0;
 
@@ -59,12 +59,11 @@ update_status ModuleIntroScene::Update()
 
 	App->render->Blit(graphics, 75, 224, &(startbutton.GetCurrentFrame()), 0.01f);
 
-	if (App->input->keyboard[SDL_SCANCODE_SPACE] && fading == false)
+	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN)
 	{
 		App->fade->FadeToBlack(this, App->scene_castle, 2.0f);
-		App->fade->fading = true;
+		
 	}
-	// TODO 2: make so pressing SPACE the HONDA stage is loaded
-
+	
 	return UPDATE_CONTINUE;
 }

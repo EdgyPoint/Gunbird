@@ -54,12 +54,9 @@ update_status ModuleCastleScene::Update()
 
 	App->render->Blit(graphics, 0, yflag, &background, 0.75f); // sea and sky
 
-	if (App->input->keyboard[SDL_SCANCODE_SPACE] && fading == false || yflag > -320)
+	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN || yflag > -320)
 	{
-
 		App->fade->FadeToBlack(this, App->scene_mine, 2.0f);
-		App->fade->fading = true;
-
 	}
 	// TODO 2: make so pressing SPACE the HONDA stage is loaded
 

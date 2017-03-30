@@ -1,3 +1,12 @@
 ﻿  ModuleIntroScene.cpp
-  SDL Game.vcxproj -> D:\Github repositories\Project-1\v0.2\Debug\SDL5 Handout.exe
-  SDL Game.vcxproj -> D:\Github repositories\Project-1\v0.2\Debug\SDL5 Handout.pdb (Full PDB)
+  ModuleCastleScene.cpp
+  Generating Code...
+  Compiling...
+  ModuleScoreScene.cpp
+  ModulePlayer.cpp
+  ModuleMineScene.cpp
+  ModuleFadeToBlack.cpp
+  Application.cpp
+  Generating Code...
+  SDL Game.vcxproj -> C:\Users\cristianpl\Documents\GitHub\Project-1\v0.2\Debug\SDL5 Handout.exe
+  SDL Game.vcxproj -> C:\Users\cristianpl\Documents\GitHub\Project-1\v0.2\Debug\SDL5 Handout.pdb (Full PDB)
