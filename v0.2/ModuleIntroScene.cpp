@@ -62,7 +62,8 @@ update_status ModuleIntroScene::Update()
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN)
 	{
 		App->fade->FadeToBlack(this, App->scene_castle, 2.0f);
-		
+		App->audio->LoadSFX("assets/sfx/ganbaado.wav");
+		Mix_PlayChannel(-1, App->audio->sfx, 0);
 	}
 	
 	return UPDATE_CONTINUE;
