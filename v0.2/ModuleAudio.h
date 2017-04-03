@@ -1,4 +1,3 @@
-
 #ifndef __ModuleAudio_H__
 #define __ModuleAudio_H__
 
@@ -8,7 +7,6 @@
 #include "SDL_mixer\include\SDL_mixer.h"
 #pragma comment( lib, "SDL_mixer/libx86/SDL2_mixer.lib" )
 
-#define MAX_SONGS 3
 typedef unsigned char Uint8;
 
 class ModuleAudio : public Module
@@ -20,11 +18,12 @@ public:
 
 	bool Init();
 	Mix_Music* const Load(const char* path);
+	Mix_Chunk* const LoadSFX(const char* path);
 	bool CleanUp();
 
 public:
 	Mix_Music* audio;
-	uint last = 0;
+	Mix_Chunk* sfx;
 };
 
 #endif // __ModuleAudio_H__

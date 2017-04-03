@@ -6,9 +6,7 @@
 #include "SDL_mixer\include\SDL_mixer.h"
 
 ModuleAudio::ModuleAudio()
-{
-	audio;
-}
+{}
 
 ModuleAudio::~ModuleAudio()
 {}
@@ -25,9 +23,6 @@ bool ModuleAudio::Init()
 	{
 		LOG("An error while opening the audio has ocurred: %s", SDL_GetError())
 	}
-
-	
-
 	return true;
 }
 
@@ -36,8 +31,7 @@ bool ModuleAudio::CleanUp()
 	LOG("Freeing audio");
 
 	Mix_FreeMusic(audio);
-
-	//Mix_FreeMusic();//Free mixer
+	Mix_FreeChunk(sfx);
 	Mix_Quit();
 	return true;
 }
@@ -53,3 +47,14 @@ Mix_Music* const ModuleAudio::Load(const char* path)
 	return audio;
 }
 
+Mix_Chunk* const ModuleAudio::LoadSFX(const char* path)
+{
+
+	sfx = Mix_LoadWAV(path);
+	if (sfx == NULL)
+	{
+		LOG("An error has ocurred when loading the sound: %s", SDL_GetError())
+	}
+
+	return sfx;
+}
