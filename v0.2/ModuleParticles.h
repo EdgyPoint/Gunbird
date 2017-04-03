@@ -45,7 +45,6 @@ private:
 
 public:
 
-	Particle explosion;
 	Particle marionbeam1;
 	Particle marionbeam2;
 	Particle marionbeam3;

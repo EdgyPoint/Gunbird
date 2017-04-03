@@ -4,13 +4,13 @@
 #include "ModuleInput.h"
 #include "ModuleTextures.h"
 #include "ModuleAudio.h"
-#include "ModuleParticles.h"
 #include "ModuleIntroScene.h"
 #include"ModuleCastleScene.h"
 #include "ModuleMineScene.h"
 #include "ModuleScoreScene.h"
 #include "ModulePlayer.h"
 #include "ModuleFadeToBlack.h"
+#include "ModuleParticles.h"
 
 Application::Application()
 {

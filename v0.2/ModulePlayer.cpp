@@ -10,6 +10,9 @@
 
 ModulePlayer::ModulePlayer()
 {
+	graphics = NULL;
+	current_animation = NULL;
+	
 	position.x = 100;
 	position.y = 220;
 

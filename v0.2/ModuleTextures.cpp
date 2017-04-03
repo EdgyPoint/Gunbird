@@ -69,20 +69,10 @@ SDL_Texture* const ModuleTextures::Load(const char* path)
 		}
 		else
 		{
-			bool room = false;
-			for (int i = 0; i < MAX_TEXTURES; ++i)
-			{
-				if (textures[i] == nullptr)
-				{
-					textures[i] = texture;
-					room = true;
-					break;
-				}
-			}
-			if (room == false)
-				LOG("Texture buffer overflow");
+			textures[last_texture++] = texture;
 		}
 
+		
 		SDL_FreeSurface(surface);
 	}
 

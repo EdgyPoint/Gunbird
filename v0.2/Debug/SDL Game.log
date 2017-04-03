@@ -1,5 +1,3 @@
-﻿  ModuleMineScene.cpp
-d:\disk c\documents\github\project-1\v0.2\moduleminescene.cpp(64): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-d:\disk c\documents\github\project-1\v0.2\moduleminescene.cpp(65): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-  SDL Game.vcxproj -> D:\Disk C\Documents\GitHub\Project-1\v0.2\Debug\SDL5 Handout.exe
-  SDL Game.vcxproj -> D:\Disk C\Documents\GitHub\Project-1\v0.2\Debug\SDL5 Handout.pdb (Full PDB)
+﻿  ModuleParticles.cpp
+  SDL Game.vcxproj -> C:\Users\Kistofe\Documents\GitHub\Project-1\v0.2\Debug\SDL5 Handout.exe
+  SDL Game.vcxproj -> C:\Users\Kistofe\Documents\GitHub\Project-1\v0.2\Debug\SDL5 Handout.pdb (Full PDB)

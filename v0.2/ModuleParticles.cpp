@@ -22,7 +22,7 @@ bool ModuleParticles::Start()
 	LOG("Loading particles");
 	graphics = App->textures->Load("assets/images/Marion.png");
 
-	marionbeam1.anim.PushBack({ 166,67, 7, 29});
+	marionbeam1.anim.PushBack({ 167,67, 7, 29});
 	marionbeam1.anim.loop = false;
 	marionbeam1.anim.speed = 0.3f;
 	marionbeam1.speed.y = -1;
