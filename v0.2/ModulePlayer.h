@@ -30,6 +30,7 @@ public:
 	Animation tright;
 	iPoint position;
 	int transition = 0;
+	int shootcounter = 0;
 
 };
 

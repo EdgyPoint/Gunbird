@@ -25,15 +25,20 @@ bool ModuleParticles::Start()
 	marionbeam1.anim.PushBack({ 167,67, 7, 29});
 	marionbeam1.anim.loop = false;
 	marionbeam1.anim.speed = 0.3f;
-	marionbeam1.speed.y = -1;
+	marionbeam1.speed.y = -4;
+	marionbeam1.life = 4000;
 
 	marionbeam2.anim.PushBack({ 166, 97, 7, 29 });
 	marionbeam2.anim.loop = false;
 	marionbeam2.anim.speed = 0.3f;
+	marionbeam2.speed.y = -4;
+	marionbeam2.life = 4000;
 
 	marionbeam3.anim.PushBack({ 166, 127, 7, 29 });
 	marionbeam3.anim.loop = false;
 	marionbeam3.anim.speed = 0.3f;
+	marionbeam3.speed.y = -4;
+	marionbeam3.life = 4000;
 
 	return true;
 }
