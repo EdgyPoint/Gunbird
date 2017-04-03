@@ -13,25 +13,35 @@ ModulePlayer::ModulePlayer()
 	position.y = 220;
 
 	// idle animation (arcade sprite sheet)
-	idle.PushBack({4, 64, 20, 32});
-	idle.PushBack({36, 64, 20, 32});
-	idle.PushBack({67, 64, 20, 32});
-	idle.PushBack({100, 64, 20, 32});
-	idle.loop = false;
+	idle.PushBack({0, 64, 32, 32});
+	idle.PushBack({32, 64, 32, 32});
+	idle.PushBack({64, 64, 32, 32});
+	idle.PushBack({96, 64, 32, 32});
+	idle.loop = true;
 	idle.speed = 0.2f;
 
 	// left animation (arcade sprite sheet)
-	left.PushBack({ 2, 32, 21, 32 });
-	left.PushBack({ 34, 32, 21, 32 });
-	left.PushBack({ 66, 32, 20, 32 });
-	left.PushBack({ 98, 32, 21, 32 });
-
-	left.PushBack({ 0, 0, 23, 32 });
-	left.PushBack({ 32, 0, 23, 32 });
-	left.PushBack({ 65, 0, 22, 32 });
-	left.PushBack({ 96, 0, 23, 32 });
-	idle.loop = false;
+	left.PushBack({ 0, 32, 32, 32 });
+	left.PushBack({ 32, 32, 32, 32 });
+	left.PushBack({ 64, 32, 32, 32 });
+	left.PushBack({ 96, 32, 32, 32 });
+	left.PushBack({ 0, 0, 32, 32 });
+	left.PushBack({ 32, 0, 32, 32 });
+	left.PushBack({ 64, 0, 32, 32 });
+	left.PushBack({ 96, 0, 32, 32 });
+	left.loop = true;
 	left.speed = 0.2f;
+
+	right.PushBack({ 0, 128, 32, 32 });
+	right.PushBack({ 32, 128, 32, 32 });
+	right.PushBack({ 64, 128, 32, 32 });
+	right.PushBack({ 96, 128, 32, 32 });
+	right.PushBack({ 0, 96, 32, 32 });
+	right.PushBack({ 32, 96, 32, 32 });
+	right.PushBack({ 64, 96, 32, 32 });
+	right.PushBack({ 96, 96, 32, 32 });
+	right.loop = true;
+	right.speed = 0.2f;
 }
 
 ModulePlayer::~ModulePlayer()
@@ -112,8 +122,8 @@ update_status ModulePlayer::Update()
 	// TODO 3: Shoot lasers when the player hits SPACE
 
 	
-	if (App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_STATE::KEY_IDLE
-		&& App->input->keyboard[SDL_SCANCODE_UP] == KEY_STATE::KEY_IDLE)
+	if (App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_IDLE
+		&& App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_IDLE)
 		current_animation = &idle;
 
 	// Draw everything --------------------------------------

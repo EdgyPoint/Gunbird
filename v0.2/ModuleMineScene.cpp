@@ -55,13 +55,13 @@ bool ModuleMineScene::CleanUp()
 // Update: draw background
 update_status ModuleMineScene::Update()
 {
-	yflag += 1;
+	yflag += 0.40f;
 	
 
 	// Draw everything --------------------------------------
 
-	App->render->Blit(graphics2, 0, 0.75*yflag, &background, 0.75f); // sea and sky
-	App->render->Blit(graphics, 0, yflag, &upperbackground, 0.75f);
+	App->render->Blit(graphics2, 0, 0.75*yflag, &background, 10.0f); // sea and sky
+	App->render->Blit(graphics, 0, yflag, &upperbackground, 10.0f);
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] && fading == false || yflag > -320)
 	{
 		
