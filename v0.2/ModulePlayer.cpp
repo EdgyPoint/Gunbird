@@ -140,18 +140,12 @@ update_status ModulePlayer::Update()
 
 	if (App->input->keyboard[SDL_SCANCODE_C] == KEY_STATE::KEY_DOWN)
 	{
-			App->particles->AddParticle(App->particles->marionbeam1, position.x + 11, position.y - 25);
 		
-			App->particles->AddParticle(App->particles->marionbeam2, position.x + 11, position.y - 25, 500);
-
-			App->particles->AddParticle(App->particles->marionbeam3, position.x + 11, position.y - 25, 1000);
-
-			App->particles->AddParticle(App->particles->marionbeam1, position.x + 11, position.y - 25, 1500);
 
 			App->audio->sfx = App->audio->LoadSFX("assets/SFX/Marion Shot.wav");
 			Mix_PlayChannel(-1, App->audio->sfx, 0);
 	}
-	
+
 	if (App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_IDLE
 		&& App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_IDLE)
 	{
@@ -159,6 +153,9 @@ update_status ModulePlayer::Update()
 		transition = 0;
 	}
 
+	bullet_timer++;
+
+	if (bullet_timer > 60)bullet_timer = 0;
 	// Draw everything --------------------------------------
 
 	App->render->Blit(graphics, position.x, position.y, &(current_animation->GetCurrentFrame()));

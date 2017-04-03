@@ -31,6 +31,7 @@ public:
 	iPoint position;
 	int transition = 0;
 	int shootcounter = 0;
+	int bullet_timer = 0;
 
 };
 
