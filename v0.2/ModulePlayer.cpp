@@ -13,10 +13,10 @@ ModulePlayer::ModulePlayer()
 	position.y = 220;
 
 	// idle animation (arcade sprite sheet)
-	idle.PushBack({4, 64, 20, 32});
-	idle.PushBack({36, 64, 20, 32});
-	idle.PushBack({68, 64, 18, 32});
-	idle.PushBack({100, 64, 20, 32});
+	idle.PushBack({0, 64, 32, 32});
+	idle.PushBack({32, 64, 32, 32});
+	idle.PushBack({64, 64, 32, 32});
+	idle.PushBack({96, 64, 32, 32});
 	idle.speed = 0.2f;
 
 	// left animation (arcade sprite sheet)
