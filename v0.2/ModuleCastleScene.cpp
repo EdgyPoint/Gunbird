@@ -30,6 +30,17 @@ ModuleCastleScene::ModuleCastleScene()
 	castlehouse1.w = 64;
 	castlehouse1.x = 0;
 	castlehouse1.y = 0;
+
+	flag.PushBack({ 13, 94, 64, 21 });
+	flag.PushBack({ 13, 120, 66, 21 });
+	flag.PushBack({ 13, 145, 66, 20 });
+	flag.PushBack({ 13, 170, 65, 21 });
+	flag.PushBack({ 13, 195, 64, 21 });
+	flag.PushBack({ 88, 97, 66, 20 });
+	flag.PushBack({ 89, 126, 65, 21 });
+	flag.PushBack({ 89, 153, 65, 21 });
+	flag.loop = true;
+	flag.speed = 0.2f;
 }
 
 ModuleCastleScene::~ModuleCastleScene()
@@ -76,6 +87,7 @@ update_status ModuleCastleScene::Update()
 	{
 		houseflag = true;
 		App->render->Blit(graphics3, 152, house1counter, &castlehouse1, 10.0f);
+		App->render->Blit(graphics3, 181, house1counter - 10, &(flag.GetCurrentFrame()));
 		house1counter += 0.55f;
 	}
 	

@@ -25,6 +25,7 @@ public:
 	SDL_Rect background;
 	SDL_Rect castlehouse1;
 	SDL_Rect backgroundup;
+	Animation flag;
 	bool houseflag = false;
 	float house1counter = -86;
 	float yflag = -1788;
