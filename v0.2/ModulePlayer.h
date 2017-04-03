@@ -32,7 +32,7 @@ public:
 	int transition = 0;
 	int shootcounter = 0;
 	int bullet_timer = 0;
-
+	bool shooting = false;
 };
 
 #endif

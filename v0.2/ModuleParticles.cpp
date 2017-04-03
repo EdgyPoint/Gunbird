@@ -2,6 +2,7 @@
 #include "Globals.h"
 #include "Application.h"
 #include "ModuleTextures.h"
+#include "ModulePlayer.h"
 #include "ModuleRender.h"
 #include "ModuleParticles.h"
 
@@ -78,6 +79,7 @@ update_status ModuleParticles::Update()
 		}
 		else if (SDL_GetTicks() >= p->born)
 		{
+			if (p->position.y < (App->player->position.y - 25))
 			App->render->Blit(graphics, p->position.x, p->position.y, &(p->anim.GetCurrentFrame()));
 			if (p->fx_played == false)
 			{
