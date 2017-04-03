@@ -1,2 +1,6 @@
 #TargetFrameworkVersion=v4.0:PlatformToolSet=v140:EnableManagedIncrementalBuild=false:VCToolArchitecture=Native32Bit:WindowsTargetPlatformVersion=8.1
+<<<<<<< HEAD
 Debug|Win32|D:\Disk C\Documents\GitHub\Project-1\v0.2\|
+=======
+Debug|Win32|C:\Users\Kistofe\Documents\GitHub\Project-1\v0.2\|
+>>>>>>> origin/master

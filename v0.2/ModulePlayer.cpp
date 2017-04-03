@@ -22,34 +22,34 @@ ModulePlayer::ModulePlayer()
 	idle.PushBack({64, 64, 32, 32});
 	idle.PushBack({96, 64, 32, 32});
 	idle.loop = true;
-	idle.speed = 0.2f;
+	idle.speed = 0.1f;
 
 	// left animation (arcade sprite sheet)
 	tleft.PushBack({ 0, 32, 32, 32 });
 	tleft.PushBack({ 32, 32, 32, 32 });
 	tleft.PushBack({ 64, 32, 32, 32 });
 	tleft.PushBack({ 96, 32, 32, 32 });
-	tleft.speed = 0.2f;
+	tleft.speed = 0.1f;
 
 	left.PushBack({ 0, 0, 32, 32 });
 	left.PushBack({ 32, 0, 32, 32 });
 	left.PushBack({ 64, 0, 32, 32 });
 	left.PushBack({ 96, 0, 32, 32 });
 	left.loop = true;
-	left.speed = 0.2f;
+	left.speed = 0.1f;
 
 	tright.PushBack({ 0, 128, 32, 32 });
 	tright.PushBack({ 32, 128, 32, 32 });
 	tright.PushBack({ 64, 128, 32, 32 });
 	tright.PushBack({ 96, 128, 32, 32 });
-	tright.speed = 0.2f;
+	tright.speed = 0.1f;
 
 	right.PushBack({ 0, 96, 32, 32 });
 	right.PushBack({ 32, 96, 32, 32 });
 	right.PushBack({ 64, 96, 32, 32 });
 	right.PushBack({ 96, 96, 32, 32 });
 	right.loop = true;
-	right.speed = 0.2f;
+	right.speed = 0.1f;
 }
 
 ModulePlayer::~ModulePlayer()
@@ -138,20 +138,17 @@ update_status ModulePlayer::Update()
 	
 	}
 
-	if (App->input->keyboard[SDL_SCANCODE_C] == KEY_STATE::KEY_DOWN)
+	if (App->input->keyboard[SDL_SCANCODE_C] == KEY_STATE::KEY_DOWN && !shooting)
 	{
-			App->particles->AddParticle(App->particles->marionbeam1, position.x + 11, position.y - 25);
-		
-			App->particles->AddParticle(App->particles->marionbeam2, position.x + 11, position.y - 25, 500);
-
-			App->particles->AddParticle(App->particles->marionbeam3, position.x + 11, position.y - 25, 1000);
-
-			App->particles->AddParticle(App->particles->marionbeam1, position.x + 11, position.y - 25, 1500);
-
-			App->audio->sfx = App->audio->LoadSFX("assets/SFX/Marion Shot.wav");
-			Mix_PlayChannel(-1, App->audio->sfx, 0);
+		App->particles->AddParticle(App->particles->marionbeam1, position.x + 11, position.y + 71);
+		App->particles->AddParticle(App->particles->marionbeam2, position.x + 11, position.y + 39);
+		App->particles->AddParticle(App->particles->marionbeam3, position.x + 11, position.y + 7);
+		App->particles->AddParticle(App->particles->marionbeam1, position.x + 11, position.y - 25);
+		shooting = true;
+		App->audio->sfx = App->audio->LoadSFX("assets/SFX/Marion Shot.wav");
+		Mix_PlayChannel(-1, App->audio->sfx, 0);
 	}
-	
+
 	if (App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_IDLE
 		&& App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_IDLE)
 	{
@@ -159,6 +156,12 @@ update_status ModulePlayer::Update()
 		transition = 0;
 	}
 
+	bullet_timer++;
+
+	if (bullet_timer > 40)
+	{
+		bullet_timer = 0; shooting = false;
+	}
 	// Draw everything --------------------------------------
 
 	App->render->Blit(graphics, position.x, position.y, &(current_animation->GetCurrentFrame()));

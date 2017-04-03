@@ -2,6 +2,7 @@
 #include "Globals.h"
 #include "Application.h"
 #include "ModuleTextures.h"
+#include "ModulePlayer.h"
 #include "ModuleRender.h"
 #include "ModuleParticles.h"
 
@@ -22,7 +23,7 @@ bool ModuleParticles::Start()
 	LOG("Loading particles");
 	graphics = App->textures->Load("assets/images/Marion.png");
 
-	marionbeam1.anim.PushBack({ 167,67, 7, 29});
+	marionbeam1.anim.PushBack({ 166,67, 7, 29});
 	marionbeam1.anim.loop = false;
 	marionbeam1.anim.speed = 0.3f;
 	marionbeam1.speed.y = -4;
@@ -78,6 +79,7 @@ update_status ModuleParticles::Update()
 		}
 		else if (SDL_GetTicks() >= p->born)
 		{
+			if (p->position.y < (App->player->position.y - 25))
 			App->render->Blit(graphics, p->position.x, p->position.y, &(p->anim.GetCurrentFrame()));
 			if (p->fx_played == false)
 			{
