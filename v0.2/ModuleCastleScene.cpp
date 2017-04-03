@@ -26,7 +26,10 @@ ModuleCastleScene::ModuleCastleScene()
 	backgroundup.x = 0;
 	backgroundup.y = 0;
 
-	
+	castlehouse1.h = 86;
+	castlehouse1.w = 64;
+	castlehouse1.x = 0;
+	castlehouse1.y = 0;
 }
 
 ModuleCastleScene::~ModuleCastleScene()
@@ -37,6 +40,7 @@ bool ModuleCastleScene::Start()
 	LOG("Loading castle scene");
 	graphics2 = App->textures->Load("assets/images/Castle Upper Background.png");
 	graphics = App->textures->Load("assets/images/Castle Background.png");
+	graphics3 = App->textures->Load("assets/images/Castle Structures.png");
 	App->audio->audio = App->audio->Load("assets/bgm/castle.ogg");
 	Mix_PlayMusic(App->audio->audio, -1);
 	App->player->Enable();
@@ -51,7 +55,9 @@ bool ModuleCastleScene::CleanUp()
 	yflag2 = -1279;
 	SDL_DestroyTexture(graphics);
 	SDL_DestroyTexture(graphics2);
+	SDL_DestroyTexture(graphics3);
 	App->player->Disable();
+	houseflag = false;
 	return true;
 }
 
@@ -66,6 +72,13 @@ update_status ModuleCastleScene::Update()
 
 	App->render->Blit(graphics, 0, yflag, &background, 10.0f); // sea and sky
 	App->render->Blit(graphics2, 0, yflag2, &backgroundup, 10.0f);
+	if (yflag >= -1503.00 || houseflag == true)
+	{
+		houseflag = true;
+		App->render->Blit(graphics3, 152, house1counter, &castlehouse1, 10.0f);
+		house1counter += 0.55f;
+	}
+	
 
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN || yflag > -320)
 	{
