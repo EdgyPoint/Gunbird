@@ -15,8 +15,9 @@ ModulePlayer::ModulePlayer()
 	// idle animation (arcade sprite sheet)
 	idle.PushBack({4, 64, 20, 32});
 	idle.PushBack({36, 64, 20, 32});
-	idle.PushBack({68, 64, 18, 32});
+	idle.PushBack({67, 64, 20, 32});
 	idle.PushBack({100, 64, 20, 32});
+	idle.loop = false;
 	idle.speed = 0.2f;
 
 	// left animation (arcade sprite sheet)
@@ -29,6 +30,7 @@ ModulePlayer::ModulePlayer()
 	left.PushBack({ 32, 0, 23, 32 });
 	left.PushBack({ 65, 0, 22, 32 });
 	left.PushBack({ 96, 0, 23, 32 });
+	idle.loop = false;
 	left.speed = 0.2f;
 }
 
@@ -59,41 +61,59 @@ update_status ModulePlayer::Update()
 {
 	int speed = 1;
 
-	if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT)
+	if (App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_REPEAT)
 	{
 		position.x -= speed;
+		if (position.x <= 0)
+		{
+			position.x = 0;
+		}
+		if (current_animation != &left)
+		{
+			left.Reset();
+			current_animation = &left;
+		}
 	}
 
-	if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT)
+	if (App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_REPEAT)
 	{
 		position.x += speed;
+		if (position.x >= 203)
+		{
+			position.x = 203;
+		}
+		if (current_animation != &right)
+		{
+			right.Reset();
+			current_animation = &right;
+		}
 	}
 
-	if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT)
+	if (App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_STATE::KEY_REPEAT)
 	{
 		position.y += speed;
-		if (current_animation != &idle)
+		if (position.y >= 288)
 		{
-			idle.Reset();
-			current_animation = &idle;
+			position.y = 288;
 		}
+	
 	}
 
-	if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT)
+	if (App->input->keyboard[SDL_SCANCODE_UP] == KEY_STATE::KEY_REPEAT)
 	{
 		position.y -= speed;
-		if (current_animation != &idle)
+		if (position.y <= 0)
 		{
-			idle.Reset();
-			current_animation = &idle;
+			position.y = 0;
 		}
+	
 	}
 
 	// TODO 3: Shoot lasers when the player hits SPACE
 
 	
-	if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_IDLE
-		&& App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_IDLE)
+	if (App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_STATE::KEY_IDLE
+		&& App->input->keyboard[SDL_SCANCODE_UP] == KEY_STATE::KEY_IDLE)
 		current_animation = &idle;
 
 	// Draw everything --------------------------------------
