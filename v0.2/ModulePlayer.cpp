@@ -136,13 +136,12 @@ update_status ModulePlayer::Update()
 	}
 
 	// TODO 3: Shoot lasers when the player hits SPACE
-<<<<<<< HEAD
+
 	if (App->input->keyboard[SDL_SCANCODE_C] == KEY_STATE::KEY_DOWN)
 	{
 		App->particles->AddParticle(App->particles->marionbeam1, position.x, position.y - 25);
 	}
-=======
->>>>>>> origin/master
+
 	
 	if (App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_IDLE
 		&& App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_IDLE)

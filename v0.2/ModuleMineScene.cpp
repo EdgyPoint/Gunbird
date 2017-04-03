@@ -39,6 +39,7 @@ bool ModuleMineScene::Start()
 	graphics2 = App->textures->Load("assets/images/Mine Background.png");
 	App->audio->audio = App->audio->Load("assets/bgm/Gunbird OST Mine.ogg");
 	Mix_PlayMusic(App->audio->audio, -1);
+	App->player->Enable();
 	return true;
 }
 

@@ -20,8 +20,11 @@ public:
 public:
 
 	SDL_Texture* graphics = nullptr;
+	SDL_Texture* graphics2 = nullptr;
 	SDL_Rect background;
-	int yflag = -1788;
+	SDL_Rect backgroundup;
+	float yflag = -1788;
+	float yflag2 = -1269;
 };
 
 #endif
