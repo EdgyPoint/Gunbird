@@ -22,34 +22,34 @@ ModulePlayer::ModulePlayer()
 	idle.PushBack({64, 64, 32, 32});
 	idle.PushBack({96, 64, 32, 32});
 	idle.loop = true;
-	idle.speed = 0.2f;
+	idle.speed = 0.1f;
 
 	// left animation (arcade sprite sheet)
 	tleft.PushBack({ 0, 32, 32, 32 });
 	tleft.PushBack({ 32, 32, 32, 32 });
 	tleft.PushBack({ 64, 32, 32, 32 });
 	tleft.PushBack({ 96, 32, 32, 32 });
-	tleft.speed = 0.2f;
+	tleft.speed = 0.1f;
 
 	left.PushBack({ 0, 0, 32, 32 });
 	left.PushBack({ 32, 0, 32, 32 });
 	left.PushBack({ 64, 0, 32, 32 });
 	left.PushBack({ 96, 0, 32, 32 });
 	left.loop = true;
-	left.speed = 0.2f;
+	left.speed = 0.1f;
 
 	tright.PushBack({ 0, 128, 32, 32 });
 	tright.PushBack({ 32, 128, 32, 32 });
 	tright.PushBack({ 64, 128, 32, 32 });
 	tright.PushBack({ 96, 128, 32, 32 });
-	tright.speed = 0.2f;
+	tright.speed = 0.1f;
 
 	right.PushBack({ 0, 96, 32, 32 });
 	right.PushBack({ 32, 96, 32, 32 });
 	right.PushBack({ 64, 96, 32, 32 });
 	right.PushBack({ 96, 96, 32, 32 });
 	right.loop = true;
-	right.speed = 0.2f;
+	right.speed = 0.1f;
 }
 
 ModulePlayer::~ModulePlayer()
