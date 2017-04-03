@@ -120,7 +120,10 @@ update_status ModulePlayer::Update()
 	}
 
 	// TODO 3: Shoot lasers when the player hits SPACE
+	if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_DOWN)
+	{
 
+	}
 	
 	if (App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_IDLE
 		&& App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_IDLE)
