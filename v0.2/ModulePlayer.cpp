@@ -13,10 +13,10 @@ ModulePlayer::ModulePlayer()
 	position.y = 220;
 
 	// idle animation (arcade sprite sheet)
-	idle.PushBack({4, 62, 20, 32});
-	idle.PushBack({34, 62, 21, 32});
-	idle.PushBack({66, 62, 20, 32});
-	idle.PushBack({98, 62, 21, 32});
+	idle.PushBack({4, 64, 20, 32});
+	idle.PushBack({36, 64, 20, 32});
+	idle.PushBack({68, 64, 18, 32});
+	idle.PushBack({100, 64, 20, 32});
 	idle.speed = 0.2f;
 
 	// left animation (arcade sprite sheet)
@@ -25,10 +25,10 @@ ModulePlayer::ModulePlayer()
 	left.PushBack({ 66, 32, 20, 32 });
 	left.PushBack({ 98, 32, 21, 32 });
 
-	left.PushBack({ 4, 62, 20, 32 });
-	left.PushBack({ 34, 62, 21, 32 });
-	left.PushBack({ 66, 62, 20, 32 });
-	left.PushBack({ 98, 62, 21, 32 });
+	left.PushBack({ 0, 0, 23, 32 });
+	left.PushBack({ 32, 0, 23, 32 });
+	left.PushBack({ 65, 0, 22, 32 });
+	left.PushBack({ 96, 0, 23, 32 });
 	left.speed = 0.2f;
 }
 
@@ -72,20 +72,20 @@ update_status ModulePlayer::Update()
 	if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT)
 	{
 		position.y += speed;
-		if (current_animation != &down)
+		if (current_animation != &idle)
 		{
-			down.Reset();
-			current_animation = &down;
+			idle.Reset();
+			current_animation = &idle;
 		}
 	}
 
 	if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT)
 	{
 		position.y -= speed;
-		if (current_animation != &up)
+		if (current_animation != &idle)
 		{
-			up.Reset();
-			current_animation = &up;
+			idle.Reset();
+			current_animation = &idle;
 		}
 	}
 

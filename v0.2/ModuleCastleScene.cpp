@@ -30,8 +30,9 @@ bool ModuleCastleScene::Start()
 	LOG("Loading castle scene");
 
 	graphics = App->textures->Load("assets/images/Castle Background.png");
-	App->audio->audio = App->audio->Load("assets/bgm/Gunbird OST Castle.ogg");
+	App->audio->audio = App->audio->Load("assets/bgm/castle.ogg");
 	Mix_PlayMusic(App->audio->audio, -1);
+	App->player->Enable();
 	return true;
 }
 
@@ -41,6 +42,7 @@ bool ModuleCastleScene::CleanUp()
 	LOG("Unloading castle scene");
 	yflag = -1788;
 	SDL_DestroyTexture(graphics);
+	App->player->Disable();
 	return true;
 }
 
