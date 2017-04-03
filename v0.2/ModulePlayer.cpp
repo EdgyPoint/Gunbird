@@ -4,6 +4,7 @@
 #include "ModuleInput.h"
 #include "ModuleParticles.h"
 #include "ModuleRender.h"
+#include "ModuleAudio.h"
 #include "ModulePlayer.h"
 
 
@@ -146,6 +147,9 @@ update_status ModulePlayer::Update()
 			App->particles->AddParticle(App->particles->marionbeam3, position.x + 11, position.y - 25, 1000);
 
 			App->particles->AddParticle(App->particles->marionbeam1, position.x + 11, position.y - 25, 1500);
+
+			App->audio->sfx = App->audio->LoadSFX("assets/SFX/Marion Shot.wav");
+			Mix_PlayChannel(-1, App->audio->sfx, 0);
 	}
 	
 	if (App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_IDLE
