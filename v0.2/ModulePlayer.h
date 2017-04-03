@@ -25,8 +25,12 @@ public:
 	Animation* current_animation = nullptr;
 	Animation idle;
 	Animation left;
+	Animation tleft;
 	Animation right;
+	Animation tright;
 	iPoint position;
+	int transition = 0;
+
 };
 
 #endif

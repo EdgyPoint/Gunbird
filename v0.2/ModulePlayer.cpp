@@ -21,10 +21,12 @@ ModulePlayer::ModulePlayer()
 	idle.speed = 0.2f;
 
 	// left animation (arcade sprite sheet)
-	left.PushBack({ 0, 32, 32, 32 });
-	left.PushBack({ 32, 32, 32, 32 });
-	left.PushBack({ 64, 32, 32, 32 });
-	left.PushBack({ 96, 32, 32, 32 });
+	tleft.PushBack({ 0, 32, 32, 32 });
+	tleft.PushBack({ 32, 32, 32, 32 });
+	tleft.PushBack({ 64, 32, 32, 32 });
+	tleft.PushBack({ 96, 32, 32, 32 });
+	tleft.speed = 0.2f;
+
 	left.PushBack({ 0, 0, 32, 32 });
 	left.PushBack({ 32, 0, 32, 32 });
 	left.PushBack({ 64, 0, 32, 32 });
@@ -32,10 +34,12 @@ ModulePlayer::ModulePlayer()
 	left.loop = true;
 	left.speed = 0.2f;
 
-	right.PushBack({ 0, 128, 32, 32 });
-	right.PushBack({ 32, 128, 32, 32 });
-	right.PushBack({ 64, 128, 32, 32 });
-	right.PushBack({ 96, 128, 32, 32 });
+	tright.PushBack({ 0, 128, 32, 32 });
+	tright.PushBack({ 32, 128, 32, 32 });
+	tright.PushBack({ 64, 128, 32, 32 });
+	tright.PushBack({ 96, 128, 32, 32 });
+	tright.speed = 0.2f;
+
 	right.PushBack({ 0, 96, 32, 32 });
 	right.PushBack({ 32, 96, 32, 32 });
 	right.PushBack({ 64, 96, 32, 32 });
@@ -70,7 +74,7 @@ bool ModulePlayer::CleanUp()
 update_status ModulePlayer::Update()
 {
 	int speed = 1;
-
+	
 	if (App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_REPEAT)
 	{
 		position.x -= speed;
@@ -78,11 +82,17 @@ update_status ModulePlayer::Update()
 		{
 			position.x = 0;
 		}
-		if (current_animation != &left)
+
+		if (current_animation != &left && transition >= TRANSITION_SPEED)
 		{
 			left.Reset();
 			current_animation = &left;
 		}
+		if (current_animation != &tleft && transition < TRANSITION_SPEED)
+		{
+			current_animation = &tleft;
+		}
+		transition++;
 	}
 
 	if (App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_REPEAT)
@@ -92,11 +102,16 @@ update_status ModulePlayer::Update()
 		{
 			position.x = 203;
 		}
-		if (current_animation != &right)
+		if (current_animation != &right && transition >= TRANSITION_SPEED)
 		{
 			right.Reset();
 			current_animation = &right;
 		}
+		if (current_animation != &tright && transition < TRANSITION_SPEED)
+		{
+			current_animation = &tright;
+		}
+		transition++;
 	}
 
 	if (App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_STATE::KEY_REPEAT)
@@ -120,11 +135,13 @@ update_status ModulePlayer::Update()
 	}
 
 	// TODO 3: Shoot lasers when the player hits SPACE
-
 	
 	if (App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_IDLE
 		&& App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_IDLE)
+	{
 		current_animation = &idle;
+		transition = 0;
+	}
 
 	// Draw everything --------------------------------------
 
