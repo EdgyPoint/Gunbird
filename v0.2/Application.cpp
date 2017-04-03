@@ -40,6 +40,7 @@ bool Application::Init()
 	scene_castle->Disable();
 	scene_mine->Disable();
 	scene_score->Disable();
+	player->Disable();
 	
 	// Disable the map that you do not start with
 
