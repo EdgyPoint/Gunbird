@@ -20,9 +20,11 @@ public:
 public:
 
 	SDL_Texture* graphics = nullptr;
+	SDL_Texture* graphics2 = nullptr;
 	SDL_Rect background;
+	SDL_Rect upperbackground;
 	bool fading = false;
-	int yflag = -3215;
+	float yflag = -3215;
 };
 
 #endif

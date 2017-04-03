@@ -20,6 +20,11 @@ ModuleMineScene::ModuleMineScene()
 	background.w = 234;
 	background.x = 0;
 	background.y = 0;
+
+	upperbackground.h = 3535;
+	upperbackground.w = 234;
+	upperbackground.x = 0;
+	upperbackground.y = 0;
 }
 
 ModuleMineScene::~ModuleMineScene()
@@ -29,7 +34,9 @@ bool ModuleMineScene::Start()
 {
 	LOG("Loading mine scene");
 
-	graphics = App->textures->Load("assets/images/Mine Background.png");
+	
+	graphics = App->textures->Load("assets/images/Mine Upper Background.png");
+	graphics2 = App->textures->Load("assets/images/Mine Background.png");
 	App->audio->audio = App->audio->Load("assets/bgm/Gunbird OST Mine.ogg");
 	Mix_PlayMusic(App->audio->audio, -1);
 	return true;
@@ -41,6 +48,7 @@ bool ModuleMineScene::CleanUp()
 	LOG("Unloading mine scene");
 	yflag = -3215;
 	SDL_DestroyTexture(graphics);
+	SDL_DestroyTexture(graphics2);
 	return true;
 }
 
@@ -51,9 +59,9 @@ update_status ModuleMineScene::Update()
 	
 
 	// Draw everything --------------------------------------
-	
-	App->render->Blit(graphics, 0, yflag, &background, 0.75f); // sea and sky
 
+	App->render->Blit(graphics2, 0, 0.75*yflag, &background, 0.75f); // sea and sky
+	App->render->Blit(graphics, 0, yflag, &upperbackground, 0.75f);
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] && fading == false || yflag > -320)
 	{
 		
