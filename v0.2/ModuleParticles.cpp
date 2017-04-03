@@ -22,15 +22,18 @@ bool ModuleParticles::Start()
 	LOG("Loading particles");
 	graphics = App->textures->Load("assets/images/Marion.png");
 
-	// Explosion particle
-	explosion.anim.PushBack({ 274, 296, 33, 30 });
-	explosion.anim.PushBack({ 313, 296, 33, 30 });
-	explosion.anim.PushBack({ 346, 296, 33, 30 });
-	explosion.anim.PushBack({ 382, 296, 33, 30 });
-	explosion.anim.PushBack({ 419, 296, 33, 30 });
-	explosion.anim.PushBack({ 457, 296, 33, 30 });
-	explosion.anim.loop = false;
-	explosion.anim.speed = 0.3f;
+	marionbeam1.anim.PushBack({ 166,67, 7, 29});
+	marionbeam1.anim.loop = false;
+	marionbeam1.anim.speed = 0.3f;
+	marionbeam1.speed.y = -1;
+
+	marionbeam2.anim.PushBack({ 166, 97, 7, 29 });
+	marionbeam2.anim.loop = false;
+	marionbeam2.anim.speed = 0.3f;
+
+	marionbeam3.anim.PushBack({ 166, 127, 7, 29 });
+	marionbeam3.anim.loop = false;
+	marionbeam3.anim.speed = 0.3f;
 
 	return true;
 }

@@ -1,5 +1,6 @@
 #include "Globals.h"
 #include "Application.h"
+#include "ModuleParticles.h"
 #include "ModuleTextures.h"
 #include "ModuleInput.h"
 #include "ModuleRender.h"
@@ -88,9 +89,9 @@ update_status ModulePlayer::Update()
 	if (App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_REPEAT)
 	{
 		position.x += speed;
-		if (position.x >= 203)
+		if (position.x >= 196)
 		{
-			position.x = 203;
+			position.x = 196;
 		}
 		if (current_animation != &right)
 		{
@@ -120,9 +121,9 @@ update_status ModulePlayer::Update()
 	}
 
 	// TODO 3: Shoot lasers when the player hits SPACE
-	if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_DOWN)
+	if (App->input->keyboard[SDL_SCANCODE_C] == KEY_STATE::KEY_DOWN)
 	{
-
+		App->particles->AddParticle(App->particles->marionbeam1, position.x, position.y - 25);
 	}
 	
 	if (App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_IDLE

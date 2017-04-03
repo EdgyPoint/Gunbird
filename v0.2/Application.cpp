@@ -4,6 +4,7 @@
 #include "ModuleInput.h"
 #include "ModuleTextures.h"
 #include "ModuleAudio.h"
+#include "ModuleParticles.h"
 #include "ModuleIntroScene.h"
 #include"ModuleCastleScene.h"
 #include "ModuleMineScene.h"
@@ -18,12 +19,13 @@ Application::Application()
 	modules[2] = render = new ModuleRender();
 	modules[3] = textures = new ModuleTextures();
 	modules[4] = audio = new ModuleAudio();
-	modules[5] = scene_intro = new ModuleIntroScene();
-	modules[6] = scene_castle = new ModuleCastleScene();
-	modules[7] = scene_mine = new ModuleMineScene();
-	modules[8] = scene_score = new ModuleScoreScene();
-	modules[9] = player = new ModulePlayer();
-	modules[10] = fade = new ModuleFadeToBlack();
+	modules[5] = particles = new ModuleParticles();
+	modules[6] = scene_intro = new ModuleIntroScene();
+	modules[7] = scene_castle = new ModuleCastleScene();
+	modules[8] = scene_mine = new ModuleMineScene();
+	modules[9] = scene_score = new ModuleScoreScene();
+	modules[10] = player = new ModulePlayer();
+	modules[11] = fade = new ModuleFadeToBlack();
 }	
 
 Application::~Application()
