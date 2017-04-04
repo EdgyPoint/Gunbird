@@ -50,6 +50,7 @@ bool ModuleMineScene::CleanUp()
 	yflag = -3215;
 	SDL_DestroyTexture(graphics);
 	SDL_DestroyTexture(graphics2);
+
 	return true;
 }
 
