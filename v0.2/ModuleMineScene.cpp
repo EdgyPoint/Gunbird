@@ -2,6 +2,7 @@
 #include "Application.h"
 #include "ModuleTextures.h"
 #include "ModulePlayer.h"
+#include "ModuleParticles.h"
 #include "ModuleInput.h"
 #include "ModuleRender.h"
 #include "ModuleFadeToBlack.h"
@@ -40,6 +41,7 @@ bool ModuleMineScene::Start()
 	App->audio->audio = App->audio->Load("assets/bgm/Gunbird OST Mine.ogg");
 	Mix_PlayMusic(App->audio->audio, -1);
 	App->player->Enable();
+	App->particles->Enable();
 	return true;
 }
 
@@ -50,6 +52,8 @@ bool ModuleMineScene::CleanUp()
 	yflag = -3215;
 	SDL_DestroyTexture(graphics);
 	SDL_DestroyTexture(graphics2);
+	App->player->Disable();
+	App->particles->Disable();
 
 	return true;
 }

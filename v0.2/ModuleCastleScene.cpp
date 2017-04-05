@@ -2,6 +2,7 @@
 #include "Application.h"
 #include "ModuleTextures.h"
 #include "ModulePlayer.h"
+#include "ModuleParticles.h"
 #include "ModuleInput.h"
 #include "ModuleRender.h"
 #include "ModuleFadeToBlack.h"
@@ -55,6 +56,7 @@ bool ModuleCastleScene::Start()
 	App->audio->audio = App->audio->Load("assets/bgm/castle.ogg");
 	Mix_PlayMusic(App->audio->audio, -1);
 	App->player->Enable();
+	App->particles->Enable();
 	return true;
 }
 
@@ -68,6 +70,7 @@ bool ModuleCastleScene::CleanUp()
 	SDL_DestroyTexture(graphics2);
 	SDL_DestroyTexture(graphics3);
 	App->player->Disable();
+	App->particles->Disable();
 	houseflag = false;
 	return true;
 }
