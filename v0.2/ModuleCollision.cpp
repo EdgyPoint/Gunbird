@@ -117,7 +117,7 @@ void ModuleCollision::DebugDraw()
 	if (debug == false)
 		return;
 
-	Uint8 alpha = 80;
+	Uint8 alpha = 15;
 	for (uint i = 0; i < MAX_COLLIDERS; ++i)
 	{
 		if (colliders[i] == nullptr)
