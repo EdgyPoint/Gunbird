@@ -64,6 +64,7 @@ bool ModuleCastleScene::Start()
 	graphics3 = App->textures->Load("assets/images/Castle Structures.png");
 	Turretcopter_texture = App->textures->Load("assets/images/enemy_turretcopter.png");
 	App->audio->audio = App->audio->Load("assets/bgm/castle.ogg");
+	Turretcopter = App->collision->AddCollider({ 100, 50, 35, 35 }, COLLIDER_ENEMY);
 	Mix_PlayMusic(App->audio->audio, -1);
 	App->player->Enable();
 	App->particles->Enable();
@@ -92,7 +93,7 @@ update_status ModuleCastleScene::Update()
 	yflag += 0.55f;
 	yflag2 += 0.55f;
 
-	//Turretcopter = App->collision->AddCollider({ 100, 50, 35, 35 }, COLLIDER_ENEMY);
+	
 	// Draw everything --------------------------------------
 
 	App->render->Blit(graphics, 0, yflag, &background, 10.0f); // sea and sky
@@ -111,7 +112,6 @@ update_status ModuleCastleScene::Update()
 	{
 		App->fade->FadeToBlack(this, App->scene_mine, 2.0f);
 	}
-	// TODO 2: make so pressing SPACE the HONDA stage is loaded
-
+	
 	return UPDATE_CONTINUE;
 }
