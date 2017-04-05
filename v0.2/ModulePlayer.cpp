@@ -8,6 +8,8 @@
 #include "ModuleCollision.h"
 #include "ModuleFadeToBlack.h"
 #include "ModuleIntroScene.h"
+#include "ModuleCastleScene.h"
+#include "ModuleScoreScene.h"
 #include "ModulePlayer.h"
 
 
@@ -177,6 +179,12 @@ update_status ModulePlayer::Update()
 void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 {
 	
-	if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_ENEMY) { App->fade->FadeToBlack(this, App->scene_intro, 2.0f); }
-
+	if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_ENEMY)
+	{ 
+		App->fade->FadeToBlack(App->scene_castle, App->scene_score, 5.0f); 
+		App->player->Disable();
+		App->collision->EraseCollider(c1);
+		App->collision->EraseCollider(c2);
+	}
+	
 }
