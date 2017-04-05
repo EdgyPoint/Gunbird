@@ -18,6 +18,14 @@ private:
 
 public:
 
+	Animation()
+	{}
+
+	Animation(const Animation& anim) : loop(anim.loop), speed(anim.speed), last_frame(anim.last_frame)
+	{
+		SDL_memcpy(&frames, anim.frames, sizeof(frames));
+	}
+
 	void PushBack(const SDL_Rect& rect)
 	{
 		frames[last_frame++] = rect;
@@ -42,7 +50,7 @@ public:
 
 	void Reset()
 	{
-		current_frame = 0;
+		current_frame = 0.0f;
 	}
 };
 
