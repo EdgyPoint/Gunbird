@@ -22,13 +22,13 @@ public:
 	SDL_Texture* graphics = nullptr;
 	SDL_Texture* graphics2 = nullptr;
 	SDL_Texture* graphics3 = nullptr;
-	SDL_Texture* turretcoter_texture = nullptr;
-	Collider* turretcopter_box;
+	SDL_Texture* Turretcopter_texture = nullptr;
 	SDL_Rect background;
 	SDL_Rect castlehouse1;
 	SDL_Rect backgroundup;
 	Animation flag;
-	Animation turretcopter;
+	Animation Turretcopter_animation;
+	Collider* Turretcopter;
 	bool houseflag = false;
 	float house1counter = -86;
 	float yflag = -1788;

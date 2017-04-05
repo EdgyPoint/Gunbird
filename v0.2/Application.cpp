@@ -46,7 +46,7 @@ bool Application::Init()
 	scene_mine->Disable();
 	scene_score->Disable();
 	player->Disable();
-	App->collision->Disable();
+	
 	// Disable the map that you do not start with
 
 

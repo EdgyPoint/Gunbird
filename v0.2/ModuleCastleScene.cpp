@@ -43,15 +43,14 @@ ModuleCastleScene::ModuleCastleScene()
 	flag.loop = true;
 	flag.speed = 0.2f;
 
-	turretcopter.PushBack({ 0, 0, 35, 35 });
-	turretcopter.PushBack({ 35, 0, 35, 35 });
-	turretcopter.PushBack({ 70, 0, 35, 35 });
-	turretcopter.PushBack({ 105, 0, 35, 35 });
-	turretcopter.PushBack({ 35, 35, 35, 35 });
-	turretcopter.PushBack({ 70, 35, 35, 35 });
-	turretcopter.PushBack({ 105, 35, 35, 35 });
-	turretcopter.loop = true;
-	turretcopter.speed = 0.2f;
+	Turretcopter_animation.PushBack({ 0, 0, 35, 35 });
+	Turretcopter_animation.PushBack({ 35, 0, 35, 35 });
+	Turretcopter_animation.PushBack({ 70, 0, 35, 35 });
+	Turretcopter_animation.PushBack({ 0, 35, 35, 35 });
+	Turretcopter_animation.PushBack({ 35, 35, 35, 35 });
+	Turretcopter_animation.PushBack({ 70, 35, 35, 35 });
+	Turretcopter_animation.loop = true;
+	Turretcopter_animation.speed = 0.2f;
 }
 
 ModuleCastleScene::~ModuleCastleScene()
@@ -63,12 +62,11 @@ bool ModuleCastleScene::Start()
 	graphics2 = App->textures->Load("assets/images/Castle Upper Background.png");
 	graphics = App->textures->Load("assets/images/Castle Background.png");
 	graphics3 = App->textures->Load("assets/images/Castle Structures.png");
-	turretcoter_texture = App->textures->Load("assets/images/enemy_turretcopter.png");
+	Turretcopter_texture = App->textures->Load("assets/images/enemy_turretcopter.png");
 	App->audio->audio = App->audio->Load("assets/bgm/castle.ogg");
 	Mix_PlayMusic(App->audio->audio, -1);
 	App->player->Enable();
 	App->particles->Enable();
-	App->collision->Enable();
 	return true;
 }
 
@@ -81,10 +79,9 @@ bool ModuleCastleScene::CleanUp()
 	SDL_DestroyTexture(graphics);
 	SDL_DestroyTexture(graphics2);
 	SDL_DestroyTexture(graphics3);
-	SDL_DestroyTexture(turretcoter_texture);
+	SDL_DestroyTexture(Turretcopter_texture);
 	App->player->Disable();
 	App->particles->Disable();
-	App->collision->Disable();
 	houseflag = false;
 	return true;
 }
@@ -95,13 +92,12 @@ update_status ModuleCastleScene::Update()
 	yflag += 0.55f;
 	yflag2 += 0.55f;
 
-	turretcopter_box = App->collision->AddCollider({ 100, 50, 35, 35 }, COLLIDER_FLYING_ENEMY);
+	//Turretcopter = App->collision->AddCollider({ 100, 50, 35, 35 }, COLLIDER_ENEMY);
 	// Draw everything --------------------------------------
 
 	App->render->Blit(graphics, 0, yflag, &background, 10.0f); // sea and sky
 	App->render->Blit(graphics2, 0, yflag2, &backgroundup, 10.0f);
-	App->render->Blit(turretcoter_texture, 100, 50, &(turretcopter.GetCurrentFrame()));
-	
+	App->render->Blit(Turretcopter_texture, 100, 50, &(Turretcopter_animation.GetCurrentFrame()));
 	if (yflag >= -1503.00 || houseflag == true)
 	{
 		houseflag = true;
