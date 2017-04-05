@@ -80,7 +80,8 @@ bool ModulePlayer::CleanUp()
 // Update: draw background
 update_status ModulePlayer::Update()
 {
-		
+	int speed = 1;
+	
 	if (App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_REPEAT)
 	{
 		position.x -= speed;
@@ -142,10 +143,7 @@ update_status ModulePlayer::Update()
 
 	if (App->input->keyboard[SDL_SCANCODE_C] == KEY_STATE::KEY_DOWN && !shooting)
 	{
-		App->particles->AddParticle(App->particles->marionbeam1, position.x + 11, position.y + 71);
-		App->particles->AddParticle(App->particles->marionbeam2, position.x + 11, position.y + 39);
-		App->particles->AddParticle(App->particles->marionbeam3, position.x + 11, position.y + 7);
-		App->particles->AddParticle(App->particles->marionbeam1, position.x + 11, position.y - 25);
+		App->particles->AddParticle(App->particles->marionbeam1, position.x + 11, position.y - 25, COLLIDER_PLAYER_SHOT);
 		shooting = true;
 		App->audio->sfx = App->audio->LoadSFX("assets/SFX/Marion Shot.wav");
 		Mix_PlayChannel(-1, App->audio->sfx, 0);
