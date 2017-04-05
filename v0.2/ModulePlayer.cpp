@@ -5,6 +5,7 @@
 #include "ModuleParticles.h"
 #include "ModuleRender.h"
 #include "ModuleAudio.h"
+#include "ModuleCollision.h"
 #include "ModulePlayer.h"
 
 
@@ -13,9 +14,6 @@ ModulePlayer::ModulePlayer()
 	graphics = NULL;
 	current_animation = NULL;
 	
-	position.x = 100;
-	position.y = 220;
-
 	// idle animation (arcade sprite sheet)
 	idle.PushBack({0, 64, 32, 32});
 	idle.PushBack({32, 64, 32, 32});
@@ -61,6 +59,11 @@ bool ModulePlayer::Start()
 	LOG("Loading player");
 
 	graphics = App->textures->Load("assets/images/Marion.png");
+
+	position.x = 100;
+	position.y = 220;
+	
+	player_col = App->collision->AddCollider({ 0, 0, 21, 32 }, COLLIDER_PLAYER);
 
 	return true;
 }
@@ -162,9 +165,16 @@ update_status ModulePlayer::Update()
 	{
 		bullet_timer = 0; shooting = false;
 	}
+
+	player_col->SetPos(position.x + 3, position.y);
 	// Draw everything --------------------------------------
 
 	App->render->Blit(graphics, position.x, position.y, &(current_animation->GetCurrentFrame()));
 
 	return UPDATE_CONTINUE;
+}
+
+void ModulePlayer::OnCollision()
+{
+	
 }

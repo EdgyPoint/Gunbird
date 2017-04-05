@@ -72,8 +72,7 @@ update_status ModuleMineScene::Update()
 	{
 		
 		App->fade->FadeToBlack(this, App->scene_score, 2.0f);
-		App->fade->fading = true;
-		
+			
 	}
 	// TODO 2: make so pressing SPACE the HONDA stage is loaded
 

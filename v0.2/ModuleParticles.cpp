@@ -4,6 +4,7 @@
 #include "ModuleTextures.h"
 #include "ModulePlayer.h"
 #include "ModuleRender.h"
+#include "ModuleCollision.h"
 #include "ModuleParticles.h"
 
 #include "SDL/include/SDL_timer.h"
@@ -102,6 +103,20 @@ void ModuleParticles::AddParticle(const Particle& particle, int x, int y, Uint32
 	active[last_particle++] = p;
 }
 
+// TODO 5: Make so every time a particle hits a wall it triggers an explosion particle
+void ModuleParticles::OnCollision(Collider* c1, Collider* c2)
+{
+	for (uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
+	{
+		// Always destroy particles that collide
+		if (active[i] != nullptr && active[i]->collider == c1)
+		{
+			delete active[i];
+			active[i] = nullptr;
+			break;
+		}
+	}
+}
 // -------------------------------------------------------------
 // -------------------------------------------------------------
 
@@ -115,6 +130,12 @@ Particle::Particle(const Particle& p) :
 	anim(p.anim), position(p.position), speed(p.speed),
 	fx(p.fx), born(p.born), life(p.life)
 {}
+
+Particle::~Particle()
+{
+	if (collider != nullptr)
+		App->collision->EraseCollider(collider);
+}
 
 bool Particle::Update()
 {
@@ -132,5 +153,9 @@ bool Particle::Update()
 	position.x += speed.x;
 	position.y += speed.y;
 
+	if (collider != nullptr)
+		collider->SetPos(position.x, position.y);
+
 	return ret;
 }
+

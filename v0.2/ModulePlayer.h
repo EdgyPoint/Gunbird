@@ -8,6 +8,7 @@
 
 
 struct SDL_Texture;
+struct Collider;
 
 class ModulePlayer : public Module
 {
@@ -18,10 +19,12 @@ public:
 	bool Start();
 	update_status Update();
 	bool CleanUp();
+	void OnCollision();
 
 public:
 
 	SDL_Texture* graphics = nullptr;
+	Collider* player_col = nullptr;
 	Animation* current_animation = nullptr;
 	Animation idle;
 	Animation left;

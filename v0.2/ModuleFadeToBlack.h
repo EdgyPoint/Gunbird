@@ -12,8 +12,8 @@ public:
 
 	bool Start();
 	update_status Update();
-	bool FadeToBlack(Module* module_off, Module* module_on, float time = 2.0f);
-	bool fading = false;
+	bool FadeToBlack(Module* module_off, Module* module_on, float time = 1.0f);
+	bool IsFading() const;
 
 private:
 
@@ -27,9 +27,8 @@ private:
 	Uint32 start_time = 0;
 	Uint32 total_time = 0;
 	SDL_Rect screen;
-	Module* module_disabling;
-	Module* module_enabling;
-
+	Module* to_enable = nullptr;
+	Module* to_disable = nullptr;
 };
 
 #endif //__MODULEFADETOBLACK_H__
