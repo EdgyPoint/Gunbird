@@ -42,6 +42,7 @@ bool ModuleMineScene::Start()
 	Mix_PlayMusic(App->audio->audio, -1);
 	App->player->Enable();
 	App->particles->Enable();
+	App->collision->Enable();
 	return true;
 }
 
@@ -54,7 +55,7 @@ bool ModuleMineScene::CleanUp()
 	SDL_DestroyTexture(graphics2);
 	App->player->Disable();
 	App->particles->Disable();
-
+	App->collision->Disable();
 	return true;
 }
 

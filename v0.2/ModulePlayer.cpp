@@ -6,6 +6,8 @@
 #include "ModuleRender.h"
 #include "ModuleAudio.h"
 #include "ModuleCollision.h"
+#include "ModuleFadeToBlack.h"
+#include "ModuleIntroScene.h"
 #include "ModulePlayer.h"
 
 
@@ -63,7 +65,7 @@ bool ModulePlayer::Start()
 	position.x = 100;
 	position.y = 220;
 	
-	player_col = App->collision->AddCollider({ 0, 0, 21, 32 }, COLLIDER_PLAYER);
+	player_col = App->collision->AddCollider({ 0, 0, 21, 32 }, COLLIDER_PLAYER, this);
 
 	return true;
 }
@@ -164,6 +166,7 @@ update_status ModulePlayer::Update()
 	}
 
 	player_col->SetPos(position.x + 3, position.y);
+	
 	// Draw everything --------------------------------------
 
 	App->render->Blit(graphics, position.x, position.y, &(current_animation->GetCurrentFrame()));
@@ -171,7 +174,9 @@ update_status ModulePlayer::Update()
 	return UPDATE_CONTINUE;
 }
 
-void ModulePlayer::OnCollision()
+void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 {
 	
+	if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_ENEMY) { App->fade->FadeToBlack(this, App->scene_intro, 2.0f); }
+
 }

@@ -184,7 +184,6 @@ bool ModuleCollision::EraseCollider(Collider* collider)
 }
 
 // -----------------------------------------------------
-
 bool Collider::CheckCollision(const SDL_Rect& r) const
 {
 	return (rect.x + rect.w >= r.x && rect.x <= r.x + r.w && rect.y + rect.h >= r.y && rect.y < r.y + r.h);

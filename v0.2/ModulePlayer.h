@@ -5,6 +5,7 @@
 #include "Animation.h"
 #include "Globals.h"
 #include "p2Point.h"
+#include "ModuleCollision.h"
 
 
 struct SDL_Texture;
@@ -19,7 +20,7 @@ public:
 	bool Start();
 	update_status Update();
 	bool CleanUp();
-	void OnCollision();
+	void OnCollision(Collider* c1, Collider* c2);
 
 public:
 

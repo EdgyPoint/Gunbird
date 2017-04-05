@@ -64,10 +64,11 @@ bool ModuleCastleScene::Start()
 	graphics3 = App->textures->Load("assets/images/Castle Structures.png");
 	Turretcopter_texture = App->textures->Load("assets/images/enemy_turretcopter.png");
 	App->audio->audio = App->audio->Load("assets/bgm/castle.ogg");
-	Turretcopter = App->collision->AddCollider({ 100, 50, 35, 35 }, COLLIDER_ENEMY);
+	Turretcopter = App->collision->AddCollider({ 100, 50, 35, 35 }, COLLIDER_ENEMY, this);
 	Mix_PlayMusic(App->audio->audio, -1);
 	App->player->Enable();
 	App->particles->Enable();
+	App->collision->Enable();
 	return true;
 }
 
@@ -83,6 +84,7 @@ bool ModuleCastleScene::CleanUp()
 	SDL_DestroyTexture(Turretcopter_texture);
 	App->player->Disable();
 	App->particles->Disable();
+	App->collision->Disable();
 	houseflag = false;
 	return true;
 }
@@ -90,10 +92,11 @@ bool ModuleCastleScene::CleanUp()
 // Update: draw background
 update_status ModuleCastleScene::Update()
 {
+	
+
 	yflag += 0.55f;
 	yflag2 += 0.55f;
 
-	
 	// Draw everything --------------------------------------
 
 	App->render->Blit(graphics, 0, yflag, &background, 10.0f); // sea and sky
@@ -107,11 +110,19 @@ update_status ModuleCastleScene::Update()
 		house1counter += 0.55f;
 	}
 	
-
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN || yflag > -320)
 	{
 		App->fade->FadeToBlack(this, App->scene_mine, 2.0f);
 	}
-	
+
 	return UPDATE_CONTINUE;
+}
+
+void ModuleCastleScene::OnCollision(Collider* c1, Collider* c2)
+{
+
+	if (c2->type == COLLIDER_PLAYER_SHOT && c1->type == COLLIDER_ENEMY)
+		c1->to_delete = true;
+	Turretcopter_texture = nullptr;
+
 }

@@ -9,6 +9,7 @@
 #include "ModuleFadeToBlack.h"
 #include "ModuleScoreScene.h"
 #include "ModuleMineScene.h"
+#include "ModuleCollision.h"
 #include "ModuleAudio.h"
 #include "SDL/include/SDL.h"
 
@@ -46,6 +47,7 @@ bool ModuleIntroScene::CleanUp()
 {
 	LOG("Unloading intro scene");
 	SDL_DestroyTexture(graphics);
+	App->collision->Disable();
 	
 	return true;
 }

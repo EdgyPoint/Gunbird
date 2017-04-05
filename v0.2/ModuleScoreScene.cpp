@@ -10,6 +10,7 @@
 #include "ModuleScoreScene.h"
 #include "ModuleMineScene.h"
 #include "ModuleAudio.h"
+#include "ModuleCollision.h"
 #include "SDL/include/SDL.h"
 
 
@@ -43,7 +44,7 @@ bool ModuleScoreScene::CleanUp()
 	LOG("Unloading score scene");
 	SDL_DestroyTexture(graphics);
 	App->player->Disable();
-
+	App->collision->Disable();
 
 	return true;
 }
