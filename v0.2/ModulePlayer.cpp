@@ -6,6 +6,7 @@
 #include "ModuleRender.h"
 #include "ModuleAudio.h"
 #include "ModulePlayer.h"
+#include "SDL/include/SDL_timer.h"
 
 
 ModulePlayer::ModulePlayer()
@@ -140,14 +141,25 @@ update_status ModulePlayer::Update()
 
 	if (App->input->keyboard[SDL_SCANCODE_C] == KEY_STATE::KEY_DOWN && !shooting)
 	{
-		App->particles->AddParticle(App->particles->marionbeam1, position.x + 11, position.y + 71);
-		App->particles->AddParticle(App->particles->marionbeam2, position.x + 11, position.y + 39);
-		App->particles->AddParticle(App->particles->marionbeam3, position.x + 11, position.y + 7);
-		App->particles->AddParticle(App->particles->marionbeam1, position.x + 11, position.y - 25);
+		App->particles->AddParticle(App->particles->marionbeam1, position.x + 11, position.y -25);
+		App->particles->AddParticle(App->particles->marionbeam1, position.x + 11, position.y - 25, 150);
+		App->particles->AddParticle(App->particles->marionbeam1, position.x + 11, position.y - 25, 300);
+		timer = SDL_GetTicks();
 		shooting = true;
 		App->audio->sfx = App->audio->LoadSFX("assets/SFX/Marion Shot.wav");
 		Mix_PlayChannel(-1, App->audio->sfx, 0);
 	}
+	if (SDL_GetTicks() >= timer + 150 && shooting)
+	{
+		App->particles->AddParticle(App->particles->marionbeam2, position.x + 11, position.y - 25);
+		timer = SDL_GetTicks();
+		shootcounter++;
+	}
+	
+		
+		
+	
+	
 
 	if (App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_IDLE
 		&& App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_IDLE)
@@ -156,11 +168,11 @@ update_status ModulePlayer::Update()
 		transition = 0;
 	}
 
-	bullet_timer++;
 
-	if (bullet_timer > 40)
+
+	if (shootcounter >= 3)
 	{
-		bullet_timer = 0; shooting = false;
+		shootcounter = 0; shooting = false;
 	}
 	// Draw everything --------------------------------------
 

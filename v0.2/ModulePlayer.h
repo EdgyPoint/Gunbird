@@ -29,8 +29,10 @@ public:
 	Animation right;
 	Animation tright;
 	iPoint position;
-	int transition = 0;
+	int timer = 0;
 	int shootcounter = 0;
+	int transition = 0;
+
 	int bullet_timer = 0;
 	bool shooting = false;
 };
