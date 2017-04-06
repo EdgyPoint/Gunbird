@@ -24,23 +24,23 @@ bool ModuleParticles::Start()
 	LOG("Loading particles");
 	graphics = App->textures->Load("assets/images/Marion.png");
 
-	marionbeam1.anim.PushBack({ 166,67, 7, 29});
-	marionbeam1.anim.loop = false;
-	marionbeam1.anim.speed = 0.3f;
-	marionbeam1.speed.y = -4;
-	marionbeam1.life = 4000;
+	marionbeam[0].anim.PushBack({ 166,67, 7, 29});
+	marionbeam[0].anim.loop = false;
+	marionbeam[0].anim.speed = 0.3f;
+	marionbeam[0].speed.y = -4;
+	marionbeam[0].life = 4000;
 
-	marionbeam2.anim.PushBack({ 166, 97, 7, 29 });
-	marionbeam2.anim.loop = false;
-	marionbeam2.anim.speed = 0.3f;
-	marionbeam2.speed.y = -4;
-	marionbeam2.life = 4000;
+	marionbeam[1].anim.PushBack({ 166, 97, 7, 29 });
+	marionbeam[1].anim.loop = false;
+	marionbeam[1].anim.speed = 0.3f;
+	marionbeam[1].speed.y = -4;
+	marionbeam[1].life = 4000;
 
-	marionbeam3.anim.PushBack({ 166, 127, 7, 29 });
-	marionbeam3.anim.loop = false;
-	marionbeam3.anim.speed = 0.3f;
-	marionbeam3.speed.y = -4;
-	marionbeam3.life = 4000;
+	marionbeam[2].anim.PushBack({ 166, 127, 7, 29 });
+	marionbeam[2].anim.loop = false;
+	marionbeam[2].anim.speed = 0.3f;
+	marionbeam[2].speed.y = -4;
+	marionbeam[2].life = 4000;
 
 	return true;
 }
@@ -80,7 +80,11 @@ update_status ModuleParticles::Update()
 		}
 		else if (SDL_GetTicks() >= p->born)
 		{
-			if (p->position.y < (App->player->position.y - 25))
+			
+			if (p->collider->type == COLLIDER_PLAYER_SHOT && p->apperance == 0)
+			{
+				p->position.x = App->player->position.x + 11; p->apperance++;
+			}
 			App->render->Blit(graphics, p->position.x, p->position.y, &(p->anim.GetCurrentFrame()));
 			if (p->fx_played == false)
 			{
@@ -100,6 +104,7 @@ void ModuleParticles::AddParticle(const Particle& particle, int x, int y, COLLID
 		{
 			Particle* p = new Particle(particle);
 			p->born = SDL_GetTicks() + delay;
+			
 			p->position.x = x;
 			p->position.y = y;
 			if (collider_type != COLLIDER_NONE)
@@ -147,10 +152,11 @@ Particle::~Particle()
 bool Particle::Update()
 {
 	bool ret = true;
+	int aux = (SDL_GetTicks() - born);
 
 	if (life > 0)
 	{
-		if ((SDL_GetTicks() - born) > life)
+		if (aux > (int)life)
 			ret = false;
 	}
 	else
@@ -160,9 +166,10 @@ bool Particle::Update()
 	position.x += speed.x;
 	position.y += speed.y;
 
-	if (collider != nullptr)
+	if (collider != nullptr && SDL_GetTicks() >= born)
 		collider->SetPos(position.x, position.y);
-
+	if (collider != nullptr && SDL_GetTicks() < born)
+		collider->SetPos(-50, 500);
 	return ret;
 }
 

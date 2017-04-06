@@ -23,6 +23,7 @@ struct Particle
 	Uint32 born = 0;
 	Uint32 life = 0;
 	bool fx_played = false;
+	int apperance = 0;
 
 	Particle();
 	Particle(const Particle& p);
@@ -51,9 +52,7 @@ private:
 
 public:
 
-	Particle marionbeam1;
-	Particle marionbeam2;
-	Particle marionbeam3;
+	Particle marionbeam[3];
 };
 
 #endif // __MODULEPARTICLES_H__
