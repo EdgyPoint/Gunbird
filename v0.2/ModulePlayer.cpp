@@ -145,16 +145,16 @@ update_status ModulePlayer::Update()
 	
 	}
 
-	if (App->input->keyboard[SDL_SCANCODE_C] == KEY_STATE::KEY_DOWN && SDL_GetTicks() >= shot)
+	if (App->input->keyboard[SDL_SCANCODE_C] == KEY_STATE::KEY_REPEAT && SDL_GetTicks() >= shot)
 	{
-		shot = (SDL_GetTicks() + 480);
+		shot = (SDL_GetTicks() + 500);
 		App->particles->AddParticle(App->particles->marionbeam[beam++], position.x + 11, position.y - 25, COLLIDER_PLAYER_SHOT);
 		if (beam == 3) beam = 0;
-		App->particles->AddParticle(App->particles->marionbeam[beam++], position.x + 11, position.y + 5, COLLIDER_PLAYER_SHOT, 120);
+		App->particles->AddParticle(App->particles->marionbeam[beam++], position.x + 11, position.y + 5, COLLIDER_PLAYER_SHOT, 140);
 		if (beam == 3) beam = 0;
-		App->particles->AddParticle(App->particles->marionbeam[beam++], position.x + 11, position.y + 35, COLLIDER_PLAYER_SHOT, 240);
+		App->particles->AddParticle(App->particles->marionbeam[beam++], position.x + 11, position.y + 35, COLLIDER_PLAYER_SHOT, 280);
 		if (beam == 3) beam = 0;
-		App->particles->AddParticle(App->particles->marionbeam[beam++], position.x + 11, position.y + 65, COLLIDER_PLAYER_SHOT, 360);	
+		App->particles->AddParticle(App->particles->marionbeam[beam++], position.x + 11, position.y + 65, COLLIDER_PLAYER_SHOT, 420);	
 		if (beam == 3) beam = 0;
 		App->audio->sfx = App->audio->LoadSFX("assets/SFX/Marion Shot.wav");
 		Mix_PlayChannel(-1, App->audio->sfx, 0);
