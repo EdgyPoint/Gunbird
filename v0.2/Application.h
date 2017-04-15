@@ -18,6 +18,7 @@ class ModuleMineScene;
 class ModuleScoreScene;
 class ModulePlayer;
 class ModuleFadeToBlack;
+class ModuleEnemies;
 class Module;
 
 class Application
@@ -38,6 +39,7 @@ public:
 	ModulePlayer* player;
 	ModuleFadeToBlack* fade;
 	ModuleCollision* collision;
+	ModuleEnemies* enemies;
 
 public:
 
