@@ -11,7 +11,6 @@
 #include "ModuleMineScene.h"
 #include "ModuleScoreScene.h"
 #include "ModuleAudio.h"
-#include "ModuleEnemies.h"
 #include "SDL/include/SDL.h"
 
 

@@ -26,11 +26,11 @@ Application::Application()
 	modules[i++] = scene_castle = new ModuleCastleScene();
 	modules[i++] = scene_mine = new ModuleMineScene();
 	modules[i++] = scene_score = new ModuleScoreScene();
+	modules[i++] = enemies = new ModuleEnemies();
 	modules[i++] = player = new ModulePlayer();
 	modules[i++] = particles = new ModuleParticles();
 	modules[i++] = collision = new ModuleCollision();
 	modules[i++] = fade = new ModuleFadeToBlack();
-	modules[i++] = enemies = new ModuleEnemies();
 }	
 
 Application::~Application()
