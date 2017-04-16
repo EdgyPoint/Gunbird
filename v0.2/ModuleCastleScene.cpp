@@ -57,8 +57,7 @@ bool ModuleCastleScene::Start()
 	App->collision->Enable();
 	App->enemies->Enable();
 
-	App->enemies->AddEnemy(ENEMY_TYPES::BALLOON, 0, 0);
-	App->enemies->AddEnemy(ENEMY_TYPES::BALLOON, 0, App->render->camera.y);
+	App->enemies->AddEnemy(ENEMY_TYPES::BALLOON, 100, App->render->camera.y);
 	graphics2 = App->textures->Load("assets/images/Castle Upper Background.png");
 	graphics = App->textures->Load("assets/images/Castle Background.png");
 	graphics3 = App->textures->Load("assets/images/Castle Structures.png");
@@ -118,5 +117,6 @@ void ModuleCastleScene::OnCollision(Collider* c1, Collider* c2)
 	if (c2->type == COLLIDER_PLAYER_SHOT && c1->type == COLLIDER_ENEMY)
 		c1->to_delete = true;
 
-
+	if (c1->type == COLLIDER_ENEMY && c2->type == COLLIDER_PLAYER)
+		App->enemies->Disable();
 }

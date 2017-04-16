@@ -2,7 +2,7 @@
 #define __ModuleEnemies_H__
 
 #include "Module.h"
-
+#include "Enemy_Balloon.h"
 
 #define MAX_ENEMIES 100
 
@@ -16,7 +16,6 @@ enum ENEMY_TYPES
 {
 	NO_TYPE,
 	BALLOON,
-	BROWNCOOKIE,
 };
 
 class Enemy;

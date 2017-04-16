@@ -5,6 +5,7 @@
 #include "ModuleParticles.h"
 #include "ModuleTextures.h"
 #include "Enemy.h"
+#include "Enemy_Balloon.h"
 
 
 #define SPAWN_MARGIN 50
@@ -122,20 +123,15 @@ void ModuleEnemies::SpawnEnemy(const EnemyInfo& info)
 	uint i = 0;
 	for (; enemies[i] != nullptr && i < MAX_ENEMIES; ++i);
 
-/*	if (i != MAX_ENEMIES)
+	if (i != MAX_ENEMIES)
 	{
 		switch (info.type)
 		{
-		case ENEMY_TYPES::REDBIRD:
-			enemies[i] = new Enemy_RedBird(info.x, info.y);
+		case ENEMY_TYPES::BALLOON:
+			enemies[i] = new Enemy_Balloon(info.x, info.y);
 			break;
-
-		case ENEMY_TYPES::BROWNCOOKIE:
-			enemies[i] = new Enemy_BrownCookie(info.x, info.y);
-			break;
-
 		}
-	}*/
+	}
 }
 
 void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
