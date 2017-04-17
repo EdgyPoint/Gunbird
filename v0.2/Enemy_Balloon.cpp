@@ -33,7 +33,7 @@ void Enemy_Balloon::Move()
 void Enemy_Balloon::Shoot()
 {
 	initcounter += 1;
-	if (initcounter > 210)
+	if (initcounter > 210 && initcounter < 500)
 	{
 		if (SDL_GetTicks() >= reload)
 		{

@@ -83,6 +83,7 @@ bool ModuleCastleScene::CleanUp()
 	SDL_DestroyTexture(graphics2);
 	SDL_DestroyTexture(graphics3);
 	App->player->Disable();
+	App->enemies->Disable();
 	App->particles->Disable();
 	App->collision->Disable();
 	houseflag = false;
