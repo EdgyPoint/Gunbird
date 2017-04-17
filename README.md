@@ -22,15 +22,25 @@ Execute "Gunbird.exe".
 
 ## History
 
-TODO: Write history
+4/5/2017 - v0.4 released.
+
+3/29/2017 - v0.3 released.
+
+3/27/2017 - v0.2 released.
+
 
 ## Credits
 
 Psikyo
+
 Edgypoint
+
 Ratkid Studio
+
 Watermelon $quad
+
 Coded Dreams
+
 Frozensloth Studios
 
 ## License
