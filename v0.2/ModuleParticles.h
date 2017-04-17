@@ -53,6 +53,7 @@ private:
 public:
 
 	Particle marionbeam[3];
+	Particle balloonshoot;
 };
 
 #endif // __MODULEPARTICLES_H__

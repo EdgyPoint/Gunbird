@@ -42,6 +42,21 @@ bool ModuleParticles::Start()
 	marionbeam[2].speed.y = -4;
 	marionbeam[2].life = 4000;
 
+
+	balloonshoot.anim.PushBack({ 31, 425, 6, 6 });
+	balloonshoot.anim.PushBack({ 47, 425, 6, 6 });
+	balloonshoot.anim.PushBack({ 79, 425, 6, 6 });
+	balloonshoot.anim.PushBack({ 111, 425, 6, 6 });
+	balloonshoot.anim.PushBack({ 143, 425, 6, 6 });
+	balloonshoot.anim.PushBack({ 191, 425, 6, 6 });
+	balloonshoot.anim.PushBack({ 15, 441, 6, 6 });
+	balloonshoot.anim.PushBack({ 47, 441, 6, 6 });
+	balloonshoot.anim.loop = true;
+	balloonshoot.anim.speed = 0.3f;
+	balloonshoot.speed.y = 3;
+	balloonshoot.life = 4000;
+
+
 	return true;
 }
 

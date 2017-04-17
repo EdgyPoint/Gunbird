@@ -1,7 +1,8 @@
 #include "Application.h"
+#include "ModuleParticles.h"
 #include "Enemy_Balloon.h"
 #include "ModuleCollision.h"
-
+#include "SDL/include/SDL_timer.h"
 
 Enemy_Balloon::Enemy_Balloon(int x, int y) : Enemy(x, y)
 {
@@ -31,5 +32,9 @@ void Enemy_Balloon::Move()
 
 void Enemy_Balloon::Shoot()
 {
-
+	if (SDL_GetTicks() >= reload)
+	{
+		App->particles->AddParticle(App->particles->balloonshoot, position.x, position.y, COLLIDER_ENEMY_SHOT);
+		reload += 500;
+	}
 }
