@@ -15,7 +15,7 @@ Enemy_Balloon::Enemy_Balloon(int x, int y) : Enemy(x, y)
 
 	animation = &fly;
 
-	path.PushBack({ 0.0f, 0.75f }, 50);
+	path.PushBack({ 0.0f, 0.75f }, 200);
 	path.PushBack({ 0.0f,0.0f }, 300);
 	path.PushBack({ 0.0f, 0.75f }, 300);
 
@@ -32,9 +32,13 @@ void Enemy_Balloon::Move()
 
 void Enemy_Balloon::Shoot()
 {
-	if (SDL_GetTicks() >= reload)
+	initcounter += 1;
+	if (initcounter > 210)
 	{
-		App->particles->AddParticle(App->particles->balloonshoot, position.x, position.y, COLLIDER_ENEMY_SHOT);
-		reload = SDL_GetTicks() + 500;
+		if (SDL_GetTicks() >= reload)
+		{
+			App->particles->AddParticle(App->particles->balloonshoot, position.x + 18, position.y + 53, COLLIDER_ENEMY_SHOT);
+			reload = SDL_GetTicks() + 500;
+		}
 	}
 }

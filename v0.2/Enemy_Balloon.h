@@ -16,6 +16,7 @@ public:
 	void Move();
 	void Shoot();
 	int reload = 0;
+	int initcounter = 0;
 };
 #endif
 
