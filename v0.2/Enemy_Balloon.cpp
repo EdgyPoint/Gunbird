@@ -28,3 +28,8 @@ void Enemy_Balloon::Move()
 {
 	position = original_pos + path.GetCurrentPosition();
 }
+
+void Enemy_Balloon::Shoot()
+{
+
+}

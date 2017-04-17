@@ -14,6 +14,7 @@ private:
 public:
 	Enemy_Balloon(int x, int y);
 	void Move();
+	void Shoot();
 };
 #endif
 
