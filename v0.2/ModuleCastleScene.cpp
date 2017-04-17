@@ -33,6 +33,11 @@ ModuleCastleScene::ModuleCastleScene()
 	castlehouse1.x = 0;
 	castlehouse1.y = 0;
 
+	npi.h = 1;
+	npi.w = 1000;
+	npi.x = 0;
+	npi.y = 0;
+
 	flag.PushBack({ 13, 94, 64, 21 });
 	flag.PushBack({ 13, 120, 66, 21 });
 	flag.PushBack({ 13, 145, 66, 20 });
@@ -58,6 +63,7 @@ bool ModuleCastleScene::Start()
 	App->enemies->Enable();
 
 	App->enemies->AddEnemy(ENEMY_TYPES::BALLOON, 100, App->render->camera.y);
+	App->collision->AddCollider(npi, COLLIDER_WALL, this);
 	graphics2 = App->textures->Load("assets/images/Castle Upper Background.png");
 	graphics = App->textures->Load("assets/images/Castle Background.png");
 	graphics3 = App->textures->Load("assets/images/Castle Structures.png");
@@ -114,9 +120,4 @@ update_status ModuleCastleScene::Update()
 void ModuleCastleScene::OnCollision(Collider* c1, Collider* c2)
 {
 
-	if (c2->type == COLLIDER_PLAYER_SHOT && c1->type == COLLIDER_ENEMY)
-		c1->to_delete = true;
-
-	if (c1->type == COLLIDER_ENEMY && c2->type == COLLIDER_PLAYER)
-		App->enemies->Disable();
 }

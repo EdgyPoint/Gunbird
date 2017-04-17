@@ -11,6 +11,7 @@
 #include "ModuleCastleScene.h"
 #include "ModuleScoreScene.h"
 #include "ModulePlayer.h"
+#include "ModuleEnemies.h"
 #include "SDL/include/SDL_timer.h"
 
 ModulePlayer::ModulePlayer()
@@ -178,5 +179,27 @@ update_status ModulePlayer::Update()
 
 void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 {
+	if (c2->type == COLLIDER_PLAYER_SHOT)
+	{
+		if (c1->type == COLLIDER_ENEMY)
+		{
+			c1->to_delete = true;
+		}
+		else if (c1->type == COLLIDER_WALL)
+		{
+			c2->to_delete = true;
+		}
+	}
+
+	if (c1->type == COLLIDER_ENEMY )
+	{
+		if (c2->type == COLLIDER_PLAYER)
+		{
+			App->enemies->Disable();
+		}
+	}
+		
+
+	
 
 }
