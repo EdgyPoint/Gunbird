@@ -18,6 +18,10 @@ public:
 	void Shoot();
 	int reload = 0;
 	int initcounter = 0;
+	float angle;
+	float hyp;
+	fPoint speeds;
+	float real_speed;
 };
 #endif
 
