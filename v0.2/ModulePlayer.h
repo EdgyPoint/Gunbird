@@ -35,6 +35,7 @@ public:
 	iPoint position;
 	int transition = 0;
 	int beam = 0;
+	int powerup_lv = 0;
 	uint shot;
 };
 

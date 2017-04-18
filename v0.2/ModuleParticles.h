@@ -52,8 +52,10 @@ private:
 
 public:
 
-	Particle marionbeam[3];
+	Particle marionbeam_lv1[3];
+	Particle marionbeam_lv2[3];
 	Particle balloonshoot;
+	Particle powerup;
 };
 
 #endif // __MODULEPARTICLES_H__

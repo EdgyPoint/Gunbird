@@ -22,25 +22,43 @@ ModuleParticles::~ModuleParticles()
 bool ModuleParticles::Start()
 {
 	LOG("Loading particles");
-	graphics = App->textures->Load("assets/images/Marion.png");
+	graphics = App->textures->Load("assets/images/particles.png");
 
-	marionbeam[0].anim.PushBack({ 166,67, 7, 29});
-	marionbeam[0].anim.loop = false;
-	marionbeam[0].anim.speed = 0.3f;
-	marionbeam[0].speed.y = -4.0f;
-	marionbeam[0].life = 4000;
+	marionbeam_lv1[0].anim.PushBack({ 166,67, 7, 29 });
+	marionbeam_lv1[0].anim.loop = false;
+	marionbeam_lv1[0].anim.speed = 0.3f;
+	marionbeam_lv1[0].speed.y = -4;
+	marionbeam_lv1[0].life = 4000;
 
-	marionbeam[1].anim.PushBack({ 166, 97, 7, 29 });
-	marionbeam[1].anim.loop = false;
-	marionbeam[1].anim.speed = 0.3f;
-	marionbeam[1].speed.y = -4.0f;
-	marionbeam[1].life = 4000;
+	marionbeam_lv1[1].anim.PushBack({ 166, 97, 7, 29 });
+	marionbeam_lv1[1].anim.loop = false;
+	marionbeam_lv1[1].anim.speed = 0.3f;
+	marionbeam_lv1[1].speed.y = -4;
+	marionbeam_lv1[1].life = 4000;
 
-	marionbeam[2].anim.PushBack({ 166, 127, 7, 29 });
-	marionbeam[2].anim.loop = false;
-	marionbeam[2].anim.speed = 0.3f;
-	marionbeam[2].speed.y = -4.0f;
-	marionbeam[2].life = 4000;
+	marionbeam_lv1[2].anim.PushBack({ 166, 127, 7, 29 });
+	marionbeam_lv1[2].anim.loop = false;
+	marionbeam_lv1[2].anim.speed = 0.3f;
+	marionbeam_lv1[2].speed.y = -4;
+	marionbeam_lv1[2].life = 4000;
+
+	marionbeam_lv2[0].anim.PushBack({ 192,68, 15, 28 });
+	marionbeam_lv2[0].anim.loop = false;
+	marionbeam_lv2[0].anim.speed = 0.3f;
+	marionbeam_lv2[0].speed.y = -4;
+	marionbeam_lv2[0].life = 4000;
+
+	marionbeam_lv2[1].anim.PushBack({ 192, 97, 15, 29 });
+	marionbeam_lv2[1].anim.loop = false;
+	marionbeam_lv2[1].anim.speed = 0.3f;
+	marionbeam_lv2[1].speed.y = -4;
+	marionbeam_lv2[1].life = 4000;
+
+	marionbeam_lv2[2].anim.PushBack({ 192, 127, 15, 29 });
+	marionbeam_lv2[2].anim.loop = false;
+	marionbeam_lv2[2].anim.speed = 0.3f;
+	marionbeam_lv2[2].speed.y = -4;
+	marionbeam_lv2[2].life = 4000;
 
 
 	balloonshoot.anim.PushBack({ 31, 425, 6, 6 });
@@ -53,8 +71,20 @@ bool ModuleParticles::Start()
 	balloonshoot.anim.PushBack({ 47, 441, 6, 6 });
 	balloonshoot.anim.loop = true;
 	balloonshoot.anim.speed = 0.3f;
-	balloonshoot.speed.y = 3.0f;
+	balloonshoot.speed.y = 3;
 	balloonshoot.life = 4000;
+
+	powerup.anim.PushBack({ 235, 423, 22, 13 });
+	powerup.anim.PushBack({ 259, 423, 22, 13 });
+	powerup.anim.PushBack({ 282, 423, 22, 13 });
+	powerup.anim.PushBack({ 305, 423, 22, 13 });
+	powerup.anim.PushBack({ 328, 423, 22, 13 });
+	powerup.anim.PushBack({ 351, 423, 22, 13 });
+	powerup.anim.PushBack({ 374, 423, 22, 13 });
+	powerup.anim.PushBack({ 397, 423, 22, 13 });
+	powerup.anim.loop = true;
+	powerup.anim.speed = 0.3f;
+	powerup.life = 20000;
 
 
 	return true;
