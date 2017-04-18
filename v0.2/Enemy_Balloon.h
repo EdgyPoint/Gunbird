@@ -9,6 +9,7 @@ class Enemy_Balloon : public Enemy
 
 private:
 	iPoint original_pos;
+	fPoint distance;
 	Animation fly;
 	Path path;
 public:

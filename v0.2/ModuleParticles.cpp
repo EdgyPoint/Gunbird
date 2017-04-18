@@ -27,19 +27,19 @@ bool ModuleParticles::Start()
 	marionbeam[0].anim.PushBack({ 166,67, 7, 29});
 	marionbeam[0].anim.loop = false;
 	marionbeam[0].anim.speed = 0.3f;
-	marionbeam[0].speed.y = -4;
+	marionbeam[0].speed.y = -4.0f;
 	marionbeam[0].life = 4000;
 
 	marionbeam[1].anim.PushBack({ 166, 97, 7, 29 });
 	marionbeam[1].anim.loop = false;
 	marionbeam[1].anim.speed = 0.3f;
-	marionbeam[1].speed.y = -4;
+	marionbeam[1].speed.y = -4.0f;
 	marionbeam[1].life = 4000;
 
 	marionbeam[2].anim.PushBack({ 166, 127, 7, 29 });
 	marionbeam[2].anim.loop = false;
 	marionbeam[2].anim.speed = 0.3f;
-	marionbeam[2].speed.y = -4;
+	marionbeam[2].speed.y = -4.0f;
 	marionbeam[2].life = 4000;
 
 
@@ -53,7 +53,7 @@ bool ModuleParticles::Start()
 	balloonshoot.anim.PushBack({ 47, 441, 6, 6 });
 	balloonshoot.anim.loop = true;
 	balloonshoot.anim.speed = 0.3f;
-	balloonshoot.speed.y = 3;
+	balloonshoot.speed.y = 3.0f;
 	balloonshoot.life = 4000;
 
 
@@ -111,7 +111,7 @@ update_status ModuleParticles::Update()
 	return UPDATE_CONTINUE;
 }
 
-void ModuleParticles::AddParticle(const Particle& particle, int x, int y, COLLIDER_TYPE collider_type, Uint32 delay)
+void ModuleParticles::AddParticle(const Particle& particle, int x, int y, COLLIDER_TYPE collider_type, float speed_x, float speed_y, Uint32 delay)
 {
 	for (uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
 	{
@@ -120,6 +120,11 @@ void ModuleParticles::AddParticle(const Particle& particle, int x, int y, COLLID
 			Particle* p = new Particle(particle);
 			p->born = SDL_GetTicks() + delay;
 			
+			if(speed_x != 0)
+			p->speed.x = speed_x;
+			if(speed_y != 0)
+			p->speed.y = speed_y;
+
 			p->position.x = x;
 			p->position.y = y;
 			if (collider_type != COLLIDER_NONE)

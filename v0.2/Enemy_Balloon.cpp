@@ -1,8 +1,10 @@
 #include "Application.h"
 #include "ModuleParticles.h"
 #include "Enemy_Balloon.h"
+#include "ModulePlayer.h"
 #include "ModuleCollision.h"
 #include "SDL/include/SDL_timer.h"
+#include <math.h>
 
 Enemy_Balloon::Enemy_Balloon(int x, int y) : Enemy(x, y)
 {
@@ -21,6 +23,8 @@ Enemy_Balloon::Enemy_Balloon(int x, int y) : Enemy(x, y)
 
 	collider = App->collision->AddCollider({ 0, 0, 42, 53 }, COLLIDER_TYPE::COLLIDER_ENEMY, (Module*)App->enemies);
 
+	distance.x = (App->player->position.x - position.x + 22);
+
 	original_pos.x = x;
 	original_pos.y = y;
 }
@@ -35,9 +39,14 @@ void Enemy_Balloon::Shoot()
 	initcounter += 1;
 	if (initcounter > 210 && initcounter < 500)
 	{
+		distance.x = fabsf(distance.x);
 		if (SDL_GetTicks() >= reload)
 		{
-			App->particles->AddParticle(App->particles->balloonshoot, position.x + 18, position.y + 53, COLLIDER_ENEMY_SHOT);
+			if (App->player->position.x + 11 < (position.x))
+			{
+				distance.x *= -1;
+			}
+			App->particles->AddParticle(App->particles->balloonshoot, position.x + 18, position.y + 53, COLLIDER_ENEMY_SHOT, distance.x);
 			reload = SDL_GetTicks() + 500;
 		}
 	}
