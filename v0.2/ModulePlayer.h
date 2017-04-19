@@ -13,11 +13,6 @@ struct Collider;
 
 class ModulePlayer : public Module
 {
-
-private:
-	int beam = 0;
-	uint shot;
-
 public:
 	ModulePlayer();
 	~ModulePlayer();
@@ -39,7 +34,9 @@ public:
 	Animation tright;
 	iPoint position;
 	int transition = 0;
-	
+	int beam = 0;
+	int powerup_lv = 0;
+	uint shot;
 };
 
 #endif

@@ -85,9 +85,9 @@ bool ModulePlayer::CleanUp()
 // Update: draw background
 update_status ModulePlayer::Update()
 {
-	float speed = 1.0f;
+	int speed = 1;
 	
-	if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT)
+	if (App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_REPEAT)
 	{
 		position.x -= speed;
 		if (position.x <= 0)
@@ -107,7 +107,7 @@ update_status ModulePlayer::Update()
 		transition++;
 	}
 
-	if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT)
+	if (App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_REPEAT)
 	{
 		position.x += speed;
 		if (position.x >= 196)
@@ -126,7 +126,7 @@ update_status ModulePlayer::Update()
 		transition++;
 	}
 
-	if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT)
+	if (App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_STATE::KEY_REPEAT)
 	{
 		position.y += speed;
 		if (position.y >= 288)
@@ -136,7 +136,7 @@ update_status ModulePlayer::Update()
 	
 	}
 
-	if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT)
+	if (App->input->keyboard[SDL_SCANCODE_UP] == KEY_STATE::KEY_REPEAT)
 	{
 		position.y -= speed;
 		if (position.y <= 0)
@@ -149,20 +149,35 @@ update_status ModulePlayer::Update()
 	if (App->input->keyboard[SDL_SCANCODE_C] == KEY_STATE::KEY_REPEAT && SDL_GetTicks() >= shot)
 	{
 		shot = (SDL_GetTicks() + 500);
-		App->particles->AddParticle(App->particles->marionbeam[beam++], position.x + 11, position.y - 25, COLLIDER_PLAYER_SHOT);
-		if (beam == 3) beam = 0;
-		App->particles->AddParticle(App->particles->marionbeam[beam++], position.x + 11, position.y + 5, COLLIDER_PLAYER_SHOT, 140);
-		if (beam == 3) beam = 0;
-		App->particles->AddParticle(App->particles->marionbeam[beam++], position.x + 11, position.y + 35, COLLIDER_PLAYER_SHOT, 280);
-		if (beam == 3) beam = 0;
-		App->particles->AddParticle(App->particles->marionbeam[beam++], position.x + 11, position.y + 65, COLLIDER_PLAYER_SHOT, 420);	
-		if (beam == 3) beam = 0;
+		if (powerup_lv == 0)
+		{
+			App->particles->AddParticle(App->particles->marionbeam_lv1[beam++], position.x + 11, position.y - 25, COLLIDER_PLAYER_SHOT);
+			if (beam == 3) beam = 0;
+			App->particles->AddParticle(App->particles->marionbeam_lv1[beam++], position.x + 11, position.y + 5, COLLIDER_PLAYER_SHOT, 0, -4, 140);
+			if (beam == 3) beam = 0;
+			App->particles->AddParticle(App->particles->marionbeam_lv1[beam++], position.x + 11, position.y + 35, COLLIDER_PLAYER_SHOT, 0, -4, 280);
+			if (beam == 3) beam = 0;
+			App->particles->AddParticle(App->particles->marionbeam_lv1[beam++], position.x + 11, position.y + 65, COLLIDER_PLAYER_SHOT, 0, -4, 420);
+			if (beam == 3) beam = 0;
+		}
+
+		if (powerup_lv == 1)
+		{
+			App->particles->AddParticle(App->particles->marionbeam_lv2[beam++], position.x + 11, position.y - 25, COLLIDER_PLAYER_SHOT);
+			if (beam == 3) beam = 0;
+			App->particles->AddParticle(App->particles->marionbeam_lv2[beam++], position.x + 11, position.y + 5, COLLIDER_PLAYER_SHOT, 0, -4, 140);
+			if (beam == 3) beam = 0;
+			App->particles->AddParticle(App->particles->marionbeam_lv2[beam++], position.x + 11, position.y + 35, COLLIDER_PLAYER_SHOT, 0, -4, 280);
+			if (beam == 3) beam = 0;
+			App->particles->AddParticle(App->particles->marionbeam_lv2[beam++], position.x + 11, position.y + 65, COLLIDER_PLAYER_SHOT, 0, -4, 420);
+			if (beam == 3) beam = 0;
+		}
 		App->audio->sfx = App->audio->LoadSFX("assets/SFX/Marion Shot.wav");
 		Mix_PlayChannel(-1, App->audio->sfx, 0);
 	}
 
-	if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_IDLE
-		&& App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_IDLE)
+	if (App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_IDLE
+		&& App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_IDLE)
 	{
 		current_animation = &idle;
 		transition = 0;
@@ -200,6 +215,17 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 		if (c2->type == COLLIDER_ENEMY_SHOT)
 		{
 			App->fade->FadeToBlack(App->scene_castle, App->scene_score, 0.1f);
+		}
+		if (c2->type == COLLIDER_PICKUP)
+		{
+			App->audio->sfx = App->audio->LoadSFX("assets/SFX/marionpowerup_quote.wav");;
+			Mix_PlayChannel(-1, App->audio->sfx, 0);
+
+			powerup_lv++;
+			if (powerup_lv > 1);
+			{
+				powerup_lv = 1;
+			}
 		}
 	}
 		

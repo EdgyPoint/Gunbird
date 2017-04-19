@@ -3,7 +3,6 @@
 #include "Application.h"
 #include "ModuleTextures.h"
 #include "ModulePlayer.h"
-#include "ModulePlayer2.h"
 #include "ModuleRender.h"
 #include "ModuleCollision.h"
 #include "ModuleParticles.h"
@@ -23,25 +22,43 @@ ModuleParticles::~ModuleParticles()
 bool ModuleParticles::Start()
 {
 	LOG("Loading particles");
-	graphics = App->textures->Load("assets/images/Marion.png");
+	graphics = App->textures->Load("assets/images/particles.png");
 
-	marionbeam[0].anim.PushBack({ 166,67, 7, 29});
-	marionbeam[0].anim.loop = false;
-	marionbeam[0].anim.speed = 0.3f;
-	marionbeam[0].speed.y = -4;
-	marionbeam[0].life = 4000;
+	marionbeam_lv1[0].anim.PushBack({ 166,67, 7, 29 });
+	marionbeam_lv1[0].anim.loop = false;
+	marionbeam_lv1[0].anim.speed = 0.3f;
+	marionbeam_lv1[0].speed.y = -4;
+	marionbeam_lv1[0].life = 4000;
 
-	marionbeam[1].anim.PushBack({ 166, 97, 7, 29 });
-	marionbeam[1].anim.loop = false;
-	marionbeam[1].anim.speed = 0.3f;
-	marionbeam[1].speed.y = -4;
-	marionbeam[1].life = 4000;
+	marionbeam_lv1[1].anim.PushBack({ 166, 97, 7, 29 });
+	marionbeam_lv1[1].anim.loop = false;
+	marionbeam_lv1[1].anim.speed = 0.3f;
+	marionbeam_lv1[1].speed.y = -4;
+	marionbeam_lv1[1].life = 4000;
 
-	marionbeam[2].anim.PushBack({ 166, 127, 7, 29 });
-	marionbeam[2].anim.loop = false;
-	marionbeam[2].anim.speed = 0.3f;
-	marionbeam[2].speed.y = -4;
-	marionbeam[2].life = 4000;
+	marionbeam_lv1[2].anim.PushBack({ 166, 127, 7, 29 });
+	marionbeam_lv1[2].anim.loop = false;
+	marionbeam_lv1[2].anim.speed = 0.3f;
+	marionbeam_lv1[2].speed.y = -4;
+	marionbeam_lv1[2].life = 4000;
+
+	marionbeam_lv2[0].anim.PushBack({ 192,68, 15, 28 });
+	marionbeam_lv2[0].anim.loop = false;
+	marionbeam_lv2[0].anim.speed = 0.3f;
+	marionbeam_lv2[0].speed.y = -4;
+	marionbeam_lv2[0].life = 4000;
+
+	marionbeam_lv2[1].anim.PushBack({ 192, 97, 15, 29 });
+	marionbeam_lv2[1].anim.loop = false;
+	marionbeam_lv2[1].anim.speed = 0.3f;
+	marionbeam_lv2[1].speed.y = -4;
+	marionbeam_lv2[1].life = 4000;
+
+	marionbeam_lv2[2].anim.PushBack({ 192, 127, 15, 29 });
+	marionbeam_lv2[2].anim.loop = false;
+	marionbeam_lv2[2].anim.speed = 0.3f;
+	marionbeam_lv2[2].speed.y = -4;
+	marionbeam_lv2[2].life = 4000;
 
 
 	balloonshoot.anim.PushBack({ 31, 425, 6, 6 });
@@ -56,6 +73,18 @@ bool ModuleParticles::Start()
 	balloonshoot.anim.speed = 0.3f;
 	balloonshoot.speed.y = 3;
 	balloonshoot.life = 4000;
+
+	powerup.anim.PushBack({ 235, 423, 22, 13 });
+	powerup.anim.PushBack({ 259, 423, 22, 13 });
+	powerup.anim.PushBack({ 282, 423, 22, 13 });
+	powerup.anim.PushBack({ 305, 423, 22, 13 });
+	powerup.anim.PushBack({ 328, 423, 22, 13 });
+	powerup.anim.PushBack({ 351, 423, 22, 13 });
+	powerup.anim.PushBack({ 374, 423, 22, 13 });
+	powerup.anim.PushBack({ 397, 423, 22, 13 });
+	powerup.anim.loop = true;
+	powerup.anim.speed = 0.3f;
+	powerup.life = 20000;
 
 
 	return true;
@@ -97,10 +126,6 @@ update_status ModuleParticles::Update()
 		else if (SDL_GetTicks() >= p->born)
 		{
 			
-			if (p->collider->type == COLLIDER_PLAYER2_SHOT && p->apperance == 0)
-			{
-				p->position.x = App->player2->position.x + 11; p->apperance++;
-			}
 			if (p->collider->type == COLLIDER_PLAYER_SHOT && p->apperance == 0)
 			{
 				p->position.x = App->player->position.x + 11; p->apperance++;
@@ -116,7 +141,7 @@ update_status ModuleParticles::Update()
 	return UPDATE_CONTINUE;
 }
 
-void ModuleParticles::AddParticle(const Particle& particle, int x, int y, COLLIDER_TYPE collider_type, Uint32 delay)
+void ModuleParticles::AddParticle(const Particle& particle, int x, int y, COLLIDER_TYPE collider_type, float speed_x, float speed_y, Uint32 delay)
 {
 	for (uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
 	{
@@ -125,6 +150,11 @@ void ModuleParticles::AddParticle(const Particle& particle, int x, int y, COLLID
 			Particle* p = new Particle(particle);
 			p->born = SDL_GetTicks() + delay;
 			
+			if(speed_x != 0)
+			p->speed.x = speed_x;
+			if(speed_y != 0)
+			p->speed.y = speed_y;
+
 			p->position.x = x;
 			p->position.y = y;
 			if (collider_type != COLLIDER_NONE)

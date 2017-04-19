@@ -18,14 +18,13 @@ struct Particle
 	Collider* collider = nullptr;
 	Animation anim;
 	uint fx = 0;
-	iPoint position;
-	iPoint position2;
-	iPoint speed;
+	fPoint position;
+	fPoint speed;
 	Uint32 born = 0;
 	Uint32 life = 0;
 	bool fx_played = false;
 	int apperance = 0;
-	
+
 	Particle();
 	Particle(const Particle& p);
 	~Particle();
@@ -43,7 +42,7 @@ public:
 	bool CleanUp();
 	void OnCollision(Collider* c1, Collider* c2);
 
-	void AddParticle(const Particle& particle, int x, int y, COLLIDER_TYPE collider_type, Uint32 delay = 0);
+	void AddParticle(const Particle& particle, int x, int y, COLLIDER_TYPE collider_type, float speed_x = 0.0f, float speed_y = 0.0f, Uint32 delay = 0);
 
 private:
 
@@ -53,8 +52,10 @@ private:
 
 public:
 
-	Particle marionbeam[3];
+	Particle marionbeam_lv1[3];
+	Particle marionbeam_lv2[3];
 	Particle balloonshoot;
+	Particle powerup;
 };
 
 #endif // __MODULEPARTICLES_H__

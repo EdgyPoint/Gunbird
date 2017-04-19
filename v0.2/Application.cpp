@@ -10,7 +10,6 @@
 #include "ModuleScoreScene.h"
 #include "ModuleCollision.h"
 #include "ModulePlayer.h"
-#include "ModulePlayer2.h"
 #include "ModuleFadeToBlack.h"
 #include "ModuleParticles.h"
 #include "ModuleEnemies.h"
@@ -18,7 +17,6 @@
 Application::Application()
 {
 	int i = 0;
-
 	modules[i++] = window = new ModuleWindow();
 	modules[i++] = input = new ModuleInput();
 	modules[i++] = render = new ModuleRender();
@@ -30,7 +28,6 @@ Application::Application()
 	modules[i++] = scene_score = new ModuleScoreScene();
 	modules[i++] = enemies = new ModuleEnemies();
 	modules[i++] = player = new ModulePlayer();
-	modules[i++] = player2 = new ModulePlayer2();
 	modules[i++] = particles = new ModuleParticles();
 	modules[i++] = collision = new ModuleCollision();
 	modules[i++] = fade = new ModuleFadeToBlack();
@@ -51,7 +48,6 @@ bool Application::Init()
 	scene_mine->Disable();
 	scene_score->Disable();
 	player->Disable();
-	player2->Disable();
 	
 	// Disable the map that you do not start with
 
