@@ -75,9 +75,6 @@ bool ModuleCastleScene::Start()
 	App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, 25, 0, 0);
 	App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, 50, 0, 1);
 
-
-
-	App->collision->AddCollider(npi, COLLIDER_WALL, this);
 	graphics2 = App->textures->Load("assets/images/Castle Upper Background.png");
 	graphics = App->textures->Load("assets/images/Castle Background.png");
 	graphics3 = App->textures->Load("assets/images/Castle Structures.png");

@@ -20,13 +20,18 @@ Enemy_Balloon::Enemy_Balloon(int x, int y, int option) : Enemy(x, y, option)
 	animation = &fly;
 
 	path.PushBack({ 0.0f, 0.75f }, 200);
-	path.PushBack({ 0.0f,0.0f }, 300);
-	path.PushBack({ 0.0f, 0.75f }, 300);
+	path.PushBack({ 0.0f,0.0f }, 50);
+	path.PushBack({ 0.0f, 0.75f }, 200);
+	path.PushBack({ 0.0f, 0.0f }, 50); 
+	path.PushBack({ 0.0f, 0.75f }, 200);
+	path.PushBack({ 0.0f, 0.0f }, 50);
 
 	collider = App->collision->AddCollider({ 0, 0, 42, 53 }, COLLIDER_TYPE::COLLIDER_ENEMY, (Module*)App->enemies);
 
 	original_pos.x = x;
 	original_pos.y = y;
+
+	hp = 19.0f;
 }
 
 void Enemy_Balloon::Move()

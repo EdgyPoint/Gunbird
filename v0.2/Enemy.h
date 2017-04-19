@@ -18,6 +18,7 @@ protected:
 public:
 	iPoint position;
 	int pathoption = 0;
+	float hp = 1.0f;
 
 
 public:
@@ -31,7 +32,7 @@ public:
 	virtual void Move() {};
 	virtual void Shoot() {};
 	virtual void Draw(SDL_Texture* sprites);
-	virtual void OnCollision(Collider* collider);
+	virtual void OnCollision(Collider* collider, Enemy* enemy);
 };
 
 #endif // __ENEMY_H__
