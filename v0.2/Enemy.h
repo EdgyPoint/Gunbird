@@ -13,14 +13,20 @@ protected:
 	Animation* animation = nullptr;
 	Collider* collider = nullptr;
 
-public:
-	iPoint position;
+
 
 public:
-	Enemy(int x, int y);
+	iPoint position;
+	int pathoption = 0;
+
+
+public:
+	Enemy(int x, int y, int option);
 	virtual ~Enemy();
 
 	const Collider* GetCollider() const;
+
+	const int GetOption();
 
 	virtual void Move() {};
 	virtual void Shoot() {};

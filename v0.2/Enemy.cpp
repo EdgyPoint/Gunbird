@@ -4,7 +4,7 @@
 #include "ModuleParticles.h"
 #include "ModuleRender.h"
 
-Enemy::Enemy(int x, int y) : position(x, y)
+Enemy::Enemy(int x, int y, int option) : position(x, y), pathoption(option)
 {}
 
 Enemy::~Enemy()
@@ -17,6 +17,8 @@ const Collider* Enemy::GetCollider() const
 {
 	return collider;
 }
+
+const int Enemy::GetOption() { return pathoption; }
 
 void Enemy::Draw(SDL_Texture* sprites)
 {

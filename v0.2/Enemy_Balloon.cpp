@@ -8,7 +8,7 @@
 
 #define PI 3.14159265
 
-Enemy_Balloon::Enemy_Balloon(int x, int y) : Enemy(x, y)
+Enemy_Balloon::Enemy_Balloon(int x, int y, int option) : Enemy(x, y, option)
 {
 	fly.PushBack({ 0, 0, 53, 53 });
 	fly.PushBack({ 53, 0, 53, 53 });

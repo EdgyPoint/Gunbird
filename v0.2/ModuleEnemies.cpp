@@ -9,7 +9,7 @@
 #include "Enemy_Redbomb.h"
 
 
-#define SPAWN_MARGIN 50
+#define SPAWN_MARGIN 500
 
 ModuleEnemies::ModuleEnemies()
 {
@@ -102,7 +102,7 @@ bool ModuleEnemies::CleanUp()
 	return true;
 }
 
-bool ModuleEnemies::AddEnemy(ENEMY_TYPES type, int x, int y)
+bool ModuleEnemies::AddEnemy(ENEMY_TYPES type, int x, int y, int option)
 {
 	bool ret = false;
 
@@ -113,6 +113,7 @@ bool ModuleEnemies::AddEnemy(ENEMY_TYPES type, int x, int y)
 			queue[i].type = type;
 			queue[i].x = x;
 			queue[i].y = y;
+			queue[i].pathoption = option;
 			ret = true;
 			break;
 		}
@@ -120,6 +121,7 @@ bool ModuleEnemies::AddEnemy(ENEMY_TYPES type, int x, int y)
 
 	return ret;
 }
+
 
 void ModuleEnemies::SpawnEnemy(const EnemyInfo& info)
 {
@@ -132,10 +134,10 @@ void ModuleEnemies::SpawnEnemy(const EnemyInfo& info)
 		switch (info.type)
 		{
 		case ENEMY_TYPES::BALLOON:
-			enemies[i] = new Enemy_Balloon(info.x, info.y);
+			enemies[i] = new Enemy_Balloon(info.x, info.y, info.pathoption);
 			break;
 		case ENEMY_TYPES::REDBOMB:
-			enemies[i] = new Enemy_Redbomb(info.x, info.y);
+			enemies[i] = new Enemy_Redbomb(info.x, info.y, info.pathoption);
 			break;
 		}
 	}

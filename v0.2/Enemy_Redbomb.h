@@ -12,7 +12,7 @@ private:
 	Animation fly;
 	Path path;
 public:
-	Enemy_Redbomb(int x, int y);
+	Enemy_Redbomb(int x, int y, int option);
 	void Move();
 	void Shoot();
 };

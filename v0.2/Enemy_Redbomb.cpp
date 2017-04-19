@@ -1,11 +1,13 @@
 #include "Application.h"
 #include "ModuleParticles.h"
+
 #include "Enemy_Redbomb.h"
 #include "ModuleCollision.h"
 #include "SDL/include/SDL_timer.h"
 
-Enemy_Redbomb :: Enemy_Redbomb(int x, int y) : Enemy(x, y)
+Enemy_Redbomb :: Enemy_Redbomb(int x, int y, int option) : Enemy(x, y, option)
 {
+	
 	fly.PushBack({ 100, 58, 28, 32 });
 	fly.PushBack({ 128, 58, 28, 32 });
 	fly.PushBack({ 156, 58, 28, 32 });
@@ -19,8 +21,19 @@ Enemy_Redbomb :: Enemy_Redbomb(int x, int y) : Enemy(x, y)
 
 	animation = &fly;
 
-	path.PushBack({ 0.0f, 0.55f }, 600);
-	path.PushBack({ 1.75f, 1.75f }, 2000);
+
+	if (option == 1)
+	{
+		path.PushBack({ 0.0f, 0.55f }, 100);
+		path.PushBack({ 1.75f, 1.75f }, 2000);
+	}
+	else
+	{
+		path.PushBack({ 0.0f, 0.55f }, 600);
+		path.PushBack({ 1.75f, 1.75f }, 2000);
+	}
+
+	
 
 
 	

@@ -13,7 +13,7 @@ private:
 	Animation fly;
 	Path path;
 public:
-	Enemy_Balloon(int x, int y);
+	Enemy_Balloon(int x, int y, int option);
 	void Move();
 	void Shoot();
 	int reload = 0;
