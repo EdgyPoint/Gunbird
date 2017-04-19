@@ -3,6 +3,7 @@
 #include "Application.h"
 #include "ModuleTextures.h"
 #include "ModulePlayer.h"
+#include "ModulePlayer2.h"
 #include "ModuleRender.h"
 #include "ModuleCollision.h"
 #include "ModuleParticles.h"
@@ -125,7 +126,10 @@ update_status ModuleParticles::Update()
 		}
 		else if (SDL_GetTicks() >= p->born)
 		{
-			
+			if (p->collider->type == COLLIDER_PLAYER2_SHOT && p->apperance == 0)
+			{
+				p->position.x = App->player2->position.x + 11; p->apperance++;
+			}
 			if (p->collider->type == COLLIDER_PLAYER_SHOT && p->apperance == 0)
 			{
 				p->position.x = App->player->position.x + 11; p->apperance++;

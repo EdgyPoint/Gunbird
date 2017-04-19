@@ -2,6 +2,7 @@
 #include "Application.h"
 #include "ModuleTextures.h"
 #include "ModulePlayer.h"
+#include "ModulePlayer2.h"
 #include "ModuleParticles.h"
 #include "ModuleInput.h"
 #include "ModuleRender.h"
@@ -58,15 +59,16 @@ bool ModuleCastleScene::Start()
 {
 	LOG("Loading castle scene");
 	App->player->Enable();
+	App->player2->Enable();
 	App->particles->Enable();
 	App->collision->Enable();
 	App->enemies->Enable();
 
-	App->enemies->AddEnemy(ENEMY_TYPES::BALLOON, 100, App->render->camera.y - 100);
+	App->collision->AddCollider(npi, COLLIDER_WALL);
 
-	App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, 10, App->render->camera.y - 100);
-	App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, 50, App->render->camera.y - 100);
-	App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, 100, App->render->camera.y - 100); 
+	App->enemies->AddEnemy(ENEMY_TYPES::BALLOON, 100, App->render->camera.y - 100);
+	App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, -10, -380);
+	App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, -26, -420);
 
 	App->collision->AddCollider(npi, COLLIDER_WALL, this);
 	graphics2 = App->textures->Load("assets/images/Castle Upper Background.png");
@@ -88,6 +90,7 @@ bool ModuleCastleScene::CleanUp()
 	SDL_DestroyTexture(graphics2);
 	SDL_DestroyTexture(graphics3);
 	App->player->Disable();
+	App->player2->Disable();
 	App->enemies->Disable();
 	App->particles->Disable();
 	App->collision->Disable();

@@ -87,7 +87,7 @@ update_status ModulePlayer::Update()
 {
 	int speed = 1;
 	
-	if (App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_REPEAT)
+	if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT)
 	{
 		position.x -= speed;
 		if (position.x <= 0)
@@ -107,7 +107,7 @@ update_status ModulePlayer::Update()
 		transition++;
 	}
 
-	if (App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_REPEAT)
+	if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT)
 	{
 		position.x += speed;
 		if (position.x >= 196)
@@ -126,7 +126,7 @@ update_status ModulePlayer::Update()
 		transition++;
 	}
 
-	if (App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_STATE::KEY_REPEAT)
+	if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT)
 	{
 		position.y += speed;
 		if (position.y >= 288)
@@ -136,7 +136,7 @@ update_status ModulePlayer::Update()
 	
 	}
 
-	if (App->input->keyboard[SDL_SCANCODE_UP] == KEY_STATE::KEY_REPEAT)
+	if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT)
 	{
 		position.y -= speed;
 		if (position.y <= 0)
@@ -146,7 +146,7 @@ update_status ModulePlayer::Update()
 	
 	}
 
-	if (App->input->keyboard[SDL_SCANCODE_C] == KEY_STATE::KEY_REPEAT && SDL_GetTicks() >= shot)
+	if (App->input->keyboard[SDL_SCANCODE_O] == KEY_STATE::KEY_REPEAT && SDL_GetTicks() >= shot)
 	{
 		shot = (SDL_GetTicks() + 500);
 		if (powerup_lv == 0)
@@ -176,8 +176,8 @@ update_status ModulePlayer::Update()
 		Mix_PlayChannel(-1, App->audio->sfx, 0);
 	}
 
-	if (App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_IDLE
-		&& App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_IDLE)
+	if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_IDLE
+		&& App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_IDLE)
 	{
 		current_animation = &idle;
 		transition = 0;
