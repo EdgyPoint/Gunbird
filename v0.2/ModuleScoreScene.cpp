@@ -2,6 +2,7 @@
 #include "Application.h"
 #include "ModuleTextures.h"
 #include "ModulePlayer.h"
+#include "ModulePlayer2.h"
 #include "ModuleInput.h"
 #include "ModuleRender.h"
 #include "ModuleIntroScene.h"
@@ -44,6 +45,7 @@ bool ModuleScoreScene::CleanUp()
 	LOG("Unloading score scene");
 	SDL_DestroyTexture(graphics);
 	App->player->Disable();
+	App->player2->Disable();
 	App->collision->Disable();
 
 	return true;

@@ -3,7 +3,6 @@
 
 #include "Module.h"
 #include "Enemy_Balloon.h"
-#include "Enemy_Redbomb.h"
 
 #define MAX_ENEMIES 100
 
@@ -17,7 +16,6 @@ enum ENEMY_TYPES
 {
 	NO_TYPE,
 	BALLOON,
-	REDBOMB,
 };
 
 class Enemy;
@@ -49,7 +47,6 @@ private:
 	void SpawnEnemy(const EnemyInfo& info);
 
 private:
-
 
 	EnemyInfo queue[MAX_ENEMIES];
 	Enemy* enemies[MAX_ENEMIES];

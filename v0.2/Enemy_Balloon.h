@@ -9,7 +9,6 @@ class Enemy_Balloon : public Enemy
 
 private:
 	iPoint original_pos;
-	fPoint distance;
 	Animation fly;
 	Path path;
 public:
@@ -18,8 +17,6 @@ public:
 	void Shoot();
 	int reload = 0;
 	int initcounter = 0;
-	float aux_float;
-	fPoint speeds;
 };
 #endif
 

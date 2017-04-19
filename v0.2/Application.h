@@ -3,8 +3,9 @@
 
 #include "Globals.h"
 
-#define NUM_MODULES 14
+#define NUM_MODULES 15
 
+class ModulePlayer2;
 class ModuleCollision;
 class ModuleWindow;
 class ModuleInput;
@@ -26,6 +27,7 @@ class Application
 public:
 
 	Module* modules[NUM_MODULES];
+	ModulePlayer2* player2;
 	ModuleWindow* window;
 	ModuleRender* render;
 	ModuleInput* input;
