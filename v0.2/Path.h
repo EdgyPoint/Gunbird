@@ -25,7 +25,7 @@ private:
 
 public:
 
-	void PushBack(fPoint speed, uint frames, Animation* animation = nullptr)
+	void PushBack(fPoint speed, uint frames,int path_type = 0, Animation* animation = nullptr)
 	{
 		steps[last_step].animation = animation;
 		steps[last_step].frames = frames;

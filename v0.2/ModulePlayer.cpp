@@ -194,42 +194,19 @@ update_status ModulePlayer::Update()
 
 void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 {
-	if (c2->type == COLLIDER_PLAYER_SHOT)
+	if (c2->type == COLLIDER_ENEMY_SHOT)
 	{
-		if (c1->type == COLLIDER_ENEMY)
+		App->fade->FadeToBlack(App->scene_castle, App->scene_score, 0.1f);
+	}
+	if (c2->type == COLLIDER_PICKUP)
+	{
+		App->audio->sfx = App->audio->LoadSFX("assets/SFX/marionpowerup_quote.wav");;
+		Mix_PlayChannel(-1, App->audio->sfx, 0);
+
+		powerup_lv++;
+		if (powerup_lv > 1);
 		{
-			c1->to_delete = true;
-		}
-		else if (c1->type == COLLIDER_WALL)
-		{
-			c2->to_delete = true;
+			powerup_lv = 1;
 		}
 	}
-
-	if (c1->type == COLLIDER_PLAYER )
-	{
-		if (c2->type == COLLIDER_ENEMY)
-		{
-			App->enemies->Disable();
-		}
-		if (c2->type == COLLIDER_ENEMY_SHOT)
-		{
-			App->fade->FadeToBlack(App->scene_castle, App->scene_score, 0.1f);
-		}
-		if (c2->type == COLLIDER_PICKUP)
-		{
-			App->audio->sfx = App->audio->LoadSFX("assets/SFX/marionpowerup_quote.wav");;
-			Mix_PlayChannel(-1, App->audio->sfx, 0);
-
-			powerup_lv++;
-			if (powerup_lv > 1);
-			{
-				powerup_lv = 1;
-			}
-		}
-	}
-		
-
-	
-
 }

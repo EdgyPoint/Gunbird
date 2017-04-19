@@ -1,9 +1,9 @@
 ﻿C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets(388,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (SDL5 Handout.vcxproj).  This can lead to incorrect clean and rebuild behavior.
-  ModuleCastleScene.cpp
-c:\users\jaume\documents\github\project-1\v0.2\modulecastlescene.cpp(111): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
-c:\users\jaume\documents\github\project-1\v0.2\modulecastlescene.cpp(112): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
-c:\users\jaume\documents\github\project-1\v0.2\modulecastlescene.cpp(116): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
-c:\users\jaume\documents\github\project-1\v0.2\modulecastlescene.cpp(117): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
-  Enemy_Redbomb.cpp
-  Generating Code...
+  ModuleParticles.cpp
+c:\users\jaume\documents\github\project-1\v0.2\moduleparticles.cpp(132): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+c:\users\jaume\documents\github\project-1\v0.2\moduleparticles.cpp(136): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+c:\users\jaume\documents\github\project-1\v0.2\moduleparticles.cpp(138): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
+c:\users\jaume\documents\github\project-1\v0.2\moduleparticles.cpp(163): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+c:\users\jaume\documents\github\project-1\v0.2\moduleparticles.cpp(164): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+c:\users\jaume\documents\github\project-1\v0.2\moduleparticles.cpp(225): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
   SDL Game.vcxproj -> C:\Users\Jaume\Documents\GitHub\Project-1\v0.2\Debug\Gunbird.exe

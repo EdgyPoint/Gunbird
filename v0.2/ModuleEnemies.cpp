@@ -9,7 +9,7 @@
 #include "Enemy_Redbomb.h"
 
 
-#define SPAWN_MARGIN 50
+#define SPAWN_MARGIN 500
 
 ModuleEnemies::ModuleEnemies()
 {
@@ -71,7 +71,7 @@ update_status ModuleEnemies::PostUpdate()
 	{
 		if (enemies[i] != nullptr)
 		{
-			if (enemies[i]->position.x * SCREEN_SIZE < (App->render->camera.x) - SPAWN_MARGIN)
+			if (enemies[i]->position.y * SCREEN_SIZE > (App->render->camera.y) + SPAWN_MARGIN * SCREEN_SIZE)
 			{
 				LOG("DeSpawning enemy at %d", enemies[i]->position.x * SCREEN_SIZE);
 				delete enemies[i];
@@ -143,13 +143,17 @@ void ModuleEnemies::SpawnEnemy(const EnemyInfo& info)
 
 void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 {
+	
 	for (uint i = 0; i < MAX_ENEMIES; ++i)
 	{
 		if (enemies[i] != nullptr && enemies[i]->GetCollider() == c1)
 		{
-			enemies[i]->OnCollision(c2);
-			delete enemies[i];
-			enemies[i] = nullptr;
+			enemies[i]->OnCollision(c2, enemies[i]);
+			if (enemies[i]->hp <= 0.0f)
+			{
+				delete enemies[i];
+				enemies[i] = nullptr;
+			}
 			break;
 		}
 	}
