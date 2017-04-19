@@ -19,7 +19,8 @@ Enemy_Redbomb :: Enemy_Redbomb(int x, int y) : Enemy(x, y)
 
 	animation = &fly;
 
-	path.PushBack({ 0.0f, 0.75f }, 200);
+	path.PushBack({ 0.0f, 0.55f }, 600);
+	path.PushBack({ 1.75f, 1.75f }, 2000);
 
 	
 
