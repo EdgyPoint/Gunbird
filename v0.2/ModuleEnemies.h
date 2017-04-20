@@ -4,14 +4,10 @@
 #include "Module.h"
 #include "Enemy_Balloon.h"
 #include "Enemy_Redbomb.h"
+#include "Enemy_Turretcopter.h"
 
 #define MAX_ENEMIES 100
 
-// TODO 2: Add a new enemy: Brown Cookies!
-
-// TODO 3: Have the Brown Cookies describe a path in the screen
-
-// TODO 4: Create a new enemy type: the Mech
 
 enum ENEMY_TYPES
 {
@@ -20,6 +16,7 @@ enum ENEMY_TYPES
 	REDBOMB,
 	HOUSE1,
 	HOUSE2,
+	TURRETCOPTER,
 };
 
 class Enemy;

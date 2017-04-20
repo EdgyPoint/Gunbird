@@ -77,10 +77,20 @@ bool ModuleCastleScene::Start()
 	App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, -38, -612, 2);
 	App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, -66, -640, 2);
 	App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, -94, -676, 2);
-
 	App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, -10, 0, 2);
 	App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, -38, 0, 2);
-
+	App->enemies->AddEnemy(ENEMY_TYPES::TURRETCOPTER, 100, -470, 0);
+	/*App->enemies->AddEnemy(ENEMY_TYPES::TURRETCOPTER, -25, -410, 0);
+	App->enemies->AddEnemy(ENEMY_TYPES::TURRETCOPTER, -10, -400, 0);
+	App->enemies->AddEnemy(ENEMY_TYPES::TURRETCOPTER, -15, -440, 0);
+	App->enemies->AddEnemy(ENEMY_TYPES::TURRETCOPTER, -25, -440, 0);
+	App->enemies->AddEnemy(ENEMY_TYPES::TURRETCOPTER, -10, -430, 0);
+	App->enemies->AddEnemy(ENEMY_TYPES::TURRETCOPTER, -10, -460, 0);
+	App->enemies->AddEnemy(ENEMY_TYPES::TURRETCOPTER, -15, -470, 0);
+	App->enemies->AddEnemy(ENEMY_TYPES::TURRETCOPTER, -20, -470, 0);
+	App->enemies->AddEnemy(ENEMY_TYPES::TURRETCOPTER, -10, -500, 0);
+	App->enemies->AddEnemy(ENEMY_TYPES::TURRETCOPTER, -15, -510, 0);
+	App->enemies->AddEnemy(ENEMY_TYPES::TURRETCOPTER, -20, -510, 0);*/
 	graphics2 = App->textures->Load("assets/images/Castle Upper Background.png");
 	graphics = App->textures->Load("assets/images/Castle Background.png");
 	//graphics3 = App->textures->Load("assets/images/Castle Structures.png");
