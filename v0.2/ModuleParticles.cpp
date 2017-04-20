@@ -200,7 +200,7 @@ Particle::Particle(const Particle& p) :
 Particle::~Particle()
 {
 	if (collider != nullptr)
-		App->collision->EraseCollider(collider);
+		collider->to_delete = true;
 }
 
 bool Particle::Update()
