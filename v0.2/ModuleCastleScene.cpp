@@ -67,7 +67,8 @@ bool ModuleCastleScene::Start()
 	App->collision->AddCollider(npi, COLLIDER_WALL);
 
 	App->enemies->AddEnemy(ENEMY_TYPES::BALLOON, 100, App->render->camera.y - 100, 0);
-	App->enemies->AddEnemy(ENEMY_TYPES::HOUSE1, 50, 50, 0);
+	App->enemies->AddEnemy(ENEMY_TYPES::HOUSE1, 153, -365, 0);
+	App->enemies->AddEnemy(ENEMY_TYPES::HOUSE2, 80, -624, 0);
 	/*App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, -10, -380, 2);
 	App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, -38, -412, 2);
 	App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, -66, -440, 2);

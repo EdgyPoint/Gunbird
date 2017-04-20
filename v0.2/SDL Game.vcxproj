@@ -75,6 +75,7 @@
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Enemy_Balloon.h" />
     <ClInclude Include="Enemy_House1.h" />
+    <ClInclude Include="Enemy_House2.h" />
     <ClInclude Include="Enemy_Redbomb.h" />
     <ClInclude Include="Globals.h" />
     <ClInclude Include="ModuleEnemies.h" />
@@ -102,6 +103,7 @@
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Enemy_Balloon.cpp" />
     <ClCompile Include="Enemy_House1.cpp" />
+    <ClCompile Include="Enemy_House2.cpp" />
     <ClCompile Include="Enemy_Redbomb.cpp" />
     <ClCompile Include="Globals.cpp" />
     <ClCompile Include="Main.cpp" />
