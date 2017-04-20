@@ -18,8 +18,6 @@ enum ENEMY_TYPES
 	NO_TYPE,
 	BALLOON,
 	REDBOMB,
-	HOUSE1,
-	HOUSE2,
 };
 
 class Enemy;

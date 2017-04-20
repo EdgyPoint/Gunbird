@@ -7,8 +7,6 @@
 #include "Enemy.h"
 #include "Enemy_Balloon.h"
 #include "Enemy_Redbomb.h"
-#include "Enemy_House1.h"
-#include "Enemy_House2.h"
 
 
 #define SPAWN_MARGIN 500

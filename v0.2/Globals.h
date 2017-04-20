@@ -30,5 +30,6 @@ typedef unsigned int uint;
 #define WIN_RESIZABLE 0
 #define REN_VSYNC 1
 #define TRANSITION_SPEED 10
+#define PI 3.14159265
 
 #endif // __GLOBALS_H__

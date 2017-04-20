@@ -27,6 +27,11 @@ Enemy_Redbomb :: Enemy_Redbomb(int x, int y, int option) : Enemy(x, y, option)
 		path.PushBack({ 0.0f, 0.55f }, 100);
 		path.PushBack({ 1.75f, 1.75f }, 2000);
 	}
+	if (option == 2)
+	{
+
+		//does a wave kind of move.
+	}
 	else
 	{
 		path.PushBack({ 0.0f, 0.55f }, 600);
@@ -42,11 +47,35 @@ Enemy_Redbomb :: Enemy_Redbomb(int x, int y, int option) : Enemy(x, y, option)
 
 	original_pos.x = x;
 	original_pos.y = y;
+	original_x = x;
 }
 
 void Enemy_Redbomb::Move()
 {
-	position = original_pos + path.GetCurrentPosition();
+	if (pathoption == 2)
+	{
+		if(going_right)
+		{
+			if (wave > 1000.0f)
+				going_right = false;
+			else
+				wave += 0.01f;
+		}
+	else
+	{
+		if (wave < -1000.0f)
+			going_right = true;
+		else
+			wave -= 0.01f;
+	}
+
+	position.x = original_x + (200.0f * sinf(wave));
+	position.y += 2;
+	}
+	else
+	{
+		position = original_pos + path.GetCurrentPosition();
+	}
 }
 
 void Enemy_Redbomb::Shoot()

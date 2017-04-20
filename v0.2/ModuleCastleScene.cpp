@@ -67,13 +67,17 @@ bool ModuleCastleScene::Start()
 	App->collision->AddCollider(npi, COLLIDER_WALL);
 
 	App->enemies->AddEnemy(ENEMY_TYPES::BALLOON, 100, App->render->camera.y - 100, 0);
-	App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, -10, -380, 0);
-	App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, -38, -412, 0);
-	App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, -66, -440, 0);
-	App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, -94, -476, 0);
+	/*App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, -10, -380, 2);
+	App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, -38, -412, 2);
+	App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, -66, -440, 2);
+	App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, -94, -476, 2);*/
+	App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, -10, -580, 2);
+	App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, -38, -612, 2);
+	App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, -66, -640, 2);
+	App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, -94, -676, 2);
 
-	App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, 25, 0, 0);
-	App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, 50, 0, 1);
+	App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, -10, 0, 2);
+	App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, -38, 0, 2);
 
 	graphics2 = App->textures->Load("assets/images/Castle Upper Background.png");
 	graphics = App->textures->Load("assets/images/Castle Background.png");

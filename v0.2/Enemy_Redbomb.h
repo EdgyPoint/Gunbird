@@ -4,6 +4,7 @@
 #include "Enemy.h"
 #include "Path.h"
 
+
 class Enemy_Redbomb : public Enemy
 {
 
@@ -11,6 +12,11 @@ private:
 	iPoint original_pos;
 	Animation fly;
 	Path path;
+	float wave = -1.0f;
+	bool going_right = true;
+	int original_x = 0;
+
+	
 public:
 	Enemy_Redbomb(int x, int y, int option);
 	void Move();

@@ -1,16 +1,14 @@
-<<<<<<< HEAD
 ﻿C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets(392,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (SDL5 Handout.vcxproj).  This can lead to incorrect clean and rebuild behavior.
   Enemy_Redbomb.cpp
+d:\disk c\documents\github\project-1\v0.2\enemy_redbomb.cpp(72): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+  Generating Code...
+  Compiling...
+  ModuleEnemies.cpp
+  Generating Code...
+  Skipping... (no relevant changes detected)
+  ModulePlayer2.cpp
+  ModulePlayer.cpp
+  ModuleCastleScene.cpp
+  Application.cpp
   SDL Game.vcxproj -> D:\Disk C\Documents\GitHub\Project-1\v0.2\Debug\Gunbird.exe
   SDL Game.vcxproj -> D:\Disk C\Documents\GitHub\Project-1\v0.2\Debug\Gunbird.pdb (Full PDB)
-=======
-﻿C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets(388,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (SDL5 Handout.vcxproj).  This can lead to incorrect clean and rebuild behavior.
-  ModuleParticles.cpp
-c:\users\jaume\documents\github\project-1\v0.2\moduleparticles.cpp(132): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
-c:\users\jaume\documents\github\project-1\v0.2\moduleparticles.cpp(136): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
-c:\users\jaume\documents\github\project-1\v0.2\moduleparticles.cpp(138): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
-c:\users\jaume\documents\github\project-1\v0.2\moduleparticles.cpp(163): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
-c:\users\jaume\documents\github\project-1\v0.2\moduleparticles.cpp(164): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
-c:\users\jaume\documents\github\project-1\v0.2\moduleparticles.cpp(225): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
-  SDL Game.vcxproj -> C:\Users\Jaume\Documents\GitHub\Project-1\v0.2\Debug\Gunbird.exe
->>>>>>> origin/master

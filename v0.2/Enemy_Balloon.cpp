@@ -6,7 +6,7 @@
 #include "SDL/include/SDL_timer.h"
 #include <cmath>
 
-#define PI 3.14159265
+
 
 Enemy_Balloon::Enemy_Balloon(int x, int y, int option) : Enemy(x, y, option)
 {
