@@ -50,7 +50,7 @@ private:
 
 	void SpawnEnemy(const EnemyInfo& info);
 
-private:
+public:
 
 
 	EnemyInfo queue[MAX_ENEMIES];

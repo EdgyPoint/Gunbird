@@ -21,6 +21,7 @@ Enemy_Redbomb :: Enemy_Redbomb(int x, int y, int option) : Enemy(x, y, option)
 
 	animation = &fly;
 
+	hp = 1.0f;
 
 	if (option == 1)
 	{

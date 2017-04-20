@@ -8,7 +8,7 @@
 #include "Enemy_Balloon.h"
 #include "Enemy_Redbomb.h"
 #include "Enemy_House1.h"
-#include "Enemy_House2.h"
+//#include "Enemy_House2.h"
 
 
 #define SPAWN_MARGIN 500
@@ -62,6 +62,9 @@ update_status ModuleEnemies::Update()
 
 	for (uint i = 0; i < MAX_ENEMIES; ++i)
 		if (enemies[i] != nullptr) enemies[i]->Shoot();
+
+	for (uint i = 0; i < MAX_ENEMIES; ++i)
+		if (enemies[i] != nullptr &&  enemies[i]->aditionalanimation) enemies[i]->Extra_animation();
 
 	return UPDATE_CONTINUE;
 }
@@ -140,6 +143,9 @@ void ModuleEnemies::SpawnEnemy(const EnemyInfo& info)
 			break;
 		case ENEMY_TYPES::REDBOMB:
 			enemies[i] = new Enemy_Redbomb(info.x, info.y, info.pathoption);
+			break;
+		case ENEMY_TYPES::HOUSE1:
+			enemies[i] = new Enemy_House1(info.x, info.y, info.pathoption);
 			break;
 		}
 	}

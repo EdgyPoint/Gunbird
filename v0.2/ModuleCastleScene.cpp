@@ -67,6 +67,7 @@ bool ModuleCastleScene::Start()
 	App->collision->AddCollider(npi, COLLIDER_WALL);
 
 	App->enemies->AddEnemy(ENEMY_TYPES::BALLOON, 100, App->render->camera.y - 100, 0);
+	App->enemies->AddEnemy(ENEMY_TYPES::HOUSE1, 50, 50, 0);
 	/*App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, -10, -380, 2);
 	App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, -38, -412, 2);
 	App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, -66, -440, 2);
@@ -81,7 +82,7 @@ bool ModuleCastleScene::Start()
 
 	graphics2 = App->textures->Load("assets/images/Castle Upper Background.png");
 	graphics = App->textures->Load("assets/images/Castle Background.png");
-	graphics3 = App->textures->Load("assets/images/Castle Structures.png");
+	//graphics3 = App->textures->Load("assets/images/Castle Structures.png");
 	App->audio->audio = App->audio->Load("assets/bgm/castle.ogg");
 	Mix_PlayMusic(App->audio->audio, -1);
 
@@ -118,13 +119,13 @@ update_status ModuleCastleScene::Update()
 
 	App->render->Blit(graphics, 0, yflag, &background, 10.0f); // sea and sky
 	App->render->Blit(graphics2, 0, yflag2, &backgroundup, 10.0f);
-	if (yflag >= -1503.00 || houseflag == true)
+	/*if (yflag >= -1503.00 || houseflag == true)
 	{
 		houseflag = true;
 		App->render->Blit(graphics3, 152, house1counter, &castlehouse1, 10.0f);
 		App->render->Blit(graphics3, 181, house1counter - 10, &(flag.GetCurrentFrame()));
 		house1counter += 0.55f;
-	}
+	}*/
 	
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN || yflag > -320)
 	{
