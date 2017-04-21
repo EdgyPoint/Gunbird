@@ -47,6 +47,7 @@ bool ModuleIntroScene::CleanUp()
 {
 	LOG("Unloading intro scene");
 	SDL_DestroyTexture(graphics);
+	App->scene_intro->Disable();
 	App->collision->Disable();
 	
 	return true;

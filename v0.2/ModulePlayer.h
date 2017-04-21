@@ -37,6 +37,8 @@ public:
 	int beam = 0;
 	int powerup_lv = 0;
 	uint shot;
+	int font_score = -1;
+	char* score = "-----00";
 };
 
 #endif

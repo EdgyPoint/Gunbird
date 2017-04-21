@@ -10,6 +10,7 @@
 #include "Enemy_House1.h"
 #include "Enemy_House2.h"
 #include "Enemy_Turretcopter.h"
+#include "Enemy_CastleMortar.h"
 
 
 #define SPAWN_MARGIN 500
@@ -155,6 +156,9 @@ void ModuleEnemies::SpawnEnemy(const EnemyInfo& info)
 			break;
 		case ENEMY_TYPES::TURRETCOPTER:
 			enemies[i] = new Enemy_Turretcopter(info.x, info.y, info.pathoption);
+			break;
+		case ENEMY_TYPES::CASTLEMORTAR:
+			enemies[i] = new Enemy_CastleMortar(info.x, info.y, info.pathoption);
 			break;
 		}
 	}
