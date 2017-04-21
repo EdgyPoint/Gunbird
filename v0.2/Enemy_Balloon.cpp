@@ -37,6 +37,8 @@ Enemy_Balloon::Enemy_Balloon(int x, int y, int option) : Enemy(x, y, option)
 	path.PushBack({ 0.0f, 0.75f }, 200);
 	path.PushBack({ 0.0f, 0.0f }, 50);
 
+	
+
 	collider = App->collision->AddCollider({ 0, 0, 42, 53 }, COLLIDER_TYPE::COLLIDER_ENEMY, (Module*)App->enemies);
 
 	original_pos.x = x;
@@ -60,6 +62,8 @@ void Enemy_Balloon::Move()
 	if (status == DAMAGED)
 		animation = &fly3;
 }
+
+
 
 void Enemy_Balloon::Shoot()
 {

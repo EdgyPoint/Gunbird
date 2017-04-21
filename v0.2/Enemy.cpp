@@ -55,6 +55,7 @@ void Enemy::OnCollision(Collider* collider, Enemy* enemy)
 		enemy->status = HIT;
 }
 
+
 void Enemy::ToDie(Enemy* enemy)
 {
 	App->particles->AddParticle(App->particles->powerup, enemy->position.x + 12, enemy->position.y + 26, COLLIDER_PICKUP);

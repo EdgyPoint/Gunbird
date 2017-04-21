@@ -10,8 +10,8 @@ class Enemy_House1 : public Enemy
 
 private:
 	iPoint original_pos;
-	Animation fly;
-	Animation flag;
+	Animation fly, fly2, fly3;
+	Animation flag, flag2, flag3;
 	Path path;
 
 
