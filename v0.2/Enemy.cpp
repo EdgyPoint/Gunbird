@@ -20,15 +20,24 @@ const Collider* Enemy::GetCollider() const
 	return collider;
 }
 
-const int Enemy::GetOption() { return pathoption; }
-
-void Enemy::Draw(SDL_Texture* sprites)
+void Enemy::Draw(SDL_Texture* sprites, Enemy* enemy)
 {
 	if (collider != nullptr)
 		collider->SetPos(position.x, position.y);
 
+	if (enemy->hp <= enemy->damaged_hp)
+		enemy->status = DAMAGED;
+
 	if (animation != nullptr)
 		App->render->Blit(sprites, position.x, position.y, &(animation->GetCurrentFrame()));
+
+	if (enemy->status == HIT)
+	{
+		if (enemy->hp > enemy->damaged_hp)
+			enemy->status = NORMAL;
+		else
+			enemy->status = DAMAGED;
+	}
 }
 
 void Enemy::OnCollision(Collider* collider, Enemy* enemy)
@@ -42,5 +51,14 @@ void Enemy::OnCollision(Collider* collider, Enemy* enemy)
 	else if (collider->type == COLLIDER_PLAYER2_SHOT && App->player2->powerup_lv == 1)
 		enemy->hp -= 1.25f;
 
+	if (collider->type == COLLIDER_PLAYER_SHOT || collider->type == COLLIDER_PLAYER2_SHOT)
+		enemy->status = HIT;
+
 	App->particles->AddParticle(App->particles->powerup, collider->rect.x, collider->rect.y, COLLIDER_PICKUP);
+}
+
+void Enemy::ToDie(Enemy* enemy)
+{
+	if (enemy->death_type == MEDIUM_ENEMY)
+		App->particles->AddParticle(App->particles->medium_explosion, enemy->position.x - 26, enemy->position.y - 10, COLLIDER_NONE);
 }

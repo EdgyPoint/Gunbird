@@ -12,17 +12,28 @@ Enemy_Balloon::Enemy_Balloon(int x, int y, int option) : Enemy(x, y, option)
 {
 	fly.PushBack({ 0, 0, 53, 53 });
 	fly.PushBack({ 53, 0, 53, 53 });
-	fly.PushBack({ 106, 0, 53 ,53 });
+	fly.PushBack({ 106, 0, 53, 53 });
 	fly.PushBack({ 159, 0, 53, 53 });
 	fly.PushBack({ 212, 0, 53, 53 });
 	fly.speed = 0.65f;
 
+	fly2.PushBack({ 265, 0, 53, 53 });
+	fly2.speed = 0.65f;
+
+	fly3.PushBack({ 0, 0, 53, 53 });
+	fly3.PushBack({ 53, 0, 53, 53 });
+	fly3.PushBack({ 106, 0, 53, 53 });
+	fly3.PushBack({ 159, 0, 53, 53 });
+	fly3.PushBack({ 212, 0, 53, 53 });
+	fly3.PushBack({ 318, 0, 53, 53 });
+	fly3.speed = 0.65f;
+
 	animation = &fly;
 
 	path.PushBack({ 0.0f, 0.75f }, 200);
-	path.PushBack({ 0.0f,0.0f }, 50);
+	path.PushBack({ 0.0f, 0.0f }, 50);
 	path.PushBack({ 0.0f, 0.75f }, 200);
-	path.PushBack({ 0.0f, 0.0f }, 50); 
+	path.PushBack({ 0.0f, 0.0f }, 50);
 	path.PushBack({ 0.0f, 0.75f }, 200);
 	path.PushBack({ 0.0f, 0.0f }, 50);
 
@@ -32,11 +43,22 @@ Enemy_Balloon::Enemy_Balloon(int x, int y, int option) : Enemy(x, y, option)
 	original_pos.y = y;
 
 	hp = 19.0f;
+	damaged_hp = 7;
+	death_type = MEDIUM_ENEMY;
 }
 
 void Enemy_Balloon::Move()
 {
 	position = original_pos + path.GetCurrentPosition();
+
+	if (status == NORMAL)
+		animation = &fly;
+
+	if (status == HIT)
+		animation = &fly2;
+
+	if (status == DAMAGED)
+		animation = &fly3;
 }
 
 void Enemy_Balloon::Shoot()
