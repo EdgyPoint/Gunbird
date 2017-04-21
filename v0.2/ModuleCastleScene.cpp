@@ -29,27 +29,10 @@ ModuleCastleScene::ModuleCastleScene()
 	backgroundup.x = 0;
 	backgroundup.y = 0;
 
-	castlehouse1.h = 86;
-	castlehouse1.w = 64;
-	castlehouse1.x = 0;
-	castlehouse1.y = 0;
-
-	npi.h = 1;
+	npi.h = -30;
 	npi.w = 1000;
 	npi.x = 0;
 	npi.y = 0;
-
-	flag.PushBack({ 13, 94, 64, 21 });
-	flag.PushBack({ 13, 120, 66, 21 });
-	flag.PushBack({ 13, 145, 66, 20 });
-	flag.PushBack({ 13, 170, 65, 21 });
-	flag.PushBack({ 13, 195, 64, 21 });
-	flag.PushBack({ 88, 97, 66, 20 });
-	flag.PushBack({ 89, 126, 65, 21 });
-	flag.PushBack({ 89, 153, 65, 21 });
-	flag.loop = true;
-	flag.speed = 0.2f;
-
 }
 
 ModuleCastleScene::~ModuleCastleScene()
@@ -67,18 +50,31 @@ bool ModuleCastleScene::Start()
 	App->collision->AddCollider(npi, COLLIDER_WALL);
 
 	App->enemies->AddEnemy(ENEMY_TYPES::BALLOON, 100, App->render->camera.y - 100, 0);
+	
+	//spawn houses
 	App->enemies->AddEnemy(ENEMY_TYPES::HOUSE1, 153, -365, 0);
 	App->enemies->AddEnemy(ENEMY_TYPES::HOUSE2, 80, -624, 0);
-	/*App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, -10, -380, 2);
-	App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, -38, -412, 2);
-	App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, -66, -440, 2);
-	App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, -94, -476, 2);*/
-	App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, -10, -580, 2);
+	
+	//spawn redbombs
+	App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, -10, -375, 0);
+	App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, -38, -407, 0);
+	App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, -66, -435, 0);
+	App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, -94, -471, 0);
+	App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, 230, -820, 2);
+	App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, 230, -820, 3);
+	App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, 230, -820, 4);
+	App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, 230, -820, 5);
+	App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, 230, -820, 6);
+	App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, 230, -820, 7);
+	App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, 230, -820, 8);
+	App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, 100, -1200, 9);
+
+	/*App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, -10, -580, 2);
 	App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, -38, -612, 2);
 	App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, -66, -640, 2);
-	App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, -94, -676, 2);
-	App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, -10, 0, 2);
-	App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, -38, 0, 2);
+	App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, -94, -676, 2);*/
+	//App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, -10, 0, 2);
+	//App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, -38, 0, 2);
 	App->enemies->AddEnemy(ENEMY_TYPES::TURRETCOPTER, 100, -470, 0);
 	App->enemies->AddEnemy(ENEMY_TYPES::CASTLEMORTAR, 168, -187, 0);
 	App->enemies->AddEnemy(ENEMY_TYPES::CASTLEMORTAR, 100, -50, 0);
@@ -95,7 +91,6 @@ bool ModuleCastleScene::Start()
 	App->enemies->AddEnemy(ENEMY_TYPES::TURRETCOPTER, -20, -510, 0);*/
 	graphics2 = App->textures->Load("assets/images/Castle Upper Background.png");
 	graphics = App->textures->Load("assets/images/Castle Background.png");
-	//graphics3 = App->textures->Load("assets/images/Castle Structures.png");
 	App->audio->audio = App->audio->Load("assets/bgm/castle.ogg");
 	Mix_PlayMusic(App->audio->audio, -1);
 
@@ -110,7 +105,6 @@ bool ModuleCastleScene::CleanUp()
 	yflag2 = -1279;
 	SDL_DestroyTexture(graphics);
 	SDL_DestroyTexture(graphics2);
-	SDL_DestroyTexture(graphics3);
 	App->player->Disable();
 	App->player2->Disable();
 	App->enemies->Disable();
@@ -132,13 +126,6 @@ update_status ModuleCastleScene::Update()
 
 	App->render->Blit(graphics, 0, yflag, &background, 10.0f); // sea and sky
 	App->render->Blit(graphics2, 0, yflag2, &backgroundup, 10.0f);
-	/*if (yflag >= -1503.00 || houseflag == true)
-	{
-		houseflag = true;
-		App->render->Blit(graphics3, 152, house1counter, &castlehouse1, 10.0f);
-		App->render->Blit(graphics3, 181, house1counter - 10, &(flag.GetCurrentFrame()));
-		house1counter += 0.55f;
-	}*/
 	
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN || yflag > -320)
 	{

@@ -23,21 +23,72 @@ Enemy_Redbomb :: Enemy_Redbomb(int x, int y, int option) : Enemy(x, y, option)
 
 	hp = 1.0f;
 
-	if (option == 1)
-	{
-		path.PushBack({ 0.0f, 0.55f }, 100);
-		path.PushBack({ 1.75f, 1.75f }, 2000);
-	}
-	if (option == 2)
-	{
-
-		//does a wave kind of move.
-	}
-	else
+	if (option == 0)
 	{
 		path.PushBack({ 0.0f, 0.55f }, 600);
 		path.PushBack({ 1.75f, 1.75f }, 2000);
 	}
+
+	if (option == 1)
+	{
+		path.PushBack({ 0.0f, 2.0f }, 10000);
+	}
+	if (option == 2)
+	{
+		path.PushBack({ 0.0f, 0.55f }, 1500);
+		path.PushBack({ -2.0f, 0.55f }, 18);
+		path.PushBack({ 0.0f, 0.55f }, 30);
+		path.PushBack({ 0.0f, 2.0f }, 1000);
+	}
+	if (option == 3)
+	{
+		path.PushBack({ 0.0f, 0.55f }, 1500);
+		path.PushBack({ -2.0f, 0.55f }, 33);
+		path.PushBack({ 0.0f, 0.55f }, 30);
+		path.PushBack({ 0.0f, 2.0f }, 1000);
+	}
+	if (option == 4)
+	{
+		path.PushBack({ 0.0f, 0.55f }, 1500);
+		path.PushBack({ -2.0f, 0.55f }, 49);
+		path.PushBack({ 0.0f, 0.55f }, 30);
+		path.PushBack({ 0.0f, 2.0f }, 1000);
+	}
+	if (option == 5)
+	{
+		path.PushBack({ 0.0f, 0.55f }, 1500);
+		path.PushBack({ -2.0f, 0.55f }, 64);
+		path.PushBack({ 0.0f, 0.55f }, 30);
+		path.PushBack({ 0.0f, 2.0f }, 1000);
+	}
+	if (option == 6)
+	{
+		path.PushBack({ 0.0f, 0.55f }, 1500);
+		path.PushBack({ -2.0f, 0.55f }, 80);
+		path.PushBack({ 0.0f, 0.55f }, 30);
+		path.PushBack({ 0.0f, 2.0f }, 1000);
+	}
+	if (option == 7)
+	{
+		path.PushBack({ 0.0f, 0.55f }, 1500);
+		path.PushBack({ -2.0f, 0.55f }, 96);
+		path.PushBack({ 0.0f, 0.55f }, 30);
+		path.PushBack({ 0.0f, 2.0f }, 1000);
+	}
+	if (option == 8)
+	{
+		path.PushBack({ 0.0f, 0.55f }, 1500);
+		path.PushBack({ -2.0f, 0.55f }, 112);
+		path.PushBack({ 0.0f, 0.55f }, 30);
+		path.PushBack({ 0.0f, 2.0f }, 1000);
+	}
+
+	if (option == 9)
+	{
+		path.PushBack({ 0.0f, 0.55f }, 10000000);
+	}
+
+	
 
 	
 
@@ -53,7 +104,7 @@ Enemy_Redbomb :: Enemy_Redbomb(int x, int y, int option) : Enemy(x, y, option)
 
 void Enemy_Redbomb::Move()
 {
-	if (pathoption == 2)
+	/*if (pathoption == 2)
 	{
 		if(going_right)
 		{
@@ -72,11 +123,11 @@ void Enemy_Redbomb::Move()
 
 	position.x = original_x + (200.0f * sinf(wave));
 	position.y += 2;
-	}
-	else
-	{
+	}*/
+	
+	
 		position = original_pos + path.GetCurrentPosition();
-	}
+	
 }
 
 void Enemy_Redbomb::Shoot()
