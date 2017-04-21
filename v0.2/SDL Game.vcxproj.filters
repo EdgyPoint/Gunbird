@@ -89,6 +89,7 @@
     <ClInclude Include="Enemy_Turretcopter.h">
       <Filter>Modules\Enemies</Filter>
     </ClInclude>
+<<<<<<< HEAD
     <ClInclude Include="Enemy_CastleMortar.h">
       <Filter>Modules\Enemies</Filter>
     </ClInclude>
@@ -107,6 +108,11 @@
     <ClInclude Include="ModuleScoreScene.h">
       <Filter>Modules\Scenes</Filter>
     </ClInclude>
+=======
+    <ClInclude Include="ModuleFonts.h">
+      <Filter>Modules</Filter>
+    </ClInclude>
+>>>>>>> origin/master
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -169,6 +175,7 @@
     <ClCompile Include="Enemy_Turretcopter.cpp">
       <Filter>Modules\Enemies</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="Enemy_CastleMortar.cpp">
       <Filter>Modules\Enemies</Filter>
     </ClCompile>
@@ -183,6 +190,10 @@
     </ClCompile>
     <ClCompile Include="ModuleScoreScene.cpp">
       <Filter>Modules\Scenes</Filter>
+=======
+    <ClCompile Include="ModuleFonts.cpp">
+      <Filter>Modules</Filter>
+>>>>>>> origin/master
     </ClCompile>
   </ItemGroup>
 </Project>

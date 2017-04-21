@@ -80,6 +80,7 @@
     <ClInclude Include="Enemy_Redbomb.h" />
     <ClInclude Include="Enemy_Turretcopter.h" />
     <ClInclude Include="Globals.h" />
+    <ClInclude Include="ModuleFonts.h" />
     <ClInclude Include="ModuleEnemies.h" />
     <ClInclude Include="MemLeaks.h" />
     <ClInclude Include="Module.h" />
@@ -111,6 +112,7 @@
     <ClCompile Include="Enemy_Turretcopter.cpp" />
     <ClCompile Include="Globals.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="ModuleFonts.cpp" />
     <ClCompile Include="ModuleAudio.cpp" />
     <ClCompile Include="ModuleCastleScene.cpp" />
     <ClCompile Include="ModuleCollision.cpp" />

@@ -12,6 +12,7 @@
 #include "ModuleScoreScene.h"
 #include "ModulePlayer.h"
 #include "ModuleEnemies.h"
+#include "ModuleFonts.h"
 #include "SDL/include/SDL_timer.h"
 
 ModulePlayer::ModulePlayer()
@@ -69,6 +70,8 @@ bool ModulePlayer::Start()
 	position.y = 220;
 	
 	player_col = App->collision->AddCollider({ 0, 0, 21, 32 }, COLLIDER_PLAYER, this);
+
+	font_score = App->fonts->Load("assets/images/fonts.png", "-1234567890", 1);
 
 	return true;
 }
@@ -186,6 +189,8 @@ update_status ModulePlayer::Update()
 	player_col->SetPos(position.x + 3, position.y);
 	
 	// Draw everything --------------------------------------
+
+	App->fonts->BlitText(position.x, position.y, font_score, score);
 
 	App->render->Blit(graphics, position.x, position.y, &(current_animation->GetCurrentFrame()));
 
