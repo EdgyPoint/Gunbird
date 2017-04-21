@@ -53,12 +53,12 @@ void Enemy::OnCollision(Collider* collider, Enemy* enemy)
 
 	if (collider->type == COLLIDER_PLAYER_SHOT || collider->type == COLLIDER_PLAYER2_SHOT)
 		enemy->status = HIT;
-
-	App->particles->AddParticle(App->particles->powerup, collider->rect.x, collider->rect.y, COLLIDER_PICKUP);
 }
 
 void Enemy::ToDie(Enemy* enemy)
 {
+	App->particles->AddParticle(App->particles->powerup, enemy->position.x + 12, enemy->position.y + 26, COLLIDER_PICKUP);
+
 	if (enemy->death_type == MEDIUM_ENEMY)
 		App->particles->AddParticle(App->particles->medium_explosion, enemy->position.x - 26, enemy->position.y - 10, COLLIDER_NONE);
 }

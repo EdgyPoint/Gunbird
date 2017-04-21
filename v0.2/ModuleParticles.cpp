@@ -113,7 +113,7 @@ bool ModuleParticles::Start()
 	medium_explosion.anim.PushBack({ 636, 477, 106, 106 });
 	medium_explosion.anim.loop = false;
 	medium_explosion.anim.speed = 0.5f;
-	medium_explosion.life = 12000;
+	medium_explosion.life = 1000;
 
 	return true;
 }
@@ -196,8 +196,7 @@ void ModuleParticles::AddParticle(const Particle& particle, int x, int y, COLLID
 
 			p->position.x = x;
 			p->position.y = y;
-			if (collider_type != COLLIDER_NONE)
-				p->collider = App->collision->AddCollider(p->anim.GetCurrentFrame(), collider_type, this);
+			p->collider = App->collision->AddCollider(p->anim.GetCurrentFrame(), collider_type, this);
 			active[i] = p;
 			break;
 		}
