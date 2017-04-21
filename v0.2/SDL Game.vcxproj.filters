@@ -15,6 +15,9 @@
     <Filter Include="Modules\Enemies">
       <UniqueIdentifier>{9f66c194-4a2e-45b3-94f5-8ae2062612a0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Modules\Scenes">
+      <UniqueIdentifier>{b9a3d1df-37a3-41a7-85dc-65ec93b9dd79}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Module.h">
@@ -32,9 +35,6 @@
     <ClInclude Include="Application.h">
       <Filter>Core</Filter>
     </ClInclude>
-    <ClInclude Include="ModuleInput.h">
-      <Filter>Modules</Filter>
-    </ClInclude>
     <ClInclude Include="ModuleRender.h">
       <Filter>Modules</Filter>
     </ClInclude>
@@ -51,18 +51,6 @@
       <Filter>Containers</Filter>
     </ClInclude>
     <ClInclude Include="ModuleFadeToBlack.h">
-      <Filter>Modules</Filter>
-    </ClInclude>
-    <ClInclude Include="ModuleScoreScene.h">
-      <Filter>Modules</Filter>
-    </ClInclude>
-    <ClInclude Include="ModuleMineScene.h">
-      <Filter>Modules</Filter>
-    </ClInclude>
-    <ClInclude Include="ModuleCastleScene.h">
-      <Filter>Modules</Filter>
-    </ClInclude>
-    <ClInclude Include="ModuleIntroScene.h">
       <Filter>Modules</Filter>
     </ClInclude>
     <ClInclude Include="ModuleAudio.h">
@@ -101,6 +89,24 @@
     <ClInclude Include="Enemy_Turretcopter.h">
       <Filter>Modules\Enemies</Filter>
     </ClInclude>
+    <ClInclude Include="Enemy_CastleMortar.h">
+      <Filter>Modules\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleCastleScene.h">
+      <Filter>Modules\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleInput.h">
+      <Filter>Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleIntroScene.h">
+      <Filter>Modules\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleMineScene.h">
+      <Filter>Modules\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleScoreScene.h">
+      <Filter>Modules\Scenes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -128,18 +134,6 @@
       <Filter>Modules</Filter>
     </ClCompile>
     <ClCompile Include="ModuleFadeToBlack.cpp">
-      <Filter>Modules</Filter>
-    </ClCompile>
-    <ClCompile Include="ModuleScoreScene.cpp">
-      <Filter>Modules</Filter>
-    </ClCompile>
-    <ClCompile Include="ModuleMineScene.cpp">
-      <Filter>Modules</Filter>
-    </ClCompile>
-    <ClCompile Include="ModuleCastleScene.cpp">
-      <Filter>Modules</Filter>
-    </ClCompile>
-    <ClCompile Include="ModuleIntroScene.cpp">
       <Filter>Modules</Filter>
     </ClCompile>
     <ClCompile Include="ModuleAudio.cpp">
@@ -174,6 +168,21 @@
     </ClCompile>
     <ClCompile Include="Enemy_Turretcopter.cpp">
       <Filter>Modules\Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy_CastleMortar.cpp">
+      <Filter>Modules\Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleCastleScene.cpp">
+      <Filter>Modules\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleIntroScene.cpp">
+      <Filter>Modules\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleMineScene.cpp">
+      <Filter>Modules\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleScoreScene.cpp">
+      <Filter>Modules\Scenes</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

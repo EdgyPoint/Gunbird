@@ -20,13 +20,13 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v120</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v120</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
@@ -74,6 +74,7 @@
     <ClInclude Include="Application.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Enemy_Balloon.h" />
+    <ClInclude Include="Enemy_CastleMortar.h" />
     <ClInclude Include="Enemy_House1.h" />
     <ClInclude Include="Enemy_House2.h" />
     <ClInclude Include="Enemy_Redbomb.h" />
@@ -103,6 +104,7 @@
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Enemy_Balloon.cpp" />
+    <ClCompile Include="Enemy_CastleMortar.cpp" />
     <ClCompile Include="Enemy_House1.cpp" />
     <ClCompile Include="Enemy_House2.cpp" />
     <ClCompile Include="Enemy_Redbomb.cpp" />
