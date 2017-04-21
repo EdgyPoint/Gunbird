@@ -208,7 +208,6 @@ void ModulePlayer2::OnCollision(Collider* c1, Collider* c2)
 	
 	if (c1->type == COLLIDER_PLAYER)
 	{
-
 		if (c2->type == COLLIDER_ENEMY_SHOT)
 		{
 			App->fade->FadeToBlack(App->scene_castle, App->scene_score, 0.1f);

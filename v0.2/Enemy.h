@@ -7,6 +7,19 @@
 struct SDL_Texture;
 struct Collider;
 
+enum ENEMY_STATUS
+{
+	NORMAL,
+	HIT,
+	DAMAGED,
+};
+
+enum DEATH_TYPE
+{
+	MEDIUM_ENEMY,
+	SMALL_ENEMY,
+	DEFAULT_ENEMY
+};
 class Enemy
 {
 protected:
@@ -19,9 +32,11 @@ public:
 	iPoint position;
 	int pathoption = 0;
 	float hp = 1.0f;
+	int status = NORMAL;
+	int death_type = DEFAULT_ENEMY;
+	int damaged_hp = 0;
 	bool aditionalanimation = false;
 	
-
 
 public:
 	Enemy(int x, int y, int option);
@@ -29,13 +44,12 @@ public:
 
 	const Collider* GetCollider() const;
 
-	const int GetOption();
-
 	virtual void Move() {};
 	virtual void Shoot() {};
-	virtual void Draw(SDL_Texture* sprites);
+	virtual void Draw(SDL_Texture* sprites, Enemy* enemy);
 	virtual void Extra_animation() {};
 	virtual void OnCollision(Collider* collider, Enemy* enemy);
+	virtual void ToDie(Enemy* enemy);
 };
 
 #endif // __ENEMY_H__

@@ -87,6 +87,33 @@ bool ModuleParticles::Start()
 	powerup.anim.speed = 0.3f;
 	powerup.life = 20000;
 
+	medium_explosion.anim.PushBack({ 0, 477, 106, 106 });
+	medium_explosion.anim.PushBack({ 636, 477, 106, 106 });
+	medium_explosion.anim.PushBack({ 106, 477, 106, 106 });
+	medium_explosion.anim.PushBack({ 636, 477, 106, 106 });
+	medium_explosion.anim.PushBack({ 212, 477, 106, 106 });
+	medium_explosion.anim.PushBack({ 636, 477, 106, 106 });
+	medium_explosion.anim.PushBack({ 318, 477, 106, 106 });
+	medium_explosion.anim.PushBack({ 636, 477, 106, 106 });
+	medium_explosion.anim.PushBack({ 424, 477, 106, 106 });
+	medium_explosion.anim.PushBack({ 636, 477, 106, 106 });
+	medium_explosion.anim.PushBack({ 530, 477, 106, 106 });
+	medium_explosion.anim.PushBack({ 636, 477, 106, 106 });
+	medium_explosion.anim.PushBack({ 0, 593, 106, 106 });
+	medium_explosion.anim.PushBack({ 636, 477, 106, 106 });
+	medium_explosion.anim.PushBack({ 106, 593, 106, 106 });
+	medium_explosion.anim.PushBack({ 636, 477, 106, 106 });
+	medium_explosion.anim.PushBack({ 212, 593, 106, 106 });
+	medium_explosion.anim.PushBack({ 636, 477, 106, 106 });
+	medium_explosion.anim.PushBack({ 318, 593, 106, 106 });
+	medium_explosion.anim.PushBack({ 636, 477, 106, 106 });
+	medium_explosion.anim.PushBack({ 424, 593, 106, 106 });
+	medium_explosion.anim.PushBack({ 636, 477, 106, 106 });
+	medium_explosion.anim.PushBack({ 530, 593, 106, 106 });
+	medium_explosion.anim.PushBack({ 636, 477, 106, 106 });
+	medium_explosion.anim.loop = false;
+	medium_explosion.anim.speed = 0.5f;
+	medium_explosion.life = 12000;
 
 	return true;
 }
@@ -126,13 +153,21 @@ update_status ModuleParticles::Update()
 		}
 		else if (SDL_GetTicks() >= p->born)
 		{
-			if (p->collider->type == COLLIDER_PLAYER2_SHOT && p->apperance == 0)
+			if (p->collider->type == COLLIDER_PLAYER2_SHOT && p->apperance == 0 && App->player->powerup_lv == 0)
 			{
 				p->position.x = App->player2->position.x + 11; p->apperance++;
 			}
-			if (p->collider->type == COLLIDER_PLAYER_SHOT && p->apperance == 0)
+			if (p->collider->type == COLLIDER_PLAYER_SHOT && p->apperance == 0 && App->player->powerup_lv == 0)
 			{
 				p->position.x = App->player->position.x + 11; p->apperance++;
+			}
+			if (p->collider->type == COLLIDER_PLAYER2_SHOT && p->apperance == 0 && App->player->powerup_lv == 1)
+			{
+				p->position.x = App->player2->position.x + 6; p->apperance++;
+			}
+			if (p->collider->type == COLLIDER_PLAYER_SHOT && p->apperance == 0 && App->player->powerup_lv == 1)
+			{
+				p->position.x = App->player->position.x + 6; p->apperance++;
 			}
 			App->render->Blit(graphics, p->position.x, p->position.y, &(p->anim.GetCurrentFrame()));
 			if (p->fx_played == false)
@@ -161,8 +196,7 @@ void ModuleParticles::AddParticle(const Particle& particle, int x, int y, COLLID
 
 			p->position.x = x;
 			p->position.y = y;
-			if (collider_type != COLLIDER_NONE)
-				p->collider = App->collision->AddCollider(p->anim.GetCurrentFrame(), collider_type, this);
+			p->collider = App->collision->AddCollider(p->anim.GetCurrentFrame(), collider_type, this);
 			active[i] = p;
 			break;
 		}

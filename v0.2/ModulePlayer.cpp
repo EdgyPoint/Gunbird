@@ -163,13 +163,13 @@ update_status ModulePlayer::Update()
 
 		if (powerup_lv == 1)
 		{
-			App->particles->AddParticle(App->particles->marionbeam_lv2[beam++], position.x + 11, position.y - 25, COLLIDER_PLAYER_SHOT);
+			App->particles->AddParticle(App->particles->marionbeam_lv2[beam++], position.x + 5, position.y - 25, COLLIDER_PLAYER_SHOT);
 			if (beam == 3) beam = 0;
-			App->particles->AddParticle(App->particles->marionbeam_lv2[beam++], position.x + 11, position.y + 5, COLLIDER_PLAYER_SHOT, 0, -4, 140);
+			App->particles->AddParticle(App->particles->marionbeam_lv2[beam++], position.x + 5, position.y + 5, COLLIDER_PLAYER_SHOT, 0, -4, 140);
 			if (beam == 3) beam = 0;
-			App->particles->AddParticle(App->particles->marionbeam_lv2[beam++], position.x + 11, position.y + 35, COLLIDER_PLAYER_SHOT, 0, -4, 280);
+			App->particles->AddParticle(App->particles->marionbeam_lv2[beam++], position.x + 5, position.y + 35, COLLIDER_PLAYER_SHOT, 0, -4, 280);
 			if (beam == 3) beam = 0;
-			App->particles->AddParticle(App->particles->marionbeam_lv2[beam++], position.x + 11, position.y + 65, COLLIDER_PLAYER_SHOT, 0, -4, 420);
+			App->particles->AddParticle(App->particles->marionbeam_lv2[beam++], position.x + 5, position.y + 65, COLLIDER_PLAYER_SHOT, 0, -4, 420);
 			if (beam == 3) beam = 0;
 		}
 		App->audio->sfx = App->audio->LoadSFX("assets/SFX/Marion Shot.wav");

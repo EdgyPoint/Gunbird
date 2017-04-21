@@ -9,7 +9,6 @@
 #include "Enemy_Redbomb.h"
 #include "Enemy_House1.h"
 #include "Enemy_House2.h"
-#include "Enemy_Turretcopter.h"
 
 
 #define SPAWN_MARGIN 500
@@ -59,7 +58,7 @@ update_status ModuleEnemies::Update()
 		if (enemies[i] != nullptr) enemies[i]->Move();
 
 	for (uint i = 0; i < MAX_ENEMIES; ++i)
-		if (enemies[i] != nullptr) enemies[i]->Draw(sprites);
+		if (enemies[i] != nullptr) enemies[i]->Draw(sprites, enemies[i]);
 
 	for (uint i = 0; i < MAX_ENEMIES; ++i)
 		if (enemies[i] != nullptr) enemies[i]->Shoot();
@@ -151,9 +150,6 @@ void ModuleEnemies::SpawnEnemy(const EnemyInfo& info)
 		case ENEMY_TYPES::HOUSE2:
 			enemies[i] = new Enemy_House2(info.x, info.y, info.pathoption);
 			break;
-		case ENEMY_TYPES::TURRETCOPTER:
-			enemies[i] = new Enemy_Turretcopter(info.x, info.y, info.pathoption);
-			break;
 		}
 	}
 }
@@ -166,12 +162,15 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 		if (enemies[i] != nullptr && enemies[i]->GetCollider() == c1)
 		{
 			enemies[i]->OnCollision(c2, enemies[i]);
-			if (enemies[i]->hp <= 0.0f)
+			if (enemies[i]->hp < 1.0f)
 			{
+				enemies[i]->ToDie(enemies[i]);
 				delete enemies[i];
 				enemies[i] = nullptr;
-			}
+			}	
 			break;
 		}
 	}
 }
+
+

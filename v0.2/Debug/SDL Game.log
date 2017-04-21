@@ -1,4 +1,18 @@
-﻿C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets(392,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (SDL5 Handout.vcxproj).  This can lead to incorrect clean and rebuild behavior.
-  Enemy_Turretcopter.cpp
-  SDL Game.vcxproj -> C:\Users\Kistofe\Documents\GitHub\Project-1\v0.2\Debug\Gunbird.exe
-  SDL Game.vcxproj -> C:\Users\Kistofe\Documents\GitHub\Project-1\v0.2\Debug\Gunbird.pdb (Full PDB)
+﻿C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets(388,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (SDL5 Handout.vcxproj).  This can lead to incorrect clean and rebuild behavior.
+  ModulePlayer2.cpp
+c:\users\jaume\documents\github\project-1\v0.2\moduleplayer2.cpp(222): warning C4390: ';' : empty controlled statement found; is this the intent?
+  ModulePlayer.cpp
+c:\users\jaume\documents\github\project-1\v0.2\moduleplayer.cpp(208): warning C4390: ';' : empty controlled statement found; is this the intent?
+  ModuleEnemies.cpp
+  ModuleCastleScene.cpp
+c:\users\jaume\documents\github\project-1\v0.2\modulecastlescene.cpp(121): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
+c:\users\jaume\documents\github\project-1\v0.2\modulecastlescene.cpp(122): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
+  Enemy_House2.cpp
+  Enemy_House1.cpp
+  Enemy_Balloon.cpp
+c:\users\jaume\documents\github\project-1\v0.2\enemy_balloon.cpp(66): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+c:\users\jaume\documents\github\project-1\v0.2\enemy_balloon.cpp(67): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+c:\users\jaume\documents\github\project-1\v0.2\enemy_balloon.cpp(75): warning C4018: '>=' : signed/unsigned mismatch
+  Application.cpp
+  Generating Code...
+  SDL Game.vcxproj -> C:\Users\Jaume\Documents\GitHub\Project-1\v0.2\Debug\Gunbird.exe

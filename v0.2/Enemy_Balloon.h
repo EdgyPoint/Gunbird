@@ -10,8 +10,9 @@ class Enemy_Balloon : public Enemy
 private:
 	iPoint original_pos;
 	fPoint distance;
-	Animation fly;
+	Animation fly, fly2, fly3;
 	Path path;
+
 public:
 	Enemy_Balloon(int x, int y, int option);
 	void Move();

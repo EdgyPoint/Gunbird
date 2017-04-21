@@ -40,7 +40,7 @@ Enemy_Redbomb :: Enemy_Redbomb(int x, int y, int option) : Enemy(x, y, option)
 	}
 
 	
-
+	death_type = SMALL_ENEMY;
 
 	
 
