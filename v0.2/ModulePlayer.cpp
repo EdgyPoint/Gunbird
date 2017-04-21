@@ -1,3 +1,4 @@
+#include<cstring>
 #include "Globals.h"
 #include "Application.h"
 #include "ModuleTextures.h"
@@ -89,7 +90,8 @@ bool ModulePlayer::CleanUp()
 update_status ModulePlayer::Update()
 {
 	int speed = 1;
-	
+	strcpy(yokse, score);
+	yokse[0] = 49;
 	if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT)
 	{
 		position.x -= speed;
@@ -190,7 +192,7 @@ update_status ModulePlayer::Update()
 	
 	// Draw everything --------------------------------------
 
-	App->fonts->BlitText(position.x, position.y, font_score, score);
+	App->fonts->BlitText(position.x, position.y, font_score, yokse);
 
 	App->render->Blit(graphics, position.x, position.y, &(current_animation->GetCurrentFrame()));
 
