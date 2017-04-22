@@ -56,6 +56,9 @@ ModulePlayer::ModulePlayer()
 	right.PushBack({ 96, 96, 32, 32 });
 	right.loop = true;
 	right.speed = 0.1f;
+
+	dying.PushBack({ 129, 0, 30, 30 });
+	dying.loop = false;
 }
 
 ModulePlayer::~ModulePlayer()
@@ -93,7 +96,11 @@ update_status ModulePlayer::Update()
 	int speed = 1;
 	strcpy(yokse, score);
 	yokse[0] = 49;
-	if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT)
+
+	if (lives < 0)
+	App->fade->FadeToBlack(App->scene_castle, App->scene_score, 0.1f);
+
+	if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT && !_dying && !respawning)
 	{
 		position.x -= speed;
 		if (position.x <= 0)
@@ -113,7 +120,7 @@ update_status ModulePlayer::Update()
 		transition++;
 	}
 
-	if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT)
+	if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT && !_dying && !respawning)
 	{
 		position.x += speed;
 		if (position.x >= 196)
@@ -132,7 +139,7 @@ update_status ModulePlayer::Update()
 		transition++;
 	}
 
-	if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT)
+	if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT && !_dying && !respawning)
 	{
 		position.y += speed;
 		if (position.y >= 288)
@@ -142,7 +149,7 @@ update_status ModulePlayer::Update()
 	
 	}
 
-	if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT)
+	if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT && !_dying && !respawning)
 	{
 		position.y -= speed;
 		if (position.y <= 0)
@@ -152,7 +159,7 @@ update_status ModulePlayer::Update()
 	
 	}
 
-	if (App->input->keyboard[SDL_SCANCODE_C] == KEY_STATE::KEY_REPEAT && SDL_GetTicks() >= shot)
+	if (App->input->keyboard[SDL_SCANCODE_C] == KEY_STATE::KEY_REPEAT && SDL_GetTicks() >= shot && !_dying && !respawning)
 	{
 		shot = (SDL_GetTicks() + 500);
 		if (powerup_lv == 0)
@@ -189,7 +196,69 @@ update_status ModulePlayer::Update()
 		transition = 0;
 	}
 
+	if (App->input->keyboard[SDL_SCANCODE_F2] == KEY_STATE::KEY_DOWN && godmode == false)
+	{
+		godmode = true;
+		App->collision->EditMatrix(COLLIDER_PLAYER, COLLIDER_ENEMY, false);
+		App->collision->EditMatrix(COLLIDER_PLAYER, COLLIDER_ENEMY_SHOT, false);
+		App->collision->EditMatrix(COLLIDER_ENEMY, COLLIDER_PLAYER, false);
+		App->collision->EditMatrix(COLLIDER_ENEMY_SHOT, COLLIDER_PLAYER, false);
+	}
+
+	else if (App->input->keyboard[SDL_SCANCODE_F2] == KEY_STATE::KEY_DOWN && godmode == true)
+	{
+		godmode = false;
+		App->collision->EditMatrix(COLLIDER_PLAYER, COLLIDER_ENEMY, true);
+		App->collision->EditMatrix(COLLIDER_PLAYER, COLLIDER_ENEMY_SHOT, true);
+		App->collision->EditMatrix(COLLIDER_ENEMY, COLLIDER_PLAYER, true);
+		App->collision->EditMatrix(COLLIDER_ENEMY_SHOT, COLLIDER_PLAYER, true);
+	}
+
 	player_col->SetPos(position.x + 3, position.y);
+
+	if (_dying)
+	{
+		current_animation = &dying;
+		if (deathcounter > 13)
+		{
+			position.y += 2;
+		}
+		deathcounter++;
+
+		if (position.y > 320)
+		{
+			current_animation = &idle;
+			_dying = false;
+			respawning = true;
+			deathcounter = 0;
+			position.x = 51;
+		}
+	}
+
+	if (respawning)
+	{
+		position.y -= 1;
+		respawncounter++;
+		if (respawncounter == 80)
+		{
+			respawning = false;
+			temp_invincibility = true;
+			respawncounter = 0;
+		}
+	}
+
+	if (temp_invincibility)
+	{
+		invincibilitycounter++;
+		if (invincibilitycounter == 120)
+		{
+			App->collision->EditMatrix(COLLIDER_PLAYER, COLLIDER_ENEMY, true);
+			App->collision->EditMatrix(COLLIDER_PLAYER, COLLIDER_ENEMY_SHOT, true);
+			App->collision->EditMatrix(COLLIDER_ENEMY, COLLIDER_PLAYER, true);
+			App->collision->EditMatrix(COLLIDER_ENEMY_SHOT, COLLIDER_PLAYER, true);
+			invincibilitycounter = 0;
+		}
+	}
 
 	
 	// Draw everything --------------------------------------
@@ -205,7 +274,17 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 {
 	if (c2->type == COLLIDER_ENEMY_SHOT)
 	{
-		App->fade->FadeToBlack(App->scene_castle, App->scene_score, 0.1f);
+		lives -= 1;
+		_dying = true;
+		App->collision->EditMatrix(COLLIDER_PLAYER, COLLIDER_ENEMY, false);
+		App->collision->EditMatrix(COLLIDER_PLAYER, COLLIDER_ENEMY_SHOT, false);
+		App->collision->EditMatrix(COLLIDER_ENEMY, COLLIDER_PLAYER, false);
+		App->collision->EditMatrix(COLLIDER_ENEMY_SHOT, COLLIDER_PLAYER, false);
+
+		if (lives < 0)
+		{
+			App->fade->FadeToBlack(App->scene_castle, App->scene_intro, 2.0f);
+		}
 	}
 	if (c2->type == COLLIDER_PICKUP)
 	{

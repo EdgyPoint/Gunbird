@@ -178,6 +178,15 @@ update_status ModuleCastleScene::Update()
 		App->fade->FadeToBlack(this, App->scene_mine, 2.0f);
 	}
 
+	if (App->input->keyboard[SDL_SCANCODE_F3] == KEY_STATE::KEY_DOWN)
+	{
+		App->fade->FadeToBlack(this, App->scene_score, 2.0f);
+	}
+	if (App->input->keyboard[SDL_SCANCODE_F4] == KEY_STATE::KEY_DOWN)
+	{
+		App->fade->FadeToBlack(this, App->scene_intro, 2.0f);
+	}
+
 	return UPDATE_CONTINUE;
 }
 

@@ -65,7 +65,6 @@ Enemy_House2::Enemy_House2(int x, int y, int option) : Enemy(x, y, option)
 	path.PushBack({ 0.0f, 0.55f }, 10000);
 	original_pos.x = x;
 	original_pos.y = y;
-
 	hp = 10.0f;
 	death_type = MEDIUM_ENEMY;
 	enemy_drops = true;
