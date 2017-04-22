@@ -89,6 +89,32 @@ bool ModuleParticles::Start()
 	powerup.speed.y = 1;
 	powerup.life = 20000;
 
+	impact.anim.PushBack({448, 768, 16, 42});
+	impact.anim.PushBack({464, 768, 16, 42 });
+	impact.anim.PushBack({480, 768, 16, 42 });
+	impact.anim.PushBack({496, 768, 16, 42 });
+	impact.anim.PushBack({512, 768, 16, 42 });
+	impact.anim.PushBack({528, 768, 16, 42 });
+	impact.anim.PushBack({544, 768, 16, 42 });
+	impact.anim.PushBack({560, 768, 16, 42 });
+	impact.anim.PushBack({576, 768, 16, 42 });
+	impact.anim.PushBack({592, 768, 16, 42 });
+	impact.anim.PushBack({608, 768, 16, 42 });
+	impact.anim.PushBack({448, 810, 16, 42});
+	impact.anim.PushBack({464, 810, 16, 42 });
+	impact.anim.PushBack({480, 810, 16, 42 });
+	impact.anim.PushBack({496, 810, 16, 42 });
+	impact.anim.PushBack({512, 810, 16, 42 });
+	impact.anim.PushBack({528, 810, 16, 42 });
+	impact.anim.PushBack({544, 810, 16, 42 });
+	impact.anim.PushBack({560, 810, 16, 42 });
+	impact.anim.PushBack({576, 810, 16, 42 });
+	impact.anim.PushBack({592, 810, 16, 42 });
+	impact.anim.loop = false;
+	impact.anim.speed = 0.5f;
+	impact.life = 500;
+
+
 	small_explosion.anim.PushBack({0, 768, 56, 64});
 	small_explosion.anim.PushBack({56, 768, 56, 64});
 	small_explosion.anim.PushBack({112, 768, 56, 64 });

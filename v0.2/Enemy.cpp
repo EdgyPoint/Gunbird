@@ -54,7 +54,12 @@ void Enemy::OnCollision(Collider* collider, Enemy* enemy)
 		enemy->hp -= 1.25f;
 
 	if (collider->type == COLLIDER_PLAYER_SHOT || collider->type == COLLIDER_PLAYER2_SHOT)
+	{
 		enemy->status = HIT;
+		App->particles->AddParticle(App->particles->impact, collider->rect.x - 6, collider->rect.y - 47, COLLIDER_NONE);
+	}
+
+
 }
 
 
