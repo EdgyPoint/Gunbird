@@ -46,10 +46,10 @@ void Enemy_CastleMortar::Shoot()
 	{
 		if (SDL_GetTicks() >= reload)
 		{
-			//App->particles->AddParticle(App->particles->balloonshoot, position.x, position.y, COLLIDER_ENEMY_SHOT, -2, -2); 
-			//App->particles->AddParticle(App->particles->balloonshoot, position.x + 32, position.y, COLLIDER_ENEMY_SHOT, 2, -2); 
-			//App->particles->AddParticle(App->particles->balloonshoot, position.x, position.y + 32, COLLIDER_ENEMY_SHOT, -2, 2);
-			//App->particles->AddParticle(App->particles->balloonshoot, position.x + 32, position.y + 32, COLLIDER_ENEMY_SHOT, 2, 2);
+			App->particles->AddParticle(App->particles->balloonshoot, position.x, position.y, COLLIDER_ENEMY_SHOT, -2, -2); 
+			App->particles->AddParticle(App->particles->balloonshoot, position.x + 32, position.y, COLLIDER_ENEMY_SHOT, 2, -2); 
+			App->particles->AddParticle(App->particles->balloonshoot, position.x, position.y + 32, COLLIDER_ENEMY_SHOT, -2, 2);
+			App->particles->AddParticle(App->particles->balloonshoot, position.x + 32, position.y + 32, COLLIDER_ENEMY_SHOT, 2, 2);
 			reload = SDL_GetTicks() + 500;
 		}
 	}

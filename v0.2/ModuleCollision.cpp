@@ -162,6 +162,7 @@ void ModuleCollision::DebugDraw()
 			break;
 		case COLLIDER_PICKUP: // purple
 			App->render->DrawQuad(colliders[i]->rect, 138, 0, 255, alpha);
+			break;
 		}
 	}
 }

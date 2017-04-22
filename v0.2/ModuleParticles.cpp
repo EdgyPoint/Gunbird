@@ -233,7 +233,6 @@ update_status ModuleParticles::Update()
 			{
 				p->speed.y = p->speed.y * -1;
 			}
-
 		}
 	}
 
