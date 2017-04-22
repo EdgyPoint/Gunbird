@@ -69,9 +69,9 @@ void Enemy::ToDie(Enemy* enemy)
 		App->particles->AddParticle(App->particles->powerup, enemy->position.x + 12, enemy->position.y + 26, COLLIDER_PICKUP);
 	}
 
-
-
 	if (enemy->death_type == MEDIUM_ENEMY)
 		App->particles->AddParticle(App->particles->medium_explosion, enemy->position.x - 26, enemy->position.y - 10, COLLIDER_NONE);
 
+	if (enemy->death_type == SMALL_ENEMY)
+		App->particles->AddParticle(App->particles->small_explosion, enemy->position.x - 12, enemy->position.y - 14, COLLIDER_NONE);
 }

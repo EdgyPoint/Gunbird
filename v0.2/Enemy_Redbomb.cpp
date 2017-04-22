@@ -100,6 +100,8 @@ Enemy_Redbomb :: Enemy_Redbomb(int x, int y, int option) : Enemy(x, y, option)
 	original_pos.x = x;
 	original_pos.y = y;
 	original_x = x;
+
+	death_type = SMALL_ENEMY;
 }
 
 void Enemy_Redbomb::Move()

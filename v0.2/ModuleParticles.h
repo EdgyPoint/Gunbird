@@ -56,6 +56,7 @@ public:
 	Particle marionbeam_lv2[3];
 	Particle balloonshoot;
 	Particle powerup;
+	Particle small_explosion;
 	Particle medium_explosion;
 };
 
