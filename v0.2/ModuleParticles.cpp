@@ -89,6 +89,25 @@ bool ModuleParticles::Start()
 	powerup.speed.y = 1;
 	powerup.life = 20000;
 
+	small_explosion.anim.PushBack({0, 768, 56, 64});
+	small_explosion.anim.PushBack({56, 768, 56, 64});
+	small_explosion.anim.PushBack({112, 768, 56, 64 });
+	small_explosion.anim.PushBack({168, 768, 56, 64 });
+	small_explosion.anim.PushBack({224, 768, 56, 64 });
+	small_explosion.anim.PushBack({280, 768, 56, 64 });
+	small_explosion.anim.PushBack({336, 768, 56, 64 });
+	small_explosion.anim.PushBack({392, 768, 56, 64 });
+	small_explosion.anim.PushBack({0, 832, 56, 64});
+	small_explosion.anim.PushBack({56, 832, 56, 64 });
+	small_explosion.anim.PushBack({112, 832, 56, 64 });
+	small_explosion.anim.PushBack({168, 832, 56, 64 });
+	small_explosion.anim.PushBack({224, 832, 56, 64 });
+	small_explosion.anim.PushBack({280, 832, 56, 64 });
+	small_explosion.anim.PushBack({336, 832, 56, 64 });
+	small_explosion.anim.loop = false;
+	small_explosion.anim.speed = 0.5f;
+	small_explosion.life = 500;
+
 	medium_explosion.anim.PushBack({ 0, 477, 106, 106 });
 	medium_explosion.anim.PushBack({ 636, 477, 106, 106 });
 	medium_explosion.anim.PushBack({ 106, 477, 106, 106 });
@@ -189,15 +208,6 @@ update_status ModuleParticles::Update()
 				p->speed.y = p->speed.y * -1;
 			}
 
-			//Restablish speeds if pickup spawns at a border
-			if (p->speed.x != 1 || p->speed.x != -1)
-			{
-				p->speed.x = 1;
-			}
-			if (p->speed.y != 1 || p->speed.y != -1)
-			{
-				p->speed.y = 1;
-			}
 		}
 	}
 

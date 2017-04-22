@@ -30,6 +30,8 @@ Enemy_Turretcopter::Enemy_Turretcopter(int x, int y, int option) : Enemy(x, y, o
 	original_pos.y = y;
 
 	hp = 1.0f;
+
+	death_type = SMALL_ENEMY;
 }
 
 void Enemy_Turretcopter::Move()
