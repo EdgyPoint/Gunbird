@@ -1,4 +1,5 @@
 #include<cstring>
+#include<stdlib.h>
 #include "Globals.h"
 #include "Application.h"
 #include "ModuleTextures.h"
@@ -189,6 +190,7 @@ update_status ModulePlayer::Update()
 	}
 
 	player_col->SetPos(position.x + 3, position.y);
+
 	
 	// Draw everything --------------------------------------
 

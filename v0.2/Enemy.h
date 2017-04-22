@@ -32,6 +32,7 @@ public:
 	iPoint position;
 	int pathoption = 0;
 	float hp = 1.0f;
+	int killscore;
 	int status = NORMAL;
 	int death_type = DEFAULT_ENEMY;
 	int damaged_hp = 0;

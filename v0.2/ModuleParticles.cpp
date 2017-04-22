@@ -85,6 +85,8 @@ bool ModuleParticles::Start()
 	powerup.anim.PushBack({ 397, 423, 22, 13 });
 	powerup.anim.loop = true;
 	powerup.anim.speed = 0.3f;
+	powerup.speed.x = 1;
+	powerup.speed.y = 1;
 	powerup.life = 20000;
 
 	medium_explosion.anim.PushBack({ 0, 477, 106, 106 });
@@ -173,6 +175,28 @@ update_status ModuleParticles::Update()
 			if (p->fx_played == false)
 			{
 				p->fx_played = true;
+			}
+		}
+
+		if (p->collider->type == COLLIDER_PICKUP)
+		{
+			if (p->position.x < 30 || p->position.x > 172)
+			{
+				p->speed.x = p->speed.x * -1;
+			}
+			if (p->position.y < 30 || p->position.y > 222)
+			{
+				p->speed.y = p->speed.y * -1;
+			}
+
+			//Restablish speeds if pickup spawns at a border
+			if (p->speed.x != 1 || p->speed.x != -1)
+			{
+				p->speed.x = 1;
+			}
+			if (p->speed.y != 1 || p->speed.y != -1)
+			{
+				p->speed.y = 1;
 			}
 		}
 	}

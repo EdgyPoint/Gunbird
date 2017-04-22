@@ -1,5 +1,7 @@
 #include "Application.h"
 #include "Enemy.h"
+#include <stdlib.h>
+#include <time.h>
 #include "ModuleCollision.h"
 #include "ModuleParticles.h"
 #include "ModulePlayer.h"
@@ -58,8 +60,18 @@ void Enemy::OnCollision(Collider* collider, Enemy* enemy)
 
 void Enemy::ToDie(Enemy* enemy)
 {
-	App->particles->AddParticle(App->particles->powerup, enemy->position.x + 12, enemy->position.y + 26, COLLIDER_PICKUP);
+	srand(time(NULL));
+
+	int drop_prob = rand() % 100 + 1;
+	
+	if (drop_prob >= 50)
+	{
+		App->particles->AddParticle(App->particles->powerup, enemy->position.x + 12, enemy->position.y + 26, COLLIDER_PICKUP);
+	}
+
+
 
 	if (enemy->death_type == MEDIUM_ENEMY)
 		App->particles->AddParticle(App->particles->medium_explosion, enemy->position.x - 26, enemy->position.y - 10, COLLIDER_NONE);
+
 }
