@@ -62,19 +62,34 @@ bool ModuleParticles::Start()
 	marionbeam_lv2[2].life = 4000;
 
 
-	balloonshoot.anim.PushBack({ 31, 425, 6, 6 });
-	balloonshoot.anim.PushBack({ 47, 425, 6, 6 });
-	balloonshoot.anim.PushBack({ 79, 425, 6, 6 });
-	balloonshoot.anim.PushBack({ 111, 425, 6, 6 });
-	balloonshoot.anim.PushBack({ 143, 425, 6, 6 });
-	balloonshoot.anim.PushBack({ 191, 425, 6, 6 });
-	balloonshoot.anim.PushBack({ 15, 441, 6, 6 });
-	balloonshoot.anim.PushBack({ 47, 441, 6, 6 });
-	balloonshoot.anim.loop = true;
-	balloonshoot.anim.speed = 0.3f;
-	balloonshoot.speed.y = 3;
-	balloonshoot.life = 4000;
+	smallshot.anim.PushBack({ 31, 425, 6, 6 });
+	smallshot.anim.PushBack({ 47, 425, 6, 6 });
+	smallshot.anim.PushBack({ 79, 425, 6, 6 });
+	smallshot.anim.PushBack({ 111, 425, 6, 6 });
+	smallshot.anim.PushBack({ 143, 425, 6, 6 });
+	smallshot.anim.PushBack({ 191, 425, 6, 6 });
+	smallshot.anim.PushBack({ 15, 441, 6, 6 });
+	smallshot.anim.PushBack({ 47, 441, 6, 6 });
+	smallshot.anim.loop = true;
+	smallshot.anim.speed = 0.3f;
+	smallshot.speed.y = 3;
+	smallshot.life = 4000;
 
+	
+
+	bigshot.anim.PushBack({ 23, 388, 16, 16 }); 
+	bigshot.anim.PushBack({ 47, 387, 19, 19 }); 
+
+
+	bigshot.anim.PushBack({ 74, 391, 12, 12 });
+	bigshot.anim.PushBack({ 96, 391, 12, 12 });
+	bigshot.anim.PushBack({ 118, 391, 12, 12 });
+	bigshot.anim.loop = true;
+	bigshot.anim.speed = 0.55f;
+	bigshot.speed.y = 3;
+	bigshot.life = 4000;
+	
+	
 	powerup.anim.PushBack({ 235, 423, 22, 13 });
 	powerup.anim.PushBack({ 259, 423, 22, 13 });
 	powerup.anim.PushBack({ 282, 423, 22, 13 });
@@ -216,14 +231,14 @@ update_status ModuleParticles::Update()
 			{
 				p->position.x = App->player->position.x + 6; p->apperance++;
 			}
-			App->render->Blit(graphics, p->position.x, p->position.y, &(p->anim.GetCurrentFrame()));
+			App->render->Blit(graphics, p->position.x, p->position.y, &(p->anim.GetCurrentFrame()), false);
 			if (p->fx_played == false)
 			{
 				p->fx_played = true;
 			}
 		}
 
-		if (p->collider->type == COLLIDER_PICKUP)
+		/*if (p->collider->type == COLLIDER_PICKUP)
 		{
 			if (p->position.x < 30 || p->position.x > 172)
 			{
@@ -233,13 +248,13 @@ update_status ModuleParticles::Update()
 			{
 				p->speed.y = p->speed.y * -1;
 			}
-		}
+		}*/
 	}
 
 	return UPDATE_CONTINUE;
 }
 
-void ModuleParticles::AddParticle(const Particle& particle, int x, int y, COLLIDER_TYPE collider_type, float speed_x, float speed_y, Uint32 delay)
+void ModuleParticles::AddParticle(const Particle& particle, int x, int y, COLLIDER_TYPE collider_type, float speed_x, float speed_y, Uint32 delay,  bool using_camera)
 {
 	for (uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
 	{

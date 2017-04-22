@@ -16,7 +16,7 @@ Enemy_Balloon::Enemy_Balloon(int x, int y, int option) : Enemy(x, y, option)
 	fly.PushBack({ 159, 0, 53, 53 });
 	fly.PushBack({ 212, 0, 53, 53 });
 	fly.speed = 0.65f;
-
+	
 	fly2.PushBack({ 265, 0, 53, 53 });
 	fly2.speed = 0.65f;
 
@@ -71,7 +71,7 @@ void Enemy_Balloon::Shoot()
 	distance.x = App->player->position.x - position.x;
 	distance.y = App->player->position.y - position.y;
 	
-	aux_float = distance.y / App->particles->balloonshoot.speed.y;
+	aux_float = distance.y / App->particles->smallshot.speed.y;
 	speeds.x = distance.x / aux_float;
 	speeds.y = distance.y / aux_float;
 
@@ -85,7 +85,7 @@ void Enemy_Balloon::Shoot()
 				speeds.y *= -1;
 				speeds.x *= -1;
 			}
-			App->particles->AddParticle(App->particles->balloonshoot, position.x + 18, position.y + 53, COLLIDER_ENEMY_SHOT, speeds.x, speeds.y);
+			App->particles->AddParticle(App->particles->smallshot, position.x + 18, position.y + 53, COLLIDER_ENEMY_SHOT, speeds.x, speeds.y);
 			reload = SDL_GetTicks() + 500;
 		}
 	}
