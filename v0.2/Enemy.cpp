@@ -65,11 +65,7 @@ void Enemy::OnCollision(Collider* collider, Enemy* enemy)
 
 void Enemy::ToDie(Enemy* enemy)
 {
-	srand(time(NULL));
-
-	int drop_prob = rand() % 100 + 1;
-	
-	if (drop_prob >= 50)
+	if (enemy->enemy_drops)
 	{
 		App->particles->AddParticle(App->particles->powerup, enemy->position.x + 12, enemy->position.y + 26, COLLIDER_PICKUP);
 	}

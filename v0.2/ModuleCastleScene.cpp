@@ -29,10 +29,22 @@ ModuleCastleScene::ModuleCastleScene()
 	backgroundup.x = 0;
 	backgroundup.y = 0;
 
-	npi.h = -30;
+	npi.h = 5;
 	npi.w = 1000;
 	npi.x = 0;
-	npi.y = 0;
+	npi.y = -10;
+
+	knightleft.PushBack({ 0, 25, 15, 25 });
+	knightleft.PushBack({ 15, 25, 15, 25 });
+	knightleft.PushBack({ 30, 25, 15, 25 });
+	knightleft.PushBack({ 45, 25, 15, 25 });
+	knightleft.speed = 0.1f;
+
+	knightup.PushBack({ 0, 0, 15, 25 });
+	knightup.PushBack({ 15, 0, 15, 25 });
+	knightup.PushBack({ 30, 0, 15, 25 });
+	knightup.PushBack({ 45, 0, 15, 25 });
+	knightup.speed = 0.1f;
 }
 
 ModuleCastleScene::~ModuleCastleScene()
@@ -91,6 +103,7 @@ bool ModuleCastleScene::Start()
 	App->enemies->AddEnemy(ENEMY_TYPES::TURRETCOPTER, -20, -510, 0);*/
 	graphics2 = App->textures->Load("assets/images/Castle Upper Background.png");
 	graphics = App->textures->Load("assets/images/Castle Background.png");
+	knight = App->textures->Load("assets/images/knight.png");
 	App->audio->audio = App->audio->Load("assets/bgm/castle.ogg");
 	Mix_PlayMusic(App->audio->audio, -1);
 
@@ -124,8 +137,41 @@ update_status ModuleCastleScene::Update()
 
 	// Draw everything --------------------------------------
 
-	App->render->Blit(graphics, 0, yflag, &background, 10.0f); // sea and sky
+	App->render->Blit(graphics, 0, yflag, &background, 10.0f);
+
+
+	// --- Draw knights
+	knight_1_x_pos -= 0.30f;
+	knight_1_y_pos += 0.55f;
+	knight_2_x_pos -= 0.30f;
+	knight_2_y_pos += 0.55f;
+	//First two moving left
+	App->render->Blit(knight, 65 + knight_1_x_pos, 110 + knight_1_y_pos, &(knightleft.GetCurrentFrame()), 0.75f);
+	App->render->Blit(knight, 75 + knight_1_x_pos, 120 + knight_1_y_pos, &(knightleft.GetCurrentFrame()), 0.75f);
+	//Two more moving up
+	if (yflag < -1645)
+	{
+		App->render->Blit(knight, 102, 0, &(knightup.GetCurrentFrame()), 0.75f);
+	}
+
+	if (yflag < -1635)
+	{
+		App->render->Blit(knight, 84, 10, &(knightup.GetCurrentFrame()), 0.75f);
+	}
+
+	if (yflag < -1680)
+	{
+		knight_2_x_pos = 0;
+	}
+
+
+	// --- Draw background top layer
 	App->render->Blit(graphics2, 0, yflag2, &backgroundup, 10.0f);
+
+	//Draw knights on fortress
+	App->render->Blit(knight, 65 + knight_2_x_pos, -190 + knight_2_y_pos, &(knightleft.GetCurrentFrame()), 0.75f);
+	App->render->Blit(knight, 85 + knight_2_x_pos, -190 + knight_2_y_pos, &(knightleft.GetCurrentFrame()), 0.75f);
+	App->render->Blit(knight, 105 + knight_2_x_pos, -190 + knight_2_y_pos, &(knightleft.GetCurrentFrame()), 0.75f);
 	
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN || yflag > -320)
 	{

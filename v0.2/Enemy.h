@@ -20,6 +20,7 @@ enum DEATH_TYPE
 	SMALL_ENEMY,
 	DEFAULT_ENEMY
 };
+
 class Enemy
 {
 protected:
@@ -35,6 +36,7 @@ public:
 	int killscore;
 	int status = NORMAL;
 	int death_type = DEFAULT_ENEMY;
+	bool enemy_drops = false;
 	int damaged_hp = 0;
 	bool aditionalanimation = false;
 

@@ -47,6 +47,7 @@ Enemy_Balloon::Enemy_Balloon(int x, int y, int option) : Enemy(x, y, option)
 	hp = 19.0f;
 	damaged_hp = 7;
 	death_type = MEDIUM_ENEMY;
+	enemy_drops = true;
 }
 
 void Enemy_Balloon::Move()

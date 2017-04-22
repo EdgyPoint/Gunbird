@@ -24,16 +24,25 @@ public:
 
 	SDL_Texture* graphics = nullptr;
 	SDL_Texture* graphics2 = nullptr;
+	SDL_Texture* knight = nullptr;
 
 	SDL_Rect background;
 
 	SDL_Rect backgroundup;
 	SDL_Rect npi;
 	Animation flag;
+	Animation knightleft;
+	Animation knightright;
+	Animation knightup;
+	Animation knightdown;
 	bool houseflag = false;
 	float house1counter = -86;
 	float yflag = -1788;
 	float yflag2 = -1269;
+	float knight_1_x_pos = 0;
+	float knight_1_y_pos = 0;
+	float knight_2_x_pos = 0;
+	float knight_2_y_pos = 0;
 };
 
 #endif

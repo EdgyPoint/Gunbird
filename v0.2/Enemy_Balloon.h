@@ -21,6 +21,7 @@ public:
 	int initcounter = 0;
 	float aux_float;
 	fPoint speeds;
+
 };
 #endif
 
