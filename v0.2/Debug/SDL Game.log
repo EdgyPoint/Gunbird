@@ -1,12 +1,6 @@
 ﻿C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets(392,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (SDL5 Handout.vcxproj).  This can lead to incorrect clean and rebuild behavior.
-  ModuleParticles.cpp
-c:\users\kistofe\documents\github\project-1\v0.2\moduleparticles.cpp(223): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-c:\users\kistofe\documents\github\project-1\v0.2\moduleparticles.cpp(227): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-c:\users\kistofe\documents\github\project-1\v0.2\moduleparticles.cpp(231): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-c:\users\kistofe\documents\github\project-1\v0.2\moduleparticles.cpp(235): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-c:\users\kistofe\documents\github\project-1\v0.2\moduleparticles.cpp(237): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-c:\users\kistofe\documents\github\project-1\v0.2\moduleparticles.cpp(274): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-c:\users\kistofe\documents\github\project-1\v0.2\moduleparticles.cpp(275): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-c:\users\kistofe\documents\github\project-1\v0.2\moduleparticles.cpp(336): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+  Enemy_CastleMortar.cpp
+c:\users\kistofe\documents\github\project-1\v0.2\enemy_castlemortar.cpp(88): warning C4553: '==': operator has no effect; did you intend '='?
+c:\users\kistofe\documents\github\project-1\v0.2\enemy_castlemortar.cpp(96): warning C4018: '>=': signed/unsigned mismatch
   SDL Game.vcxproj -> C:\Users\Kistofe\Documents\GitHub\Project-1\v0.2\Debug\Gunbird.exe
   SDL Game.vcxproj -> C:\Users\Kistofe\Documents\GitHub\Project-1\v0.2\Debug\Gunbird.pdb (Full PDB)

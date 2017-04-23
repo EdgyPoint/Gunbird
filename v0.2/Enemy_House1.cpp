@@ -12,7 +12,7 @@
 
 Enemy_House1::Enemy_House1(int x, int y, int option) : Enemy(x, y, option)
 {
-	aditionalanimation = true;
+	aditionalanimation = true; 
 
 	fly.PushBack({ 220, 58, 64, 86 });
 
@@ -24,21 +24,7 @@ Enemy_House1::Enemy_House1(int x, int y, int option) : Enemy(x, y, option)
 	
 	flag.PushBack({ 354, 94, 64, 21 });
 	flag.PushBack({ 354, 120, 66, 21 });
-	flag.PushBack({ 354, 145, 66, 20 });
-	flag.PushBack({ 354, 170, 65, 21 });
-	flag.PushBack({ 354, 195, 64, 21 });
-	flag.PushBack({ 429, 97, 66, 20 });
-	flag.PushBack({ 430, 126, 65, 21 });
-	flag.PushBack({ 430, 153, 65, 21 });
-	flag.loop = true;
-	flag.speed = 0.2f;
-
-	flag2.PushBack({ 495, 94, 64, 21 });
-	flag2.PushBack({ 495, 120, 66, 21 });
-	flag2.PushBack({ 495, 145, 66, 20 });
-	flag2.PushBack({495, 170, 65, 21 });
-	flag2.PushBack({ 495, 195, 64, 21 });
-	flag2.PushBack({ 570, 97, 66, 20 });
+	flag.PushBack({ 354, 145, 66, 20 });     
 	flag2.PushBack({ 570, 126, 65, 21 });
 	flag2.PushBack({ 570, 153, 65, 21 });
 	flag2.loop = true;

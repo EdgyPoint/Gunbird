@@ -88,18 +88,8 @@ bool ModuleCastleScene::Start()
 	//App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, -38, 0, 2);
 	App->enemies->AddEnemy(ENEMY_TYPES::TURRETCOPTER, 100, -470, 0);
 	App->enemies->AddEnemy(ENEMY_TYPES::CASTLEMORTAR, 168, -187, 0);
-	App->enemies->AddEnemy(ENEMY_TYPES::CASTLEMORTAR, 100, 20, 0);
-	/*App->enemies->AddEnemy(ENEMY_TYPES::TURRETCOPTER, -25, -410, 0);
-	App->enemies->AddEnemy(ENEMY_TYPES::TURRETCOPTER, -10, -400, 0);
-	App->enemies->AddEnemy(ENEMY_TYPES::TURRETCOPTER, -15, -440, 0);
-	App->enemies->AddEnemy(ENEMY_TYPES::TURRETCOPTER, -25, -440, 0);
-	App->enemies->AddEnemy(ENEMY_TYPES::TURRETCOPTER, -10, -430, 0);
-	App->enemies->AddEnemy(ENEMY_TYPES::TURRETCOPTER, -10, -460, 0);
-	App->enemies->AddEnemy(ENEMY_TYPES::TURRETCOPTER, -15, -470, 0);
-	App->enemies->AddEnemy(ENEMY_TYPES::TURRETCOPTER, -20, -470, 0);
-	App->enemies->AddEnemy(ENEMY_TYPES::TURRETCOPTER, -10, -500, 0);
-	App->enemies->AddEnemy(ENEMY_TYPES::TURRETCOPTER, -15, -510, 0);
-	App->enemies->AddEnemy(ENEMY_TYPES::TURRETCOPTER, -20, -510, 0);*/
+	App->enemies->AddEnemy(ENEMY_TYPES::CASTLEMORTAR, 100, 50, 0);
+
 	graphics2 = App->textures->Load("assets/images/Castle Upper Background.png");
 	graphics = App->textures->Load("assets/images/Castle Background.png");
 	knight = App->textures->Load("assets/images/knight.png");
@@ -174,7 +164,7 @@ update_status ModuleCastleScene::Update()
 	
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN || yflag > -320)
 	{
-		App->fade->FadeToBlack(this, App->scene_mine, 2.0f);
+		App->fade->FadeToBlack(this, App->scene_score, 2.0f);
 	}
 
 	if (App->input->keyboard[SDL_SCANCODE_F3] == KEY_STATE::KEY_DOWN)
