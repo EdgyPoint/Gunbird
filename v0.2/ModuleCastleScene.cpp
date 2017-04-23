@@ -60,7 +60,7 @@ bool ModuleCastleScene::Start()
 
 	App->collision->AddCollider(npi, COLLIDER_WALL);
 
-	App->enemies->AddEnemy(ENEMY_TYPES::BALLOON, 100, App->render->camera.y - 100, 0);
+	App->enemies->AddEnemy(ENEMY_TYPES::BALLOON, 112,-100, 0);
 	
 	//spawn houses
 	App->enemies->AddEnemy(ENEMY_TYPES::HOUSE1, 153, -365, 0);
@@ -78,14 +78,37 @@ bool ModuleCastleScene::Start()
 	App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, 230, -820, 6);
 	App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, 230, -820, 7);
 	App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, 230, -820, 8);
-	App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, 100, -1200, 9);
 
-	/*App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, -10, -580, 2);
-	App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, -38, -612, 2);
-	App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, -66, -640, 2);
-	App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, -94, -676, 2);*/
-	//App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, -10, 0, 2);
-	//App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, -38, 0, 2);
+	//1st final wave
+	App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, 77, -1250, 9);
+	App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, 125, -1250, 9);
+	App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, 51, -1340, 9);
+	App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, 147, -1340, 9);
+	App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, 3 , -1340, 9);
+	App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, 195, -1340, 9);
+	App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, 51, -1426, 9);
+	App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, 147, -1426, 9);
+	App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, 3, -1426, 10);
+	App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, 195, -1426, 10);
+	App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, 77, -1516, 9);
+	App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, 125, -1516, 9);
+	App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, 112, -1533, 10);
+
+	App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, 77, -1806, 9);
+	App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, 125, -1806, 9);
+	App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, 51, -1896, 9);
+	App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, 147, -1896, 9);
+	App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, 3 , -1896, 9);
+	App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, 195, -1896, 9);
+	App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, 51, -1982, 9);
+	App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, 147, -1982, 9);
+	App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, 3, -1982, 10);
+	App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, 195, -1982, 10);
+	App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, 77, -2072, 9);
+	App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, 125, -2072, 9);
+	App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, 112, -2089, 9);
+
+
 	App->enemies->AddEnemy(ENEMY_TYPES::TURRETCOPTER, 100, -470, 0);
 	App->enemies->AddEnemy(ENEMY_TYPES::CASTLEMORTAR, 168, -187, 0);
 	App->enemies->AddEnemy(ENEMY_TYPES::CASTLEMORTAR, 100, 20, 0);
@@ -174,7 +197,7 @@ update_status ModuleCastleScene::Update()
 	
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN || yflag > -320)
 	{
-		App->fade->FadeToBlack(this, App->scene_mine, 2.0f);
+		App->fade->FadeToBlack(this, App->scene_score, 2.0f);
 	}
 
 	if (App->input->keyboard[SDL_SCANCODE_F3] == KEY_STATE::KEY_DOWN)

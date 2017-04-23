@@ -30,12 +30,18 @@ Enemy_Balloon::Enemy_Balloon(int x, int y, int option) : Enemy(x, y, option)
 
 	animation = &fly;
 
-	path.PushBack({ 0.0f, 0.75f }, 200);
+	/*path.PushBack({ 0.0f, 0.75f }, 200);
 	path.PushBack({ 0.0f, 0.0f }, 50);
 	path.PushBack({ 0.0f, 0.75f }, 200);
 	path.PushBack({ 0.0f, 0.0f }, 50);
 	path.PushBack({ 0.0f, 0.75f }, 200);
-	path.PushBack({ 0.0f, 0.0f }, 50);
+	path.PushBack({ 0.0f, 0.0f }, 50);*/
+
+	path.PushBack({ 0.0f, 0.55f }, 10000);
+	path.PushBack({ 0.0f, 2.0f }, 80);
+	path.PushBack({ 0.0f, 0.55f }, 120);
+	path.PushBack({ 0.0f, 2.0f }, 60);
+	path.PushBack({ 0.0f, 0.55f }, 1000);
 
 	
 

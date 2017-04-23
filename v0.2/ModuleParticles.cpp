@@ -238,7 +238,7 @@ update_status ModuleParticles::Update()
 			}
 		}
 
-		/*if (p->collider->type == COLLIDER_PICKUP)
+/*if (p->collider->type == COLLIDER_PICKUP)
 		{
 			if (p->position.x < 30 || p->position.x > 172)
 			{

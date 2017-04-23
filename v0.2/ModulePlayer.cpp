@@ -96,7 +96,7 @@ bool ModulePlayer::CleanUp()
 // Update: draw background
 update_status ModulePlayer::Update()
 {
-	int speed = 1;
+	int speed = 3;
 	strcpy(yokse, score);
 	yokse[0] = 49;
 
@@ -160,7 +160,7 @@ update_status ModulePlayer::Update()
 	
 	}
 
-	if (App->input->keyboard[SDL_SCANCODE_C] == KEY_STATE::KEY_REPEAT && SDL_GetTicks() >= shot && !_dying && !respawning)
+	if (App->input->keyboard[SDL_SCANCODE_C] == KEY_STATE::KEY_DOWN && SDL_GetTicks() >= shot && !_dying && !respawning)
 	{
 		shot = (SDL_GetTicks() + 500);
 		if (powerup_lv == 0)

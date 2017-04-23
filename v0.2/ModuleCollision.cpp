@@ -123,14 +123,32 @@ update_status ModuleCollision::Update()
 
 			c2 = colliders[k];
 
-			if (c1->CheckCollision(c2->rect) == true)
+			if (c1->CheckCollision(c2->rect) == true &&  c1->already_hit == false && c2->already_hit == false) // this allows the redbombs to not be destroyed at the same time when they are overlayed. Ask Lorién.
 			{
 				if (matrix[c1->type][c2->type] && c1->callback)
 					c1->callback->OnCollision(c1, c2);
 
 				if (matrix[c2->type][c1->type] && c2->callback)
 					c2->callback->OnCollision(c2, c1);
+
+				if (c1->type == COLLIDER_PLAYER_SHOT && c2->type == COLLIDER_ENEMY)
+				{
+					if (c1->already_hit == false)
+						c1->already_hit = true;
+					else
+						c1->already_hit = false;
+				}
+				if (c2->type == COLLIDER_PLAYER_SHOT && c1->type == COLLIDER_ENEMY)
+				{
+					if (c2->already_hit == false)
+						c2->already_hit = true;
+					else
+						c2->already_hit = false;
+				}
+
+				
 			}
+			
 		}
 	}
 

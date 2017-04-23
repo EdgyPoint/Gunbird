@@ -1,5 +1,8 @@
+#include<math.h>
 #include "Application.h"
 #include "ModuleParticles.h"
+#include "ModulePlayer.h"
+#include "ModuleCastleScene.h"
 
 #include "Enemy_Redbomb.h"
 #include "ModuleCollision.h"
@@ -85,18 +88,19 @@ Enemy_Redbomb :: Enemy_Redbomb(int x, int y, int option) : Enemy(x, y, option)
 
 	if (option == 9)
 	{
-		path.PushBack({ 0.0f, 0.55f }, 10000000);
+		path.PushBack({ 0.0f, 0.55f },2120);
+		path.PushBack({ 0.0f, 3.0f }, 100000);
 	}
 
+	if (option == 10)
+	{
+		path.PushBack({ 0.0f, 0.55f }, 2050);
+		path.PushBack({ 0.0f, 0.55f }, 70);//this is done in order to allow the bombs to start tracking the player when they appear in the screen. More questions, ask Lorién/Witiza
+		path.PushBack({ 0.0f, 3.0f }, 100000);
+	}
+
+		collider = App->collision->AddCollider({ 0, 0,  28, 32 }, COLLIDER_TYPE::COLLIDER_ENEMY, (Module*)App->enemies);
 	
-
-	
-
-
-	
-
-	collider = App->collision->AddCollider({ 0, 0,  28, 32 }, COLLIDER_TYPE::COLLIDER_ENEMY, (Module*)App->enemies);
-
 	original_pos.x = x;
 	original_pos.y = y;
 	original_x = x;
@@ -106,28 +110,21 @@ Enemy_Redbomb :: Enemy_Redbomb(int x, int y, int option) : Enemy(x, y, option)
 
 void Enemy_Redbomb::Move()
 {
-	/*if (pathoption == 2)
+	if (pathoption == 10 && following == false)
 	{
-		if(going_right)
+		if (path.Get_current_step() > 1)
 		{
-			if (wave > 1000.0f)
-				going_right = false;
-			else
-				wave += 0.01f;
+			
+			int x = position.x - App->player->position.x ;
+			int y = position.y - App->player->position.y;
+			float time = y / 3.0f;
+			
+			path.steps[2].speed.x = (x / time);
+			path.steps[2].speed.y = 3.0f;
+			
+			following = true;
 		}
-	else
-	{
-		if (wave < -1000.0f)
-			going_right = true;
-		else
-			wave -= 0.01f;
 	}
-
-	position.x = original_x + (200.0f * sinf(wave));
-	position.y += 2;
-	}*/
-	
-	
 		position = original_pos + path.GetCurrentPosition();
 	
 }
