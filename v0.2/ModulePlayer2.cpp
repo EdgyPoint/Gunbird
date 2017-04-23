@@ -90,7 +90,7 @@ bool ModulePlayer2::CleanUp()
 // Update: draw background
 update_status ModulePlayer2::Update()
 {
-	int speed = 1;
+	int speed = 2;
 
 	if (App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_REPEAT && !_dying && !respawning)
 	{

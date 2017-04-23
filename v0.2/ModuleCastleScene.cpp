@@ -60,7 +60,7 @@ bool ModuleCastleScene::Start()
 
 	App->collision->AddCollider(npi, COLLIDER_WALL);
 
-	App->enemies->AddEnemy(ENEMY_TYPES::BALLOON, 112,-100, 0);
+	App->enemies->AddEnemy(ENEMY_TYPES::BALLOON, 105,-210, 0);
 	
 	//spawn houses
 	App->enemies->AddEnemy(ENEMY_TYPES::HOUSE1, 153, -365, 0);

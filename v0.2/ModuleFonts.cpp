@@ -97,13 +97,14 @@ void ModuleFonts::BlitText(int x, int y, int font_id, const char* text) const
 	{
 		if (font->table[i] == text[j])
 		{
-			if (i % font->row_chars)
-				row++;
 			rect.x = rect.w * i;
 			rect.y = row;
 			App->render->Blit(font->graphic, x, y, &rect);
+
+			x += rect.w;
+			i = -1;
 			j++;
-			if (text[j] == '\0')
+			if (j == strlen(text))
 				break;
 		}
 		// TODO 2: Find the character in the table and its position in the texture, then Blit

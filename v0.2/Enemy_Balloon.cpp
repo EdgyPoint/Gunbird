@@ -30,26 +30,19 @@ Enemy_Balloon::Enemy_Balloon(int x, int y, int option) : Enemy(x, y, option)
 
 	animation = &fly;
 
-	/*path.PushBack({ 0.0f, 0.75f }, 200);
-	path.PushBack({ 0.0f, 0.0f }, 50);
-	path.PushBack({ 0.0f, 0.75f }, 200);
-	path.PushBack({ 0.0f, 0.0f }, 50);
-	path.PushBack({ 0.0f, 0.75f }, 200);
-	path.PushBack({ 0.0f, 0.0f }, 50);*/
-
-	path.PushBack({ 0.0f, 0.55f }, 10000);
+	path.PushBack({ 0.0f, 0.55f }, 220);
 	path.PushBack({ 0.0f, 2.0f }, 80);
 	path.PushBack({ 0.0f, 0.55f }, 120);
 	path.PushBack({ 0.0f, 2.0f }, 60);
 	path.PushBack({ 0.0f, 0.55f }, 1000);
 
-	
 
 	collider = App->collision->AddCollider({ 0, 0, 42, 53 }, COLLIDER_TYPE::COLLIDER_ENEMY_F, (Module*)App->enemies);
 
 	original_pos.x = x;
 	original_pos.y = y;
 
+	killscore = 500;
 	hp = 19.0f;
 	damaged_hp = 7;
 	death_type = MEDIUM_ENEMY;
@@ -82,8 +75,7 @@ void Enemy_Balloon::Shoot()
 	speeds.x = distance.x / aux_float;
 	speeds.y = distance.y / aux_float;
 
-	initcounter += 1;
-	if (initcounter > 210 && initcounter < 500)
+	if (path.Get_current_step() == 1 || path.Get_current_step() == 3)
 	{
 		if (SDL_GetTicks() >= reload)
 		{
