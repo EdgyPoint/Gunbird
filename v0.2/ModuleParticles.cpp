@@ -217,6 +217,54 @@ bool ModuleParticles::Start()
 	playerstunned.anim.speed = 0.5f;
 	playerstunned.life = 1000;
 
+	magicspark[0].anim.PushBack({ 168, 0, 11, 11 });
+	magicspark[0].anim.PushBack({ 183, 0, 11, 11 });
+	magicspark[0].anim.PushBack({ 198, 0, 11, 11 });
+	magicspark[0].anim.PushBack({ 213, 0, 11, 11 });
+	magicspark[0].anim.PushBack({ 228, 0, 11, 11 });
+	magicspark[0].anim.PushBack({ 243, 0, 11, 11 });
+	magicspark[0].anim.PushBack({ 258, 0, 11, 11 });
+	magicspark[0].anim.PushBack({ 273, 0, 11, 11 });
+	magicspark[0].anim.loop = false;
+	magicspark[0].anim.speed = 0.33f;
+	magicspark[0].life = 400;
+
+	magicspark[1].anim.PushBack({ 168, 15, 11, 11 });
+	magicspark[1].anim.PushBack({ 183, 15, 11, 11 });
+	magicspark[1].anim.PushBack({ 198, 15, 11, 11 });
+	magicspark[1].anim.PushBack({ 213, 15, 11, 11 });
+	magicspark[1].anim.PushBack({ 228, 15, 11, 11 });
+	magicspark[1].anim.PushBack({ 243, 15, 11, 11 });
+	magicspark[1].anim.PushBack({ 258, 15, 11, 11 });
+	magicspark[1].anim.PushBack({ 273, 15, 11, 11 });
+	magicspark[1].anim.loop = false;
+	magicspark[1].anim.speed = 0.33f;
+	magicspark[1].life = 400;
+
+	magicspark[2].anim.PushBack({ 168, 30, 11, 11 });
+	magicspark[2].anim.PushBack({ 183, 30, 11, 11 });
+	magicspark[2].anim.PushBack({ 198, 30, 11, 11 });
+	magicspark[2].anim.PushBack({ 213, 30, 11, 11 });
+	magicspark[2].anim.PushBack({ 228, 30, 11, 11 });
+	magicspark[2].anim.PushBack({ 243, 30, 11, 11 });
+	magicspark[2].anim.PushBack({ 258, 30, 11, 11 });
+	magicspark[2].anim.PushBack({ 273, 30, 11, 11 });
+	magicspark[2].anim.loop = false;
+	magicspark[2].anim.speed = 0.33f;
+	magicspark[2].life = 400;
+
+	magicspark[3].anim.PushBack({ 168, 45, 11, 11 });
+	magicspark[3].anim.PushBack({ 183, 45, 11, 11 });
+	magicspark[3].anim.PushBack({ 198, 45, 11, 11 });
+	magicspark[3].anim.PushBack({ 213, 45, 11, 11 });
+	magicspark[3].anim.PushBack({ 228, 45, 11, 11 });
+	magicspark[3].anim.PushBack({ 243, 45, 11, 11 });
+	magicspark[3].anim.PushBack({ 258, 45, 11, 11 });
+	magicspark[3].anim.PushBack({ 273, 45, 11, 11 });
+	magicspark[3].anim.loop = false;
+	magicspark[3].anim.speed = 0.33f;
+	magicspark[3].life = 400;
+
 	return true;
 }
 
