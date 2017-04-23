@@ -9,7 +9,9 @@
 #include "ModuleFadeToBlack.h"
 #include "ModuleScoreScene.h"
 #include "ModuleMineScene.h"
+#include "ModulePlayer.h"
 #include "ModuleAudio.h"
+#include "ModuleFonts.h"
 #include "ModuleCollision.h"
 #include "SDL/include/SDL.h"
 
@@ -22,6 +24,7 @@ ModuleScoreScene::ModuleScoreScene()
 	background.w = 234;
 	background.x = 0;
 	background.y = 0;
+
 }
 
 ModuleScoreScene::~ModuleScoreScene()
@@ -55,6 +58,7 @@ update_status ModuleScoreScene::Update()
 
 	// Draw everything --------------------------------------
 	App->render->Blit(graphics, 0, 0, &background, 0.75f); // sea and sky
+	App->fonts->BlitText(112, 58, App->player->font_score, App->player->text_score);
 
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] && fading == false)
 	{
