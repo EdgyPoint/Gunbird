@@ -25,6 +25,9 @@ public:
 public:
 
 	SDL_Texture* graphics = nullptr;
+	SDL_Texture* ui = nullptr;
+	SDL_Rect p1display;
+	SDL_Rect lifedisplay;
 	Collider* player_col = nullptr;
 	Animation* current_animation = nullptr;
 	Animation idle;
@@ -47,6 +50,7 @@ public:
 	int respawncounter = 0;
 	int deathcounter = 0;
 	int stuncounter = 0;
+	int magicsparks = 0;
 	int lives = 2;
 	bool out = false;
 	uint shot;

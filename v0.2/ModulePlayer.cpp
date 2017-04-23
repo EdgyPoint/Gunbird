@@ -83,6 +83,19 @@ bool ModulePlayer::Start()
 
 	graphics = App->textures->Load("assets/images/Marion.png");
 
+	//Init UI
+	ui = App->textures->Load("assets/images/UI.png");
+
+	p1display.x = 0;
+	p1display.y = 0;
+	p1display.w = 15;
+	p1display.h = 12;
+
+	lifedisplay.x = 15;
+	lifedisplay.y = 0;
+	lifedisplay.w = 13;
+	lifedisplay.h = 13;
+
 	position.x = 51;
 	position.y = 320;
 	
@@ -327,18 +340,39 @@ update_status ModulePlayer::Update()
 		}
 	}
 
+	//Leave particles behind (yay! magic sparks)
+	//magicsparks++;
+	//if (magicsparks == 6)
+	//{
+
+	//} 
+
 	//Return to intro scene if both players are out
 	if (out && App->player2->out)
 	{
 		App->fade->FadeToBlack(App->scene_castle, App->scene_intro, 2.0f);
 	}
 
+
+
+
 	
 	// Draw everything --------------------------------------
-
 	App->fonts->BlitText(position.x, position.y, font_score, yokse);
 
 	App->render->Blit(graphics, position.x, position.y, &(current_animation->GetCurrentFrame()));
+	//Blit UI
+	App->render->Blit(ui, 5, 6, &p1display, 0, true);
+
+	if (lives == 1)
+	App->render->Blit(ui, 5, 21, &lifedisplay, 0, true);
+
+	if (lives == 2)
+	{
+		App->render->Blit(ui, 5, 21, &lifedisplay, 0, true);
+		App->render->Blit(ui, 21, 21, &lifedisplay, 0, true);
+	}
+
 
 	return UPDATE_CONTINUE;
 }
