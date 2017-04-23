@@ -77,8 +77,12 @@ bool ModuleParticles::Start()
 
 	
 
-	bigshot.anim.PushBack({ 23, 388, 16, 16 }); 
-	bigshot.anim.PushBack({ 47, 387, 19, 19 }); 
+	prebigshot.anim.PushBack({ 23, 388, 16, 16 }); 
+	prebigshot.anim.PushBack({ 47, 387, 19, 19 }); 
+	prebigshot.anim.loop = false;
+	prebigshot.anim.speed = 1;
+	prebigshot.speed.y = 0.55f;
+	prebigshot.life = 400;
 
 
 	bigshot.anim.PushBack({ 74, 391, 12, 12 });

@@ -10,8 +10,13 @@ class Enemy_CastleMortar : public Enemy
 private:
 	iPoint original_pos;
 	fPoint distance;
+	Animation opening;
+	Animation opening2;
 	Animation stand;
+	Animation stand2;
+	Animation stand3;
 	Path path;
+	bool is_opening = true;
 public:
 	Enemy_CastleMortar(int x, int y, int option);
 	void Shoot();

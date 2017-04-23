@@ -1,5 +1,19 @@
 ﻿C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets(392,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (SDL5 Handout.vcxproj).  This can lead to incorrect clean and rebuild behavior.
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+  Enemy_CastleMortar.cpp
+c:\users\kistofe\documents\github\project-1\v0.2\enemy_castlemortar.cpp(88): warning C4553: '==': operator has no effect; did you intend '='?
+c:\users\kistofe\documents\github\project-1\v0.2\enemy_castlemortar.cpp(96): warning C4018: '>=': signed/unsigned mismatch
+  SDL Game.vcxproj -> C:\Users\Kistofe\Documents\GitHub\Project-1\v0.2\Debug\Gunbird.exe
+  SDL Game.vcxproj -> C:\Users\Kistofe\Documents\GitHub\Project-1\v0.2\Debug\Gunbird.pdb (Full PDB)
+=======
+  ModuleScoreScene.cpp
+  ModulePlayer2.cpp
+d:\disk c\documents\github\project-1\v0.2\moduleplayer2.cpp(301): warning C4390: ';': empty controlled statement found; is this the intent?
+>>>>>>> origin/master
   ModulePlayer.cpp
 d:\disk c\documents\github\project-1\v0.2\moduleplayer.cpp(428): warning C4390: ';': empty controlled statement found; is this the intent?
   SDL Game.vcxproj -> D:\Disk C\Documents\GitHub\Project-1\v0.2\Debug\Gunbird.exe
   SDL Game.vcxproj -> D:\Disk C\Documents\GitHub\Project-1\v0.2\Debug\Gunbird.pdb (Full PDB)
+>>>>>>> origin/master
