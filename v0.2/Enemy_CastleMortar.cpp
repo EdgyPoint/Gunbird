@@ -12,15 +12,18 @@ Enemy_CastleMortar::Enemy_CastleMortar(int x, int y, int option) : Enemy(x, y, o
 {
 	
 	
+	//enemy closed
+	closed.PushBack({0, 140, 32, 32});
+	status = NONE;
+
 	//animation when the mortar opens
-	opening.PushBack({0, 140, 32, 32});
 	opening.PushBack({34, 140, 32, 32});
 	opening.PushBack({68, 140, 32, 32});
 	opening.PushBack({102, 140, 32, 32});
 	opening.PushBack({137, 140, 32, 32 });
 	opening.PushBack({ 0, 174, 32, 32 });
 	opening.loop = false;
-	opening.speed = 0.05f;
+	opening.speed = 0.1f;
 	status = OPENING;
 
 	//animation when the mortar is being shot while opening
@@ -47,7 +50,6 @@ Enemy_CastleMortar::Enemy_CastleMortar(int x, int y, int option) : Enemy(x, y, o
 	stand2.loop = true;
 	stand2.speed = 0.175f;
 	
-
 	//animation when the mortar is damaged
 	stand3.PushBack({ 34, 174, 32, 32 });
 	stand3.PushBack({ 34, 242, 32, 32 });
@@ -60,13 +62,13 @@ Enemy_CastleMortar::Enemy_CastleMortar(int x, int y, int option) : Enemy(x, y, o
 	stand3.loop = true;
 	stand3.speed = 0.175f;
 
-
-	animation = &opening;
+	
+	animation = &closed;
 	
 
 	collider = App->collision->AddCollider({ 0, 0, 32, 32 }, COLLIDER_TYPE::COLLIDER_ENEMY, (Module*)App->enemies);
 
-	path.PushBack({ 0.0f, 0.55f }, 10000);
+	path.PushBack({ 0.0f, 0.55f }, 1000);
 
 	original_pos.x = x;
 	original_pos.y = y;
@@ -81,7 +83,9 @@ void Enemy_CastleMortar::Move()
 {
 	position = original_pos + path.GetCurrentPosition();
 
-	if (status == OPENING && animation->Finished() == true) { status = NORMAL; }
+
+	if (position.y) { animation = &opening; status = OPENING; }
+	if (status == OPENING &&animation->Finished() == true) { status = NORMAL; }
 	if (status == NORMAL) { animation = &stand; }
 	if (status == HIT && animation == &opening) { animation = &opening2; }
 	if (status == HIT) { animation = &stand2; }
