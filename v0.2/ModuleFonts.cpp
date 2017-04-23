@@ -15,7 +15,7 @@ ModuleFonts::~ModuleFonts()
 {}
 
 // Load new texture from file path
-int ModuleFonts::Load(const char* texture_path, const char* characters, uint rows)
+int ModuleFonts::Load(const char* texture_path, const char* characters, int font_id, uint rows)
 {
 	int id = -1;
 
@@ -33,7 +33,7 @@ int ModuleFonts::Load(const char* texture_path, const char* characters, uint row
 		return id;
 	}
 
-	id = 0;
+	id = font_id;
 	for (; id < MAX_FONTS; ++id)
 		if (fonts[id].graphic == nullptr)
 			break;

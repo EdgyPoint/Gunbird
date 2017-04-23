@@ -102,7 +102,7 @@ bool ModulePlayer::Start()
 	
 	player_col = App->collision->AddCollider({ 0, 0, 21, 32 }, COLLIDER_PLAYER, this);
 
-	font_score = App->fonts->Load("assets/images/fonts.png", " 1234567890", 1);
+	font_score = App->fonts->Load("assets/images/fonts.png", " 1234567890", 1, 1);
 
 	respawning = true;
 
@@ -387,7 +387,7 @@ update_status ModulePlayer::Update()
 		App->render->Blit(ui, 5, 21, &lifedisplay, 0, true);
 		App->render->Blit(ui, 21, 21, &lifedisplay, 0, true);
 	}
-	App->fonts->BlitText( 5, 20, font_score, text_score);
+	App->fonts->BlitText(20, 6, font_score, text_score);
 
 	return UPDATE_CONTINUE;
 }

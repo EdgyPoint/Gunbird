@@ -5,11 +5,13 @@
 #include "ModuleParticles.h"
 #include "ModuleRender.h"
 #include "ModuleAudio.h"
+#include "ModuleFonts.h"
 #include "ModuleCollision.h"
 #include "ModuleFadeToBlack.h"
 #include "ModuleIntroScene.h"
 #include "ModuleCastleScene.h"
 #include "ModuleScoreScene.h"
+#include "ModulePlayer.h"
 #include "ModulePlayer2.h"
 #include "ModuleEnemies.h"
 #include "SDL/include/SDL_timer.h"
@@ -67,6 +69,19 @@ bool ModulePlayer2::Start()
 	LOG("Loading player");
 
 	graphics = App->textures->Load("assets/images/Marion.png");
+
+	//Init UI
+	ui = App->textures->Load("assets/images/UI.png");
+
+	p2display.x = 28;
+	p2display.y = 0;
+	p2display.w = 15;
+	p2display.h = 12;
+
+	lifedisplay.x = 15;
+	lifedisplay.y = 0;
+	lifedisplay.w = 13;
+	lifedisplay.h = 13;
 
 	position.x = 141;
 	position.y = 320;
@@ -250,6 +265,19 @@ update_status ModulePlayer2::Update()
 	// Draw everything --------------------------------------
 
 	App->render->Blit(graphics, position.x, position.y, &(current_animation->GetCurrentFrame()));
+
+	//Blit UI
+	App->render->Blit(ui, 116, 6, &p2display, 0, true);
+
+	if (lives == 1)
+		App->render->Blit(ui, 116, 21, &lifedisplay, 0, true);
+
+	if (lives == 2)
+	{
+		App->render->Blit(ui, 116, 21, &lifedisplay, 0, true);
+		App->render->Blit(ui, 132, 21, &lifedisplay, 0, true);
+	}
+	App->fonts->BlitText(132, 6, App->player->font_score, App->player->text_score);
 
 	return UPDATE_CONTINUE;
 }

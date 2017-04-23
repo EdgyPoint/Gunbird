@@ -3,9 +3,10 @@
 #include "ModuleRender.h"
 #include "ModuleInput.h"
 #include "ModuleTextures.h"
+#include "ModuleFonts.h"
 #include "ModuleAudio.h"
 #include "ModuleIntroScene.h"
-#include"ModuleCastleScene.h"
+#include "ModuleCastleScene.h"
 #include "ModuleMineScene.h"
 #include "ModuleScoreScene.h"
 #include "ModuleCollision.h"
@@ -14,7 +15,6 @@
 #include "ModuleFadeToBlack.h"
 #include "ModuleParticles.h"
 #include "ModuleEnemies.h"
-#include "ModuleFonts.h"
 
 Application::Application()
 {

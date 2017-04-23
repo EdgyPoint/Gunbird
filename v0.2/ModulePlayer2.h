@@ -29,6 +29,9 @@ public:
 public:
 
 	SDL_Texture* graphics = nullptr;
+	SDL_Texture* ui = nullptr;
+	SDL_Rect p2display;
+	SDL_Rect lifedisplay;
 	Collider* player_col = nullptr;
 	Animation* current_animation = nullptr;
 	Animation idle;

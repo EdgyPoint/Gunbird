@@ -24,7 +24,7 @@ public:
 	~ModuleFonts();
 
 	// Load Font
-	int Load(const char* texture_path, const char* characters, uint rows = 1);
+	int Load(const char* texture_path, const char* characters, int font_id, uint rows = 1);
 	void UnLoad(int font_id);
 
 	// Create a surface from text

@@ -22,6 +22,7 @@ public:
 	SDL_Texture* graphics = nullptr;
 	SDL_Rect background;
 	bool fading = false;
+	int font;
 };
 
 #endif 

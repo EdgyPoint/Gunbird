@@ -113,18 +113,6 @@ bool ModuleParticles::Start()
 	powerup.speed.y = 1;
 	powerup.life = 20000;
 
-	/*magicspark.anim.PushBack({169, 0, 10, 41});
-	magicspark.anim.PushBack({184, 0, 10, 41 });
-	magicspark.anim.PushBack({184, 0, 10, 41 });
-	magicspark.anim.PushBack({});
-	magicspark.anim.PushBack({});
-	magicspark.anim.PushBack({});
-	magicspark.anim.PushBack({});
-	magicspark.anim.PushBack({});
-	magicspark.anim.loop = false;
-	magicspark.anim.speed = 0.333f;
-	magicspark.life = 300;*/
-
 	impact.anim.PushBack({448, 768, 16, 42});
 	impact.anim.PushBack({464, 768, 16, 42 });
 	impact.anim.PushBack({480, 768, 16, 42 });
@@ -332,7 +320,7 @@ update_status ModuleParticles::Update()
 		}
 
 
-		/*if (p->collider->type == COLLIDER_PICKUP)
+		if (p->collider->type == COLLIDER_PICKUP)
 
 		{
 			if (p->position.x < 30 || p->position.x > 172)
@@ -343,7 +331,7 @@ update_status ModuleParticles::Update()
 			{
 				p->speed.y = p->speed.y * -1;
 			}
-		}*/
+		}
 	}
 
 	return UPDATE_CONTINUE;
