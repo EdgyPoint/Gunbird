@@ -13,6 +13,7 @@
 #include "ModuleCastleScene.h"
 #include "ModuleScoreScene.h"
 #include "ModulePlayer.h"
+#include "ModulePlayer2.h"
 #include "ModuleEnemies.h"
 #include "ModuleFonts.h"
 #include "SDL/include/SDL_timer.h"
@@ -71,12 +72,14 @@ bool ModulePlayer::Start()
 
 	graphics = App->textures->Load("assets/images/Marion.png");
 
-	position.x = 100;
-	position.y = 220;
+	position.x = 51;
+	position.y = 320;
 	
 	player_col = App->collision->AddCollider({ 0, 0, 21, 32 }, COLLIDER_PLAYER, this);
 
 	font_score = App->fonts->Load("assets/images/fonts.png", "-1234567890", 1);
+
+	respawning = true;
 
 	return true;
 }
@@ -97,8 +100,6 @@ update_status ModulePlayer::Update()
 	strcpy(yokse, score);
 	yokse[0] = 49;
 
-	if (lives < 0)
-	App->fade->FadeToBlack(App->scene_castle, App->scene_score, 0.1f);
 
 	if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT && !_dying && !respawning)
 	{
@@ -219,10 +220,15 @@ update_status ModulePlayer::Update()
 	if (_dying)
 	{
 		current_animation = &dying;
-		if (deathcounter > 13)
+		if (deathcounter > 13 && deathcounter <= 18)
 		{
 			position.y += 2;
 		}
+		if (deathcounter > 18)
+		{
+			position.y += 3;
+		}
+
 		deathcounter++;
 
 		if (position.y > 320)
@@ -237,8 +243,16 @@ update_status ModulePlayer::Update()
 
 	if (respawning)
 	{
-		position.y -= 1;
-		respawncounter++;
+		App->collision->EditMatrix(COLLIDER_PLAYER, COLLIDER_ENEMY, false);
+		App->collision->EditMatrix(COLLIDER_PLAYER, COLLIDER_ENEMY_SHOT, false);
+		App->collision->EditMatrix(COLLIDER_ENEMY, COLLIDER_PLAYER, false);
+		App->collision->EditMatrix(COLLIDER_ENEMY_SHOT, COLLIDER_PLAYER, false);
+
+		if (!out)
+		{
+			position.y -= 1;
+			respawncounter++;
+		}
 		if (respawncounter == 80)
 		{
 			respawning = false;
@@ -256,8 +270,15 @@ update_status ModulePlayer::Update()
 			App->collision->EditMatrix(COLLIDER_PLAYER, COLLIDER_ENEMY_SHOT, true);
 			App->collision->EditMatrix(COLLIDER_ENEMY, COLLIDER_PLAYER, true);
 			App->collision->EditMatrix(COLLIDER_ENEMY_SHOT, COLLIDER_PLAYER, true);
+			temp_invincibility = false;
 			invincibilitycounter = 0;
 		}
+	}
+
+	//Return to intro scene if both players are out
+	if (out && App->player2->out)
+	{
+		App->fade->FadeToBlack(App->scene_castle, App->scene_intro, 2.0f);
 	}
 
 	
@@ -281,9 +302,16 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 		App->collision->EditMatrix(COLLIDER_ENEMY, COLLIDER_PLAYER, false);
 		App->collision->EditMatrix(COLLIDER_ENEMY_SHOT, COLLIDER_PLAYER, false);
 
+		App->particles->AddParticle(App->particles->medium_explosion, position.x - 40, position.y - 25, COLLIDER_NONE);
+		App->audio->sfx = App->audio->LoadSFX("assets/SFX/mediumexplosion.wav");
+		Mix_PlayChannel(-1, App->audio->sfx, 0);
+
+		App->audio->sfx = App->audio->LoadSFX("assets/SFX/mariondeath.wav");
+		Mix_PlayChannel(-1, App->audio->sfx, 0);
+
 		if (lives < 0)
 		{
-			App->fade->FadeToBlack(App->scene_castle, App->scene_intro, 2.0f);
+			out = true;
 		}
 	}
 	if (c2->type == COLLIDER_PICKUP)

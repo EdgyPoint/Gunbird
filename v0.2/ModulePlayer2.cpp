@@ -53,6 +53,9 @@ ModulePlayer2::ModulePlayer2()
 	right.PushBack({ 96, 96, 32, 32 });
 	right.loop = true;
 	right.speed = 0.1f;
+
+	dying.PushBack({ 129, 0, 30, 30 });
+	dying.loop = false;
 }
 
 ModulePlayer2::~ModulePlayer2()
@@ -65,10 +68,12 @@ bool ModulePlayer2::Start()
 
 	graphics = App->textures->Load("assets/images/Marion.png");
 
-	position.x = 150;
-	position.y = 220;
+	position.x = 141;
+	position.y = 320;
 
-	player_col = App->collision->AddCollider({ 0, 0, 21, 32 }, COLLIDER_PLAYER, this);
+	player_col = App->collision->AddCollider({ 0, 0, 21, 32 }, COLLIDER_PLAYER2, this);
+
+	respawning = true;
 
 	return true;
 }
@@ -185,6 +190,63 @@ update_status ModulePlayer2::Update()
 
 	player_col->SetPos(position.x + 3, position.y);
 
+	if (_dying)
+	{
+		current_animation = &dying;
+		if (deathcounter > 13 && deathcounter <= 18)
+		{
+			position.y += 2;
+		}
+		if (deathcounter > 18)
+		{
+			position.y += 3;
+		}
+
+		deathcounter++;
+
+		if (position.y > 320)
+		{
+			current_animation = &idle;
+			_dying = false;
+			respawning = true;
+			deathcounter = 0;
+			position.x = 51;
+		}
+	}
+
+	if (respawning)
+	{
+		App->collision->EditMatrix(COLLIDER_PLAYER, COLLIDER_ENEMY, false);
+		App->collision->EditMatrix(COLLIDER_PLAYER, COLLIDER_ENEMY_SHOT, false);
+		App->collision->EditMatrix(COLLIDER_ENEMY, COLLIDER_PLAYER, false);
+		App->collision->EditMatrix(COLLIDER_ENEMY_SHOT, COLLIDER_PLAYER, false);
+
+		if (!out)
+		{
+			position.y -= 1;
+			respawncounter++;
+		}
+		if (respawncounter == 80)
+		{
+			respawning = false;
+			temp_invincibility = true;
+			respawncounter = 0;
+		}
+	}
+
+	if (temp_invincibility)
+	{
+		invincibilitycounter++;
+		if (invincibilitycounter == 120)
+		{
+			App->collision->EditMatrix(COLLIDER_PLAYER2, COLLIDER_ENEMY, true);
+			App->collision->EditMatrix(COLLIDER_PLAYER2, COLLIDER_ENEMY_SHOT, true);
+			App->collision->EditMatrix(COLLIDER_ENEMY, COLLIDER_PLAYER2, true);
+			App->collision->EditMatrix(COLLIDER_ENEMY_SHOT, COLLIDER_PLAYER2, true);
+			invincibilitycounter = 0;
+		}
+	}
+
 	// Draw everything --------------------------------------
 
 	App->render->Blit(graphics, position.x, position.y, &(current_animation->GetCurrentFrame()));
@@ -206,11 +268,29 @@ void ModulePlayer2::OnCollision(Collider* c1, Collider* c2)
 		}
 	}
 	
-	if (c1->type == COLLIDER_PLAYER)
+	if (c1->type == COLLIDER_PLAYER2)
 	{
 
 		if (c2->type == COLLIDER_ENEMY_SHOT)
 		{
+			lives -= 1;
+			_dying = true;
+			App->collision->EditMatrix(COLLIDER_PLAYER2, COLLIDER_ENEMY, false);
+			App->collision->EditMatrix(COLLIDER_PLAYER2, COLLIDER_ENEMY_SHOT, false);
+			App->collision->EditMatrix(COLLIDER_ENEMY, COLLIDER_PLAYER2, false);
+			App->collision->EditMatrix(COLLIDER_ENEMY_SHOT, COLLIDER_PLAYER2, false);
+
+			App->particles->AddParticle(App->particles->medium_explosion, position.x - 40, position.y - 25, COLLIDER_NONE);
+			App->audio->sfx = App->audio->LoadSFX("assets/SFX/mediumexplosion.wav");
+			Mix_PlayChannel(-1, App->audio->sfx, 0);
+
+			App->audio->sfx = App->audio->LoadSFX("assets/SFX/mariondeath.wav");
+			Mix_PlayChannel(-1, App->audio->sfx, 0);
+
+			if (lives < 0)
+			{
+				out = true;
+			}
 		}
 		if (c2->type == COLLIDER_PICKUP)
 		{
