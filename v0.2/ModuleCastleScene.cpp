@@ -106,7 +106,7 @@ bool ModuleCastleScene::Start()
 	App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, 195, -1982, 10);
 	App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, 77, -2072, 9);
 	App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, 125, -2072, 9);
-	App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, 112, -2089, 9);
+	App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, 112, -2089, 10);
 
 
 	App->enemies->AddEnemy(ENEMY_TYPES::TURRETCOPTER, 100, -470, 0);

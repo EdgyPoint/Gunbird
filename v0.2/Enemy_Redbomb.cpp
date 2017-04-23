@@ -115,7 +115,7 @@ void Enemy_Redbomb::Move()
 {
 	if (pathoption == 10 && following == false)
 	{
-		if (path.Get_current_step() > 1)
+		if (path.steps[2].active == true)
 		{
 			
 			int x = position.x - App->player->position.x ;

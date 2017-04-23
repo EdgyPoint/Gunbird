@@ -31,10 +31,10 @@ Enemy_Balloon::Enemy_Balloon(int x, int y, int option) : Enemy(x, y, option)
 	animation = &fly;
 
 	path.PushBack({ 0.0f, 0.55f }, 220);
-	path.PushBack({ 0.0f, 2.0f }, 80);
-	path.PushBack({ 0.0f, 0.55f }, 120);
-	path.PushBack({ 0.0f, 2.0f }, 60);
-	path.PushBack({ 0.0f, 0.55f }, 1000);
+	path.PushBack({ 0.0f, 2.0f }, 55);
+	path.PushBack({ 0.0f, 0.0f }, 120);
+	path.PushBack({ 0.0f, 2.0f }, 55);
+	path.PushBack({ 0.0f, 0.0f }, 1000);
 
 
 	collider = App->collision->AddCollider({ 0, 0, 42, 53 }, COLLIDER_TYPE::COLLIDER_ENEMY_F, (Module*)App->enemies);
@@ -68,24 +68,22 @@ void Enemy_Balloon::Move()
 
 void Enemy_Balloon::Shoot()
 {
-	distance.x = App->player->position.x - position.x;
-	distance.y = App->player->position.y - position.y;
-	
-	aux_float = distance.y / App->particles->smallshot.speed.y;
-	speeds.x = distance.x / aux_float;
-	speeds.y = distance.y / aux_float;
-
-	if (path.Get_current_step() == 1 || path.Get_current_step() == 3)
+	if (path.steps[2].active == true || path.steps[4].active == true)
 	{
-		if (SDL_GetTicks() >= reload)
+		if (reload == 0 || reload == 40)
 		{
-			if (distance.y < 0)
-			{
-				speeds.y *= -1;
-				speeds.x *= -1;
-			}
-			App->particles->AddParticle(App->particles->smallshot, position.x + 18, position.y + 53, COLLIDER_ENEMY_SHOT, speeds.x, speeds.y);
-			reload = SDL_GetTicks() + 500;
+
+			App->particles->AddParticle(App->particles->smallshot, position.x + 25, position.y + 44, COLLIDER_ENEMY_SHOT, 2, 1, false);
+			App->particles->AddParticle(App->particles->smallshot, position.x + 9, position.y + 44, COLLIDER_ENEMY_SHOT, -2, 1, false);
+			App->particles->AddParticle(App->particles->presmallshot, position.x + 24, position.y + 43, COLLIDER_ENEMY_SHOT, 2, 1, false);
+			App->particles->AddParticle(App->particles->presmallshot, position.x + 8, position.y + 43, COLLIDER_ENEMY_SHOT, -2, 1, false);
 		}
+		reload++;
+}
+	
+	else if( reload != 0)
+	{
+		reload = 0;
 	}
+	
 }

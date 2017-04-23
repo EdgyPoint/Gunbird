@@ -64,6 +64,7 @@ public:
 	Particle medium_explosion;
 	Particle playercollision;
 	Particle playerstunned;
+	Particle presmallshot;
 };
 
 #endif // __MODULEPARTICLES_H__

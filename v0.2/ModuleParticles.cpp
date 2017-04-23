@@ -75,7 +75,12 @@ bool ModuleParticles::Start()
 	smallshot.speed.y = 3;
 	smallshot.life = 4000;
 
-	
+	presmallshot.anim.PushBack({ 0, 424, 8, 8 });
+	presmallshot.anim.PushBack({ 8, 424, 8, 8 });
+	smallshot.anim.loop = true;
+	presmallshot.anim.speed = 0.3f;
+	presmallshot.life = 1;
+
 
 	prebigshot.anim.PushBack({ 23, 388, 16, 16 }); 
 	prebigshot.anim.PushBack({ 47, 387, 19, 19 }); 
