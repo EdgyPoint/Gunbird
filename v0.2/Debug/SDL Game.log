@@ -1,12 +1,59 @@
 ﻿C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets(392,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (SDL5 Handout.vcxproj).  This can lead to incorrect clean and rebuild behavior.
+  ModuleWindow.cpp
+  ModuleTextures.cpp
+  ModuleScoreScene.cpp
+  ModuleRender.cpp
+  ModulePlayer2.cpp
+d:\github repositories\project-1\v0.2\moduleplayer2.cpp(301): warning C4390: ';': se encontró una instrucción controlada vacía; ¿es esa la intención?
+  ModulePlayer.cpp
+d:\github repositories\project-1\v0.2\moduleplayer.cpp(392): warning C4390: ';': se encontró una instrucción controlada vacía; ¿es esa la intención?
   ModuleParticles.cpp
-c:\users\kistofe\documents\github\project-1\v0.2\moduleparticles.cpp(223): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-c:\users\kistofe\documents\github\project-1\v0.2\moduleparticles.cpp(227): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-c:\users\kistofe\documents\github\project-1\v0.2\moduleparticles.cpp(231): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-c:\users\kistofe\documents\github\project-1\v0.2\moduleparticles.cpp(235): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-c:\users\kistofe\documents\github\project-1\v0.2\moduleparticles.cpp(237): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-c:\users\kistofe\documents\github\project-1\v0.2\moduleparticles.cpp(274): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-c:\users\kistofe\documents\github\project-1\v0.2\moduleparticles.cpp(275): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-c:\users\kistofe\documents\github\project-1\v0.2\moduleparticles.cpp(336): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-  SDL Game.vcxproj -> C:\Users\Kistofe\Documents\GitHub\Project-1\v0.2\Debug\Gunbird.exe
-  SDL Game.vcxproj -> C:\Users\Kistofe\Documents\GitHub\Project-1\v0.2\Debug\Gunbird.pdb (Full PDB)
+d:\github repositories\project-1\v0.2\moduleparticles.cpp(244): warning C4244: '=': conversión de 'int' a 'float'; posible pérdida de datos
+d:\github repositories\project-1\v0.2\moduleparticles.cpp(248): warning C4244: '=': conversión de 'int' a 'float'; posible pérdida de datos
+d:\github repositories\project-1\v0.2\moduleparticles.cpp(252): warning C4244: '=': conversión de 'int' a 'float'; posible pérdida de datos
+d:\github repositories\project-1\v0.2\moduleparticles.cpp(256): warning C4244: '=': conversión de 'int' a 'float'; posible pérdida de datos
+d:\github repositories\project-1\v0.2\moduleparticles.cpp(258): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
+d:\github repositories\project-1\v0.2\moduleparticles.cpp(295): warning C4244: '=': conversión de 'int' a 'float'; posible pérdida de datos
+d:\github repositories\project-1\v0.2\moduleparticles.cpp(296): warning C4244: '=': conversión de 'int' a 'float'; posible pérdida de datos
+d:\github repositories\project-1\v0.2\moduleparticles.cpp(357): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
+  ModuleMineScene.cpp
+d:\github repositories\project-1\v0.2\moduleminescene.cpp(70): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
+d:\github repositories\project-1\v0.2\moduleminescene.cpp(71): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
+  ModuleIntroScene.cpp
+  ModuleInput.cpp
+  ModuleFadeToBlack.cpp
+  ModuleEnemies.cpp
+  ModuleCollision.cpp
+  ModuleCastleScene.cpp
+d:\github repositories\project-1\v0.2\modulecastlescene.cpp(139): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
+d:\github repositories\project-1\v0.2\modulecastlescene.cpp(148): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
+d:\github repositories\project-1\v0.2\modulecastlescene.cpp(149): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
+d:\github repositories\project-1\v0.2\modulecastlescene.cpp(168): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
+d:\github repositories\project-1\v0.2\modulecastlescene.cpp(171): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
+d:\github repositories\project-1\v0.2\modulecastlescene.cpp(172): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
+d:\github repositories\project-1\v0.2\modulecastlescene.cpp(173): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
+  ModuleAudio.cpp
+  ModuleFonts.cpp
+  Main.cpp
+  Globals.cpp
+  Enemy_Turretcopter.cpp
+d:\github repositories\project-1\v0.2\enemy_turretcopter.cpp(57): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+  Enemy_Redbomb.cpp
+  Generando código...
+  Compilando...
+  Enemy_House2.cpp
+  Enemy_House1.cpp
+d:\github repositories\project-1\v0.2\enemy_house1.cpp(71): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+  Enemy_CastleMortar.cpp
+d:\github repositories\project-1\v0.2\enemy_castlemortar.cpp(49): warning C4018: '>=': no coinciden signed/unsigned
+d:\github repositories\project-1\v0.2\enemy_castlemortar.cpp(60): warning C4018: '>=': no coinciden signed/unsigned
+  Enemy_Balloon.cpp
+d:\github repositories\project-1\v0.2\enemy_balloon.cpp(72): warning C4244: '=': conversión de 'int' a 'float'; posible pérdida de datos
+d:\github repositories\project-1\v0.2\enemy_balloon.cpp(73): warning C4244: '=': conversión de 'int' a 'float'; posible pérdida de datos
+d:\github repositories\project-1\v0.2\enemy_balloon.cpp(82): warning C4018: '>=': no coinciden signed/unsigned
+  Enemy.cpp
+  Application.cpp
+  Generando código...
+  LINK : no se encontró D:\Github repositories\Project-1\v0.2\Debug\Gunbird.exe o no lo generó el último vínculo incremental; ejecutando vínculo completo
+  SDL Game.vcxproj -> D:\Github repositories\Project-1\v0.2\Debug\Gunbird.exe
+  SDL Game.vcxproj -> D:\Github repositories\Project-1\v0.2\Debug\Gunbird.pdb (Full PDB)

@@ -95,7 +95,7 @@ Enemy_Redbomb :: Enemy_Redbomb(int x, int y, int option) : Enemy(x, y, option)
 
 	
 
-	collider = App->collision->AddCollider({ 0, 0,  28, 32 }, COLLIDER_TYPE::COLLIDER_ENEMY, (Module*)App->enemies);
+	collider = App->collision->AddCollider({ 0, 0,  28, 32 }, COLLIDER_TYPE::COLLIDER_ENEMY_F, (Module*)App->enemies);
 
 	original_pos.x = x;
 	original_pos.y = y;

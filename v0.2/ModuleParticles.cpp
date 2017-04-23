@@ -177,6 +177,30 @@ bool ModuleParticles::Start()
 	medium_explosion.anim.speed = 0.5f;
 	medium_explosion.life = 1000;
 
+	playercollision.anim.PushBack({ 0, 896, 31, 31 });
+	playercollision.anim.PushBack({ 31, 896, 31, 31 });
+	playercollision.anim.PushBack({ 62, 896, 31, 31 });
+	playercollision.anim.PushBack({ 93, 896, 31, 31 });
+	playercollision.anim.PushBack({ 124, 896, 31, 31 });
+	playercollision.anim.PushBack({ 155, 896, 31, 31 });
+	playercollision.anim.PushBack({ 186, 896, 31, 31 });
+	playercollision.anim.PushBack({ 217, 896, 31, 31 });
+	playercollision.anim.PushBack({ 248, 896, 31, 31 });
+	playercollision.anim.loop = false;
+	playercollision.anim.speed = 0.5f;
+	playercollision.life = 450;
+
+	playerstunned.anim.PushBack({ 279, 896, 28, 20});
+	playerstunned.anim.PushBack({ 307, 896, 28, 20 });
+	playerstunned.anim.PushBack({ 335, 896, 28, 20 });
+	playerstunned.anim.PushBack({ 363, 896, 28, 20 });
+	playerstunned.anim.PushBack({ 391, 896, 28, 20 });
+	playerstunned.anim.PushBack({ 419, 896, 28, 20 });
+	playerstunned.anim.PushBack({ 447, 896, 28, 20 });
+	playerstunned.anim.loop = true;
+	playerstunned.anim.speed = 0.5f;
+	playerstunned.life = 1000;
+
 	return true;
 }
 
@@ -238,7 +262,7 @@ update_status ModuleParticles::Update()
 			}
 		}
 
-		/*if (p->collider->type == COLLIDER_PICKUP)
+		if (p->collider->type == COLLIDER_PICKUP)
 		{
 			if (p->position.x < 30 || p->position.x > 172)
 			{
@@ -248,7 +272,7 @@ update_status ModuleParticles::Update()
 			{
 				p->speed.y = p->speed.y * -1;
 			}
-		}*/
+		}
 	}
 
 	return UPDATE_CONTINUE;

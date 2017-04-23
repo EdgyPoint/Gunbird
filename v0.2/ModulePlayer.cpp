@@ -220,26 +220,26 @@ update_status ModulePlayer::Update()
 	if (App->input->keyboard[SDL_SCANCODE_F2] == KEY_STATE::KEY_DOWN && godmode == false)
 	{
 		godmode = true;
-		App->collision->EditMatrix(COLLIDER_PLAYER, COLLIDER_ENEMY, false);
+		App->collision->EditMatrix(COLLIDER_PLAYER, COLLIDER_ENEMY_F, false);
 		App->collision->EditMatrix(COLLIDER_PLAYER, COLLIDER_ENEMY_SHOT, false);
-		App->collision->EditMatrix(COLLIDER_ENEMY, COLLIDER_PLAYER, false);
+		App->collision->EditMatrix(COLLIDER_ENEMY_F, COLLIDER_PLAYER, false);
 		App->collision->EditMatrix(COLLIDER_ENEMY_SHOT, COLLIDER_PLAYER, false);
-		App->collision->EditMatrix(COLLIDER_PLAYER2, COLLIDER_ENEMY, false);
+		App->collision->EditMatrix(COLLIDER_PLAYER2, COLLIDER_ENEMY_F, false);
 		App->collision->EditMatrix(COLLIDER_PLAYER2, COLLIDER_ENEMY_SHOT, false);
-		App->collision->EditMatrix(COLLIDER_ENEMY, COLLIDER_PLAYER2, false);
+		App->collision->EditMatrix(COLLIDER_ENEMY_F, COLLIDER_PLAYER2, false);
 		App->collision->EditMatrix(COLLIDER_ENEMY_SHOT, COLLIDER_PLAYER2, false);
 	}
 
 	else if (App->input->keyboard[SDL_SCANCODE_F2] == KEY_STATE::KEY_DOWN && godmode == true)
 	{
 		godmode = false;
-		App->collision->EditMatrix(COLLIDER_PLAYER, COLLIDER_ENEMY, true);
+		App->collision->EditMatrix(COLLIDER_PLAYER, COLLIDER_ENEMY_F, true);
 		App->collision->EditMatrix(COLLIDER_PLAYER, COLLIDER_ENEMY_SHOT, true);
-		App->collision->EditMatrix(COLLIDER_ENEMY, COLLIDER_PLAYER, true);
+		App->collision->EditMatrix(COLLIDER_ENEMY_F, COLLIDER_PLAYER, true);
 		App->collision->EditMatrix(COLLIDER_ENEMY_SHOT, COLLIDER_PLAYER, true);
-		App->collision->EditMatrix(COLLIDER_PLAYER2, COLLIDER_ENEMY, true);
+		App->collision->EditMatrix(COLLIDER_PLAYER2, COLLIDER_ENEMY_F, true);
 		App->collision->EditMatrix(COLLIDER_PLAYER2, COLLIDER_ENEMY_SHOT, true);
-		App->collision->EditMatrix(COLLIDER_ENEMY, COLLIDER_PLAYER2, true);
+		App->collision->EditMatrix(COLLIDER_ENEMY_F, COLLIDER_PLAYER2, true);
 		App->collision->EditMatrix(COLLIDER_ENEMY_SHOT, COLLIDER_PLAYER2, true);
 	}
 
@@ -253,6 +253,7 @@ update_status ModulePlayer::Update()
 
 	if (stunned)
 	{
+		
 		stuncounter++;
 		if (stuncounter == 64)
 		{
@@ -290,9 +291,9 @@ update_status ModulePlayer::Update()
 	{
 		if (godmode == false)
 		{
-			App->collision->EditMatrix(COLLIDER_PLAYER, COLLIDER_ENEMY, false);
+			App->collision->EditMatrix(COLLIDER_PLAYER, COLLIDER_ENEMY_F, false);
 			App->collision->EditMatrix(COLLIDER_PLAYER, COLLIDER_ENEMY_SHOT, false);
-			App->collision->EditMatrix(COLLIDER_ENEMY, COLLIDER_PLAYER, false);
+			App->collision->EditMatrix(COLLIDER_ENEMY_F, COLLIDER_PLAYER, false);
 			App->collision->EditMatrix(COLLIDER_ENEMY_SHOT, COLLIDER_PLAYER, false);
 		}
 
@@ -316,9 +317,9 @@ update_status ModulePlayer::Update()
 		{
 			if (godmode == false)
 			{
-				App->collision->EditMatrix(COLLIDER_PLAYER, COLLIDER_ENEMY, true);
+				App->collision->EditMatrix(COLLIDER_PLAYER, COLLIDER_ENEMY_F, true);
 				App->collision->EditMatrix(COLLIDER_PLAYER, COLLIDER_ENEMY_SHOT, true);
-				App->collision->EditMatrix(COLLIDER_ENEMY, COLLIDER_PLAYER, true);
+				App->collision->EditMatrix(COLLIDER_ENEMY_F, COLLIDER_PLAYER, true);
 				App->collision->EditMatrix(COLLIDER_ENEMY_SHOT, COLLIDER_PLAYER, true);
 			}
 			temp_invincibility = false;
@@ -350,9 +351,9 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 		_dying = true;
 		if (godmode == false)
 		{
-			App->collision->EditMatrix(COLLIDER_PLAYER, COLLIDER_ENEMY, false);
+			App->collision->EditMatrix(COLLIDER_PLAYER, COLLIDER_ENEMY_F, false);
 			App->collision->EditMatrix(COLLIDER_PLAYER, COLLIDER_ENEMY_SHOT, false);
-			App->collision->EditMatrix(COLLIDER_ENEMY, COLLIDER_PLAYER, false);
+			App->collision->EditMatrix(COLLIDER_ENEMY_F, COLLIDER_PLAYER, false);
 			App->collision->EditMatrix(COLLIDER_ENEMY_SHOT, COLLIDER_PLAYER, false);
 		}
 
@@ -369,10 +370,11 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 		}
 	}
 
-	if (c2->type == COLLIDER_ENEMY && !stunned)
+	if (c2->type == COLLIDER_ENEMY_F && !stunned)
 	{
 		stunned = true;
 		powerup_lv--;
+		App->particles->AddParticle(App->particles->playercollision, position.x, position.y, COLLIDER_NONE);
 		current_animation = &tilting;
 
 		if (powerup_lv < 0)
