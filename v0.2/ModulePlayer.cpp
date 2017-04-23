@@ -120,7 +120,7 @@ bool ModulePlayer::CleanUp()
 // Update: draw background
 update_status ModulePlayer::Update()
 {
-	int speed = 3;
+	int speed = 2;
 	strcpy(yokse, score);
 	yokse[0] = 49;
 

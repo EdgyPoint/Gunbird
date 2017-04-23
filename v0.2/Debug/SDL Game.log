@@ -1,48 +1,5 @@
 ﻿C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets(392,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (SDL5 Handout.vcxproj).  This can lead to incorrect clean and rebuild behavior.
-  ModuleScoreScene.cpp
-  ModulePlayer2.cpp
-d:\disk c\documents\github\project-1\v0.2\moduleplayer2.cpp(301): warning C4390: ';': empty controlled statement found; is this the intent?
   ModulePlayer.cpp
-d:\disk c\documents\github\project-1\v0.2\moduleplayer.cpp(329): warning C4390: ';': empty controlled statement found; is this the intent?
-  ModuleParticles.cpp
-d:\disk c\documents\github\project-1\v0.2\moduleparticles.cpp(220): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-d:\disk c\documents\github\project-1\v0.2\moduleparticles.cpp(224): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-d:\disk c\documents\github\project-1\v0.2\moduleparticles.cpp(228): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-d:\disk c\documents\github\project-1\v0.2\moduleparticles.cpp(232): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-d:\disk c\documents\github\project-1\v0.2\moduleparticles.cpp(234): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-d:\disk c\documents\github\project-1\v0.2\moduleparticles.cpp(271): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-d:\disk c\documents\github\project-1\v0.2\moduleparticles.cpp(272): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-d:\disk c\documents\github\project-1\v0.2\moduleparticles.cpp(333): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-  ModuleMineScene.cpp
-d:\disk c\documents\github\project-1\v0.2\moduleminescene.cpp(70): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-d:\disk c\documents\github\project-1\v0.2\moduleminescene.cpp(71): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-  ModuleIntroScene.cpp
-  ModuleCollision.cpp
-  ModuleCastleScene.cpp
-d:\disk c\documents\github\project-1\v0.2\modulecastlescene.cpp(162): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-d:\disk c\documents\github\project-1\v0.2\modulecastlescene.cpp(171): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-d:\disk c\documents\github\project-1\v0.2\modulecastlescene.cpp(172): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-d:\disk c\documents\github\project-1\v0.2\modulecastlescene.cpp(191): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-d:\disk c\documents\github\project-1\v0.2\modulecastlescene.cpp(194): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-d:\disk c\documents\github\project-1\v0.2\modulecastlescene.cpp(195): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-d:\disk c\documents\github\project-1\v0.2\modulecastlescene.cpp(196): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-  Enemy_Turretcopter.cpp
-d:\disk c\documents\github\project-1\v0.2\enemy_turretcopter.cpp(56): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-  Enemy_Redbomb.cpp
-  Enemy_House2.cpp
-  Enemy_House1.cpp
-d:\disk c\documents\github\project-1\v0.2\enemy_house1.cpp(71): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-  Enemy_CastleMortar.cpp
-d:\disk c\documents\github\project-1\v0.2\enemy_castlemortar.cpp(48): warning C4018: '>=': signed/unsigned mismatch
-d:\disk c\documents\github\project-1\v0.2\enemy_castlemortar.cpp(59): warning C4018: '>=': signed/unsigned mismatch
-  Enemy_Balloon.cpp
-d:\disk c\documents\github\project-1\v0.2\enemy_balloon.cpp(77): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-d:\disk c\documents\github\project-1\v0.2\enemy_balloon.cpp(78): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-d:\disk c\documents\github\project-1\v0.2\enemy_balloon.cpp(87): warning C4018: '>=': signed/unsigned mismatch
-  Enemy.cpp
-  Application.cpp
-  Generating Code...
-  Skipping... (no relevant changes detected)
-  ModuleEnemies.cpp
+d:\disk c\documents\github\project-1\v0.2\moduleplayer.cpp(428): warning C4390: ';': empty controlled statement found; is this the intent?
   SDL Game.vcxproj -> D:\Disk C\Documents\GitHub\Project-1\v0.2\Debug\Gunbird.exe
   SDL Game.vcxproj -> D:\Disk C\Documents\GitHub\Project-1\v0.2\Debug\Gunbird.pdb (Full PDB)
