@@ -31,9 +31,13 @@ O - Shoot
 ### Other
 
 F1 - Turn collision boxes ON/OFF
+
 F2 - Turn godmode ON/OFF
+
 F3 - Automatic win
+
 F4 - Automatic lose
+
 F5 - Player 2 start
 
 ## Contributing
