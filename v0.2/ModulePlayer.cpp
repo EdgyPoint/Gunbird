@@ -1,5 +1,6 @@
 #include<cstring>
 #include<stdlib.h>
+#include <stdio.h>
 #include "Globals.h"
 #include "Application.h"
 #include "ModuleTextures.h"
@@ -101,7 +102,7 @@ bool ModulePlayer::Start()
 	
 	player_col = App->collision->AddCollider({ 0, 0, 21, 32 }, COLLIDER_PLAYER, this);
 
-	font_score = App->fonts->Load("assets/images/fonts.png", "-1234567890", 1);
+	font_score = App->fonts->Load("assets/images/fonts.png", " 1234567890", 1);
 
 	respawning = true;
 
@@ -121,9 +122,6 @@ bool ModulePlayer::CleanUp()
 update_status ModulePlayer::Update()
 {
 	int speed = 3;
-	strcpy(yokse, score);
-	yokse[0] = 49;
-
 
 	if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT && !_dying && !respawning)
 	{
@@ -357,10 +355,10 @@ update_status ModulePlayer::Update()
 
 
 
-
+	sprintf_s(text_score, 10, "%7d", score);
 	
 	// Draw everything --------------------------------------
-	App->fonts->BlitText(position.x, position.y, font_score, yokse);
+
 
 	App->render->Blit(graphics, position.x, position.y, &(current_animation->GetCurrentFrame()));
 	//Blit UI
@@ -374,7 +372,7 @@ update_status ModulePlayer::Update()
 		App->render->Blit(ui, 5, 21, &lifedisplay, 0, true);
 		App->render->Blit(ui, 21, 21, &lifedisplay, 0, true);
 	}
-
+	App->fonts->BlitText( 5, 20, font_score, text_score);
 
 	return UPDATE_CONTINUE;
 }

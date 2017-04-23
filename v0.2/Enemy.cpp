@@ -90,4 +90,6 @@ void Enemy::ToDie(Enemy* enemy)
 		App->audio->sfx = App->audio->LoadSFX("assets/SFX/smallexplosion.wav");
 		Mix_PlayChannel(-1, App->audio->sfx, 0);
 	}
+
+	App->player->score += enemy->killscore;
 }
