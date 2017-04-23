@@ -60,6 +60,17 @@ ModulePlayer::ModulePlayer()
 
 	dying.PushBack({ 129, 0, 30, 30 });
 	dying.loop = false;
+
+	tilting.PushBack({ 0, 64, 32, 32 });
+	tilting.PushBack({ 0, 32, 32, 32 });
+	tilting.PushBack({ 0, 0, 32, 32 });
+	tilting.PushBack({ 0, 32, 32, 32 });
+	tilting.PushBack({ 0, 64, 32, 32 });
+	tilting.PushBack({ 0, 128, 32, 32 });
+	tilting.PushBack({ 0, 96, 32, 32 });
+	tilting.PushBack({ 0, 128, 32, 32 });
+	tilting.loop = true;
+	tilting.speed = 0.5f;
 }
 
 ModulePlayer::~ModulePlayer()
@@ -108,17 +119,19 @@ update_status ModulePlayer::Update()
 		{
 			position.x = 0;
 		}
-
-		if (current_animation != &left && transition >= TRANSITION_SPEED)
+		if (!stunned)
 		{
-			left.Reset();
-			current_animation = &left;
+			if (current_animation != &left && transition >= TRANSITION_SPEED)
+			{
+				left.Reset();
+				current_animation = &left;
+			}
+			if (current_animation != &tleft && transition < TRANSITION_SPEED)
+			{
+				current_animation = &tleft;
+			}
+			transition++;
 		}
-		if (current_animation != &tleft && transition < TRANSITION_SPEED)
-		{
-			current_animation = &tleft;
-		}
-		transition++;
 	}
 
 	if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT && !_dying && !respawning)
@@ -128,16 +141,20 @@ update_status ModulePlayer::Update()
 		{
 			position.x = 196;
 		}
-		if (current_animation != &right && transition >= TRANSITION_SPEED)
+
+		if (!stunned)
 		{
-			right.Reset();
-			current_animation = &right;
+			if (current_animation != &right && transition >= TRANSITION_SPEED)
+			{
+				right.Reset();
+				current_animation = &right;
+			}
+			if (current_animation != &tright && transition < TRANSITION_SPEED)
+			{
+				current_animation = &tright;
+			}
+			transition++;
 		}
-		if (current_animation != &tright && transition < TRANSITION_SPEED)
-		{
-			current_animation = &tright;
-		}
-		transition++;
 	}
 
 	if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT && !_dying && !respawning)
@@ -160,7 +177,7 @@ update_status ModulePlayer::Update()
 	
 	}
 
-	if (App->input->keyboard[SDL_SCANCODE_C] == KEY_STATE::KEY_REPEAT && SDL_GetTicks() >= shot && !_dying && !respawning)
+	if (App->input->keyboard[SDL_SCANCODE_C] == KEY_STATE::KEY_REPEAT && SDL_GetTicks() >= shot && !_dying && !respawning && !stunned)
 	{
 		shot = (SDL_GetTicks() + 500);
 		if (powerup_lv == 0)
@@ -193,8 +210,11 @@ update_status ModulePlayer::Update()
 	if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_IDLE
 		&& App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_IDLE)
 	{
-		current_animation = &idle;
-		transition = 0;
+		if (!stunned)
+		{
+			current_animation = &idle;
+			transition = 0;
+		}
 	}
 
 	if (App->input->keyboard[SDL_SCANCODE_F2] == KEY_STATE::KEY_DOWN && godmode == false)
@@ -230,6 +250,17 @@ update_status ModulePlayer::Update()
 	}
 
 	player_col->SetPos(position.x + 3, position.y);
+
+	if (stunned)
+	{
+		stuncounter++;
+		if (stuncounter == 64)
+		{
+			stunned = false;
+			current_animation = &idle;
+			stuncounter = 0;
+		}
+	}
 
 	if (_dying)
 	{
@@ -337,6 +368,19 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 			out = true;
 		}
 	}
+
+	if (c2->type == COLLIDER_ENEMY && !stunned)
+	{
+		stunned = true;
+		powerup_lv--;
+		current_animation = &tilting;
+
+		if (powerup_lv < 0)
+		{
+			powerup_lv = 0;
+		}
+	}
+
 	if (c2->type == COLLIDER_PICKUP)
 	{
 		App->audio->sfx = App->audio->LoadSFX("assets/SFX/marionpowerup.wav");;

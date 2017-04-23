@@ -102,6 +102,8 @@ Enemy_Redbomb :: Enemy_Redbomb(int x, int y, int option) : Enemy(x, y, option)
 	original_x = x;
 
 	death_type = SMALL_ENEMY;
+
+	flying = true;
 }
 
 void Enemy_Redbomb::Move()

@@ -33,6 +33,7 @@ public:
 	Animation right;
 	Animation tright;
 	Animation dying;
+	Animation tilting; //used for stun
 	iPoint position;
 	int transition = 0;
 	int beam = 0;
@@ -41,9 +42,11 @@ public:
 	bool _dying = false;
 	bool respawning = false;
 	bool temp_invincibility = false;
+	bool stunned = false;
 	int invincibilitycounter = 0;
 	int respawncounter = 0;
 	int deathcounter = 0;
+	int stuncounter = 0;
 	int lives = 2;
 	bool out = false;
 	uint shot;
