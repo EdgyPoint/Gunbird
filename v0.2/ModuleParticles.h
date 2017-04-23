@@ -58,7 +58,7 @@ public:
 	Particle prebigshot;
 	Particle bigshot;
 	Particle powerup;
-	//Particle magicspark;
+	Particle magicspark[4];
 	Particle impact;
 	Particle small_explosion;
 	Particle medium_explosion;

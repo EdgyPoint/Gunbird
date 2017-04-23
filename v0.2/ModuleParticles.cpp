@@ -81,7 +81,7 @@ bool ModuleParticles::Start()
 	presmallshot.anim.speed = 0.3f;
 	presmallshot.life = 1;
 
-
+	//First two frames of the mortar shot
 	prebigshot.anim.PushBack({ 23, 388, 16, 16 }); 
 	prebigshot.anim.PushBack({ 47, 387, 19, 19 }); 
 	prebigshot.anim.loop = false;
@@ -89,7 +89,7 @@ bool ModuleParticles::Start()
 	prebigshot.speed.y = 0.55f;
 	prebigshot.life = 400;
 
-
+	//Mortar shot
 	bigshot.anim.PushBack({ 74, 391, 12, 12 });
 	bigshot.anim.PushBack({ 96, 391, 12, 12 });
 	bigshot.anim.PushBack({ 118, 391, 12, 12 });
@@ -222,6 +222,54 @@ bool ModuleParticles::Start()
 	playerstunned.anim.speed = 0.5f;
 	playerstunned.life = 1000;
 
+	magicspark[0].anim.PushBack({ 168, 0, 11, 11 });
+	magicspark[0].anim.PushBack({ 183, 0, 11, 11 });
+	magicspark[0].anim.PushBack({ 198, 0, 11, 11 });
+	magicspark[0].anim.PushBack({ 213, 0, 11, 11 });
+	magicspark[0].anim.PushBack({ 228, 0, 11, 11 });
+	magicspark[0].anim.PushBack({ 243, 0, 11, 11 });
+	magicspark[0].anim.PushBack({ 258, 0, 11, 11 });
+	magicspark[0].anim.PushBack({ 273, 0, 11, 11 });
+	magicspark[0].anim.loop = false;
+	magicspark[0].anim.speed = 0.33f;
+	magicspark[0].life = 400;
+
+	magicspark[1].anim.PushBack({ 168, 15, 11, 11 });
+	magicspark[1].anim.PushBack({ 183, 15, 11, 11 });
+	magicspark[1].anim.PushBack({ 198, 15, 11, 11 });
+	magicspark[1].anim.PushBack({ 213, 15, 11, 11 });
+	magicspark[1].anim.PushBack({ 228, 15, 11, 11 });
+	magicspark[1].anim.PushBack({ 243, 15, 11, 11 });
+	magicspark[1].anim.PushBack({ 258, 15, 11, 11 });
+	magicspark[1].anim.PushBack({ 273, 15, 11, 11 });
+	magicspark[1].anim.loop = false;
+	magicspark[1].anim.speed = 0.33f;
+	magicspark[1].life = 400;
+
+	magicspark[2].anim.PushBack({ 168, 30, 11, 11 });
+	magicspark[2].anim.PushBack({ 183, 30, 11, 11 });
+	magicspark[2].anim.PushBack({ 198, 30, 11, 11 });
+	magicspark[2].anim.PushBack({ 213, 30, 11, 11 });
+	magicspark[2].anim.PushBack({ 228, 30, 11, 11 });
+	magicspark[2].anim.PushBack({ 243, 30, 11, 11 });
+	magicspark[2].anim.PushBack({ 258, 30, 11, 11 });
+	magicspark[2].anim.PushBack({ 273, 30, 11, 11 });
+	magicspark[2].anim.loop = false;
+	magicspark[2].anim.speed = 0.33f;
+	magicspark[2].life = 400;
+
+	magicspark[3].anim.PushBack({ 168, 45, 11, 11 });
+	magicspark[3].anim.PushBack({ 183, 45, 11, 11 });
+	magicspark[3].anim.PushBack({ 198, 45, 11, 11 });
+	magicspark[3].anim.PushBack({ 213, 45, 11, 11 });
+	magicspark[3].anim.PushBack({ 228, 45, 11, 11 });
+	magicspark[3].anim.PushBack({ 243, 45, 11, 11 });
+	magicspark[3].anim.PushBack({ 258, 45, 11, 11 });
+	magicspark[3].anim.PushBack({ 273, 45, 11, 11 });
+	magicspark[3].anim.loop = false;
+	magicspark[3].anim.speed = 0.33f;
+	magicspark[3].life = 400;
+
 	return true;
 }
 
@@ -284,7 +332,7 @@ update_status ModuleParticles::Update()
 		}
 
 
-		if (p->collider->type == COLLIDER_PICKUP)
+		/*if (p->collider->type == COLLIDER_PICKUP)
 
 		{
 			if (p->position.x < 30 || p->position.x > 172)
@@ -295,7 +343,7 @@ update_status ModuleParticles::Update()
 			{
 				p->speed.y = p->speed.y * -1;
 			}
-		}
+		}*/
 	}
 
 	return UPDATE_CONTINUE;

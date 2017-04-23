@@ -10,10 +10,10 @@
 
 Enemy_CastleMortar::Enemy_CastleMortar(int x, int y, int option) : Enemy(x, y, option)
 {
-	
-	
+		
 	//enemy closed
 	closed.PushBack({0, 140, 32, 32});
+	closed.loop = false;
 	status = NONE;
 
 	//animation when the mortar opens
@@ -24,14 +24,14 @@ Enemy_CastleMortar::Enemy_CastleMortar(int x, int y, int option) : Enemy(x, y, o
 	opening.PushBack({ 0, 174, 32, 32 });
 	opening.loop = false;
 	opening.speed = 0.1f;
-	status = OPENING;
+	
 
 	//animation when the mortar is being shot while opening
 	opening2.PushBack({ 0, 140, 32, 32 });
 	opening2.PushBack({ 0, 208, 32, 32 });
 	opening2.PushBack({ 34, 140, 32, 32 });
 	opening2.PushBack({ 34, 208, 32, 32 });
-	opening2.loop = true;
+	opening2.loop = false;
 	opening2.speed = 0.175f;
 
 	//animation when the mortar has opened and is shooting
@@ -84,9 +84,8 @@ void Enemy_CastleMortar::Move()
 {
 	position = original_pos + path.GetCurrentPosition();
 
-
-	if (position.y) { animation = &opening; status = OPENING; }
-	if (status == OPENING &&animation->Finished() == true) { status = NORMAL; }
+	if (position.y == -20) { animation = &opening; status = OPENING; }
+	if (status == OPENING && animation->Finished() == true) { status = NORMAL; }
 	if (status == NORMAL) { animation = &stand; }
 	if (status == HIT && animation == &opening) { animation = &opening2; }
 	if (status == HIT) { animation = &stand2; }
@@ -98,13 +97,19 @@ void Enemy_CastleMortar::Shoot()
 	initcounter += 1;
 	if (initcounter > 210 && initcounter < 500)
 	{
-		if (SDL_GetTicks() >= reload && status != OPENING)//first wave
+		if (SDL_GetTicks() >= reload && status != OPENING && status != NONE)//first wave
 		{
-			//App->particles->AddParticle(App->particles->prebigshot, position.x + 7, position.y + 5, COLLIDER_ENEMY_SHOT, 0, 0, false);
-			App->particles->AddParticle(App->particles->bigshot, position.x + 12, position.y + 7, COLLIDER_ENEMY_SHOT, -1, -1, false); 
-			App->particles->AddParticle(App->particles->bigshot, position.x + 7, position.y + 7, COLLIDER_ENEMY_SHOT, 1, -1, false); 
-			App->particles->AddParticle(App->particles->bigshot, position.x + 7, position.y + 12, COLLIDER_ENEMY_SHOT, -1, 1, false);
-			App->particles->AddParticle(App->particles->bigshot, position.x + 12, position.y + 12, COLLIDER_ENEMY_SHOT, 1, 1, false);
+			int counterflag = 0;
+			App->particles->AddParticle(App->particles->prebigshot, position.x + 7, position.y + 5, COLLIDER_ENEMY_SHOT, 0, 0, false); counterflag++;
+
+			if (counterflag != 0)
+			{
+				App->particles->AddParticle(App->particles->bigshot, position.x + 10, position.y + 10, COLLIDER_ENEMY_SHOT, -1, -1);
+				App->particles->AddParticle(App->particles->bigshot, position.x + 10, position.y + 10, COLLIDER_ENEMY_SHOT, 1, -1);
+				App->particles->AddParticle(App->particles->bigshot, position.x + 10, position.y + 10, COLLIDER_ENEMY_SHOT, -1, 1);
+				App->particles->AddParticle(App->particles->bigshot, position.x + 10, position.y + 10, COLLIDER_ENEMY_SHOT, 1, 1);
+			}
+			
 			reload = SDL_GetTicks() + 1000;
 		}
 

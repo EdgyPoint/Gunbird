@@ -341,11 +341,26 @@ update_status ModulePlayer::Update()
 	}
 
 	//Leave particles behind (yay! magic sparks)
-	//magicsparks++;
-	//if (magicsparks == 6)
-	//{
+	magicsparks++;
+	if (magicsparks == 6)
+	{
+		App->particles->AddParticle(App->particles->magicspark[0], position.x + 8, position.y + 31, COLLIDER_NONE);
+	}
+	if (magicsparks == 12)
+	{
+		App->particles->AddParticle(App->particles->magicspark[1], position.x + 8, position.y + 31, COLLIDER_NONE);
+	}
 
-	//} 
+	if (magicsparks == 18)
+	{
+		App->particles->AddParticle(App->particles->magicspark[2], position.x + 8, position.y + 31, COLLIDER_NONE);
+	}
+
+	if (magicsparks == 24)
+	{
+		App->particles->AddParticle(App->particles->magicspark[3], position.x + 8, position.y + 31, COLLIDER_NONE);
+		magicsparks = 0;
+	}
 
 	//Return to intro scene if both players are out
 	if (out && App->player2->out)
