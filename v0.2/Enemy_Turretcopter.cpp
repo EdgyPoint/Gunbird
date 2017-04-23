@@ -33,6 +33,7 @@ Enemy_Turretcopter::Enemy_Turretcopter(int x, int y, int option) : Enemy(x, y, o
 
 	death_type = SMALL_ENEMY;
 	flying = true;
+	killscore = 200;
 }
 
 void Enemy_Turretcopter::Move()

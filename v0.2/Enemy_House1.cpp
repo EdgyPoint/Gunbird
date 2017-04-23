@@ -73,6 +73,7 @@ Enemy_House1::Enemy_House1(int x, int y, int option) : Enemy(x, y, option)
 	death_type = MEDIUM_ENEMY;
 	enemy_drops = true;
 	flying = false;
+	killscore = 3000;
 }
 
 void Enemy_House1::Move()
