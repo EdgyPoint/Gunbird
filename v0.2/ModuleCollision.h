@@ -12,6 +12,7 @@ enum COLLIDER_TYPE
 	COLLIDER_PLAYER,
 	COLLIDER_PLAYER2,
 	COLLIDER_ENEMY,
+	COLLIDER_ENEMY_F,
 	COLLIDER_PLAYER_SHOT,
 	COLLIDER_PLAYER2_SHOT,
 	COLLIDER_ENEMY_SHOT,
@@ -23,6 +24,7 @@ struct Collider
 {
 	SDL_Rect rect;
 	bool to_delete = false;
+	bool already_hit = false;
 	COLLIDER_TYPE type;
 	Module* callback = nullptr;
 
@@ -62,7 +64,7 @@ private:
 
 	Collider* colliders[MAX_COLLIDERS];
 	bool matrix[COLLIDER_MAX][COLLIDER_MAX];
-	bool debug = true;
+	bool debug = false;
 };
 
 #endif // __ModuleCollision_H__

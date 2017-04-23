@@ -41,6 +41,7 @@ public:
 	bool enemy_drops = false;
 	int damaged_hp = 0;
 	bool aditionalanimation = false;
+	bool following = false;
 
 
 public:
@@ -48,6 +49,7 @@ public:
 	virtual ~Enemy();
 
 	const Collider* GetCollider() const;
+
 
 	virtual void Move() {};
 	virtual void Shoot() {};

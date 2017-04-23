@@ -12,6 +12,34 @@ Unzip the folder in whatever directory you prefer.
 
 Execute "Gunbird.exe".
 
+## How to play
+
+Space - Start button
+
+### Player 1
+
+WASD - Move character
+
+C - Shoot
+
+### Player 2
+
+Arrow Keys - Move character
+
+O - Shoot
+
+### Other
+
+F1 - Turn collision boxes ON/OFF
+
+F2 - Turn godmode ON/OFF
+
+F3 - Automatic win
+
+F4 - Automatic lose
+
+F5 - Player 2 start
+
 ## Contributing
 
 1. Fork it!
@@ -21,6 +49,8 @@ Execute "Gunbird.exe".
 5. Submit a pull request :D
 
 ## History
+
+5/17/2017 - v0.4.5 released.
 
 4/5/2017 - v0.4 released.
 
