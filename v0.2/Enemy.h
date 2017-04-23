@@ -13,6 +13,7 @@ enum ENEMY_STATUS
 	HIT,
 	DAMAGED,
 	OPENING,
+	NONE,
 };
 
 enum DEATH_TYPE
@@ -34,7 +35,7 @@ public:
 	iPoint position;
 	int pathoption = 0;
 	float hp = 1.0f;
-	int killscore;
+	int killscore = 0;
 	int status = NORMAL;
 	int death_type = DEFAULT_ENEMY;
 	bool flying;

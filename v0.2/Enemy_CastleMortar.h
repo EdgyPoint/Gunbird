@@ -10,6 +10,7 @@ class Enemy_CastleMortar : public Enemy
 private:
 	iPoint original_pos;
 	fPoint distance;
+	Animation closed;
 	Animation opening;
 	Animation opening2;
 	Animation stand;

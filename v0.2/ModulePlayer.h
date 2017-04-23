@@ -55,8 +55,8 @@ public:
 	bool out = false;
 	uint shot;
 	int font_score = -1;
-	char* score = "-----00";
-	char yokse[8];
+	int score = 0;
+	char text_score[10];
 };
 
 #endif

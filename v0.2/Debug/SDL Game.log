@@ -1,4 +1,49 @@
+<<<<<<< HEAD
+﻿C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets(388,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (SDL5 Handout.vcxproj).  This can lead to incorrect clean and rebuild behavior.
+  Enemy.cpp
+  Generating Code...
+  Compiling...
+  ModuleEnemies.cpp
+  Enemy_Turretcopter.cpp
+c:\users\jaume\documents\github\project-1\v0.2\enemy_turretcopter.cpp(57): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
+  Enemy_Redbomb.cpp
+  Enemy_House2.cpp
+  Enemy_House1.cpp
+c:\users\jaume\documents\github\project-1\v0.2\enemy_house1.cpp(71): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
+  Enemy_CastleMortar.cpp
+c:\users\jaume\documents\github\project-1\v0.2\enemy_castlemortar.cpp(49): warning C4018: '>=' : signed/unsigned mismatch
+c:\users\jaume\documents\github\project-1\v0.2\enemy_castlemortar.cpp(60): warning C4018: '>=' : signed/unsigned mismatch
+  Enemy_Balloon.cpp
+c:\users\jaume\documents\github\project-1\v0.2\enemy_balloon.cpp(79): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+c:\users\jaume\documents\github\project-1\v0.2\enemy_balloon.cpp(80): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+c:\users\jaume\documents\github\project-1\v0.2\enemy_balloon.cpp(89): warning C4018: '>=' : signed/unsigned mismatch
+  Generating Code...
+  Skipping... (no relevant changes detected)
+  ModulePlayer2.cpp
+  ModulePlayer.cpp
+  ModuleCastleScene.cpp
+  Application.cpp
+  SDL Game.vcxproj -> C:\Users\Jaume\Documents\GitHub\Project-1\v0.2\Debug\Gunbird.exe
+=======
 ﻿C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets(392,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (SDL5 Handout.vcxproj).  This can lead to incorrect clean and rebuild behavior.
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> origin/master
+  Enemy_CastleMortar.cpp
+c:\users\kistofe\documents\github\project-1\v0.2\enemy_castlemortar.cpp(91): warning C4553: '==': operator has no effect; did you intend '='?
+c:\users\kistofe\documents\github\project-1\v0.2\enemy_castlemortar.cpp(99): warning C4018: '>=': signed/unsigned mismatch
+  SDL Game.vcxproj -> C:\Users\Kistofe\Documents\GitHub\Project-1\v0.2\Debug\Gunbird.exe
+  SDL Game.vcxproj -> C:\Users\Kistofe\Documents\GitHub\Project-1\v0.2\Debug\Gunbird.pdb (Full PDB)
+<<<<<<< HEAD
+=======
+=======
+  ModuleScoreScene.cpp
+>>>>>>> origin/master
   ModulePlayer2.cpp
 d:\disk c\documents\github\project-1\v0.2\moduleplayer2.cpp(301): warning C4390: ';': empty controlled statement found; is this the intent?
   ModulePlayer.cpp
@@ -40,3 +85,9 @@ d:\disk c\documents\github\project-1\v0.2\enemy_balloon.cpp(80): warning C4018: 
   LINK : D:\Disk C\Documents\GitHub\Project-1\v0.2\Debug\Gunbird.exe not found or not built by the last incremental link; performing full link
   SDL Game.vcxproj -> D:\Disk C\Documents\GitHub\Project-1\v0.2\Debug\Gunbird.exe
   SDL Game.vcxproj -> D:\Disk C\Documents\GitHub\Project-1\v0.2\Debug\Gunbird.pdb (Full PDB)
+<<<<<<< HEAD
+=======
+>>>>>>> origin/master
+>>>>>>> origin/master
+>>>>>>> origin/master
+>>>>>>> origin/master
