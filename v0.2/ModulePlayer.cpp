@@ -204,6 +204,10 @@ update_status ModulePlayer::Update()
 		App->collision->EditMatrix(COLLIDER_PLAYER, COLLIDER_ENEMY_SHOT, false);
 		App->collision->EditMatrix(COLLIDER_ENEMY, COLLIDER_PLAYER, false);
 		App->collision->EditMatrix(COLLIDER_ENEMY_SHOT, COLLIDER_PLAYER, false);
+		App->collision->EditMatrix(COLLIDER_PLAYER2, COLLIDER_ENEMY, false);
+		App->collision->EditMatrix(COLLIDER_PLAYER2, COLLIDER_ENEMY_SHOT, false);
+		App->collision->EditMatrix(COLLIDER_ENEMY, COLLIDER_PLAYER2, false);
+		App->collision->EditMatrix(COLLIDER_ENEMY_SHOT, COLLIDER_PLAYER2, false);
 	}
 
 	else if (App->input->keyboard[SDL_SCANCODE_F2] == KEY_STATE::KEY_DOWN && godmode == true)
@@ -213,6 +217,10 @@ update_status ModulePlayer::Update()
 		App->collision->EditMatrix(COLLIDER_PLAYER, COLLIDER_ENEMY_SHOT, true);
 		App->collision->EditMatrix(COLLIDER_ENEMY, COLLIDER_PLAYER, true);
 		App->collision->EditMatrix(COLLIDER_ENEMY_SHOT, COLLIDER_PLAYER, true);
+		App->collision->EditMatrix(COLLIDER_PLAYER2, COLLIDER_ENEMY, true);
+		App->collision->EditMatrix(COLLIDER_PLAYER2, COLLIDER_ENEMY_SHOT, true);
+		App->collision->EditMatrix(COLLIDER_ENEMY, COLLIDER_PLAYER2, true);
+		App->collision->EditMatrix(COLLIDER_ENEMY_SHOT, COLLIDER_PLAYER2, true);
 	}
 
 	if (App->input->keyboard[SDL_SCANCODE_F5] == KEY_STATE::KEY_DOWN)
@@ -249,10 +257,13 @@ update_status ModulePlayer::Update()
 
 	if (respawning)
 	{
-		App->collision->EditMatrix(COLLIDER_PLAYER, COLLIDER_ENEMY, false);
-		App->collision->EditMatrix(COLLIDER_PLAYER, COLLIDER_ENEMY_SHOT, false);
-		App->collision->EditMatrix(COLLIDER_ENEMY, COLLIDER_PLAYER, false);
-		App->collision->EditMatrix(COLLIDER_ENEMY_SHOT, COLLIDER_PLAYER, false);
+		if (godmode == false)
+		{
+			App->collision->EditMatrix(COLLIDER_PLAYER, COLLIDER_ENEMY, false);
+			App->collision->EditMatrix(COLLIDER_PLAYER, COLLIDER_ENEMY_SHOT, false);
+			App->collision->EditMatrix(COLLIDER_ENEMY, COLLIDER_PLAYER, false);
+			App->collision->EditMatrix(COLLIDER_ENEMY_SHOT, COLLIDER_PLAYER, false);
+		}
 
 		if (!out)
 		{
@@ -272,10 +283,13 @@ update_status ModulePlayer::Update()
 		invincibilitycounter++;
 		if (invincibilitycounter == 120)
 		{
-			App->collision->EditMatrix(COLLIDER_PLAYER, COLLIDER_ENEMY, true);
-			App->collision->EditMatrix(COLLIDER_PLAYER, COLLIDER_ENEMY_SHOT, true);
-			App->collision->EditMatrix(COLLIDER_ENEMY, COLLIDER_PLAYER, true);
-			App->collision->EditMatrix(COLLIDER_ENEMY_SHOT, COLLIDER_PLAYER, true);
+			if (godmode == false)
+			{
+				App->collision->EditMatrix(COLLIDER_PLAYER, COLLIDER_ENEMY, true);
+				App->collision->EditMatrix(COLLIDER_PLAYER, COLLIDER_ENEMY_SHOT, true);
+				App->collision->EditMatrix(COLLIDER_ENEMY, COLLIDER_PLAYER, true);
+				App->collision->EditMatrix(COLLIDER_ENEMY_SHOT, COLLIDER_PLAYER, true);
+			}
 			temp_invincibility = false;
 			invincibilitycounter = 0;
 		}
@@ -303,10 +317,13 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 	{
 		lives -= 1;
 		_dying = true;
-		App->collision->EditMatrix(COLLIDER_PLAYER, COLLIDER_ENEMY, false);
-		App->collision->EditMatrix(COLLIDER_PLAYER, COLLIDER_ENEMY_SHOT, false);
-		App->collision->EditMatrix(COLLIDER_ENEMY, COLLIDER_PLAYER, false);
-		App->collision->EditMatrix(COLLIDER_ENEMY_SHOT, COLLIDER_PLAYER, false);
+		if (godmode == false)
+		{
+			App->collision->EditMatrix(COLLIDER_PLAYER, COLLIDER_ENEMY, false);
+			App->collision->EditMatrix(COLLIDER_PLAYER, COLLIDER_ENEMY_SHOT, false);
+			App->collision->EditMatrix(COLLIDER_ENEMY, COLLIDER_PLAYER, false);
+			App->collision->EditMatrix(COLLIDER_ENEMY_SHOT, COLLIDER_PLAYER, false);
+		}
 
 		App->particles->AddParticle(App->particles->medium_explosion, position.x - 40, position.y - 25, COLLIDER_NONE);
 		App->audio->sfx = App->audio->LoadSFX("assets/SFX/mediumexplosion.wav");
