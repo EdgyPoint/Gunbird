@@ -99,13 +99,15 @@ Enemy_Redbomb :: Enemy_Redbomb(int x, int y, int option) : Enemy(x, y, option)
 		path.PushBack({ 0.0f, 3.0f }, 100000);
 	}
 
-		collider = App->collision->AddCollider({ 0, 0,  28, 32 }, COLLIDER_TYPE::COLLIDER_ENEMY, (Module*)App->enemies);
-	
+	collider = App->collision->AddCollider({ 0, 0,  28, 32 }, COLLIDER_TYPE::COLLIDER_ENEMY_F, (Module*)App->enemies);
+
 	original_pos.x = x;
 	original_pos.y = y;
 	original_x = x;
 
 	death_type = SMALL_ENEMY;
+
+	flying = true;
 }
 
 void Enemy_Redbomb::Move()

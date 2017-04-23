@@ -36,6 +36,7 @@ public:
 	int killscore;
 	int status = NORMAL;
 	int death_type = DEFAULT_ENEMY;
+	bool flying;
 	bool enemy_drops = false;
 	int damaged_hp = 0;
 	bool aditionalanimation = false;

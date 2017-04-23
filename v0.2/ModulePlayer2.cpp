@@ -151,7 +151,7 @@ update_status ModulePlayer2::Update()
 
 	}
 
-	if (App->input->keyboard[SDL_SCANCODE_O] == KEY_STATE::KEY_REPEAT && SDL_GetTicks() >= shot && !_dying && !respawning)
+	if (App->input->keyboard[SDL_SCANCODE_O] == KEY_STATE::KEY_REPEAT && SDL_GetTicks() >= shot && !_dying && !respawning && !stunned)
 	{
 		shot = (SDL_GetTicks() + 500);
 		if (powerup_lv == 0)

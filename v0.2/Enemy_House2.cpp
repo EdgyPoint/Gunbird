@@ -68,6 +68,7 @@ Enemy_House2::Enemy_House2(int x, int y, int option) : Enemy(x, y, option)
 	hp = 10.0f;
 	death_type = MEDIUM_ENEMY;
 	enemy_drops = true;
+	flying = false;
 }
 
 void Enemy_House2::Move()

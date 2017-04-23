@@ -33,6 +33,7 @@ Enemy_CastleMortar::Enemy_CastleMortar(int x, int y, int option) : Enemy(x, y, o
 	hp = 20.0f;
 	damaged_hp = 8;
 	death_type = SMALL_ENEMY;
+	flying = false;
 }
 
 void Enemy_CastleMortar::Move()

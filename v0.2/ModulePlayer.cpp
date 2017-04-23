@@ -60,6 +60,17 @@ ModulePlayer::ModulePlayer()
 
 	dying.PushBack({ 129, 0, 30, 30 });
 	dying.loop = false;
+
+	tilting.PushBack({ 0, 64, 32, 32 });
+	tilting.PushBack({ 0, 32, 32, 32 });
+	tilting.PushBack({ 0, 0, 32, 32 });
+	tilting.PushBack({ 0, 32, 32, 32 });
+	tilting.PushBack({ 0, 64, 32, 32 });
+	tilting.PushBack({ 0, 128, 32, 32 });
+	tilting.PushBack({ 0, 96, 32, 32 });
+	tilting.PushBack({ 0, 128, 32, 32 });
+	tilting.loop = true;
+	tilting.speed = 0.5f;
 }
 
 ModulePlayer::~ModulePlayer()
@@ -71,6 +82,19 @@ bool ModulePlayer::Start()
 	LOG("Loading player");
 
 	graphics = App->textures->Load("assets/images/Marion.png");
+
+	//Init UI
+	ui = App->textures->Load("assets/images/UI.png");
+
+	p1display.x = 0;
+	p1display.y = 0;
+	p1display.w = 15;
+	p1display.h = 12;
+
+	lifedisplay.x = 15;
+	lifedisplay.y = 0;
+	lifedisplay.w = 13;
+	lifedisplay.h = 13;
 
 	position.x = 51;
 	position.y = 320;
@@ -108,17 +132,19 @@ update_status ModulePlayer::Update()
 		{
 			position.x = 0;
 		}
-
-		if (current_animation != &left && transition >= TRANSITION_SPEED)
+		if (!stunned)
 		{
-			left.Reset();
-			current_animation = &left;
+			if (current_animation != &left && transition >= TRANSITION_SPEED)
+			{
+				left.Reset();
+				current_animation = &left;
+			}
+			if (current_animation != &tleft && transition < TRANSITION_SPEED)
+			{
+				current_animation = &tleft;
+			}
+			transition++;
 		}
-		if (current_animation != &tleft && transition < TRANSITION_SPEED)
-		{
-			current_animation = &tleft;
-		}
-		transition++;
 	}
 
 	if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT && !_dying && !respawning)
@@ -128,16 +154,20 @@ update_status ModulePlayer::Update()
 		{
 			position.x = 196;
 		}
-		if (current_animation != &right && transition >= TRANSITION_SPEED)
+
+		if (!stunned)
 		{
-			right.Reset();
-			current_animation = &right;
+			if (current_animation != &right && transition >= TRANSITION_SPEED)
+			{
+				right.Reset();
+				current_animation = &right;
+			}
+			if (current_animation != &tright && transition < TRANSITION_SPEED)
+			{
+				current_animation = &tright;
+			}
+			transition++;
 		}
-		if (current_animation != &tright && transition < TRANSITION_SPEED)
-		{
-			current_animation = &tright;
-		}
-		transition++;
 	}
 
 	if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT && !_dying && !respawning)
@@ -160,7 +190,9 @@ update_status ModulePlayer::Update()
 	
 	}
 
-	if (App->input->keyboard[SDL_SCANCODE_C] == KEY_STATE::KEY_DOWN && SDL_GetTicks() >= shot && !_dying && !respawning)
+
+	if (App->input->keyboard[SDL_SCANCODE_C] == KEY_STATE::KEY_REPEAT && SDL_GetTicks() >= shot && !_dying && !respawning && !stunned)
+
 	{
 		shot = (SDL_GetTicks() + 500);
 		if (powerup_lv == 0)
@@ -193,26 +225,37 @@ update_status ModulePlayer::Update()
 	if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_IDLE
 		&& App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_IDLE)
 	{
-		current_animation = &idle;
-		transition = 0;
+		if (!stunned)
+		{
+			current_animation = &idle;
+			transition = 0;
+		}
 	}
 
 	if (App->input->keyboard[SDL_SCANCODE_F2] == KEY_STATE::KEY_DOWN && godmode == false)
 	{
 		godmode = true;
-		App->collision->EditMatrix(COLLIDER_PLAYER, COLLIDER_ENEMY, false);
+		App->collision->EditMatrix(COLLIDER_PLAYER, COLLIDER_ENEMY_F, false);
 		App->collision->EditMatrix(COLLIDER_PLAYER, COLLIDER_ENEMY_SHOT, false);
-		App->collision->EditMatrix(COLLIDER_ENEMY, COLLIDER_PLAYER, false);
+		App->collision->EditMatrix(COLLIDER_ENEMY_F, COLLIDER_PLAYER, false);
 		App->collision->EditMatrix(COLLIDER_ENEMY_SHOT, COLLIDER_PLAYER, false);
+		App->collision->EditMatrix(COLLIDER_PLAYER2, COLLIDER_ENEMY_F, false);
+		App->collision->EditMatrix(COLLIDER_PLAYER2, COLLIDER_ENEMY_SHOT, false);
+		App->collision->EditMatrix(COLLIDER_ENEMY_F, COLLIDER_PLAYER2, false);
+		App->collision->EditMatrix(COLLIDER_ENEMY_SHOT, COLLIDER_PLAYER2, false);
 	}
 
 	else if (App->input->keyboard[SDL_SCANCODE_F2] == KEY_STATE::KEY_DOWN && godmode == true)
 	{
 		godmode = false;
-		App->collision->EditMatrix(COLLIDER_PLAYER, COLLIDER_ENEMY, true);
+		App->collision->EditMatrix(COLLIDER_PLAYER, COLLIDER_ENEMY_F, true);
 		App->collision->EditMatrix(COLLIDER_PLAYER, COLLIDER_ENEMY_SHOT, true);
-		App->collision->EditMatrix(COLLIDER_ENEMY, COLLIDER_PLAYER, true);
+		App->collision->EditMatrix(COLLIDER_ENEMY_F, COLLIDER_PLAYER, true);
 		App->collision->EditMatrix(COLLIDER_ENEMY_SHOT, COLLIDER_PLAYER, true);
+		App->collision->EditMatrix(COLLIDER_PLAYER2, COLLIDER_ENEMY_F, true);
+		App->collision->EditMatrix(COLLIDER_PLAYER2, COLLIDER_ENEMY_SHOT, true);
+		App->collision->EditMatrix(COLLIDER_ENEMY_F, COLLIDER_PLAYER2, true);
+		App->collision->EditMatrix(COLLIDER_ENEMY_SHOT, COLLIDER_PLAYER2, true);
 	}
 
 	if (App->input->keyboard[SDL_SCANCODE_F5] == KEY_STATE::KEY_DOWN)
@@ -222,6 +265,18 @@ update_status ModulePlayer::Update()
 	}
 
 	player_col->SetPos(position.x + 3, position.y);
+
+	if (stunned)
+	{
+		
+		stuncounter++;
+		if (stuncounter == 64)
+		{
+			stunned = false;
+			current_animation = &idle;
+			stuncounter = 0;
+		}
+	}
 
 	if (_dying)
 	{
@@ -249,10 +304,13 @@ update_status ModulePlayer::Update()
 
 	if (respawning)
 	{
-		App->collision->EditMatrix(COLLIDER_PLAYER, COLLIDER_ENEMY, false);
-		App->collision->EditMatrix(COLLIDER_PLAYER, COLLIDER_ENEMY_SHOT, false);
-		App->collision->EditMatrix(COLLIDER_ENEMY, COLLIDER_PLAYER, false);
-		App->collision->EditMatrix(COLLIDER_ENEMY_SHOT, COLLIDER_PLAYER, false);
+		if (godmode == false)
+		{
+			App->collision->EditMatrix(COLLIDER_PLAYER, COLLIDER_ENEMY_F, false);
+			App->collision->EditMatrix(COLLIDER_PLAYER, COLLIDER_ENEMY_SHOT, false);
+			App->collision->EditMatrix(COLLIDER_ENEMY_F, COLLIDER_PLAYER, false);
+			App->collision->EditMatrix(COLLIDER_ENEMY_SHOT, COLLIDER_PLAYER, false);
+		}
 
 		if (!out)
 		{
@@ -272,14 +330,24 @@ update_status ModulePlayer::Update()
 		invincibilitycounter++;
 		if (invincibilitycounter == 120)
 		{
-			App->collision->EditMatrix(COLLIDER_PLAYER, COLLIDER_ENEMY, true);
-			App->collision->EditMatrix(COLLIDER_PLAYER, COLLIDER_ENEMY_SHOT, true);
-			App->collision->EditMatrix(COLLIDER_ENEMY, COLLIDER_PLAYER, true);
-			App->collision->EditMatrix(COLLIDER_ENEMY_SHOT, COLLIDER_PLAYER, true);
+			if (godmode == false)
+			{
+				App->collision->EditMatrix(COLLIDER_PLAYER, COLLIDER_ENEMY_F, true);
+				App->collision->EditMatrix(COLLIDER_PLAYER, COLLIDER_ENEMY_SHOT, true);
+				App->collision->EditMatrix(COLLIDER_ENEMY_F, COLLIDER_PLAYER, true);
+				App->collision->EditMatrix(COLLIDER_ENEMY_SHOT, COLLIDER_PLAYER, true);
+			}
 			temp_invincibility = false;
 			invincibilitycounter = 0;
 		}
 	}
+
+	//Leave particles behind (yay! magic sparks)
+	//magicsparks++;
+	//if (magicsparks == 6)
+	//{
+
+	//} 
 
 	//Return to intro scene if both players are out
 	if (out && App->player2->out)
@@ -287,12 +355,26 @@ update_status ModulePlayer::Update()
 		App->fade->FadeToBlack(App->scene_castle, App->scene_intro, 2.0f);
 	}
 
+
+
+
 	
 	// Draw everything --------------------------------------
-
 	App->fonts->BlitText(position.x, position.y, font_score, yokse);
 
 	App->render->Blit(graphics, position.x, position.y, &(current_animation->GetCurrentFrame()));
+	//Blit UI
+	App->render->Blit(ui, 5, 6, &p1display, 0, true);
+
+	if (lives == 1)
+	App->render->Blit(ui, 5, 21, &lifedisplay, 0, true);
+
+	if (lives == 2)
+	{
+		App->render->Blit(ui, 5, 21, &lifedisplay, 0, true);
+		App->render->Blit(ui, 21, 21, &lifedisplay, 0, true);
+	}
+
 
 	return UPDATE_CONTINUE;
 }
@@ -303,10 +385,13 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 	{
 		lives -= 1;
 		_dying = true;
-		App->collision->EditMatrix(COLLIDER_PLAYER, COLLIDER_ENEMY, false);
-		App->collision->EditMatrix(COLLIDER_PLAYER, COLLIDER_ENEMY_SHOT, false);
-		App->collision->EditMatrix(COLLIDER_ENEMY, COLLIDER_PLAYER, false);
-		App->collision->EditMatrix(COLLIDER_ENEMY_SHOT, COLLIDER_PLAYER, false);
+		if (godmode == false)
+		{
+			App->collision->EditMatrix(COLLIDER_PLAYER, COLLIDER_ENEMY_F, false);
+			App->collision->EditMatrix(COLLIDER_PLAYER, COLLIDER_ENEMY_SHOT, false);
+			App->collision->EditMatrix(COLLIDER_ENEMY_F, COLLIDER_PLAYER, false);
+			App->collision->EditMatrix(COLLIDER_ENEMY_SHOT, COLLIDER_PLAYER, false);
+		}
 
 		App->particles->AddParticle(App->particles->medium_explosion, position.x - 40, position.y - 25, COLLIDER_NONE);
 		App->audio->sfx = App->audio->LoadSFX("assets/SFX/mediumexplosion.wav");
@@ -320,6 +405,20 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 			out = true;
 		}
 	}
+
+	if (c2->type == COLLIDER_ENEMY_F && !stunned)
+	{
+		stunned = true;
+		powerup_lv--;
+		App->particles->AddParticle(App->particles->playercollision, position.x, position.y, COLLIDER_NONE);
+		current_animation = &tilting;
+
+		if (powerup_lv < 0)
+		{
+			powerup_lv = 0;
+		}
+	}
+
 	if (c2->type == COLLIDER_PICKUP)
 	{
 		App->audio->sfx = App->audio->LoadSFX("assets/SFX/marionpowerup.wav");;
