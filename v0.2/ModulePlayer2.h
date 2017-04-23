@@ -46,8 +46,8 @@ public:
 	int invincibilitycounter = 0;
 	int respawncounter = 0;
 	int deathcounter = 0;
-	int lives = 0;
-	bool out = false;
+	int lives = 2;
+	bool out = true;
 
 };
 

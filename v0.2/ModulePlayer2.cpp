@@ -92,7 +92,7 @@ update_status ModulePlayer2::Update()
 {
 	int speed = 1;
 
-	if (App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_REPEAT)
+	if (App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_REPEAT && !_dying && !respawning)
 	{
 		position.x -= speed;
 		if (position.x <= 0)
@@ -112,7 +112,7 @@ update_status ModulePlayer2::Update()
 		transition++;
 	}
 
-	if (App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_REPEAT)
+	if (App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_REPEAT && !_dying && !respawning)
 	{
 		position.x += speed;
 		if (position.x >= 196)
@@ -131,7 +131,7 @@ update_status ModulePlayer2::Update()
 		transition++;
 	}
 
-	if (App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_STATE::KEY_REPEAT)
+	if (App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_STATE::KEY_REPEAT && !_dying && !respawning)
 	{
 		position.y += speed;
 		if (position.y >= 288)
@@ -141,7 +141,7 @@ update_status ModulePlayer2::Update()
 
 	}
 
-	if (App->input->keyboard[SDL_SCANCODE_UP] == KEY_STATE::KEY_REPEAT)
+	if (App->input->keyboard[SDL_SCANCODE_UP] == KEY_STATE::KEY_REPEAT && !_dying && !respawning)
 	{
 		position.y -= speed;
 		if (position.y <= 0)
@@ -151,7 +151,7 @@ update_status ModulePlayer2::Update()
 
 	}
 
-	if (App->input->keyboard[SDL_SCANCODE_O] == KEY_STATE::KEY_REPEAT && SDL_GetTicks() >= shot)
+	if (App->input->keyboard[SDL_SCANCODE_O] == KEY_STATE::KEY_REPEAT && SDL_GetTicks() >= shot && !_dying && !respawning)
 	{
 		shot = (SDL_GetTicks() + 500);
 		if (powerup_lv == 0)
@@ -210,16 +210,16 @@ update_status ModulePlayer2::Update()
 			_dying = false;
 			respawning = true;
 			deathcounter = 0;
-			position.x = 51;
+			position.x = 141;
 		}
 	}
 
 	if (respawning)
 	{
-		App->collision->EditMatrix(COLLIDER_PLAYER, COLLIDER_ENEMY, false);
-		App->collision->EditMatrix(COLLIDER_PLAYER, COLLIDER_ENEMY_SHOT, false);
-		App->collision->EditMatrix(COLLIDER_ENEMY, COLLIDER_PLAYER, false);
-		App->collision->EditMatrix(COLLIDER_ENEMY_SHOT, COLLIDER_PLAYER, false);
+		App->collision->EditMatrix(COLLIDER_PLAYER2, COLLIDER_ENEMY, false);
+		App->collision->EditMatrix(COLLIDER_PLAYER2, COLLIDER_ENEMY_SHOT, false);
+		App->collision->EditMatrix(COLLIDER_ENEMY, COLLIDER_PLAYER2, false);
+		App->collision->EditMatrix(COLLIDER_ENEMY_SHOT, COLLIDER_PLAYER2, false);
 
 		if (!out)
 		{

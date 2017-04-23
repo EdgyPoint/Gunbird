@@ -54,7 +54,6 @@ bool ModuleCastleScene::Start()
 {
 	LOG("Loading castle scene");
 	App->player->Enable();
-	App->player2->Enable();
 	App->particles->Enable();
 	App->collision->Enable();
 	App->enemies->Enable();

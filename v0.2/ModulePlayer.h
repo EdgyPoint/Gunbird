@@ -44,7 +44,7 @@ public:
 	int invincibilitycounter = 0;
 	int respawncounter = 0;
 	int deathcounter = 0;
-	int lives = 0;
+	int lives = 2;
 	bool out = false;
 	uint shot;
 	int font_score = -1;

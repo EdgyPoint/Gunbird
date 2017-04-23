@@ -215,6 +215,12 @@ update_status ModulePlayer::Update()
 		App->collision->EditMatrix(COLLIDER_ENEMY_SHOT, COLLIDER_PLAYER, true);
 	}
 
+	if (App->input->keyboard[SDL_SCANCODE_F5] == KEY_STATE::KEY_DOWN)
+	{
+		App->player2->Enable();
+		App->player2->out = false;
+	}
+
 	player_col->SetPos(position.x + 3, position.y);
 
 	if (_dying)
