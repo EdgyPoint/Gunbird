@@ -76,7 +76,7 @@ bool ModuleParticles::Start()
 	smallshot.life = 4000;
 
 	
-
+	//First two frames of the mortar shot
 	prebigshot.anim.PushBack({ 23, 388, 16, 16 }); 
 	prebigshot.anim.PushBack({ 47, 387, 19, 19 }); 
 	prebigshot.anim.loop = false;
@@ -84,7 +84,7 @@ bool ModuleParticles::Start()
 	prebigshot.speed.y = 0.55f;
 	prebigshot.life = 400;
 
-
+	//Mortar shot
 	bigshot.anim.PushBack({ 74, 391, 12, 12 });
 	bigshot.anim.PushBack({ 96, 391, 12, 12 });
 	bigshot.anim.PushBack({ 118, 391, 12, 12 });
@@ -279,7 +279,7 @@ update_status ModuleParticles::Update()
 		}
 
 
-		if (p->collider->type == COLLIDER_PICKUP)
+		/*if (p->collider->type == COLLIDER_PICKUP)
 
 		{
 			if (p->position.x < 30 || p->position.x > 172)
@@ -290,7 +290,7 @@ update_status ModuleParticles::Update()
 			{
 				p->speed.y = p->speed.y * -1;
 			}
-		}
+		}*/
 	}
 
 	return UPDATE_CONTINUE;

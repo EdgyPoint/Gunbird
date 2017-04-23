@@ -45,7 +45,7 @@ void Enemy::Draw(SDL_Texture* sprites, Enemy* enemy)
 			enemy->status = DAMAGED;
 	}
 
-	if (enemy->status == OPENING)
+	if (enemy->status == OPENING || enemy->status == NONE)
 	{
 		enemy->collider->type = COLLIDER_NONE;
 	}
