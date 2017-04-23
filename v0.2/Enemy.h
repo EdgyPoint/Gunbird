@@ -13,6 +13,7 @@ enum ENEMY_STATUS
 	HIT,
 	DAMAGED,
 	OPENING,
+	NONE,
 };
 
 enum DEATH_TYPE
