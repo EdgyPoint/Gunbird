@@ -11,17 +11,58 @@
 Enemy_CastleMortar::Enemy_CastleMortar(int x, int y, int option) : Enemy(x, y, option)
 {
 	
-		stand.PushBack({ 0, 140, 32, 32 });
-		stand.PushBack({ 34, 140, 32, 32 });
-		stand.PushBack({ 68, 140, 32, 32 });
-		stand.PushBack({ 102, 140, 32, 32 });
-		/*stand.PushBack({ 212, 140, 32, 32 });
-		stand.PushBack({ 159, 140, 32, 32 });
-		stand.PushBack({ 212, 140, 32, 32 });*/
-		stand.speed = 0.3f;
-		
 	
-	animation = &stand;
+	//animation when the mortar opens
+	opening.PushBack({0, 140, 32, 32});
+	opening.PushBack({34, 140, 32, 32});
+	opening.PushBack({68, 140, 32, 32});
+	opening.PushBack({102, 140, 32, 32});
+	opening.PushBack({137, 140, 32, 32 });
+	opening.PushBack({ 0, 174, 32, 32 });
+	opening.loop = false;
+	opening.speed = 0.05f;
+	status = OPENING;
+
+	//animation when the mortar is being shot while opening
+	opening2.PushBack({ 0, 140, 32, 32 });
+	opening2.PushBack({ 0, 208, 32, 32 });
+	opening2.PushBack({ 34, 140, 32, 32 });
+	opening2.PushBack({ 34, 208, 32, 32 });
+	opening2.loop = true;
+	opening2.speed = 0.175f;
+
+	//animation when the mortar has opened and is shooting
+	stand.PushBack({ 34, 174, 32, 32 });
+	stand.PushBack({ 68, 174, 32, 32 });
+	stand.PushBack({ 102, 174, 32, 32 });
+	stand.PushBack({ 137, 174, 32, 32 });
+	stand.loop = true;
+	stand.speed = 0.175f;
+
+	//animation when the mortar is being shot while is active
+	stand2.PushBack({ 34, 208, 32, 32 });
+	stand2.PushBack({ 68, 208, 32, 32 });
+	stand2.PushBack({ 102, 208, 32, 32 });
+	stand2.PushBack({ 137, 208, 32, 32 });
+	stand2.loop = true;
+	stand2.speed = 0.175f;
+	
+
+	//animation when the mortar is damaged
+	stand3.PushBack({ 34, 174, 32, 32 });
+	stand3.PushBack({ 34, 242, 32, 32 });
+	stand3.PushBack({ 68, 174, 32, 32 });
+	stand3.PushBack({ 68, 242, 32, 32 });
+	stand3.PushBack({ 102, 174, 32, 32 });
+	stand3.PushBack({ 102, 242, 32, 32 });
+	stand3.PushBack({ 137, 174, 32, 32 });
+	stand3.PushBack({ 137, 242, 32, 32 });
+	stand3.loop = true;
+	stand3.speed = 0.175f;
+
+
+	animation = &opening;
+	
 
 	collider = App->collision->AddCollider({ 0, 0, 32, 32 }, COLLIDER_TYPE::COLLIDER_ENEMY, (Module*)App->enemies);
 
@@ -39,6 +80,12 @@ Enemy_CastleMortar::Enemy_CastleMortar(int x, int y, int option) : Enemy(x, y, o
 void Enemy_CastleMortar::Move()
 {
 	position = original_pos + path.GetCurrentPosition();
+
+	if (status == OPENING && animation->Finished() == true) { status = NORMAL; }
+	if (status == NORMAL) { animation = &stand; }
+	if (status == HIT && animation == &opening) { animation = &opening2; }
+	if (status == HIT) { animation = &stand2; }
+	if (status == DAMAGED) { animation == &stand3; }
 }
 
 void Enemy_CastleMortar::Shoot()
@@ -46,27 +93,26 @@ void Enemy_CastleMortar::Shoot()
 	initcounter += 1;
 	if (initcounter > 210 && initcounter < 500)
 	{
-		if (SDL_GetTicks() >= reload)//first wave
+		if (SDL_GetTicks() >= reload && status != OPENING)//first wave
 		{
-			App->particles->AddParticle(App->particles->prebigshot, position.x + 7, position.y + 5, COLLIDER_ENEMY_SHOT, 0, 0, true);
-			 
-			App->particles->AddParticle(App->particles->bigshot, position.x + 7, position.y + 5, COLLIDER_ENEMY_SHOT, -2, -2); 
-			App->particles->AddParticle(App->particles->bigshot, position.x + 7, position.y + 5, COLLIDER_ENEMY_SHOT, 2, -2); 
-			App->particles->AddParticle(App->particles->bigshot, position.x + 7, position.y + 5, COLLIDER_ENEMY_SHOT, -2, 2);
-			App->particles->AddParticle(App->particles->bigshot, position.x + 7, position.y + 5, COLLIDER_ENEMY_SHOT, 2, 2);
+			//App->particles->AddParticle(App->particles->prebigshot, position.x + 7, position.y + 5, COLLIDER_ENEMY_SHOT, 0, 0, false);
+			App->particles->AddParticle(App->particles->bigshot, position.x + 12, position.y + 7, COLLIDER_ENEMY_SHOT, -1, -1, false); 
+			App->particles->AddParticle(App->particles->bigshot, position.x + 7, position.y + 7, COLLIDER_ENEMY_SHOT, 1, -1, false); 
+			App->particles->AddParticle(App->particles->bigshot, position.x + 7, position.y + 12, COLLIDER_ENEMY_SHOT, -1, 1, false);
+			App->particles->AddParticle(App->particles->bigshot, position.x + 12, position.y + 12, COLLIDER_ENEMY_SHOT, 1, 1, false);
 			reload = SDL_GetTicks() + 1000;
 		}
 
-		if (SDL_GetTicks() >= reload)//second wave
+		/*if (SDL_GetTicks() >= reload)//second wave
 		{
-			App->particles->AddParticle(App->particles->prebigshot, position.x + 7, position.y + 5, COLLIDER_ENEMY_SHOT, 0, 0, true);
+			App->particles->AddParticle(App->particles->prebigshot, position.x + 7, position.y + 5, COLLIDER_ENEMY_SHOT, 0, 0, false);
 		
 			App->particles->AddParticle(App->particles->bigshot, position.x + 10, position.y + 10, COLLIDER_ENEMY_SHOT, -2, -2);
 			App->particles->AddParticle(App->particles->bigshot, position.x + 32, position.y, COLLIDER_ENEMY_SHOT, 2, -2);
-			App->particles->AddParticle(App->particles->bigshot, position.x, position.y + 32, COLLIDER_ENEMY_SHOT, -2, 2);
+			App->particles->AddParticle(App->particles->bigshot, position.x + 10, position.y + 5, COLLIDER_ENEMY_SHOT, -1, 1);
 			App->particles->AddParticle(App->particles->bigshot, position.x + 32, position.y + 32, COLLIDER_ENEMY_SHOT, 2, 2);
 			reload = SDL_GetTicks() + 1000;
-		}
+		}*/
 		
 	}
 

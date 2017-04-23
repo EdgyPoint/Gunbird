@@ -30,15 +30,12 @@ Enemy_Balloon::Enemy_Balloon(int x, int y, int option) : Enemy(x, y, option)
 
 	animation = &fly;
 
-	
-
 	path.PushBack({ 0.0f, 0.55f }, 220);
 	path.PushBack({ 0.0f, 2.0f }, 80);
 	path.PushBack({ 0.0f, 0.55f }, 120);
 	path.PushBack({ 0.0f, 2.0f }, 60);
 	path.PushBack({ 0.0f, 0.55f }, 1000);
 
-	
 
 	collider = App->collision->AddCollider({ 0, 0, 42, 53 }, COLLIDER_TYPE::COLLIDER_ENEMY_F, (Module*)App->enemies);
 

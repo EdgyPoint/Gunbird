@@ -60,7 +60,7 @@ bool ModuleCastleScene::Start()
 
 	App->collision->AddCollider(npi, COLLIDER_WALL);
 
-	App->enemies->AddEnemy(ENEMY_TYPES::BALLOON, 112,-100, 0);
+	App->enemies->AddEnemy(ENEMY_TYPES::BALLOON, 105,-210, 0);
 	
 	//spawn houses
 	App->enemies->AddEnemy(ENEMY_TYPES::HOUSE1, 153, -365, 0);
@@ -111,18 +111,8 @@ bool ModuleCastleScene::Start()
 
 	App->enemies->AddEnemy(ENEMY_TYPES::TURRETCOPTER, 100, -470, 0);
 	App->enemies->AddEnemy(ENEMY_TYPES::CASTLEMORTAR, 168, -187, 0);
-	App->enemies->AddEnemy(ENEMY_TYPES::CASTLEMORTAR, 100, 20, 0);
-	/*App->enemies->AddEnemy(ENEMY_TYPES::TURRETCOPTER, -25, -410, 0);
-	App->enemies->AddEnemy(ENEMY_TYPES::TURRETCOPTER, -10, -400, 0);
-	App->enemies->AddEnemy(ENEMY_TYPES::TURRETCOPTER, -15, -440, 0);
-	App->enemies->AddEnemy(ENEMY_TYPES::TURRETCOPTER, -25, -440, 0);
-	App->enemies->AddEnemy(ENEMY_TYPES::TURRETCOPTER, -10, -430, 0);
-	App->enemies->AddEnemy(ENEMY_TYPES::TURRETCOPTER, -10, -460, 0);
-	App->enemies->AddEnemy(ENEMY_TYPES::TURRETCOPTER, -15, -470, 0);
-	App->enemies->AddEnemy(ENEMY_TYPES::TURRETCOPTER, -20, -470, 0);
-	App->enemies->AddEnemy(ENEMY_TYPES::TURRETCOPTER, -10, -500, 0);
-	App->enemies->AddEnemy(ENEMY_TYPES::TURRETCOPTER, -15, -510, 0);
-	App->enemies->AddEnemy(ENEMY_TYPES::TURRETCOPTER, -20, -510, 0);*/
+	App->enemies->AddEnemy(ENEMY_TYPES::CASTLEMORTAR, 100, 50, 0);
+
 	graphics2 = App->textures->Load("assets/images/Castle Upper Background.png");
 	graphics = App->textures->Load("assets/images/Castle Background.png");
 	knight = App->textures->Load("assets/images/knight.png");
