@@ -191,7 +191,7 @@ update_status ModulePlayer::Update()
 	}
 
 
-	if (App->input->keyboard[SDL_SCANCODE_C] == KEY_STATE::KEY_REPEAT && SDL_GetTicks() >= shot && !_dying && !respawning && !stunned)
+	if (App->input->keyboard[SDL_SCANCODE_C] == KEY_STATE::KEY_DOWN && SDL_GetTicks() >= shot && !_dying && !respawning && !stunned)
 
 	{
 		shot = (SDL_GetTicks() + 500);
@@ -368,7 +368,7 @@ update_status ModulePlayer::Update()
 
 	if (lives == 1)
 	App->render->Blit(ui, 5, 21, &lifedisplay, 0, true);
-
+	 
 	if (lives == 2)
 	{
 		App->render->Blit(ui, 5, 21, &lifedisplay, 0, true);
