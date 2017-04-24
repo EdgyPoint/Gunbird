@@ -107,10 +107,10 @@ bool ModuleCastleScene::Start()
 	App->enemies->AddEnemy(ENEMY_TYPES::HOUSE2, 74, -563, 0);
 	
 	//spawn redbombs
-	App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, -18, -315, 0);
-	App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, -46, -347, 0);
-	App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, -74, -375, 0);
-	App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, -104, -411, 0);
+	App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, -20, -315, 0);
+	App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, -48, -347, 0);
+	App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, -76, -375, 0);
+	App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, -106, -411, 0);
 	App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, 225, -710, 2);
 	App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, 225, -710, 3);
 	App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, 225, -710, 4);
@@ -195,7 +195,8 @@ update_status ModuleCastleScene::Update()
 	// Draw everything --------------------------------------
 
 	App->render->Blit(graphics, 0, yflag, &background, 10.0f);
-	 
+	App->render->Blit(river, 0, knight_1_y_pos - 378, &(river2.GetCurrentFrame()), 0.07f, true);
+	App->render->Blit(river, 0, knight_1_y_pos - 1, &(river1.GetCurrentFrame()), 0.07f, true);
 
 	// --- Draw knights
 	knight_1_x_pos -= 0.30f;
@@ -221,8 +222,7 @@ update_status ModuleCastleScene::Update()
 		knight_2_x_pos = 0;
 	}
 
-	App->render->Blit(river, 0, knight_1_y_pos - 378, &(river2.GetCurrentFrame()), 0.07f, true);
-	App->render->Blit(river, 0, knight_1_y_pos - 1, &(river1.GetCurrentFrame()), 0.07f, true);
+
 
 	// --- Draw background top layer
 	App->render->Blit(graphics2, 0, yflag, &background, 10.0f);
@@ -242,11 +242,12 @@ update_status ModuleCastleScene::Update()
 
 
 	if (yflag > -964)
-
 	{
 		bridge_speed_y += 0.55f;
 		App->render->Blit(bridge, 63, bridge_speed_y, &(bridge_anim.GetCurrentFrame()), 0.75f);
 	}
+
+	
 
 	if (App->input->keyboard[SDL_SCANCODE_F3] == KEY_STATE::KEY_DOWN || yflag >= -10)
 	{

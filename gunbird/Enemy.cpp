@@ -62,6 +62,7 @@ void Enemy::OnCollision(Collider* collider, Enemy* enemy)
 		if (collider->type == COLLIDER_PLAYER_SHOT || collider->type == COLLIDER_PLAYER2_SHOT)
 		{
 			enemy->status = HIT;
+			collider->already_hit = true;
 			App->particles->AddParticle(App->particles->impact, collider->rect.x - 6, collider->rect.y - 47, COLLIDER_NONE);
 			App->audio->sfx = App->audio->LoadSFX("assets/SFX/impact.wav");
 			Mix_PlayChannel(-1, App->audio->sfx, 0);
