@@ -77,6 +77,14 @@ ModuleCastleScene::ModuleCastleScene()
 	dead_mortar.loop = true;
 	dead_mortar.speed = 0.1f;
 
+	thebossstanding.PushBack({ 170, 166, 14, 24 });
+	thebossstanding.PushBack({ 189, 166, 14, 24 });
+	thebossstanding.loop = true;
+	thebossstanding.speed = 0.125f;
+
+	/*thebossup.PushBack({});
+	thebossup.speed = 0.25f;*/
+
 }
 
 ModuleCastleScene::~ModuleCastleScene()
@@ -145,6 +153,7 @@ bool ModuleCastleScene::Start()
 
 	graphics2 = App->textures->Load("assets/images/Castle Upper Background better.png");
 	graphics = App->textures->Load("assets/images/Castle Background better.png");
+	trump = App->textures->Load("assets/images/thetrump.png");
 	knight = App->textures->Load("assets/images/knight.png");
 	river = App->textures->Load("assets/images/river.png");
 	bridge = App->textures->Load("assets/images/castle_bridge.png");

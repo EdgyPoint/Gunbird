@@ -26,6 +26,7 @@ public:
 
 	SDL_Texture* graphics = nullptr;
 	SDL_Texture* ui = nullptr;
+	SDL_Texture* ui2 = nullptr;
 	SDL_Rect p1display;
 	SDL_Rect lifedisplay;
 	Collider* player_col = nullptr;
@@ -37,6 +38,7 @@ public:
 	Animation tright;
 	Animation dying;
 	Animation tilting; //used for stun
+	Animation startbutton; //part of the UI
 	iPoint position;
 	int transition = 0;
 	int beam = 0;

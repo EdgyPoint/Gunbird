@@ -72,6 +72,10 @@ ModulePlayer::ModulePlayer()
 	tilting.PushBack({ 0, 128, 32, 32 });
 	tilting.loop = true;
 	tilting.speed = 0.5f;
+
+	startbutton.PushBack({ 0, 320, 68, 13 });
+	startbutton.PushBack({ 0, 333, 68, 13 });
+	startbutton.speed = 0.03f;
 }
 
 ModulePlayer::~ModulePlayer()
@@ -84,8 +88,10 @@ bool ModulePlayer::Start()
 
 	graphics = App->textures->Load("assets/images/Marion.png");
 
+
 	//Init UI
 	ui = App->textures->Load("assets/images/UI.png");
+	ui2 = App->textures->Load("assets/images/Intro Screen.png");
 
 	p1display.x = 0;
 	p1display.y = 0;
@@ -105,6 +111,7 @@ bool ModulePlayer::Start()
 	font_score = App->fonts->Load("assets/images/fonts.png", " 1234567890", 1, 1);
 
 	respawning = true;
+
 
 	return true;
 }
@@ -374,8 +381,8 @@ update_status ModulePlayer::Update()
 	
 	// Draw everything --------------------------------------
 
-
 	App->render->Blit(graphics, position.x, position.y, &(current_animation->GetCurrentFrame()));
+
 	//Blit UI
 	App->render->Blit(ui, 5, 6, &p1display, 0, true);
 
@@ -389,6 +396,11 @@ update_status ModulePlayer::Update()
 	}
 
 	App->fonts->BlitText(20, 6, font_score, text_score);
+
+	if (App->player2->out == true)
+	{
+		App->render->Blit(ui2, 117, 6, &(startbutton.GetCurrentFrame()), 0, true);
+	}
 
 	return UPDATE_CONTINUE;
 }
@@ -435,12 +447,14 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 	{
 		App->audio->sfx = App->audio->LoadSFX("assets/SFX/marionpowerup.wav");;
 		Mix_PlayChannel(-1, App->audio->sfx, 0);
-		App->player->score += 2000;
 
-		powerup_lv++;
-		if (powerup_lv > 1);
+		if (powerup_lv == 1)
 		{
-			powerup_lv = 1;
+			App->player->score += 2000;
+			App->particles->AddParticle(App->particles->powerupscore, position.x + 4, position.y + 4, COLLIDER_NONE);
 		}
+
+		if (powerup_lv < 1)
+		powerup_lv++;
 	}
 }

@@ -24,6 +24,7 @@ public:
 
 	SDL_Texture* graphics = nullptr;
 	SDL_Texture* graphics2 = nullptr;
+	SDL_Texture* trump = nullptr;
 	SDL_Texture* knight = nullptr;
 	SDL_Texture* river = nullptr;
 	SDL_Texture* bridge = nullptr;
@@ -32,9 +33,13 @@ public:
 	SDL_Rect npi;
 	Animation flag;
 	Animation knightleft;
-	Animation knightright;
 	Animation knightup;
-	Animation knightdown;
+	Animation thebossstanding;
+	Animation thebossup;
+	Animation acestanding;
+	Animation aceup;
+	Animation acelaughing;
+
 
 	Animation river1;
 	Animation river2;

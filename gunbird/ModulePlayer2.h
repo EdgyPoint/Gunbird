@@ -51,6 +51,8 @@ public:
 	int invincibilitycounter = 0;
 	int respawncounter = 0;
 	int deathcounter = 0;
+	int stuncounter = 0;
+	int magicsparks = 0;
 	int lives = 2;
 	bool out = true;
 	char text_score2[10];
