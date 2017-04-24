@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include "Globals.h"
 #include "Application.h"
 #include "ModuleTextures.h"
@@ -277,7 +278,10 @@ update_status ModulePlayer2::Update()
 		App->render->Blit(ui, 116, 21, &lifedisplay, 0, true);
 		App->render->Blit(ui, 132, 21, &lifedisplay, 0, true);
 	}
-	App->fonts->BlitText(132, 6, App->player->font_score, App->player->text_score);
+
+	sprintf_s(text_score2, 10, "%7d", score2);
+
+	App->fonts->BlitText(132, 6, App->player->font_score, text_score2);
 
 	return UPDATE_CONTINUE;
 }

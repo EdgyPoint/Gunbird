@@ -2,6 +2,7 @@
 #include "Application.h"
 #include "ModuleTextures.h"
 #include "ModulePlayer.h"
+#include "ModulePlayer2.h"
 #include "ModuleInput.h"
 #include "ModuleRender.h"
 #include "ModuleIntroScene.h"
@@ -45,8 +46,11 @@ bool ModuleScoreScene::Start()
 bool ModuleScoreScene::CleanUp()
 {
 	LOG("Unloading score scene");
+	App->player->score = 0;
+	App->player2->score2 = 0;
 	SDL_DestroyTexture(graphics);
 	App->player->Disable();
+	App->player2->Disable();
 	App->collision->Disable();
 
 	return true;
@@ -58,7 +62,9 @@ update_status ModuleScoreScene::Update()
 
 	// Draw everything --------------------------------------
 	App->render->Blit(graphics, 0, 0, &background, 0.75f); // sea and sky
+
 	App->fonts->BlitText(112, 58, App->player->font_score, App->player->text_score);
+	App->fonts->BlitText(112, 80, App->player->font_score, App->player2->text_score2);
 
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] && fading == false)
 	{

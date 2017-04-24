@@ -84,6 +84,11 @@ void Enemy_CastleMortar::Move()
 {
 	position = original_pos + path.GetCurrentPosition();
 
+	if (status == OPENING || status == NONE)
+		collider->type = COLLIDER_NONE;
+	if (status == NORMAL)
+		collider->type = COLLIDER_ENEMY;
+
 	if (position.y == -20) { animation = &opening; status = OPENING; }
 	if (status == OPENING && animation->Finished() == true) { status = NORMAL; }
 	if (status == NORMAL) { animation = &stand; }
