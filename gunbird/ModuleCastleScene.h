@@ -25,6 +25,7 @@ public:
 	SDL_Texture* graphics = nullptr;
 	SDL_Texture* graphics2 = nullptr;
 	SDL_Texture* knight = nullptr;
+	SDL_Texture* bridge = nullptr;
 
 	SDL_Rect background;
 
@@ -35,6 +36,7 @@ public:
 	Animation knightright;
 	Animation knightup;
 	Animation knightdown;
+	Animation bridge_anim;
 	bool houseflag = false;
 	float house1counter = -86;
 	float yflag = -1788;
@@ -43,6 +45,7 @@ public:
 	float knight_1_y_pos = 0;
 	float knight_2_x_pos = 0;
 	float knight_2_y_pos = 0;
+	float bridge_speed_y = -83;
 };
 
 #endif

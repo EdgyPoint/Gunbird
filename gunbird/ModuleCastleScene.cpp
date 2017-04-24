@@ -45,6 +45,18 @@ ModuleCastleScene::ModuleCastleScene()
 	knightup.PushBack({ 30, 0, 15, 25 });
 	knightup.PushBack({ 45, 0, 15, 25 });
 	knightup.speed = 0.1f;
+
+	bridge_anim.PushBack({ 0, 0, 125, 165 });
+	bridge_anim.PushBack({ 125, 0, 125, 165 });
+	bridge_anim.PushBack({ 250, 0, 125, 165 });
+	bridge_anim.PushBack({ 375, 0, 125, 165 });
+	bridge_anim.PushBack({ 0, 165, 125, 165 });
+	bridge_anim.PushBack({ 125, 165, 125, 165 });
+	bridge_anim.PushBack({ 250, 165, 125, 165 });
+	bridge_anim.PushBack({ 375, 165, 125, 165 });
+	bridge_anim.PushBack({ 0, 330, 125, 165 });
+	bridge_anim.loop = false;
+	bridge_anim.speed = 0.1f;
 }
 
 ModuleCastleScene::~ModuleCastleScene()
@@ -116,6 +128,8 @@ bool ModuleCastleScene::Start()
 	graphics2 = App->textures->Load("assets/images/Castle Upper Background.png");
 	graphics = App->textures->Load("assets/images/Castle Background.png");
 	knight = App->textures->Load("assets/images/knight.png");
+	bridge = App->textures->Load("assets/images/castle_bridge.png");
+
 	App->audio->audio = App->audio->Load("assets/bgm/castle.ogg");
 	Mix_PlayMusic(App->audio->audio, -1);
 
@@ -130,6 +144,8 @@ bool ModuleCastleScene::CleanUp()
 	yflag2 = -1279;
 	SDL_DestroyTexture(graphics);
 	SDL_DestroyTexture(graphics2);
+	SDL_DestroyTexture(knight);
+	SDL_DestroyTexture(bridge);
 	App->player->Disable();
 	App->player2->Disable();
 	App->enemies->Disable();
@@ -185,6 +201,12 @@ update_status ModuleCastleScene::Update()
 	App->render->Blit(knight, 85 + knight_2_x_pos, -190 + knight_2_y_pos, &(knightleft.GetCurrentFrame()), 0.75f);
 	App->render->Blit(knight, 105 + knight_2_x_pos, -190 + knight_2_y_pos, &(knightleft.GetCurrentFrame()), 0.75f);
 	
+	if (yflag > -1335)
+	{
+		bridge_speed_y += 0.55f;
+		App->render->Blit(bridge, 68, bridge_speed_y, &(bridge_anim.GetCurrentFrame()), 0.75f);
+	}
+
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN || yflag > -320)
 	{
 		App->fade->FadeToBlack(this, App->scene_score, 2.0f);
