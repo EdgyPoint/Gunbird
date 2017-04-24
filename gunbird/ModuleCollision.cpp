@@ -148,23 +148,6 @@ update_status ModuleCollision::Update()
 
 				if (matrix[c2->type][c1->type] && c2->callback)
 					c2->callback->OnCollision(c2, c1);
-
-				if (c1->type == COLLIDER_PLAYER_SHOT && c2->type == COLLIDER_ENEMY)
-				{
-					if (c1->already_hit == false)
-						c1->already_hit = true;
-					else
-						c1->already_hit = false;
-				}
-				if (c2->type == COLLIDER_PLAYER_SHOT && c1->type == COLLIDER_ENEMY)
-				{
-					if (c2->already_hit == false)
-						c2->already_hit = true;
-					else
-						c2->already_hit = false;
-				}
-
-				
 			}
 			
 		}

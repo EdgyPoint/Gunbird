@@ -65,6 +65,7 @@ public:
 	Particle playercollision;
 	Particle playerstunned;
 	Particle presmallshot;
+	Particle powerupscore;
 };
 
 #endif // __MODULEPARTICLES_H__

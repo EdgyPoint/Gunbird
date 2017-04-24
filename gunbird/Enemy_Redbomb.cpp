@@ -38,63 +38,63 @@ Enemy_Redbomb :: Enemy_Redbomb(int x, int y, int option) : Enemy(x, y, option)
 	}
 	if (option == 2)
 	{
-		path.PushBack({ 0.0f, 0.55f }, 1500);
-		path.PushBack({ -2.0f, 0.55f }, 18);
-		path.PushBack({ 0.0f, 0.55f }, 30);
+		path.PushBack({ 0.0f, 0.55f }, 1340);
+		path.PushBack({ -2.0f, 0.0f }, 18);
+		path.PushBack({ 0.0f, 0.0f }, 80);
 		path.PushBack({ 0.0f, 2.0f }, 1000);
 	}
 	if (option == 3)
 	{
-		path.PushBack({ 0.0f, 0.55f }, 1500);
-		path.PushBack({ -2.0f, 0.55f }, 33);
-		path.PushBack({ 0.0f, 0.55f }, 30);
+		path.PushBack({ 0.0f, 0.55f }, 1340);
+		path.PushBack({ -2.0f, 0.0f }, 33);
+		path.PushBack({ 0.0f, 0.0f }, 80);
 		path.PushBack({ 0.0f, 2.0f }, 1000);
 	}
 	if (option == 4)
 	{
-		path.PushBack({ 0.0f, 0.55f }, 1500);
-		path.PushBack({ -2.0f, 0.55f }, 49);
-		path.PushBack({ 0.0f, 0.55f }, 30);
+		path.PushBack({ 0.0f, 0.55f }, 1340);
+		path.PushBack({ -2.0f, 0.0f }, 49);
+		path.PushBack({ 0.0f, 0.0f }, 80);
 		path.PushBack({ 0.0f, 2.0f }, 1000);
 	}
 	if (option == 5)
 	{
-		path.PushBack({ 0.0f, 0.55f }, 1500);
-		path.PushBack({ -2.0f, 0.55f }, 64);
-		path.PushBack({ 0.0f, 0.55f }, 30);
+		path.PushBack({ 0.0f, 0.55f }, 1340);
+		path.PushBack({ -2.0f, 0.0f }, 64);
+		path.PushBack({ 0.0f, 0.0f }, 80);
 		path.PushBack({ 0.0f, 2.0f }, 1000);
 	}
 	if (option == 6)
 	{
-		path.PushBack({ 0.0f, 0.55f }, 1500);
-		path.PushBack({ -2.0f, 0.55f }, 80);
-		path.PushBack({ 0.0f, 0.55f }, 30);
+		path.PushBack({ 0.0f, 0.55f }, 1340);
+		path.PushBack({ -2.0f, 0.0f }, 80);
+		path.PushBack({ 0.0f, 0.0f }, 80);
 		path.PushBack({ 0.0f, 2.0f }, 1000);
 	}
 	if (option == 7)
 	{
-		path.PushBack({ 0.0f, 0.55f }, 1500);
-		path.PushBack({ -2.0f, 0.55f }, 96);
-		path.PushBack({ 0.0f, 0.55f }, 30);
+		path.PushBack({ 0.0f, 0.55f }, 1340);
+		path.PushBack({ -2.0f, 0.0f }, 96);
+		path.PushBack({ 0.0f, 0.0f }, 80);
 		path.PushBack({ 0.0f, 2.0f }, 1000);
 	}
 	if (option == 8)
 	{
-		path.PushBack({ 0.0f, 0.55f }, 1500);
-		path.PushBack({ -2.0f, 0.55f }, 112);
-		path.PushBack({ 0.0f, 0.55f }, 30);
+		path.PushBack({ 0.0f, 0.55f }, 1340);
+		path.PushBack({ -2.0f, 0.0f }, 112);
+		path.PushBack({ 0.0f, 0.0f }, 80);
 		path.PushBack({ 0.0f, 2.0f }, 1000);
 	}
 
 	if (option == 9)
 	{
-		path.PushBack({ 0.0f, 0.55f },2120);
+		path.PushBack({ 0.0f, 0.55f },1990);
 		path.PushBack({ 0.0f, 3.0f }, 100000);
 	}
 
 	if (option == 10)
 	{
-		path.PushBack({ 0.0f, 0.55f }, 2050);
+		path.PushBack({ 0.0f, 0.55f }, 1920);
 		path.PushBack({ 0.0f, 0.55f }, 70);//this is done in order to allow the bombs to start tracking the player when they appear in the screen. More questions, ask Lorién/Witiza
 		path.PushBack({ 0.0f, 3.0f }, 100000);
 	}

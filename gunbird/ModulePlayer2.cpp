@@ -59,6 +59,19 @@ ModulePlayer2::ModulePlayer2()
 
 	dying.PushBack({ 129, 0, 30, 30 });
 	dying.loop = false;
+
+	tilting.PushBack({ 0, 64, 32, 32 });
+	tilting.PushBack({ 0, 32, 32, 32 });
+	tilting.PushBack({ 0, 0, 32, 32 });
+	tilting.PushBack({ 0, 32, 32, 32 });
+	tilting.PushBack({ 0, 64, 32, 32 });
+	tilting.PushBack({ 0, 128, 32, 32 });
+	tilting.PushBack({ 0, 96, 32, 32 });
+	tilting.PushBack({ 0, 128, 32, 32 });
+	tilting.loop = true;
+	tilting.speed = 0.5f;
+
+	lives = 2;
 }
 
 ModulePlayer2::~ModulePlayer2()
@@ -115,17 +128,19 @@ update_status ModulePlayer2::Update()
 		{
 			position.x = 0;
 		}
-
-		if (current_animation != &left && transition >= TRANSITION_SPEED)
+		if (!stunned)
 		{
-			left.Reset();
-			current_animation = &left;
+			if (current_animation != &left && transition >= TRANSITION_SPEED)
+			{
+				left.Reset();
+				current_animation = &left;
+			}
+			if (current_animation != &tleft && transition < TRANSITION_SPEED)
+			{
+				current_animation = &tleft;
+			}
+			transition++;
 		}
-		if (current_animation != &tleft && transition < TRANSITION_SPEED)
-		{
-			current_animation = &tleft;
-		}
-		transition++;
 	}
 
 	if (App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_REPEAT && !_dying && !respawning)
@@ -135,16 +150,20 @@ update_status ModulePlayer2::Update()
 		{
 			position.x = 196;
 		}
-		if (current_animation != &right && transition >= TRANSITION_SPEED)
+
+		if (!stunned)
 		{
-			right.Reset();
-			current_animation = &right;
+			if (current_animation != &right && transition >= TRANSITION_SPEED)
+			{
+				right.Reset();
+				current_animation = &right;
+			}
+			if (current_animation != &tright && transition < TRANSITION_SPEED)
+			{
+				current_animation = &tright;
+			}
+			transition++;
 		}
-		if (current_animation != &tright && transition < TRANSITION_SPEED)
-		{
-			current_animation = &tright;
-		}
-		transition++;
 	}
 
 	if (App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_STATE::KEY_REPEAT && !_dying && !respawning)
@@ -200,11 +219,26 @@ update_status ModulePlayer2::Update()
 	if (App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_IDLE
 		&& App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_IDLE)
 	{
-		current_animation = &idle;
-		transition = 0;
+		if (!stunned)
+		{
+			current_animation = &idle;
+			transition = 0;
+		}
 	}
 
 	player_col->SetPos(position.x + 3, position.y);
+
+	if (stunned)
+	{
+
+		stuncounter++;
+		if (stuncounter == 64)
+		{
+			stunned = false;
+			current_animation = &idle;
+			stuncounter = 0;
+		}
+	}
 
 	if (_dying)
 	{
@@ -261,6 +295,28 @@ update_status ModulePlayer2::Update()
 			App->collision->EditMatrix(COLLIDER_ENEMY_SHOT, COLLIDER_PLAYER2, true);
 			invincibilitycounter = 0;
 		}
+	}
+
+	//Leave particles behind (yay! magic sparks)
+	magicsparks++;
+	if (magicsparks == 6)
+	{
+		App->particles->AddParticle(App->particles->magicspark[0], position.x + 8, position.y + 31, COLLIDER_NONE);
+	}
+	if (magicsparks == 12)
+	{
+		App->particles->AddParticle(App->particles->magicspark[1], position.x + 8, position.y + 31, COLLIDER_NONE);
+	}
+
+	if (magicsparks == 18)
+	{
+		App->particles->AddParticle(App->particles->magicspark[2], position.x + 8, position.y + 31, COLLIDER_NONE);
+	}
+
+	if (magicsparks == 24)
+	{
+		App->particles->AddParticle(App->particles->magicspark[3], position.x + 8, position.y + 31, COLLIDER_NONE);
+		magicsparks = 0;
 	}
 
 	// Draw everything --------------------------------------
@@ -324,6 +380,20 @@ void ModulePlayer2::OnCollision(Collider* c1, Collider* c2)
 				out = true;
 			}
 		}
+
+		if (c2->type == COLLIDER_ENEMY_F && !stunned)
+		{
+			stunned = true;
+			powerup_lv--;
+			App->particles->AddParticle(App->particles->playercollision, position.x, position.y, COLLIDER_NONE);
+			current_animation = &tilting;
+
+			if (powerup_lv < 0)
+			{
+				powerup_lv = 0;
+			}
+		}
+
 		if (c2->type == COLLIDER_PICKUP)
 		{
 			App->audio->sfx = App->audio->LoadSFX("assets/SFX/marionpowerup.wav");;
