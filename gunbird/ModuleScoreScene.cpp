@@ -63,8 +63,21 @@ update_status ModuleScoreScene::Update()
 	// Draw everything --------------------------------------
 	App->render->Blit(graphics, 0, 0, &background, 0.75f); // sea and sky
 
-	App->fonts->BlitText(112, 58, App->player->font_score, App->player->text_score);
-	App->fonts->BlitText(112, 80, App->player->font_score, App->player2->text_score2);
+
+	App->render->Blit(App->player->ui, 90, 55, &App->player->p1display, 0, true);
+	App->render->Blit(App->player2->ui, 90, 80, &App->player2->p2display, 0, true);
+
+	App->fonts->BlitText(120, 79, App->player->font_score, "      0");
+	App->fonts->BlitText(120, 103, App->player->font_score, "      0");
+	App->fonts->BlitText(120, 127, App->player->font_score, "      0");
+	App->fonts->BlitText(120, 151, App->player->font_score, "      0");
+	App->fonts->BlitText(120, 175, App->player->font_score, "      0");
+	App->fonts->BlitText(120, 199, App->player->font_score, "      0");
+	App->fonts->BlitText(120, 223, App->player->font_score, "      0");
+	App->fonts->BlitText(120, 247, App->player->font_score, "      0");
+	App->fonts->BlitText(120, 271, App->player->font_score, "      0");
+	App->fonts->BlitText(120, 55, App->player->font_score, App->player->text_score);
+	App->fonts->BlitText(120, 79, App->player->font_score, App->player2->text_score2);
 
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] && fading == false)
 	{

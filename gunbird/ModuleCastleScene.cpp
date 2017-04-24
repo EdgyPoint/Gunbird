@@ -52,6 +52,7 @@ ModuleCastleScene::ModuleCastleScene()
 	river2.PushBack({ 224,92,224,92 });
 	river2.PushBack({ 224,184,224,92 });
 	river2.PushBack({ 0, 306, 224, 92 }); // its a blank space to see the backround. Ask Lorién.
+	river2.speed = 0.07f;
 
 	bridge_anim.PushBack({ 0, 0, 125, 165 });
 	bridge_anim.PushBack({ 125, 0, 125, 165 });
@@ -211,14 +212,18 @@ update_status ModuleCastleScene::Update()
 		knight_2_x_pos = 0;
 	}
 
-	//App->render->Blit(river, 0, 0, &(river1.GetCurrentFrame()), 0.07f,  true);
+	App->render->Blit(river, 0, knight_1_y_pos - 378, &(river2.GetCurrentFrame()), 0.07f, true);
+	App->render->Blit(river, 0, knight_1_y_pos - 1, &(river1.GetCurrentFrame()), 0.07f, true);
+
 	// --- Draw background top layer
 	App->render->Blit(graphics2, 0, yflag, &background, 10.0f);
 
 	//Draw knights on fortress
+
 	App->render->Blit(knight, 97 + knight_2_x_pos, -130 + knight_2_y_pos, &(knightleft.GetCurrentFrame()), 0.75f);
 	App->render->Blit(knight, 107 + knight_2_x_pos, -130 + knight_2_y_pos, &(knightleft.GetCurrentFrame()), 0.75f);
 	App->render->Blit(knight, 137 + knight_2_x_pos, -130 + knight_2_y_pos, &(knightleft.GetCurrentFrame()), 0.75f);
+
 	//Draw dead mortar
 	if (yflag > -1230)
 	{
@@ -226,7 +231,9 @@ update_status ModuleCastleScene::Update()
 		App->render->Blit(mortar, 160, mortar_speed_y, &(dead_mortar.GetCurrentFrame()), 1.0f);
 	}
 
+
 	if (yflag > -964)
+
 	{
 		bridge_speed_y += 0.55f;
 		App->render->Blit(bridge, 63, bridge_speed_y, &(bridge_anim.GetCurrentFrame()), 0.75f);
