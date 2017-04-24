@@ -103,6 +103,11 @@ bool ModuleCastleScene::Start()
 	App->enemies->AddEnemy(ENEMY_TYPES::HOUSE1, 153, -365, 0);
 	App->enemies->AddEnemy(ENEMY_TYPES::HOUSE2, 80, -624, 0);
 	
+	//spawn Vases
+	App->enemies->AddEnemy(ENEMY_TYPES::VASE, 8, -671, 0);
+	App->enemies->AddEnemy(ENEMY_TYPES::VASE, 8, -879, 0);
+	App->enemies->AddEnemy(ENEMY_TYPES::VASE, 184, -879, 0);
+	App->enemies->AddEnemy(ENEMY_TYPES::VASE, 184, -671, 0);
 	//spawn redbombs
 	App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, -10, -375, 0);
 	App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, -38, -407, 0);
@@ -147,10 +152,9 @@ bool ModuleCastleScene::Start()
 
 
 	App->enemies->AddEnemy(ENEMY_TYPES::TURRETCOPTER, 100, -470, 0);
-
+	//Spawn Castle Mortar
 	App->enemies->AddEnemy(ENEMY_TYPES::CASTLEMORTAR, 160, -127, 0);
-	App->enemies->AddEnemy(ENEMY_TYPES::CASTLEMORTAR, 100, 50, 0);
-
+	
 	graphics2 = App->textures->Load("assets/images/Castle Upper Background better.png");
 	graphics = App->textures->Load("assets/images/Castle Background better.png");
 	knight = App->textures->Load("assets/images/knight.png");

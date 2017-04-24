@@ -19,6 +19,7 @@ enum ENEMY_TYPES
 	HOUSE2,
 	TURRETCOPTER,
 	CASTLEMORTAR,
+	VASE,
 };
 
 class Enemy;
