@@ -22,7 +22,7 @@ public:
 	Enemy_CastleMortar(int x, int y, int option);
 	void Shoot();
 	void Move();
-	int reload = 0;
+	int reload[3];
 	int initcounter = 0;
 	float aux_float;
 	fPoint speeds;

@@ -97,33 +97,38 @@ void Enemy_CastleMortar::Shoot()
 	initcounter += 1;
 	if (initcounter > 210 && initcounter < 500)
 	{
-		if (SDL_GetTicks() >= reload && status != OPENING && status != NONE)//first wave
-		{
-			int counterflag = 0;
-			App->particles->AddParticle(App->particles->prebigshot, position.x + 7, position.y + 5, COLLIDER_ENEMY_SHOT, 0, 0, false); counterflag++;
-
-			if (counterflag != 0)
+			if (SDL_GetTicks() >= reload[0] && status != OPENING && status != NONE)//first wave
 			{
+				//App->particles->AddParticle(App->particles->prebigshot, position.x + 7, position.y + 5, COLLIDER_ENEMY_SHOT, 0, 0, false); 
 				App->particles->AddParticle(App->particles->bigshot, position.x + 10, position.y + 10, COLLIDER_ENEMY_SHOT, -1, -1);
 				App->particles->AddParticle(App->particles->bigshot, position.x + 10, position.y + 10, COLLIDER_ENEMY_SHOT, 1, -1);
 				App->particles->AddParticle(App->particles->bigshot, position.x + 10, position.y + 10, COLLIDER_ENEMY_SHOT, -1, 1);
 				App->particles->AddParticle(App->particles->bigshot, position.x + 10, position.y + 10, COLLIDER_ENEMY_SHOT, 1, 1);
-			}
-			
-			reload = SDL_GetTicks() + 1000;
-		}
 
-		/*if (SDL_GetTicks() >= reload)//second wave
-		{
-			App->particles->AddParticle(App->particles->prebigshot, position.x + 7, position.y + 5, COLLIDER_ENEMY_SHOT, 0, 0, false);
-		
-			App->particles->AddParticle(App->particles->bigshot, position.x + 10, position.y + 10, COLLIDER_ENEMY_SHOT, -2, -2);
-			App->particles->AddParticle(App->particles->bigshot, position.x + 32, position.y, COLLIDER_ENEMY_SHOT, 2, -2);
-			App->particles->AddParticle(App->particles->bigshot, position.x + 10, position.y + 5, COLLIDER_ENEMY_SHOT, -1, 1);
-			App->particles->AddParticle(App->particles->bigshot, position.x + 32, position.y + 32, COLLIDER_ENEMY_SHOT, 2, 2);
-			reload = SDL_GetTicks() + 1000;
-		}*/
-		
+				reload[0] = SDL_GetTicks() + 1500;
+				reload[1] = SDL_GetTicks() + 200;
+				reload[2] = SDL_GetTicks() + 400;
+			}
+
+			if (SDL_GetTicks() >= reload[1] && status != OPENING && status != NONE)
+			{
+				App->particles->AddParticle(App->particles->bigshot, position.x + 10, position.y + 10, COLLIDER_ENEMY_SHOT, 1.05, 0.35);
+				App->particles->AddParticle(App->particles->bigshot, position.x + 10, position.y + 10, COLLIDER_ENEMY_SHOT, -1.25, 0.6);
+				App->particles->AddParticle(App->particles->bigshot, position.x + 10, position.y + 10, COLLIDER_ENEMY_SHOT, -0.4, -0.7);
+				App->particles->AddParticle(App->particles->bigshot, position.x + 10, position.y + 10, COLLIDER_ENEMY_SHOT, 0.3, 1.6);
+
+				reload[1] = SDL_GetTicks() + 1300;
+			}
+
+			if (SDL_GetTicks() >= reload[2] && status != OPENING && status != NONE)
+			{
+				App->particles->AddParticle(App->particles->bigshot, position.x + 10, position.y + 10, COLLIDER_ENEMY_SHOT, -1.25, 0.1);
+				App->particles->AddParticle(App->particles->bigshot, position.x + 10, position.y + 10, COLLIDER_ENEMY_SHOT, 1.05, 0.6);
+				App->particles->AddParticle(App->particles->bigshot, position.x + 10, position.y + 10, COLLIDER_ENEMY_SHOT, 0.3, -0.6);
+				App->particles->AddParticle(App->particles->bigshot, position.x + 10, position.y + 10, COLLIDER_ENEMY_SHOT, -0.3, 1.6);
+
+				reload[2] = SDL_GetTicks() + 1100;
+			}
 	}
 
 }
