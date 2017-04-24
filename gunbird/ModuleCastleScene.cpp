@@ -57,6 +57,17 @@ ModuleCastleScene::ModuleCastleScene()
 	bridge_anim.PushBack({ 0, 330, 125, 165 });
 	bridge_anim.loop = false;
 	bridge_anim.speed = 0.1f;
+
+	dead_mortar.PushBack({ 32, 10, 32, 32 });
+	dead_mortar.PushBack({ 66, 10, 32, 32 });
+	dead_mortar.PushBack({ 32, 44, 32, 32 });
+	dead_mortar.PushBack({ 66, 44, 32, 32 });
+	dead_mortar.PushBack({ 49, 81, 32, 32 });
+	dead_mortar.PushBack({ 66, 44, 32, 32 });
+	dead_mortar.PushBack({ 32, 44, 32, 32 });
+	dead_mortar.PushBack({ 66, 10, 32, 32 });
+	dead_mortar.loop = true;
+	dead_mortar.speed = 0.1f;
 }
 
 ModuleCastleScene::~ModuleCastleScene()
@@ -129,6 +140,7 @@ bool ModuleCastleScene::Start()
 	graphics = App->textures->Load("assets/images/Castle Background.png");
 	knight = App->textures->Load("assets/images/knight.png");
 	bridge = App->textures->Load("assets/images/castle_bridge.png");
+	mortar = App->textures->Load("assets/images/destroyed mortar.png");
 
 	App->audio->audio = App->audio->Load("assets/bgm/castle.ogg");
 	Mix_PlayMusic(App->audio->audio, -1);
@@ -146,6 +158,7 @@ bool ModuleCastleScene::CleanUp()
 	SDL_DestroyTexture(graphics2);
 	SDL_DestroyTexture(knight);
 	SDL_DestroyTexture(bridge);
+	SDL_DestroyTexture(mortar);
 	App->player->Disable();
 	App->player2->Disable();
 	App->enemies->Disable();
@@ -200,7 +213,13 @@ update_status ModuleCastleScene::Update()
 	App->render->Blit(knight, 65 + knight_2_x_pos, -190 + knight_2_y_pos, &(knightleft.GetCurrentFrame()), 0.75f);
 	App->render->Blit(knight, 85 + knight_2_x_pos, -190 + knight_2_y_pos, &(knightleft.GetCurrentFrame()), 0.75f);
 	App->render->Blit(knight, 105 + knight_2_x_pos, -190 + knight_2_y_pos, &(knightleft.GetCurrentFrame()), 0.75f);
-	
+	//Draw dead mortar
+	if (yflag > -1600)
+	{
+		mortar_speed_y += 0.55f;
+		App->render->Blit(mortar, 168, mortar_speed_y, &(dead_mortar.GetCurrentFrame()), 1.0f);
+	}
+
 	if (yflag > -1335)
 	{
 		bridge_speed_y += 0.55f;

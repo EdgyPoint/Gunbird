@@ -32,7 +32,7 @@ void Enemy::Draw(SDL_Texture* sprites, Enemy* enemy)
 	}
 
 
-	if (enemy->hp <= enemy->damaged_hp)
+	if (enemy->hp <= enemy->damaged_hp && enemy->hp > 0)
 		enemy->status = DAMAGED;
 
 	if (animation != nullptr)
@@ -47,14 +47,13 @@ void Enemy::Draw(SDL_Texture* sprites, Enemy* enemy)
 	}
 
 	if (enemy->status == OPENING || enemy->status == NONE)
-	{
 		enemy->collider->type = COLLIDER_NONE;
-	}
+	
 
 	if (enemy->status == NORMAL)
-	{
 		enemy->collider->type = COLLIDER_ENEMY;
-	}
+	
+	
 }
 
 void Enemy::OnCollision(Collider* collider, Enemy* enemy)
