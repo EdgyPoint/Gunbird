@@ -19,6 +19,8 @@
 
 ModuleCastleScene::ModuleCastleScene()
 {
+	
+
 	background.h = 1677;
 	background.w = 224;
 	background.x = 0;
@@ -98,6 +100,14 @@ bool ModuleCastleScene::Start()
 	App->collision->Enable();
 	App->enemies->Enable();
 
+	yflag = -1357;
+	knight1 = { 0.0f,0.0f };
+	knight2 = { 0.0f, 0.0f };
+	
+	bridge_speed_y = -83;
+	mortar_speed_y = 0;
+
+
 	App->collision->AddCollider(npi, COLLIDER_WALL);
 
 	App->enemies->AddEnemy(ENEMY_TYPES::BALLOON, 97,-170, 0);
@@ -175,7 +185,7 @@ bool ModuleCastleScene::Start()
 bool ModuleCastleScene::CleanUp()
 {
 	LOG("Unloading castle scene");
-	yflag = -1357;
+
 	SDL_DestroyTexture(graphics);
 	SDL_DestroyTexture(graphics2);
 	SDL_DestroyTexture(knight);
@@ -186,7 +196,8 @@ bool ModuleCastleScene::CleanUp()
 	App->enemies->Disable();
 	App->particles->Disable();
 	App->collision->Disable();
-	houseflag = false;
+	
+	
 	return true;
 }
 
@@ -194,23 +205,28 @@ bool ModuleCastleScene::CleanUp()
 update_status ModuleCastleScene::Update()
 {
 	
-
-	yflag += 0.55f;
+	//App->render->camera.y += 0.55f;
+	
+		yflag += 0.55f;
+	 
+		
+	
 
 	// Draw everything --------------------------------------
 
-	App->render->Blit(graphics, 0, yflag, &background, 10.0f);
-	App->render->Blit(river, 0, knight_1_y_pos - 378, &(river2.GetCurrentFrame()), 0.07f, true);
-	App->render->Blit(river, 0, knight_1_y_pos - 1, &(river1.GetCurrentFrame()), 0.07f, true);
+
 
 	// --- Draw knights
-	knight_1_x_pos -= 0.30f;
-	knight_1_y_pos += 0.55f;
-	knight_2_x_pos -= 0.30f;
-	knight_2_y_pos += 0.55f;
+	knight1.x -= 0.30f;
+	knight1.y += 0.55f;
+	knight2.x -= 0.30f;
+	knight2.y += 0.55f;
+	App->render->Blit(graphics, 0, yflag, &background, 10.0f);
+	App->render->Blit(river, 0, knight1.y - 378, &(river2.GetCurrentFrame()), 0.07f, false);
+	App->render->Blit(river, 0, knight1.y - 1, &(river1.GetCurrentFrame()), 0.07f, false);
 	//First two moving left
-	App->render->Blit(knight, 57 + knight_1_x_pos, 170 + knight_1_y_pos, &(knightleft.GetCurrentFrame()), 0.75f);
-	App->render->Blit(knight, 67 + knight_1_x_pos, 180 + knight_1_y_pos, &(knightleft.GetCurrentFrame()), 0.75f);
+	App->render->Blit(knight, 57 + knight1.x, 170 + knight1.y, &(knightleft.GetCurrentFrame()), 0.75f);
+	App->render->Blit(knight, 67 + knight1.x, 180 + knight1.y, &(knightleft.GetCurrentFrame()), 0.75f);
 	//Two more moving up
 	if (yflag < -1200)
 	{
@@ -224,7 +240,7 @@ update_status ModuleCastleScene::Update()
 
 	if (yflag < -1620)
 	{
-		knight_2_x_pos = 0;
+		knight2.x = 0;
 	}
 
 
@@ -234,9 +250,9 @@ update_status ModuleCastleScene::Update()
 
 	//Draw knights on fortress
 
-	App->render->Blit(knight, 97 + knight_2_x_pos, -130 + knight_2_y_pos, &(knightleft.GetCurrentFrame()), 0.75f);
-	App->render->Blit(knight, 107 + knight_2_x_pos, -130 + knight_2_y_pos, &(knightleft.GetCurrentFrame()), 0.75f);
-	App->render->Blit(knight, 137 + knight_2_x_pos, -130 + knight_2_y_pos, &(knightleft.GetCurrentFrame()), 0.75f);
+	App->render->Blit(knight, 97 + knight2.x, -130 + knight2.y, &(knightleft.GetCurrentFrame()), 0.75f);
+	App->render->Blit(knight, 107 + knight2.x, -130 + knight2.y, &(knightleft.GetCurrentFrame()), 0.75f);
+	App->render->Blit(knight, 137 + knight2.x, -130 + knight2.y, &(knightleft.GetCurrentFrame()), 0.75f);
 
 	//Draw dead mortar
 	if (yflag > -1230)
@@ -257,6 +273,7 @@ update_status ModuleCastleScene::Update()
 	if (App->input->keyboard[SDL_SCANCODE_F3] == KEY_STATE::KEY_DOWN || yflag >= -10)
 	{
 		App->fade->FadeToBlack(this, App->scene_score, 2.0f);
+		
 	}
 	if (App->input->keyboard[SDL_SCANCODE_F4] == KEY_STATE::KEY_DOWN)
 	{

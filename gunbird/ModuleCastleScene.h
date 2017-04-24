@@ -2,6 +2,7 @@
 #define __MODULECASTLESCENE_H__
 
 #include "Module.h"
+#include "Path.h"
 #include "Animation.h"
 #include "Globals.h"
 
@@ -46,13 +47,10 @@ public:
 	Animation bridge_anim;
 	Animation dead_mortar;
 
-	bool houseflag = false;
-	float yflag = -1357;
-	float knight_1_x_pos = 0;
-	float knight_1_y_pos = 0;
-	float knight_2_x_pos = 0;
-	float knight_2_y_pos = 0;
-	float bridge_speed_y = -83;
+	float yflag;
+	fPoint knight1 = { 0.0f,0.0f };
+	fPoint knight2 = { 0.0f, 0.0f };
+	float bridge_speed_y;
 	float mortar_speed_y = 0;
 };
 

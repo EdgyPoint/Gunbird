@@ -34,7 +34,8 @@ Enemy_Balloon::Enemy_Balloon(int x, int y, int option) : Enemy(x, y, option)
 	path.PushBack({ 0.0f, 2.0f }, 55);
 	path.PushBack({ 0.0f, 0.0f }, 120);
 	path.PushBack({ 0.0f, 2.0f }, 55);
-	path.PushBack({ 0.0f, 0.0f }, 1000);
+	path.PushBack({ 0.0f, 0.0f }, 120);
+	path.PushBack({ 0.0f, 2.0f }, 10000);
 
 
 	collider = App->collision->AddCollider({ 0, 0, 42, 53 }, COLLIDER_TYPE::COLLIDER_ENEMY_F, (Module*)App->enemies);

@@ -119,7 +119,7 @@ bool ModulePlayer::Start()
 bool ModulePlayer::CleanUp()
 {
 	LOG("Unloading player");
-
+	powerup_lv = 0;
 	App->textures->Unload(graphics);
 
 	return true;

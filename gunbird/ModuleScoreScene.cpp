@@ -49,9 +49,9 @@ bool ModuleScoreScene::CleanUp()
 	App->player->score = 0;
 	App->player2->score2 = 0;
 	SDL_DestroyTexture(graphics);
-	App->player->Disable();
+	/*App->player->Disable();
 	App->player2->Disable();
-	App->collision->Disable();
+	App->collision->Disable();*/
 
 	return true;
 }
@@ -65,7 +65,7 @@ update_status ModuleScoreScene::Update()
 
 
 	App->render->Blit(App->player->ui, 90, 55, &App->player->p1display, 0, true);
-	App->render->Blit(App->player2->ui, 90, 80, &App->player2->p2display, 0, true);
+	App->render->Blit(App->player->ui, 90, 80, &App->player2->p2display, 0, true); // if not gives the invalid texture LOG. (player2 uses the player 1 ui texture)
 
 	App->fonts->BlitText(120, 79, App->player->font_score, "      0");
 	App->fonts->BlitText(120, 103, App->player->font_score, "      0");

@@ -85,7 +85,7 @@ bool ModulePlayer2::Start()
 	graphics = App->textures->Load("assets/images/Marion.png");
 
 	//Init UI
-	ui = App->textures->Load("assets/images/UI.png");
+	//ui = App->textures->Load("assets/images/UI.png");
 
 	p2display.x = 28;
 	p2display.y = 0;

@@ -220,7 +220,7 @@ bool ModuleParticles::Start()
 	magicspark[0].anim.PushBack({ 273, 0, 11, 11 });
 	magicspark[0].anim.loop = false;
 	magicspark[0].anim.speed = 0.33f;
-	magicspark[0].speed.y = 0.25f;
+	magicspark[0].speed.y = 1.0f;
 	magicspark[0].life = 400;
 
 	magicspark[1].anim.PushBack({ 168, 15, 11, 11 });
@@ -233,7 +233,7 @@ bool ModuleParticles::Start()
 	magicspark[1].anim.PushBack({ 273, 15, 11, 11 });
 	magicspark[1].anim.loop = false;
 	magicspark[1].anim.speed = 0.33f;
-	magicspark[1].speed.y = 0.25f;
+	magicspark[1].speed.y = 1.0f;
 	magicspark[1].life = 400;
 
 	magicspark[2].anim.PushBack({ 168, 30, 11, 11 });
@@ -246,7 +246,7 @@ bool ModuleParticles::Start()
 	magicspark[2].anim.PushBack({ 273, 30, 11, 11 });
 	magicspark[2].anim.loop = false;
 	magicspark[2].anim.speed = 0.33f;
-	magicspark[2].speed.y = 0.25f;
+	magicspark[2].speed.y = 1.0f;
 	magicspark[2].life = 400;
 
 	magicspark[3].anim.PushBack({ 168, 45, 11, 11 });
@@ -259,7 +259,7 @@ bool ModuleParticles::Start()
 	magicspark[3].anim.PushBack({ 273, 45, 11, 11 });
 	magicspark[3].anim.loop = false;
 	magicspark[3].anim.speed = 0.33f;
-	magicspark[3].speed.y = 0.25f;
+	magicspark[3].speed.y = 1.0f;
 	magicspark[3].life = 400;
 
 	powerupscore.anim.PushBack({ 44, 0, 15, 7 });
@@ -330,7 +330,7 @@ update_status ModuleParticles::Update()
 		}
 
 
-		if (p->collider->type == COLLIDER_PICKUP)
+	if (p->collider->type == COLLIDER_PICKUP)
 
 		{
 			if (p->position.x < 30 || p->position.x > 172)
