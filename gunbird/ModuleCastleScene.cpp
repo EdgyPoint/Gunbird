@@ -19,8 +19,8 @@
 
 ModuleCastleScene::ModuleCastleScene()
 {
-	background.h = 2108;
-	background.w = 234;
+	background.h = 1677;
+	background.w = 224;
 	background.x = 0;
 	background.y = 0;
 
@@ -45,6 +45,18 @@ ModuleCastleScene::ModuleCastleScene()
 	knightup.PushBack({ 30, 0, 15, 25 });
 	knightup.PushBack({ 45, 0, 15, 25 });
 	knightup.speed = 0.1f;
+
+	river1.PushBack({ 0,0,224, 102 });
+	river1.PushBack({ 0,102,224,102 });
+	river1.PushBack({ 0,204,224,102 });
+	river1.PushBack({ 0,306, 224, 102 });
+	river1.speed = 0.07f;
+	
+
+	river2.PushBack({ 224,0,224,92 });
+	river2.PushBack({ 224,92,224,92 });
+	river2.PushBack({ 224,184,224,92 });
+	river2.PushBack({ 0, 306, 224, 92 }); // its a blank space to see the backround. Ask Lorién.
 }
 
 ModuleCastleScene::~ModuleCastleScene()
@@ -110,12 +122,13 @@ bool ModuleCastleScene::Start()
 
 
 	App->enemies->AddEnemy(ENEMY_TYPES::TURRETCOPTER, 100, -470, 0);
-	App->enemies->AddEnemy(ENEMY_TYPES::CASTLEMORTAR, 168, -187, 0);
+	App->enemies->AddEnemy(ENEMY_TYPES::CASTLEMORTAR, 160, -127, 0);
 	App->enemies->AddEnemy(ENEMY_TYPES::CASTLEMORTAR, 100, 50, 0);
 
-	graphics2 = App->textures->Load("assets/images/Castle Upper Background.png");
-	graphics = App->textures->Load("assets/images/Castle Background.png");
+	graphics2 = App->textures->Load("assets/images/Castle Upper Background better.png");
+	graphics = App->textures->Load("assets/images/Castle Background better.png");
 	knight = App->textures->Load("assets/images/knight.png");
+	river = App->textures->Load("assets/images/river.png");
 	App->audio->audio = App->audio->Load("assets/bgm/castle.ogg");
 	Mix_PlayMusic(App->audio->audio, -1);
 
@@ -126,7 +139,7 @@ bool ModuleCastleScene::Start()
 bool ModuleCastleScene::CleanUp()
 {
 	LOG("Unloading castle scene");
-	yflag = -1788;
+	yflag = -1357;
 	yflag2 = -1279;
 	SDL_DestroyTexture(graphics);
 	SDL_DestroyTexture(graphics2);
@@ -150,7 +163,7 @@ update_status ModuleCastleScene::Update()
 	// Draw everything --------------------------------------
 
 	App->render->Blit(graphics, 0, yflag, &background, 10.0f);
-
+	 
 
 	// --- Draw knights
 	knight_1_x_pos -= 0.30f;
@@ -176,9 +189,9 @@ update_status ModuleCastleScene::Update()
 		knight_2_x_pos = 0;
 	}
 
-
+	//App->render->Blit(river, 0, 0, &(river1.GetCurrentFrame()), 0.07f,  true);
 	// --- Draw background top layer
-	App->render->Blit(graphics2, 0, yflag2, &backgroundup, 10.0f);
+	App->render->Blit(graphics2, 0, yflag, &background, 10.0f);
 
 	//Draw knights on fortress
 	App->render->Blit(knight, 65 + knight_2_x_pos, -190 + knight_2_y_pos, &(knightleft.GetCurrentFrame()), 0.75f);
