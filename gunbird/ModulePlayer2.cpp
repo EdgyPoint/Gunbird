@@ -324,7 +324,7 @@ void ModulePlayer2::OnCollision(Collider* c1, Collider* c2)
 		{
 			App->audio->sfx = App->audio->LoadSFX("assets/SFX/marionpowerup.wav");;
 			Mix_PlayChannel(-1, App->audio->sfx, 0);
-
+			
 			powerup_lv++;
 			if (powerup_lv > 1);
 			{
