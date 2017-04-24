@@ -32,7 +32,7 @@ void Enemy::Draw(SDL_Texture* sprites, Enemy* enemy)
 	}
 
 
-	if (enemy->hp <= enemy->damaged_hp)
+	if (enemy->hp <= enemy->damaged_hp && enemy->hp > 0)
 		enemy->status = DAMAGED;
 
 	if (animation != nullptr)
@@ -44,16 +44,6 @@ void Enemy::Draw(SDL_Texture* sprites, Enemy* enemy)
 			enemy->status = NORMAL;
 		else
 			enemy->status = DAMAGED;
-	}
-
-	if (enemy->status == OPENING || enemy->status == NONE)
-	{
-		enemy->collider->type = COLLIDER_NONE;
-	}
-
-	if (enemy->status == NORMAL)
-	{
-		enemy->collider->type = COLLIDER_ENEMY;
 	}
 }
 
@@ -81,7 +71,7 @@ void Enemy::OnCollision(Collider* collider, Enemy* enemy)
 }
 
 
-void Enemy::ToDie(Enemy* enemy)
+void Enemy::ToDie(Enemy* enemy, Collider* col)
 {
 	if (enemy->enemy_drops)
 	{
@@ -102,5 +92,9 @@ void Enemy::ToDie(Enemy* enemy)
 		Mix_PlayChannel(-1, App->audio->sfx, 0);
 	}
 
+	if (col->type == COLLIDER_PLAYER_SHOT)
 	App->player->score += enemy->killscore;
+
+	if (col->type == COLLIDER_PLAYER2_SHOT)
+		App->player2->score2 += enemy->killscore;
 }

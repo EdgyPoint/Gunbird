@@ -174,7 +174,7 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 			enemies[i]->OnCollision(c2, enemies[i]);
 			if (enemies[i]->hp <= 0.0f)
 			{
-				enemies[i]->ToDie(enemies[i]);
+				enemies[i]->ToDie(enemies[i], c2);
 				delete enemies[i];
 				enemies[i] = nullptr;
 			}

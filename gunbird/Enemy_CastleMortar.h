@@ -17,7 +17,6 @@ private:
 	Animation stand2;
 	Animation stand3;
 	Path path;
-	bool is_opening = true;
 public:
 	Enemy_CastleMortar(int x, int y, int option);
 	void Shoot();

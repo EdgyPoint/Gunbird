@@ -53,7 +53,8 @@ public:
 	int deathcounter = 0;
 	int lives = 2;
 	bool out = true;
-
+	char text_score2[10];
+	int score2 = 0;
 };
 
 #endif

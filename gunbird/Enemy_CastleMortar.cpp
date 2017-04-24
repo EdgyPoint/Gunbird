@@ -84,13 +84,18 @@ void Enemy_CastleMortar::Move()
 {
 	position = original_pos + path.GetCurrentPosition();
 
+	if (status == OPENING || status == NONE)
+		collider->type = COLLIDER_NONE;
+	if (status == NORMAL)
+		collider->type = COLLIDER_ENEMY;
+
 	if (position.y == -20) { animation = &opening; status = OPENING; }
 	if (status == OPENING && animation->Finished() == true) { status = NORMAL; }
 	if (status == NORMAL) { animation = &stand; }
 	if (status == HIT && animation == &opening) { animation = &opening2; }
 	if (status == HIT) { animation = &stand2; }
-	if (status == DAMAGED) { animation == &stand3; }
-}
+	if (status == DAMAGED) { animation = &stand3; }
+	}
 
 void Enemy_CastleMortar::Shoot()
 {

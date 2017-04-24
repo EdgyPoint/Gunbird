@@ -57,7 +57,7 @@ public:
 	virtual void Draw(SDL_Texture* sprites, Enemy* enemy);
 	virtual void Extra_animation() {};
 	virtual void OnCollision(Collider* collider, Enemy* enemy);
-	virtual void ToDie(Enemy* enemy);
+	virtual void ToDie(Enemy* enemy, Collider* col);
 };
 
 #endif // __ENEMY_H__
