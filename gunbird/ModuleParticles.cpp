@@ -320,7 +320,7 @@ update_status ModuleParticles::Update()
 		}
 
 
-		if (p->collider->type == COLLIDER_PICKUP)
+		/*if (p->collider->type == COLLIDER_PICKUP)
 
 		{
 			if (p->position.x < 30 || p->position.x > 172)
@@ -331,7 +331,7 @@ update_status ModuleParticles::Update()
 			{
 				p->speed.y = p->speed.y * -1;
 			}
-		}
+		}*/
 	}
 
 	return UPDATE_CONTINUE;

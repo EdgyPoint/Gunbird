@@ -100,7 +100,7 @@ bool ModulePlayer::Start()
 	position.x = 51;
 	position.y = 320;
 	
-	player_col = App->collision->AddCollider({ 0, 0, 21, 32 }, COLLIDER_PLAYER, this);
+	player_col = App->collision->AddCollider({ 0, 0, 8, 8 }, COLLIDER_PLAYER, this);
 
 	font_score = App->fonts->Load("assets/images/fonts.png", " 1234567890", 1, 1);
 
@@ -262,7 +262,7 @@ update_status ModulePlayer::Update()
 		App->player2->out = false;
 	}
 
-	player_col->SetPos(position.x + 3, position.y);
+	player_col->SetPos(position.x + 10, position.y + 9);
 
 	if (stunned)
 	{
