@@ -29,7 +29,6 @@ public:
 	SDL_Texture* bridge = nullptr;
 	SDL_Texture* mortar = nullptr;
 	SDL_Rect background;
-	SDL_Rect backgroundup;
 	SDL_Rect npi;
 	Animation flag;
 	Animation knightleft;
@@ -43,9 +42,7 @@ public:
 	Animation dead_mortar;
 
 	bool houseflag = false;
-	float house1counter = -86;
 	float yflag = -1357;
-	float yflag2 = -1269;
 	float knight_1_x_pos = 0;
 	float knight_1_y_pos = 0;
 	float knight_2_x_pos = 0;
