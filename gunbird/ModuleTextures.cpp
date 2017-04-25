@@ -45,7 +45,7 @@ bool ModuleTextures::CleanUp()
 	for (uint i = 0; i < MAX_TEXTURES; ++i)
 	{
 		if (textures[i] != nullptr)
-			SDL_DestroyTexture(textures[i]);
+			App->textures->Unload(textures[i]);
 	}
 
 	IMG_Quit();
