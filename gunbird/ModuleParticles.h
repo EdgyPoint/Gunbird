@@ -66,6 +66,7 @@ public:
 	Particle playerstunned;
 	Particle presmallshot;
 	Particle powerupscore;
+
 };
 
 #endif // __MODULEPARTICLES_H__

@@ -74,10 +74,11 @@ void Enemy::OnCollision(Collider* collider, Enemy* enemy)
 
 void Enemy::ToDie(Enemy* enemy, Collider* col)
 {
-	if (enemy->enemy_drops)
-	{
-		App->particles->AddParticle(App->particles->powerup, enemy->position.x + 12, enemy->position.y + 26, COLLIDER_PICKUP);
-	}
+	if (enemy->drops_powerup)
+		App->particles->AddParticle(App->particles->powerup, enemy->position.x + 12, enemy->position.y + 26, COLLIDER_POWERUP);
+
+	if (enemy->drops_coin)
+		App->particles->AddParticle(App->particles->powerup, enemy->position.x + 12, enemy->position.y + 26, COLLIDER_COIN);
 
 	if (enemy->death_type == MEDIUM_ENEMY)
 	{

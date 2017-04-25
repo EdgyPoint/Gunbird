@@ -84,6 +84,8 @@ bool ModulePlayer2::Start()
 
 	graphics = App->textures->Load("assets/images/Marion.png");
 
+	ui = App->textures->Load("assets/images/ui.png");
+
 	//Init UI
 	//ui = App->textures->Load("assets/images/UI.png");
 
@@ -394,7 +396,7 @@ void ModulePlayer2::OnCollision(Collider* c1, Collider* c2)
 			}
 		}
 
-		if (c2->type == COLLIDER_PICKUP)
+		if (c2->type == COLLIDER_POWERUP)
 		{
 			App->audio->sfx = App->audio->LoadSFX("assets/SFX/marionpowerup.wav");;
 			Mix_PlayChannel(-1, App->audio->sfx, 0);

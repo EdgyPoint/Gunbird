@@ -71,7 +71,7 @@ Enemy_House1::Enemy_House1(int x, int y, int option) : Enemy(x, y, option)
 	hp = 10.0f;
 	damaged_hp = 2.0f;
 	death_type = MEDIUM_ENEMY;
-	enemy_drops = true;
+	drops_powerup = true;
 	flying = false;
 	killscore = 3000;
 }
