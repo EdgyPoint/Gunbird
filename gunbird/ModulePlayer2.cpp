@@ -188,7 +188,7 @@ update_status ModulePlayer2::Update()
 
 	}
 
-	if (App->input->keyboard[SDL_SCANCODE_O] == KEY_STATE::KEY_REPEAT && SDL_GetTicks() >= shot && !_dying && !respawning && !stunned)
+	if (App->input->keyboard[SDL_SCANCODE_KP_0] == KEY_STATE::KEY_REPEAT && SDL_GetTicks() >= shot && !_dying && !respawning && !stunned)
 	{
 		shot = (SDL_GetTicks() + 500);
 		if (powerup_lv == 0)
@@ -423,6 +423,12 @@ void ModulePlayer2::OnCollision(Collider* c1, Collider* c2)
 				App->audio->sfx = App->audio->LoadSFX("assets/SFX/marionpowerup.wav");;
 				Mix_PlayChannel(-1, App->audio->sfx, 0);
 			}
+		}
+		if (c2->type == COLLIDER_COIN)
+		{
+			App->audio->sfx = App->audio->LoadSFX("assets/SFX/collectcoin.wav");
+			Mix_PlayChannel(-1, App->audio->sfx, 0);
+			score += 200;
 		}
 	}
 
