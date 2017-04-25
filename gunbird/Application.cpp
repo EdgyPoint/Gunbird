@@ -31,11 +31,12 @@ Application::Application()
 	modules[i++] = enemies = new ModuleEnemies();
 	modules[i++] = player = new ModulePlayer();
 	modules[i++] = player2 = new ModulePlayer2();
+	modules[i++] = fonts = new ModuleFonts();
 	modules[i++] = collision = new ModuleCollision();
 	modules[i++] = particles = new ModuleParticles();
 
 	modules[i++] = fade = new ModuleFadeToBlack();
-	modules[i++] = fonts = new ModuleFonts();
+
 }	
 
 Application::~Application()

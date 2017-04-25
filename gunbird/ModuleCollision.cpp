@@ -263,10 +263,7 @@ Collider* ModuleCollision::AddCollider(SDL_Rect rect, COLLIDER_TYPE type, Module
 
 	return ret;
 }
-void ModuleCollision::EditMatrix(COLLIDER_TYPE col_type1, COLLIDER_TYPE col_type2, bool state)
-{
-	matrix[col_type1][col_type2] = state;
-}
+
 
 
 bool ModuleCollision::EraseCollider(Collider* collider)

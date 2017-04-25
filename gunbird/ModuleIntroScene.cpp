@@ -64,7 +64,7 @@ update_status ModuleIntroScene::Update()
 	{
 		App->audio->sfx = App->audio->LoadSFX("assets/SFX/ganbaado.wav");
 		Mix_PlayChannel(-1, App->audio->sfx, 0);
-		App->fade->FadeToBlack(this, App->scene_castle, 2.0f);	
+		App->fade->FadeToBlack(this, App->scene_castle, 1.0f);	
 	}
 	
 	return UPDATE_CONTINUE;

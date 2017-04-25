@@ -18,6 +18,7 @@ enum COLLIDER_TYPE
 	COLLIDER_ENEMY_SHOT,
 	COLLIDER_POWERUP,
 	COLLIDER_COIN,
+	COLLIDER_GOD,
 	COLLIDER_MAX
 };
 
@@ -56,7 +57,6 @@ public:
 	bool CleanUp();
 
 	Collider* AddCollider(SDL_Rect rect, COLLIDER_TYPE type, Module* callback = nullptr);
-	void EditMatrix(COLLIDER_TYPE col_type1, COLLIDER_TYPE col_type2, bool state);
 	bool EraseCollider(Collider* collider);
 	void DebugDraw();
 
