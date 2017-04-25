@@ -464,8 +464,8 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 
 	if (c2->type == COLLIDER_COIN)
 	{
-		//App->audio->sfx = App->audio->LoadSFX("assets/SFX/collectcoin.wav");
-		//Mix_PlayChannel(-1, App->audio->sfx, 0);
+		App->audio->sfx = App->audio->LoadSFX("assets/SFX/collectcoin.wav");
+		Mix_PlayChannel(-1, App->audio->sfx, 0);
 		App->player->score += 200;
 	}
 }
