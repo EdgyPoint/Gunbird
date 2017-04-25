@@ -262,16 +262,19 @@ update_status ModulePlayer2::Update()
 			_dying = false;
 			respawning = true;
 			deathcounter = 0;
-			position.x = 141;
+			position.x = 151;
 		}
 	}
 
 	if (respawning)
 	{
-		App->collision->EditMatrix(COLLIDER_PLAYER2, COLLIDER_ENEMY, false);
-		App->collision->EditMatrix(COLLIDER_PLAYER2, COLLIDER_ENEMY_SHOT, false);
-		App->collision->EditMatrix(COLLIDER_ENEMY, COLLIDER_PLAYER2, false);
-		App->collision->EditMatrix(COLLIDER_ENEMY_SHOT, COLLIDER_PLAYER2, false);
+		if (App->player->godmode == false)
+		{
+			App->collision->EditMatrix(COLLIDER_PLAYER, COLLIDER_ENEMY_F, false);
+			App->collision->EditMatrix(COLLIDER_PLAYER, COLLIDER_ENEMY_SHOT, false);
+			App->collision->EditMatrix(COLLIDER_ENEMY_F, COLLIDER_PLAYER, false);
+			App->collision->EditMatrix(COLLIDER_ENEMY_SHOT, COLLIDER_PLAYER, false);
+		}
 
 		if (!out)
 		{
@@ -291,10 +294,14 @@ update_status ModulePlayer2::Update()
 		invincibilitycounter++;
 		if (invincibilitycounter == 120)
 		{
-			App->collision->EditMatrix(COLLIDER_PLAYER2, COLLIDER_ENEMY, true);
-			App->collision->EditMatrix(COLLIDER_PLAYER2, COLLIDER_ENEMY_SHOT, true);
-			App->collision->EditMatrix(COLLIDER_ENEMY, COLLIDER_PLAYER2, true);
-			App->collision->EditMatrix(COLLIDER_ENEMY_SHOT, COLLIDER_PLAYER2, true);
+			if (App->player->godmode == false)
+			{
+				App->collision->EditMatrix(COLLIDER_PLAYER, COLLIDER_ENEMY_F, true);
+				App->collision->EditMatrix(COLLIDER_PLAYER, COLLIDER_ENEMY_SHOT, true);
+				App->collision->EditMatrix(COLLIDER_ENEMY_F, COLLIDER_PLAYER, true);
+				App->collision->EditMatrix(COLLIDER_ENEMY_SHOT, COLLIDER_PLAYER, true);
+			}
+			temp_invincibility = false;
 			invincibilitycounter = 0;
 		}
 	}
@@ -326,20 +333,23 @@ update_status ModulePlayer2::Update()
 	App->render->Blit(graphics, position.x, position.y, &(current_animation->GetCurrentFrame()));
 
 	//Blit UI
-	App->render->Blit(ui, 116, 6, &p2display, 0, true);
-
-	if (lives == 1)
-		App->render->Blit(ui, 116, 21, &lifedisplay, 0, true);
-
-	if (lives == 2)
+	if (!out)
 	{
-		App->render->Blit(ui, 116, 21, &lifedisplay, 0, true);
-		App->render->Blit(ui, 132, 21, &lifedisplay, 0, true);
+		App->render->Blit(ui, 116, 6, &p2display, 0, true);
+
+		if (this->lives == 1)
+			App->render->Blit(ui, 116, 21, &lifedisplay, 0, true);
+
+		if (this->lives == 2)
+		{
+			App->render->Blit(ui, 116, 21, &lifedisplay, 0, true);
+			App->render->Blit(ui, 132, 21, &lifedisplay, 0, true);
+		}
+		App->fonts->BlitText(132, 6, App->player->font_score, text_score2);
 	}
 
 	sprintf_s(text_score2, 10, "%7d", score2);
 
-	App->fonts->BlitText(132, 6, App->player->font_score, text_score2);
 
 	return UPDATE_CONTINUE;
 }
@@ -365,9 +375,10 @@ void ModulePlayer2::OnCollision(Collider* c1, Collider* c2)
 		{
 			lives -= 1;
 			_dying = true;
-			App->collision->EditMatrix(COLLIDER_PLAYER2, COLLIDER_ENEMY, false);
+
+			App->collision->EditMatrix(COLLIDER_PLAYER2, COLLIDER_ENEMY_F, false);
 			App->collision->EditMatrix(COLLIDER_PLAYER2, COLLIDER_ENEMY_SHOT, false);
-			App->collision->EditMatrix(COLLIDER_ENEMY, COLLIDER_PLAYER2, false);
+			App->collision->EditMatrix(COLLIDER_ENEMY_F, COLLIDER_PLAYER2, false);
 			App->collision->EditMatrix(COLLIDER_ENEMY_SHOT, COLLIDER_PLAYER2, false);
 
 			App->particles->AddParticle(App->particles->medium_explosion, position.x - 40, position.y - 25, COLLIDER_NONE);
