@@ -343,23 +343,13 @@ update_status ModuleParticles::Update()
 			}
 		}
 
-	/*if (p->collider->type == COLLIDER_POWERUP)
-		{
-			if (p->position.x < 10 || p->position.x > 192)
-			{
-				p->speed.x = p->speed.x * -1;
-			}
-			if (p->position.y < 45 || p->position.y > 222)
-			{
-				p->speed.y = p->speed.y * -1;
-			}
-		}*/
+
 	}
 
 	return UPDATE_CONTINUE;
 }
 
-void ModuleParticles::AddParticle(const Particle& particle, int x, int y, COLLIDER_TYPE collider_type, float speed_x, float speed_y, Uint32 delay,  bool using_camera)
+void ModuleParticles::AddParticle(const Particle& particle, int x, int y, COLLIDER_TYPE collider_type, float speed_x, float speed_y, Uint32 delay,  bool using_camera, ITEM_TYPE item_type)
 {
 	for (uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
 	{
@@ -376,6 +366,7 @@ void ModuleParticles::AddParticle(const Particle& particle, int x, int y, COLLID
 			p->position.x = x;
 			p->position.y = y;
 			p->collider = App->collision->AddCollider(p->anim.GetCurrentFrame(), collider_type, this);
+			p->itemtype = item_type;
 			active[i] = p;
 			break;
 		}
@@ -433,6 +424,20 @@ bool Particle::Update()
 
 	position.x += speed.x;
 	position.y += speed.y;
+
+	if (itemtype == ITEM_POWERUP)
+	{
+		if (position.x < 10 || position.x > 192)
+		{
+			speed.x = speed.x * -1;
+		}
+		if (position.y < 45 || position.y > 222)
+		{
+			speed.y = speed.y * -1;
+		}
+	}
+
+
 
 	if (collider != nullptr && SDL_GetTicks() >= born)
 		collider->SetPos(position.x, position.y);

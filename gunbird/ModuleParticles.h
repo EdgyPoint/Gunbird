@@ -13,6 +13,14 @@ struct SDL_Texture;
 struct Collider;
 enum COLLIDER_TYPE;
 
+enum ITEM_TYPE
+{
+	ITEM_NOT,
+	ITEM_POWERUP,
+	ITEM_COIN,
+	ITEM_BOMB
+};
+
 struct Particle
 {
 	Collider* collider = nullptr;
@@ -22,6 +30,7 @@ struct Particle
 	fPoint speed;
 	Uint32 born = 0;
 	Uint32 life = 0;
+	ITEM_TYPE itemtype;
 	bool fx_played = false;
 	int apperance = 0;
 
@@ -42,7 +51,7 @@ public:
 	bool CleanUp();
 	void OnCollision(Collider* c1, Collider* c2);
 
-	void AddParticle(const Particle& particle, int x, int y, COLLIDER_TYPE collider_type, float speed_x = 0.0f, float speed_y = 0.0f, Uint32 delay = 0, bool using_camera = true);
+	void AddParticle(const Particle& particle, int x, int y, COLLIDER_TYPE collider_type, float speed_x = 0.0f, float speed_y = 0.0f, Uint32 delay = 0, bool using_camera = true, ITEM_TYPE item_type = ITEM_NOT);
 
 private:
 
