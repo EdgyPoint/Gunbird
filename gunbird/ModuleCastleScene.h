@@ -41,6 +41,8 @@ public:
 	Animation aceup;
 	Animation acelaughing;
 
+	Collider* wall;
+
 
 	Animation river1;
 	Animation river2;

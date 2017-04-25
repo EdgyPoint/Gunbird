@@ -107,7 +107,7 @@ bool ModuleCastleScene::Start()
 	mortar_speed_y = 0;
 
 
-	App->collision->AddCollider(npi, COLLIDER_WALL);
+	wall = App->collision->AddCollider(npi, COLLIDER_WALL);
 
 	App->enemies->AddEnemy(ENEMY_TYPES::BALLOON, 97,-170, 0);
 	
