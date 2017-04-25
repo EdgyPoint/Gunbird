@@ -37,7 +37,7 @@ Enemy_Vase::Enemy_Vase(int x, int y, int option) : Enemy(x, y, option)
 	hp = 12.0f;
 	damaged_hp = 4.0f;
 	death_type = SMALL_ENEMY;
-	enemy_drops = true;
+	drops_coin = true;
 	flying = false;
 	killscore = 0;
 }

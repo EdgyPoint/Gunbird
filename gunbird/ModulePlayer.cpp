@@ -444,18 +444,21 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 		}
 	}
 
-	if (c2->type == COLLIDER_PICKUP)
+	if (c2->type == COLLIDER_POWERUP)
 	{
-		App->audio->sfx = App->audio->LoadSFX("assets/SFX/marionpowerup.wav");;
-		Mix_PlayChannel(-1, App->audio->sfx, 0);
-
 		if (powerup_lv == 1)
 		{
 			App->player->score += 2000;
 			App->particles->AddParticle(App->particles->powerupscore, position.x + 4, position.y + 4, COLLIDER_NONE);
+			App->audio->sfx = App->audio->LoadSFX("assets/SFX/marionmaxpowerup.wav");;
+			Mix_PlayChannel(-1, App->audio->sfx, 0);
 		}
 
 		if (powerup_lv < 1)
-		powerup_lv++;
+		{
+			powerup_lv++;
+			App->audio->sfx = App->audio->LoadSFX("assets/SFX/marionpowerup.wav");;
+			Mix_PlayChannel(-1, App->audio->sfx, 0);
+		}
 	}
 }

@@ -330,15 +330,13 @@ update_status ModuleParticles::Update()
 			}
 		}
 
-
 	/*if (p->collider->type == COLLIDER_PICKUP)
-
 		{
-			if (p->position.x < 30 || p->position.x > 172)
+			if (p->position.x < 10 || p->position.x > 192)
 			{
 				p->speed.x = p->speed.x * -1;
 			}
-			if (p->position.y < 30 || p->position.y > 222)
+			if (p->position.y < 45 || p->position.y > 222)
 			{
 				p->speed.y = p->speed.y * -1;
 			}
