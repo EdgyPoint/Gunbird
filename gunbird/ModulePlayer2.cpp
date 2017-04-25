@@ -348,7 +348,7 @@ update_status ModulePlayer2::Update()
 		App->fonts->BlitText(132, 6, App->player->font_score, text_score2);
 	}
 
-	sprintf_s(text_score2, 10, "%7d", score2);
+	sprintf_s(text_score2, 10, "%7d", score);
 
 
 	return UPDATE_CONTINUE;
@@ -409,13 +409,19 @@ void ModulePlayer2::OnCollision(Collider* c1, Collider* c2)
 
 		if (c2->type == COLLIDER_POWERUP)
 		{
-			App->audio->sfx = App->audio->LoadSFX("assets/SFX/marionpowerup.wav");;
-			Mix_PlayChannel(-1, App->audio->sfx, 0);
-			
-			powerup_lv++;
-			if (powerup_lv > 1);
+			if (powerup_lv == 1)
 			{
-				powerup_lv = 1;
+				score += 2000;
+				App->particles->AddParticle(App->particles->powerupscore, position.x + 4, position.y + 4, COLLIDER_NONE);
+				App->audio->sfx = App->audio->LoadSFX("assets/SFX/marionmaxpowerup.wav");;
+				Mix_PlayChannel(-1, App->audio->sfx, 0);
+			}
+
+			if (powerup_lv < 1)
+			{
+				powerup_lv++;
+				App->audio->sfx = App->audio->LoadSFX("assets/SFX/marionpowerup.wav");;
+				Mix_PlayChannel(-1, App->audio->sfx, 0);
 			}
 		}
 	}
