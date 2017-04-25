@@ -15,6 +15,7 @@
 #include "ModuleFadeToBlack.h"
 #include "ModuleParticles.h"
 #include "ModuleEnemies.h"
+#include "ModuleItems.h"
 
 Application::Application()
 {
@@ -28,6 +29,7 @@ Application::Application()
 	modules[i++] = scene_castle = new ModuleCastleScene();
 	modules[i++] = scene_mine = new ModuleMineScene();
 	modules[i++] = scene_score = new ModuleScoreScene();
+	modules[i++] = items = new ModuleItems();
 	modules[i++] = enemies = new ModuleEnemies();
 	modules[i++] = player = new ModulePlayer();
 	modules[i++] = player2 = new ModulePlayer2();

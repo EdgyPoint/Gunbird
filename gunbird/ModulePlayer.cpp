@@ -123,6 +123,8 @@ bool ModulePlayer::CleanUp()
 	App->textures->Unload(graphics);
 	App->textures->Unload(ui);
 	App->textures->Unload(ui2);
+	App->fonts->UnLoad(font_score);
+
 	return true;
 }
 

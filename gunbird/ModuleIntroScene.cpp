@@ -69,3 +69,4 @@ update_status ModuleIntroScene::Update()
 	
 	return UPDATE_CONTINUE;
 }
+
