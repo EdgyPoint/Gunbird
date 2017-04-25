@@ -47,7 +47,7 @@ bool ModuleScoreScene::CleanUp()
 {
 	LOG("Unloading score scene");
 	App->player->score = 0;
-	App->player2->score2 = 0;
+	App->player2->score = 0;
 	App->textures->Unload(graphics);
 	App->textures->Unload(App->player->ui);
 
