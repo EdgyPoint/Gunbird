@@ -48,8 +48,8 @@ bool ModuleScoreScene::CleanUp()
 	LOG("Unloading score scene");
 	App->player->score = 0;
 	App->player2->score2 = 0;
-	SDL_DestroyTexture(graphics);
-	SDL_DestroyTexture(App->player->ui);
+	App->textures->Unload(graphics);
+	App->textures->Unload(App->player->ui);
 
 	/*App->player->Disable();
 	App->player2->Disable();

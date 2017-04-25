@@ -185,13 +185,13 @@ bool ModuleCastleScene::CleanUp()
 {
 	LOG("Unloading castle scene");
 
-	SDL_DestroyTexture(graphics);
-	SDL_DestroyTexture(graphics2);
-	SDL_DestroyTexture(knight);
-	SDL_DestroyTexture(bridge);
-	SDL_DestroyTexture(mortar);
-	SDL_DestroyTexture(river);
-	SDL_DestroyTexture(trump);
+	App->textures->Unload(graphics);
+	App->textures->Unload(graphics2);
+	App->textures->Unload(knight);
+	App->textures->Unload(bridge);
+	App->textures->Unload(mortar);
+	App->textures->Unload(river);
+	App->textures->Unload(trump);
 	App->player->Disable();
 	App->player2->Disable();
 	App->enemies->Disable();

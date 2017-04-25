@@ -46,7 +46,7 @@ bool ModuleIntroScene::Start()
 bool ModuleIntroScene::CleanUp()
 {
 	LOG("Unloading intro scene");
-	SDL_DestroyTexture(graphics);
+	App->textures->Unload(graphics);
 	
 	return true;
 }

@@ -121,8 +121,6 @@ bool ModulePlayer::CleanUp()
 	LOG("Unloading player");
 	powerup_lv = 0;
 	App->textures->Unload(graphics);
-	App->textures->Unload(ui);
-	App->textures->Unload(ui2);
 	return true;
 }
 

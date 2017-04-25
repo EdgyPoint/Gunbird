@@ -51,8 +51,8 @@ bool ModuleMineScene::CleanUp()
 {
 	LOG("Unloading mine scene");
 	yflag = -3215;
-	SDL_DestroyTexture(graphics);
-	SDL_DestroyTexture(graphics2);
+	App->textures->Unload(graphics);
+	App->textures->Unload(graphics2);
 	App->player->Disable();
 	App->particles->Disable();
 	App->collision->Disable();
