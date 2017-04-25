@@ -149,7 +149,6 @@ update_status ModuleCollision::Update()
 				if (matrix[c2->type][c1->type] && c2->callback)
 					c2->callback->OnCollision(c2, c1);
 			}
-			
 		}
 	}
 
@@ -233,7 +232,8 @@ Collider* ModuleCollision::AddCollider(SDL_Rect rect, COLLIDER_TYPE type, Module
 	{
 		if (colliders[i] == nullptr)
 		{
-			ret = colliders[i] = new Collider(rect, type, callback);
+			ret = new Collider(rect, type, callback);
+			colliders[i] = ret;
 			break;
 		}
 	}

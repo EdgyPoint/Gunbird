@@ -112,7 +112,7 @@ bool ModulePlayer2::CleanUp()
 	LOG("Unloading player");
 
 	App->textures->Unload(graphics);
-
+	App->textures->Unload(ui);
 	return true;
 }
 

@@ -302,6 +302,7 @@ update_status ModuleParticles::Update()
 		if (p->Update() == false)
 		{
 			delete p;
+			p = nullptr;
 			active[i] = nullptr;
 		}
 		else if (SDL_GetTicks() >= p->born)
@@ -330,7 +331,7 @@ update_status ModuleParticles::Update()
 		}
 
 
-	if (p->collider->type == COLLIDER_PICKUP)
+	/*if (p->collider->type == COLLIDER_PICKUP)
 
 		{
 			if (p->position.x < 30 || p->position.x > 172)
@@ -341,7 +342,7 @@ update_status ModuleParticles::Update()
 			{
 				p->speed.y = p->speed.y * -1;
 			}
-		}
+		}*/
 	}
 
 	return UPDATE_CONTINUE;

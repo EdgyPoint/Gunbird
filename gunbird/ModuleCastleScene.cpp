@@ -103,7 +103,6 @@ bool ModuleCastleScene::Start()
 	yflag = -1357;
 	knight1 = { 0.0f,0.0f };
 	knight2 = { 0.0f, 0.0f };
-	
 	bridge_speed_y = -83;
 	mortar_speed_y = 0;
 
@@ -191,6 +190,8 @@ bool ModuleCastleScene::CleanUp()
 	SDL_DestroyTexture(knight);
 	SDL_DestroyTexture(bridge);
 	SDL_DestroyTexture(mortar);
+	SDL_DestroyTexture(river);
+	SDL_DestroyTexture(trump);
 	App->player->Disable();
 	App->player2->Disable();
 	App->enemies->Disable();
