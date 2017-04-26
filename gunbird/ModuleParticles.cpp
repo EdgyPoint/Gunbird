@@ -99,17 +99,17 @@ bool ModuleParticles::Start()
 	bigshot.life = 4000;
 	
 	//coin
-	coin.anim.PushBack({ 237, 361, 12, 16 });
-	coin.anim.PushBack({ 259, 361, 12, 16 });
-	coin.anim.PushBack({ 285, 361, 12, 16 });
-	coin.anim.PushBack({ 314, 361, 12, 16 });
-	coin.anim.PushBack({ 239, 388, 12, 16 });
-	coin.anim.PushBack({ 263, 388, 12, 16 });
-	coin.anim.PushBack({ 287, 388, 12, 16 });
-	coin.anim.PushBack({ 314, 388, 12, 16 });
+	coin.anim.PushBack({ 234, 362, 16, 16 });
+	coin.anim.PushBack({ 256, 362, 16, 16 });
+	coin.anim.PushBack({ 282, 362, 16, 16 });
+	coin.anim.PushBack({ 310, 362, 16, 16 });
+	coin.anim.PushBack({ 234, 388, 16, 16 });
+	coin.anim.PushBack({ 256, 388, 16, 16 });
+	coin.anim.PushBack({ 282, 388, 16, 16 });
+	coin.anim.PushBack({ 310, 388, 16, 16 });
 	coin.anim.loop = true;
 	coin.life = 10000;
-	coin.anim.speed = 0.1f;
+	coin.anim.speed = 0.25f;
 
 
 	powerup.anim.PushBack({ 235, 423, 22, 13 });

@@ -214,6 +214,8 @@ update_status ModulePlayer::Update()
 			if (beam == 3) beam = 0;
 			App->particles->AddParticle(App->particles->marionbeam_lv1[beam++], position.x + 11, position.y + 65, COLLIDER_PLAYER_SHOT, 0, -4, 420);
 			if (beam == 3) beam = 0;
+
+			App->particles->AddParticle(App->particles->coin, position.x + 10, position.y + 25, COLLIDER_COIN, 0, 0.55f);
 		}
 
 		if (powerup_lv == 1)
@@ -385,7 +387,16 @@ update_status ModulePlayer::Update()
 	
 	// Draw everything --------------------------------------
 
-	App->render->Blit(graphics, position.x, position.y, &(current_animation->GetCurrentFrame()));
+	blinkcounter++;
+	if (blinkcounter == 6)
+		blinkcounter = 0;
+
+	// Draw everything --------------------------------------
+	if (blinkcounter > 3 && (respawning || temp_invincibility))
+		App->render->Blit(graphics, position.x, position.y, &(current_animation->GetCurrentFrame()));
+
+	else if (!respawning && !temp_invincibility)
+		App->render->Blit(graphics, position.x, position.y, &(current_animation->GetCurrentFrame()));
 
 	//Blit UI
 	App->render->Blit(ui, 5, 6, &p1display, 0, true);
