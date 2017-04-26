@@ -383,9 +383,15 @@ update_status ModulePlayer::Update()
 
 	sprintf_s(text_score, 10, "%7d", score);
 	
-	// Draw everything --------------------------------------
+	blink++;
+	if (blink == 6)
+	blink = 0;
 
-	App->render->Blit(graphics, position.x, position.y, &(current_animation->GetCurrentFrame()));
+	// Draw everything --------------------------------------
+	if (blink <= 2 && (respawning || temp_invincibility))
+		App->render->Blit(graphics, position.x, position.y, &(current_animation->GetCurrentFrame()));
+	else if (!respawning && !temp_invincibility)
+		App->render->Blit(graphics, position.x, position.y, &(current_animation->GetCurrentFrame()));
 
 	//Blit UI
 	App->render->Blit(ui, 5, 6, &p1display, 0, true);
@@ -449,13 +455,18 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 
 	if (c2->type == COLLIDER_POWERUP)
 	{
-		App->audio->sfx = App->audio->LoadSFX("assets/SFX/marionpowerup.wav");;
-		Mix_PlayChannel(-1, App->audio->sfx, 0);
+		if (powerup_lv == 0)
+		{
+			App->audio->sfx = App->audio->LoadSFX("assets/SFX/marionpowerup.wav");;
+			Mix_PlayChannel(-1, App->audio->sfx, 0);
+		}
 
 		if (powerup_lv == 1)
 		{
 			App->player->score += 2000;
 			App->particles->AddParticle(App->particles->powerupscore, position.x + 4, position.y + 4, COLLIDER_NONE);
+			App->audio->sfx = App->audio->LoadSFX("assets/SFX/MaxPower.wav");
+			Mix_PlayChannel(-1, App->audio->sfx, 0);
 		}
 
 		if (powerup_lv < 1)

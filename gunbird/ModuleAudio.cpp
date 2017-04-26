@@ -23,6 +23,7 @@ bool ModuleAudio::Init()
 	{
 		LOG("An error while opening the audio has ocurred: %s", SDL_GetError())
 	}
+
 	return true;
 }
 

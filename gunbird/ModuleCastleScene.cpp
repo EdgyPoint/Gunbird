@@ -31,6 +31,7 @@ ModuleCastleScene::ModuleCastleScene()
 	npi.x = 0;
 	npi.y = -10;
 
+
 	knightleft.PushBack({ 0, 25, 15, 25 });
 	knightleft.PushBack({ 15, 25, 15, 25 });
 	knightleft.PushBack({ 30, 25, 15, 25 });
@@ -173,8 +174,6 @@ bool ModuleCastleScene::Start()
 	river = App->textures->Load("assets/images/river.png");
 	bridge = App->textures->Load("assets/images/castle_bridge.png");
 	mortar = App->textures->Load("assets/images/destroyed mortar.png");
-
-
 	App->audio->audio = App->audio->Load("assets/bgm/castle.ogg");
 	Mix_PlayMusic(App->audio->audio, -1);
 
@@ -224,6 +223,7 @@ update_status ModuleCastleScene::Update()
 	knight2.x -= 0.30f;
 	knight2.y += 0.55f;
 	App->render->Blit(graphics, 0, yflag, &background, 10.0f);
+
 	App->render->Blit(river, 0, knight1.y - 378, &(river2.GetCurrentFrame()), 0.07f, false);
 	App->render->Blit(river, 0, knight1.y - 1, &(river1.GetCurrentFrame()), 0.07f, false);
 	//First two moving left
