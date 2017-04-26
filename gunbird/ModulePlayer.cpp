@@ -214,8 +214,6 @@ update_status ModulePlayer::Update()
 			if (beam == 3) beam = 0;
 			App->particles->AddParticle(App->particles->marionbeam_lv1[beam++], position.x + 11, position.y + 65, COLLIDER_PLAYER_SHOT, 0, -4, 420);
 			if (beam == 3) beam = 0;
-
-			App->particles->AddParticle(App->particles->coin, position.x + 10, position.y + 25, COLLIDER_COIN, 0, 0.55f);
 		}
 
 		if (powerup_lv == 1)
@@ -385,7 +383,9 @@ update_status ModulePlayer::Update()
 
 	sprintf_s(text_score, 10, "%7d", score);
 	
-	// Draw everything --------------------------------------
+	blink++;
+	if (blink == 6)
+	blink = 0;
 
 	blinkcounter++;
 	if (blinkcounter == 6)
@@ -460,13 +460,18 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 
 	if (c2->type == COLLIDER_POWERUP)
 	{
-		App->audio->sfx = App->audio->LoadSFX("assets/SFX/marionpowerup.wav");;
-		Mix_PlayChannel(-1, App->audio->sfx, 0);
+		if (powerup_lv == 0)
+		{
+			App->audio->sfx = App->audio->LoadSFX("assets/SFX/marionpowerup.wav");;
+			Mix_PlayChannel(-1, App->audio->sfx, 0);
+		}
 
 		if (powerup_lv == 1)
 		{
 			App->player->score += 2000;
 			App->particles->AddParticle(App->particles->powerupscore, position.x + 4, position.y + 4, COLLIDER_NONE);
+			App->audio->sfx = App->audio->LoadSFX("assets/SFX/MaxPower.wav");
+			Mix_PlayChannel(-1, App->audio->sfx, 0);
 		}
 
 		if (powerup_lv < 1)

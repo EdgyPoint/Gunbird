@@ -60,6 +60,7 @@ public:
 	int font_score = -1;
 	int score = 0;
 	char text_score[10];
+	int blink = 0;
 };
 
 #endif
