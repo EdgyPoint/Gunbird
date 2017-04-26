@@ -191,6 +191,8 @@ bool ModuleCastleScene::CleanUp()
 	App->textures->Unload(knight);
 	App->textures->Unload(bridge);
 	App->textures->Unload(mortar);
+	App->textures->Unload(river);
+	App->textures->Unload(trump);
 	App->player->Disable();
 	App->player2->Disable();
 	App->enemies->Disable();
