@@ -49,8 +49,6 @@ bool ModuleScoreScene::CleanUp()
 	App->player->score = 0;
 	App->player2->score = 0;
 	App->textures->Unload(graphics);
-	App->textures->Unload(App->player->ui);
-
 	/*App->player->Disable();
 	App->player2->Disable();
 	App->collision->Disable();*/
@@ -64,6 +62,7 @@ update_status ModuleScoreScene::Update()
 
 	// Draw everything --------------------------------------
 	App->render->Blit(graphics, 0, 0, &background, 0.75f); // sea and sky
+
 
 	App->render->Blit(App->player->ui, 90, 55, &App->player->p1display, 0, true);
 	App->render->Blit(App->player->ui, 90, 80, &App->player2->p2display, 0, true); // if not gives the invalid texture LOG. (player2 uses the player 1 ui texture)
@@ -80,9 +79,9 @@ update_status ModuleScoreScene::Update()
 	App->fonts->BlitText(120, 55, App->player->font_score, App->player->text_score);
 	App->fonts->BlitText(120, 79, App->player->font_score, App->player2->text_score2);
 
-	if (App->input->keyboard[SDL_SCANCODE_SPACE] && fading == false)
+	if (App->input->keyboard[SDL_SCANCODE_SPACE] && !App->fade->fading)
 	{
-		App->fade->FadeToBlack(this, App->scene_intro, 1.0f);
+		App->fade->FadeToBlack(this, App->scene_intro, 2.0f);
 	}
 	// TODO 2: make so pressing SPACE the HONDA stage is loaded
 

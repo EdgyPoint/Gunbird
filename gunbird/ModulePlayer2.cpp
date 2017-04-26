@@ -82,9 +82,11 @@ bool ModulePlayer2::Start()
 {
 	LOG("Loading player");
 
-	graphics = App->textures->Load("assets/images/Marion.png");
+	powerup_lv = 0;
+	lives = 2;
 
-	ui = App->textures->Load("assets/images/ui.png");
+	graphics = App->textures->Load("assets/images/Marion.png");
+	ui = App->textures->Load("assets/images/UI.png");
 
 	//Init UI
 	//ui = App->textures->Load("assets/images/UI.png");
@@ -102,7 +104,7 @@ bool ModulePlayer2::Start()
 	position.x = 141;
 	position.y = 320;
 
-	player_col = App->collision->AddCollider({ 0, 0, 21, 32 }, COLLIDER_PLAYER2, this);
+	player_col = App->collision->AddCollider({ 0, 0, 8, 8 }, COLLIDER_PLAYER2, this);
 
 	respawning = true;
 
@@ -114,6 +116,7 @@ bool ModulePlayer2::CleanUp()
 	LOG("Unloading player");
 
 	App->textures->Unload(graphics);
+
 	return true;
 }
 
@@ -187,7 +190,7 @@ update_status ModulePlayer2::Update()
 
 	}
 
-	if (App->input->keyboard[SDL_SCANCODE_KP_0] == KEY_STATE::KEY_REPEAT && SDL_GetTicks() >= shot && !_dying && !respawning && !stunned)
+	if (App->input->keyboard[SDL_SCANCODE_O] == KEY_STATE::KEY_REPEAT && SDL_GetTicks() >= shot && !_dying && !respawning && !stunned)
 	{
 		shot = (SDL_GetTicks() + 500);
 		if (powerup_lv == 0)
@@ -227,7 +230,7 @@ update_status ModulePlayer2::Update()
 		}
 	}
 
-	player_col->SetPos(position.x + 3, position.y);
+	player_col->SetPos(position.x + 10, position.y + 9);
 
 	if (stunned)
 	{
@@ -261,16 +264,16 @@ update_status ModulePlayer2::Update()
 			_dying = false;
 			respawning = true;
 			deathcounter = 0;
-			position.x = 151;
+			position.x = 141;
 		}
 	}
 
 	if (respawning)
 	{
-		if (App->player->godmode == false)
-		{
-			player_col->type = COLLIDER_GOD;
-		}
+		App->collision->EditMatrix(COLLIDER_PLAYER2, COLLIDER_ENEMY, false);
+		App->collision->EditMatrix(COLLIDER_PLAYER2, COLLIDER_ENEMY_SHOT, false);
+		App->collision->EditMatrix(COLLIDER_ENEMY, COLLIDER_PLAYER2, false);
+		App->collision->EditMatrix(COLLIDER_ENEMY_SHOT, COLLIDER_PLAYER2, false);
 
 		if (!out)
 		{
@@ -290,11 +293,10 @@ update_status ModulePlayer2::Update()
 		invincibilitycounter++;
 		if (invincibilitycounter == 120)
 		{
-			if (App->player->godmode == false)
-			{
-				player_col->type = COLLIDER_PLAYER2;
-			}
-			temp_invincibility = false;
+			App->collision->EditMatrix(COLLIDER_PLAYER2, COLLIDER_ENEMY, true);
+			App->collision->EditMatrix(COLLIDER_PLAYER2, COLLIDER_ENEMY_SHOT, true);
+			App->collision->EditMatrix(COLLIDER_ENEMY, COLLIDER_PLAYER2, true);
+			App->collision->EditMatrix(COLLIDER_ENEMY_SHOT, COLLIDER_PLAYER2, true);
 			invincibilitycounter = 0;
 		}
 	}
@@ -330,19 +332,19 @@ update_status ModulePlayer2::Update()
 	{
 		App->render->Blit(ui, 116, 6, &p2display, 0, true);
 
-		if (this->lives == 1)
+		if (lives == 1)
 			App->render->Blit(ui, 116, 21, &lifedisplay, 0, true);
 
-		if (this->lives == 2)
+		if (lives == 2)
 		{
 			App->render->Blit(ui, 116, 21, &lifedisplay, 0, true);
 			App->render->Blit(ui, 132, 21, &lifedisplay, 0, true);
 		}
-		App->fonts->BlitText(132, 6, App->player->font_score, text_score2);
 	}
 
 	sprintf_s(text_score2, 10, "%7d", score);
 
+	App->fonts->BlitText(132, 6, App->player->font_score, text_score2);
 
 	return UPDATE_CONTINUE;
 }
@@ -368,8 +370,10 @@ void ModulePlayer2::OnCollision(Collider* c1, Collider* c2)
 		{
 			lives -= 1;
 			_dying = true;
-
-			player_col->type = COLLIDER_GOD;
+			App->collision->EditMatrix(COLLIDER_PLAYER2, COLLIDER_ENEMY, false);
+			App->collision->EditMatrix(COLLIDER_PLAYER2, COLLIDER_ENEMY_SHOT, false);
+			App->collision->EditMatrix(COLLIDER_ENEMY, COLLIDER_PLAYER2, false);
+			App->collision->EditMatrix(COLLIDER_ENEMY_SHOT, COLLIDER_PLAYER2, false);
 
 			App->particles->AddParticle(App->particles->medium_explosion, position.x - 40, position.y - 25, COLLIDER_NONE);
 			App->audio->sfx = App->audio->LoadSFX("assets/SFX/mediumexplosion.wav");
@@ -399,21 +403,16 @@ void ModulePlayer2::OnCollision(Collider* c1, Collider* c2)
 
 		if (c2->type == COLLIDER_POWERUP)
 		{
-			if (powerup_lv == 1)
+			App->audio->sfx = App->audio->LoadSFX("assets/SFX/marionpowerup.wav");;
+			Mix_PlayChannel(-1, App->audio->sfx, 0);
+			
+			powerup_lv++;
+			if (powerup_lv > 1);
 			{
-				score += 2000;
-				App->particles->AddParticle(App->particles->powerupscore, position.x + 4, position.y + 4, COLLIDER_NONE);
-				App->audio->sfx = App->audio->LoadSFX("assets/SFX/marionmaxpowerup.wav");;
-				Mix_PlayChannel(-1, App->audio->sfx, 0);
-			}
-
-			if (powerup_lv < 1)
-			{
-				powerup_lv++;
-				App->audio->sfx = App->audio->LoadSFX("assets/SFX/marionpowerup.wav");;
-				Mix_PlayChannel(-1, App->audio->sfx, 0);
+				powerup_lv = 1;
 			}
 		}
+
 		if (c2->type == COLLIDER_COIN)
 		{
 			App->audio->sfx = App->audio->LoadSFX("assets/SFX/collectcoin.wav");

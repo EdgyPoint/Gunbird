@@ -69,7 +69,7 @@ update_status ModuleMineScene::Update()
 
 	App->render->Blit(graphics2, 0, 0.75*yflag, &background, 10.0f); // sea and sky
 	App->render->Blit(graphics, 0, yflag, &upperbackground, 10.0f);
-	if (App->input->keyboard[SDL_SCANCODE_SPACE] && fading == false || yflag > -320)
+	if ((App->input->keyboard[SDL_SCANCODE_SPACE] && fading == false || yflag > -320) && !App->fade->fading)
 	{
 		
 		App->fade->FadeToBlack(this, App->scene_score, 2.0f);

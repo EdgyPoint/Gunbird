@@ -2,11 +2,13 @@
 #include "ModuleInput.h"
 #include "ModuleRender.h"
 #include "ModuleCollision.h"
+#include "ModuleFadeToBlack.h"
 
 ModuleCollision::ModuleCollision()
 {
 	for (uint i = 0; i < MAX_COLLIDERS; ++i)
 		colliders[i] = nullptr;
+
 
 	matrix[COLLIDER_WALL][COLLIDER_WALL] = false;
 	matrix[COLLIDER_WALL][COLLIDER_PLAYER] = true;
@@ -169,6 +171,7 @@ update_status ModuleCollision::Update()
 				if (matrix[c2->type][c1->type] && c2->callback)
 					c2->callback->OnCollision(c2, c1);
 			}
+			
 		}
 	}
 
@@ -179,7 +182,7 @@ update_status ModuleCollision::Update()
 
 void ModuleCollision::DebugDraw()
 {
-	if (App->input->keyboard[SDL_SCANCODE_F1] == KEY_DOWN)
+	if (App->input->keyboard[SDL_SCANCODE_F1] == KEY_DOWN && !App->fade->fading)
 		debug = !debug;
 
 	if (debug == false)
@@ -255,15 +258,17 @@ Collider* ModuleCollision::AddCollider(SDL_Rect rect, COLLIDER_TYPE type, Module
 	{
 		if (colliders[i] == nullptr)
 		{
-			ret = new Collider(rect, type, callback);
-			colliders[i] = ret;
+			ret = colliders[i] = new Collider(rect, type, callback);
 			break;
 		}
 	}
 
 	return ret;
 }
-
+void ModuleCollision::EditMatrix(COLLIDER_TYPE col_type1, COLLIDER_TYPE col_type2, bool state)
+{
+	matrix[col_type1][col_type2] = state;
+}
 
 
 bool ModuleCollision::EraseCollider(Collider* collider)

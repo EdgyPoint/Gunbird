@@ -24,6 +24,7 @@ ModulePlayer::ModulePlayer()
 	graphics = NULL;
 	current_animation = NULL;
 	
+
 	// idle animation (arcade sprite sheet)
 	idle.PushBack({0, 64, 32, 32});
 	idle.PushBack({32, 64, 32, 32});
@@ -86,6 +87,9 @@ bool ModulePlayer::Start()
 {
 	LOG("Loading player");
 
+	powerup_lv = 0;
+	lives = 2;
+
 	graphics = App->textures->Load("assets/images/Marion.png");
 
 
@@ -121,9 +125,6 @@ bool ModulePlayer::CleanUp()
 	LOG("Unloading player");
 	powerup_lv = 0;
 	App->textures->Unload(graphics);
-	App->textures->Unload(ui);
-	App->textures->Unload(ui2);
-	App->fonts->UnLoad(font_score);
 
 	return true;
 }
@@ -133,7 +134,7 @@ update_status ModulePlayer::Update()
 {
 	int speed = 2;
 
-	if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT && !_dying && !respawning)
+	if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT && !_dying && !respawning && !App->fade->fading)
 	{
 		position.x -= speed;
 		if (position.x <= 0)
@@ -155,7 +156,7 @@ update_status ModulePlayer::Update()
 		}
 	}
 
-	if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT && !_dying && !respawning)
+	if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT && !_dying && !respawning && !App->fade->fading)
 	{
 		position.x += speed;
 		if (position.x >= 196)
@@ -178,7 +179,7 @@ update_status ModulePlayer::Update()
 		}
 	}
 
-	if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT && !_dying && !respawning)
+	if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT && !_dying && !respawning && !App->fade->fading)
 	{
 		position.y += speed;
 		if (position.y >= 288)
@@ -188,7 +189,7 @@ update_status ModulePlayer::Update()
 	
 	}
 
-	if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT && !_dying && !respawning)
+	if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT && !_dying && !respawning && !App->fade->fading)
 	{
 		position.y -= speed;
 		if (position.y <= 0)
@@ -199,7 +200,7 @@ update_status ModulePlayer::Update()
 	}
 
 
-	if (App->input->keyboard[SDL_SCANCODE_C] == KEY_STATE::KEY_DOWN && SDL_GetTicks() >= shot && !_dying && !respawning && !stunned)
+	if (App->input->keyboard[SDL_SCANCODE_C] == KEY_STATE::KEY_DOWN && SDL_GetTicks() >= shot && !_dying && !respawning && !stunned && !App->fade->fading)
 
 	{
 		shot = (SDL_GetTicks() + 500);
@@ -240,19 +241,33 @@ update_status ModulePlayer::Update()
 		}
 	}
 
-	if (App->input->keyboard[SDL_SCANCODE_F2] == KEY_STATE::KEY_DOWN && godmode == false)
+	if (App->input->keyboard[SDL_SCANCODE_F2] == KEY_STATE::KEY_DOWN && godmode == false && !App->fade->fading)
 	{
 		godmode = true;
-		player_col->type = COLLIDER_GOD;
+		App->collision->EditMatrix(COLLIDER_PLAYER, COLLIDER_ENEMY_F, false);
+		App->collision->EditMatrix(COLLIDER_PLAYER, COLLIDER_ENEMY_SHOT, false);
+		App->collision->EditMatrix(COLLIDER_ENEMY_F, COLLIDER_PLAYER, false);
+		App->collision->EditMatrix(COLLIDER_ENEMY_SHOT, COLLIDER_PLAYER, false);
+		App->collision->EditMatrix(COLLIDER_PLAYER2, COLLIDER_ENEMY_F, false);
+		App->collision->EditMatrix(COLLIDER_PLAYER2, COLLIDER_ENEMY_SHOT, false);
+		App->collision->EditMatrix(COLLIDER_ENEMY_F, COLLIDER_PLAYER2, false);
+		App->collision->EditMatrix(COLLIDER_ENEMY_SHOT, COLLIDER_PLAYER2, false);
 	}
 
-	else if (App->input->keyboard[SDL_SCANCODE_F2] == KEY_STATE::KEY_DOWN && godmode == true)
+	else if (App->input->keyboard[SDL_SCANCODE_F2] == KEY_STATE::KEY_DOWN && godmode == true && !App->fade->fading)
 	{
 		godmode = false;
-		player_col->type = COLLIDER_PLAYER;
+		App->collision->EditMatrix(COLLIDER_PLAYER, COLLIDER_ENEMY_F, true);
+		App->collision->EditMatrix(COLLIDER_PLAYER, COLLIDER_ENEMY_SHOT, true);
+		App->collision->EditMatrix(COLLIDER_ENEMY_F, COLLIDER_PLAYER, true);
+		App->collision->EditMatrix(COLLIDER_ENEMY_SHOT, COLLIDER_PLAYER, true);
+		App->collision->EditMatrix(COLLIDER_PLAYER2, COLLIDER_ENEMY_F, true);
+		App->collision->EditMatrix(COLLIDER_PLAYER2, COLLIDER_ENEMY_SHOT, true);
+		App->collision->EditMatrix(COLLIDER_ENEMY_F, COLLIDER_PLAYER2, true);
+		App->collision->EditMatrix(COLLIDER_ENEMY_SHOT, COLLIDER_PLAYER2, true);
 	}
 
-	if (App->input->keyboard[SDL_SCANCODE_F5] == KEY_STATE::KEY_DOWN)
+	if (App->input->keyboard[SDL_SCANCODE_F5] == KEY_STATE::KEY_DOWN && !App->fade->fading)
 	{
 		App->player2->Enable();
 		App->player2->out = false;
@@ -300,7 +315,10 @@ update_status ModulePlayer::Update()
 	{
 		if (godmode == false)
 		{
-			player_col->type = COLLIDER_GOD;
+			App->collision->EditMatrix(COLLIDER_PLAYER, COLLIDER_ENEMY_F, false);
+			App->collision->EditMatrix(COLLIDER_PLAYER, COLLIDER_ENEMY_SHOT, false);
+			App->collision->EditMatrix(COLLIDER_ENEMY_F, COLLIDER_PLAYER, false);
+			App->collision->EditMatrix(COLLIDER_ENEMY_SHOT, COLLIDER_PLAYER, false);
 		}
 
 		if (!out)
@@ -323,7 +341,10 @@ update_status ModulePlayer::Update()
 		{
 			if (godmode == false)
 			{
-				player_col->type = COLLIDER_PLAYER;
+				App->collision->EditMatrix(COLLIDER_PLAYER, COLLIDER_ENEMY_F, true);
+				App->collision->EditMatrix(COLLIDER_PLAYER, COLLIDER_ENEMY_SHOT, true);
+				App->collision->EditMatrix(COLLIDER_ENEMY_F, COLLIDER_PLAYER, true);
+				App->collision->EditMatrix(COLLIDER_ENEMY_SHOT, COLLIDER_PLAYER, true);
 			}
 			temp_invincibility = false;
 			invincibilitycounter = 0;
@@ -395,7 +416,10 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 		lives -= 1;
 		_dying = true;
 		
-		player_col->type = COLLIDER_GOD;
+		App->collision->EditMatrix(COLLIDER_PLAYER, COLLIDER_ENEMY_F, false);
+		App->collision->EditMatrix(COLLIDER_PLAYER, COLLIDER_ENEMY_SHOT, false);
+		App->collision->EditMatrix(COLLIDER_ENEMY_F, COLLIDER_PLAYER, false);
+		App->collision->EditMatrix(COLLIDER_ENEMY_SHOT, COLLIDER_PLAYER, false);
 
 		App->particles->AddParticle(App->particles->medium_explosion, position.x - 40, position.y - 25, COLLIDER_NONE);
 		App->audio->sfx = App->audio->LoadSFX("assets/SFX/mediumexplosion.wav");
@@ -425,20 +449,17 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 
 	if (c2->type == COLLIDER_POWERUP)
 	{
+		App->audio->sfx = App->audio->LoadSFX("assets/SFX/marionpowerup.wav");;
+		Mix_PlayChannel(-1, App->audio->sfx, 0);
+
 		if (powerup_lv == 1)
 		{
-			score += 2000;
+			App->player->score += 2000;
 			App->particles->AddParticle(App->particles->powerupscore, position.x + 4, position.y + 4, COLLIDER_NONE);
-			App->audio->sfx = App->audio->LoadSFX("assets/SFX/marionmaxpowerup.wav");;
-			Mix_PlayChannel(-1, App->audio->sfx, 0);
 		}
 
 		if (powerup_lv < 1)
-		{
-			powerup_lv++;
-			App->audio->sfx = App->audio->LoadSFX("assets/SFX/marionpowerup.wav");;
-			Mix_PlayChannel(-1, App->audio->sfx, 0);
-		}
+		powerup_lv++;
 	}
 
 	if (c2->type == COLLIDER_COIN)

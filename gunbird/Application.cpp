@@ -31,21 +31,16 @@ Application::Application()
 	modules[i++] = enemies = new ModuleEnemies();
 	modules[i++] = player = new ModulePlayer();
 	modules[i++] = player2 = new ModulePlayer2();
-	modules[i++] = fonts = new ModuleFonts();
-	modules[i++] = collision = new ModuleCollision();
 	modules[i++] = particles = new ModuleParticles();
-
+	modules[i++] = collision = new ModuleCollision();
 	modules[i++] = fade = new ModuleFadeToBlack();
-
+	modules[i++] = fonts = new ModuleFonts();
 }	
 
 Application::~Application()
 {
-	for (int i = NUM_MODULES - 1; i >= 0; --i)
-	{
+	for(int i = NUM_MODULES - 1; i >= 0; --i)
 		delete modules[i];
-		modules[i] = nullptr;
-	}
 }
 
 bool Application::Init()
@@ -78,7 +73,7 @@ update_status Application::Update()
 		ret = modules[i]->IsEnabled() ? modules[i]->PreUpdate() : UPDATE_CONTINUE;
 
 	for(int i = 0; i < NUM_MODULES && ret == UPDATE_CONTINUE; ++i)
- 		ret = modules[i]->IsEnabled() ? modules[i]->Update() : UPDATE_CONTINUE;
+		ret = modules[i]->IsEnabled() ? modules[i]->Update() : UPDATE_CONTINUE;
 
 	for(int i = 0; i < NUM_MODULES && ret == UPDATE_CONTINUE; ++i)
 		ret = modules[i]->IsEnabled() ? modules[i]->PostUpdate() : UPDATE_CONTINUE;

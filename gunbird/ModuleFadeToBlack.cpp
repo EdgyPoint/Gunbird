@@ -45,6 +45,7 @@ update_status ModuleFadeToBlack::Update()
 				to_enable->Enable();
 				total_time += total_time;
 				start_time = SDL_GetTicks();
+				fading = false;
 				current_step = fade_step::fade_from_black;
 			}
 		} break;
@@ -81,6 +82,7 @@ bool ModuleFadeToBlack::FadeToBlack(Module* module_off, Module* module_on, float
 		total_time = (Uint32)(time * 0.5f * 1000.0f);
 		to_enable = module_on;
 		to_disable = module_off;
+		fading = true;
 		ret = true;
 	}
 

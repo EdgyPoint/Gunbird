@@ -83,7 +83,6 @@ int main(int argc, char* argv[])
 	}
 
 	delete App;
-	App = nullptr;
 	LOG("Bye :)\n");
 	return main_return;
 }

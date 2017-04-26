@@ -47,6 +47,8 @@ bool ModuleIntroScene::CleanUp()
 {
 	LOG("Unloading intro scene");
 	App->textures->Unload(graphics);
+	App->scene_intro->Disable();
+	//App->collision->Disable();
 	
 	return true;
 }
@@ -60,13 +62,12 @@ update_status ModuleIntroScene::Update()
 
 	App->render->Blit(graphics, 75, 224, &(startbutton.GetCurrentFrame()), 0.01f);
 
-	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN)
+	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN && !App->fade->fading)
 	{
 		App->audio->sfx = App->audio->LoadSFX("assets/SFX/ganbaado.wav");
 		Mix_PlayChannel(-1, App->audio->sfx, 0);
-		App->fade->FadeToBlack(this, App->scene_castle, 1.0f);	
+		App->fade->FadeToBlack(this, App->scene_castle, 2.0f);	
 	}
 	
 	return UPDATE_CONTINUE;
 }
-

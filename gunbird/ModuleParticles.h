@@ -11,14 +11,13 @@
 
 struct SDL_Texture;
 struct Collider;
-enum COLLIDER_TYPE;
 
 enum ITEM_TYPE
 {
-	ITEM_NOT,
+	ITEM_NONE,
 	ITEM_POWERUP,
 	ITEM_COIN,
-	ITEM_BOMB
+	ITEM_BOMB,
 };
 
 struct Particle
@@ -51,7 +50,7 @@ public:
 	bool CleanUp();
 	void OnCollision(Collider* c1, Collider* c2);
 
-	void AddParticle(const Particle& particle, int x, int y, COLLIDER_TYPE collider_type, float speed_x = 0.0f, float speed_y = 0.0f, Uint32 delay = 0, bool using_camera = true, ITEM_TYPE item_type = ITEM_NOT);
+	void AddParticle(const Particle& particle, int x, int y, COLLIDER_TYPE collider_type, float speed_x = 0.0f, float speed_y = 0.0f, Uint32 delay = 0, bool using_camera = true, ITEM_TYPE item_type = ITEM_NONE);
 
 private:
 
@@ -76,7 +75,6 @@ public:
 	Particle presmallshot;
 	Particle powerupscore;
 	Particle coin;
-
 };
 
 #endif // __MODULEPARTICLES_H__

@@ -14,6 +14,7 @@ public:
 	update_status Update();
 	bool FadeToBlack(Module* module_off, Module* module_on, float time = 1.0f);
 	bool IsFading() const;
+	bool fading = false;
 
 private:
 

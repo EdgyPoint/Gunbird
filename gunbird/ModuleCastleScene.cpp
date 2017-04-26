@@ -103,11 +103,12 @@ bool ModuleCastleScene::Start()
 	yflag = -1357;
 	knight1 = { 0.0f,0.0f };
 	knight2 = { 0.0f, 0.0f };
+	
 	bridge_speed_y = -83;
 	mortar_speed_y = 0;
 
 
-	wall = App->collision->AddCollider(npi, COLLIDER_WALL);
+	App->collision->AddCollider(npi, COLLIDER_WALL);
 
 	App->enemies->AddEnemy(ENEMY_TYPES::BALLOON, 97,-170, 0);
 	
@@ -190,8 +191,6 @@ bool ModuleCastleScene::CleanUp()
 	App->textures->Unload(knight);
 	App->textures->Unload(bridge);
 	App->textures->Unload(mortar);
-	App->textures->Unload(river);
-	App->textures->Unload(trump);
 	App->player->Disable();
 	App->player2->Disable();
 	App->enemies->Disable();
@@ -271,14 +270,14 @@ update_status ModuleCastleScene::Update()
 
 	
 
-	if (App->input->keyboard[SDL_SCANCODE_F3] == KEY_STATE::KEY_DOWN || yflag >= -10)
+	if ((App->input->keyboard[SDL_SCANCODE_F3] == KEY_STATE::KEY_DOWN || yflag >= -10) && !App->fade->fading)
 	{
-		App->fade->FadeToBlack(this, App->scene_score, 1.0f);
+		App->fade->FadeToBlack(this, App->scene_score, 2.0f);
 		
 	}
-	if (App->input->keyboard[SDL_SCANCODE_F4] == KEY_STATE::KEY_DOWN)
+	if ((App->input->keyboard[SDL_SCANCODE_F4] == KEY_STATE::KEY_DOWN) && !App->fade->fading)
 	{
-		App->fade->FadeToBlack(this, App->scene_intro, 1.0f);
+		App->fade->FadeToBlack(this, App->scene_intro, 2.0f);
 	}
 
 	return UPDATE_CONTINUE;

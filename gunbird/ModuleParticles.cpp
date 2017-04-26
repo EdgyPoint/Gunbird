@@ -25,7 +25,6 @@ bool ModuleParticles::Start()
 	LOG("Loading particles");
 	graphics = App->textures->Load("assets/images/particles.png");
 
-	
 	marionbeam_lv1[0].anim.PushBack({ 166,67, 7, 29 });
 	marionbeam_lv1[0].anim.loop = false;
 	marionbeam_lv1[0].anim.speed = 0.3f;
@@ -78,7 +77,7 @@ bool ModuleParticles::Start()
 
 	presmallshot.anim.PushBack({ 0, 424, 8, 8 });
 	presmallshot.anim.PushBack({ 8, 424, 8, 8 });
-	presmallshot.anim.loop = true;
+	smallshot.anim.loop = true;
 	presmallshot.anim.speed = 0.3f;
 	presmallshot.life = 1;
 
@@ -171,7 +170,7 @@ bool ModuleParticles::Start()
 	small_explosion.anim.loop = false;
 	small_explosion.anim.speed = 0.5f;
 	small_explosion.life = 500;
-	
+
 	medium_explosion.anim.PushBack({ 0, 477, 106, 106 });
 	medium_explosion.anim.PushBack({ 636, 477, 106, 106 });
 	medium_explosion.anim.PushBack({ 106, 477, 106, 106 });
@@ -199,7 +198,7 @@ bool ModuleParticles::Start()
 	medium_explosion.anim.loop = false;
 	medium_explosion.anim.speed = 0.5f;
 	medium_explosion.life = 1000;
-	
+
 	playercollision.anim.PushBack({ 0, 896, 31, 31 });
 	playercollision.anim.PushBack({ 31, 896, 31, 31 });
 	playercollision.anim.PushBack({ 62, 896, 31, 31 });
@@ -212,7 +211,7 @@ bool ModuleParticles::Start()
 	playercollision.anim.loop = false;
 	playercollision.anim.speed = 0.5f;
 	playercollision.life = 450;
-	
+
 	playerstunned.anim.PushBack({ 279, 896, 28, 20});
 	playerstunned.anim.PushBack({ 307, 896, 28, 20 });
 	playerstunned.anim.PushBack({ 335, 896, 28, 20 });
@@ -223,7 +222,7 @@ bool ModuleParticles::Start()
 	playerstunned.anim.loop = true;
 	playerstunned.anim.speed = 0.5f;
 	playerstunned.life = 1000;
-	
+
 	magicspark[0].anim.PushBack({ 168, 0, 11, 11 });
 	magicspark[0].anim.PushBack({ 183, 0, 11, 11 });
 	magicspark[0].anim.PushBack({ 198, 0, 11, 11 });
@@ -316,7 +315,6 @@ update_status ModuleParticles::Update()
 		if (p->Update() == false)
 		{
 			delete p;
-			p = nullptr;
 			active[i] = nullptr;
 		}
 		else if (SDL_GetTicks() >= p->born)
@@ -427,6 +425,7 @@ bool Particle::Update()
 	position.y += speed.y;
 
 	if (itemtype == ITEM_POWERUP)
+
 	{
 		if (position.x < 10 || position.x > 192)
 		{
@@ -437,8 +436,6 @@ bool Particle::Update()
 			speed.y = speed.y * -1;
 		}
 	}
-
-
 
 	if (collider != nullptr && SDL_GetTicks() >= born)
 		collider->SetPos(position.x, position.y);

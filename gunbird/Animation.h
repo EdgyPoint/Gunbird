@@ -2,7 +2,7 @@
 #define __ANIMATION_H__
 
 #include "SDL/include/SDL_rect.h"
-#define MAX_FRAMES 30
+#define MAX_FRAMES 25
 
 class Animation
 {
@@ -20,6 +20,7 @@ public:
 
 	void PushBack(const SDL_Rect& rect)
 	{
+		if(last_frame <= MAX_FRAMES)
 		frames[last_frame++] = rect;
 	}
 
