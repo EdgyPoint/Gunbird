@@ -1,0 +1,7 @@
+- Summary of the issue should be in its title.
+- Type is not that important (an art/animation bug is pretty much the same).
+- An A severity bug makes the game crash. B severity bug doesn't make the game crash but doesnt let you move forward. C1 severity bugs are not game stoppers but make the game dont work as it should. Finally, C2 bugs are just aesthetic.
+- Steps to reproduce should be as much precise as possible, in order to make bugfixing easier.
+- The actual result should be clear, and screenshots/gifs/videos are extremely helpful.
+- Expected result does not need to be extremely precise, but it should exist.
+- The build where the bug happens needs to be written.
