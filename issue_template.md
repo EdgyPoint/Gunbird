@@ -1,4 +1,3 @@
-**Summary: **  
 **Type: **  
 **Severity: **  
 **Steps to Reproduce: **  
