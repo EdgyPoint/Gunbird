@@ -44,7 +44,7 @@ class ModuleParticles : public Module
 public:
 	ModuleParticles();
 	~ModuleParticles();
-
+	bool Init();
 	bool Start();
 	update_status Update();
 	bool CleanUp();

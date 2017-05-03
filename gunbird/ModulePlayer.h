@@ -20,6 +20,7 @@ public:
 	bool Start();
 	update_status Update();
 	bool CleanUp();
+	void shootburst();
 	void OnCollision(Collider* c1, Collider* c2);
 
 public:
@@ -40,27 +41,13 @@ public:
 	Animation tilting; //used for stun
 	Animation startbutton; //part of the UI
 	iPoint position;
-	int transition = 0;
-	int beam = 0;
-	int powerup_lv = 0;
-	bool godmode = false;
-	bool _dying = false;
-	bool respawning = false;
-	bool temp_invincibility = false;
-	bool stunned = false;
-	int invincibilitycounter = 0;
-	int respawncounter = 0;
-	int deathcounter = 0;
-	int stuncounter = 0;
-	int magicsparks = 0;
-	int blinkcounter = 0;
+	int transition, beam, powerup_lv, invincibilitycounter, respawncounter, deathcounter, stuncounter, magicsparks, blinkcounter, score, blink = 0;
+	bool godmode, _dying, respawning, temp_invincibility, stunned, shooting = false;
 	int lives = 2;
 	bool out = false;
 	uint shot;
 	int font_score = -1;
-	int score = 0;
 	char text_score[10];
-	int blink = 0;
 };
 
 #endif

@@ -20,10 +20,8 @@ ModuleParticles::~ModuleParticles()
 {}
 
 // Load assets
-bool ModuleParticles::Start()
+bool ModuleParticles::Init()
 {
-	LOG("Loading particles");
-	graphics = App->textures->Load("assets/images/particles.png");
 
 	marionbeam_lv1[0].anim.PushBack({ 166,67, 7, 29 });
 	marionbeam_lv1[0].anim.loop = false;
@@ -281,6 +279,13 @@ bool ModuleParticles::Start()
 	powerupscore.anim.speed = 0.1f;
 	powerupscore.life = 1000;
 
+	return true;
+}
+
+bool ModuleParticles::Start()
+{
+	LOG("Loading particles");
+	graphics = App->textures->Load("assets/images/particles.png");
 	return true;
 }
 

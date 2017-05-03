@@ -42,21 +42,11 @@ public:
 	Animation dying;
 	Animation tilting; //used for stun
 	iPoint position;
-	int transition = 0;
-	int powerup_lv = 0;
-	bool _dying = false;
-	bool respawning = false;
-	bool temp_invincibility = false;
-	bool stunned = false;
-	int invincibilitycounter = 0;
-	int respawncounter = 0;
-	int deathcounter = 0;
-	int stuncounter = 0;
-	int magicsparks = 0;
+	int transition, powerup_lv, invincibilitycounter, respawncounter, deathcounter, stuncounter, magicsparks, score = 0;
+	bool _dying, respawning, temp_invincibility, stunned = false;
 	int lives = 2;
 	bool out = true;
 	char text_score2[10];
-	int score = 0;
 };
 
 #endif
