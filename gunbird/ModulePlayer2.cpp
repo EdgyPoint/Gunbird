@@ -123,6 +123,14 @@ bool ModulePlayer2::CleanUp()
 // Update: draw background
 update_status ModulePlayer2::Update()
 {
+	if (!shooting && poweruping)
+	{
+		powerup_lv++;
+		poweruping = false;
+		if (powerup_lv == MAX_LEVEL)
+			powerup_lv = MAX_LEVEL - 1;
+	}
+
 	int speed = 2;
 
 	if (App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_REPEAT && !_dying && !respawning)
@@ -190,36 +198,26 @@ update_status ModulePlayer2::Update()
 
 	}
 
-	if (App->input->keyboard[SDL_SCANCODE_KP_0] == KEY_STATE::KEY_DOWN && SDL_GetTicks() >= shot && !_dying && !respawning && !stunned)
+	if (App->input->keyboard[SDL_SCANCODE_KP_0] == KEY_STATE::KEY_DOWN && !_dying && !respawning && !stunned)
 
 	{
-		shot = (SDL_GetTicks() + 500);
-		if (powerup_lv == 0)
+		if (!shooting)
 		{
-			App->particles->AddParticle(App->particles->marionbeam_lv1[beam++], position.x + 11, position.y - 25, COLLIDER_PLAYER2_SHOT);
-			if (beam == 3) beam = 0;
-			App->particles->AddParticle(App->particles->marionbeam_lv1[beam++], position.x + 11, position.y + 5, COLLIDER_PLAYER2_SHOT, 0, -4, 140);
-			if (beam == 3) beam = 0;
-			App->particles->AddParticle(App->particles->marionbeam_lv1[beam++], position.x + 11, position.y + 35, COLLIDER_PLAYER2_SHOT, 0, -4, 280);
-			if (beam == 3) beam = 0;
-			App->particles->AddParticle(App->particles->marionbeam_lv1[beam++], position.x + 11, position.y + 65, COLLIDER_PLAYER2_SHOT, 0, -4, 420);
-			if (beam == 3) beam = 0;
+			shot = SDL_GetTicks();
+
+			App->audio->sfx = App->audio->LoadSFX("assets/SFX/Marion Shot.wav");
+			Mix_PlayChannel(-1, App->audio->sfx, 0);
 		}
 
-		if (powerup_lv == 1)
-		{
-			App->particles->AddParticle(App->particles->marionbeam_lv2[beam++], position.x + 11, position.y - 25, COLLIDER_PLAYER2_SHOT);
-			if (beam == 3) beam = 0;
-			App->particles->AddParticle(App->particles->marionbeam_lv2[beam++], position.x + 11, position.y + 5, COLLIDER_PLAYER2_SHOT, 0, -4, 140);
-			if (beam == 3) beam = 0;
-			App->particles->AddParticle(App->particles->marionbeam_lv2[beam++], position.x + 11, position.y + 35, COLLIDER_PLAYER2_SHOT, 0, -4, 280);
-			if (beam == 3) beam = 0;
-			App->particles->AddParticle(App->particles->marionbeam_lv2[beam++], position.x + 11, position.y + 65, COLLIDER_PLAYER2_SHOT, 0, -4, 420);
-			if (beam == 3) beam = 0;
-		}
-		App->audio->sfx = App->audio->LoadSFX("assets/SFX/Marion Shot.wav");
-		Mix_PlayChannel(-1, App->audio->sfx, 0);
+		shooting = true;
 	}
+
+	//Adding all 4 particles
+	if (shot <= SDL_GetTicks() && shooting)
+		shootburst(powerup_lv);
+
+
+
 
 	if (App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_IDLE
 		&& App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_IDLE)
@@ -350,6 +348,28 @@ update_status ModulePlayer2::Update()
 	return UPDATE_CONTINUE;
 }
 
+void ModulePlayer2::shootburst(int level)
+{
+	switch (level)
+	{
+	case 0:
+		App->particles->AddParticle(App->particles->marionbeam_lv1[beam++], position.x + 11, position.y - 25, COLLIDER_PLAYER_SHOT);
+		break;
+	case 1:
+		App->particles->AddParticle(App->particles->marionbeam_lv2[beam++], position.x + 7, position.y - 25, COLLIDER_PLAYER_SHOT);
+		break;
+	}
+
+	shot += MARION_RELOAD;
+	if (beam == 3) beam = 0;
+	burst_counter++;
+	if (burst_counter == 4)
+	{
+		burst_counter = 0;
+		shooting = false;
+	}
+}
+
 void ModulePlayer2::OnCollision(Collider* c1, Collider* c2)
 {
 	if (c2->type == COLLIDER_PLAYER2_SHOT)
@@ -407,11 +427,7 @@ void ModulePlayer2::OnCollision(Collider* c1, Collider* c2)
 			App->audio->sfx = App->audio->LoadSFX("assets/SFX/marionpowerup.wav");;
 			Mix_PlayChannel(-1, App->audio->sfx, 0);
 			
-			powerup_lv++;
-			if (powerup_lv > 1);
-			{
-				powerup_lv = 1;
-			}
+			poweruping = true;
 		}
 
 		if (c2->type == COLLIDER_COIN)

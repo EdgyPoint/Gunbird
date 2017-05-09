@@ -7,6 +7,8 @@
 #include "p2Point.h"
 #include "ModuleCollision.h"
 
+#define MAX_LEVEL 2
+#define MARION_RELOAD 120
 
 struct SDL_Texture;
 struct Collider;
@@ -20,7 +22,8 @@ public:
 	bool Start();
 	update_status Update();
 	bool CleanUp();
-	void shootburst();
+	void shootburst(int level);
+	void to_powerup();
 	void OnCollision(Collider* c1, Collider* c2);
 
 public:
@@ -41,8 +44,8 @@ public:
 	Animation tilting; //used for stun
 	Animation startbutton; //part of the UI
 	iPoint position;
-	int transition, beam, powerup_lv, invincibilitycounter, respawncounter, deathcounter, stuncounter, magicsparks, blinkcounter, score, blink = 0;
-	bool godmode, _dying, respawning, temp_invincibility, stunned, shooting = false;
+	int transition, beam, powerup_lv, invincibilitycounter, respawncounter, burst_counter, deathcounter, stuncounter, magicsparks, blinkcounter, score, blink = 0;
+	bool godmode, _dying, respawning, temp_invincibility, stunned, shooting, poweruping = false;
 	int lives = 2;
 	bool out = false;
 	uint shot;
