@@ -67,17 +67,17 @@ update_status ModuleScoreScene::Update()
 	App->render->Blit(App->player->ui, 90, 55, &App->player->p1display, 0, true);
 	App->render->Blit(App->player->ui, 90, 80, &App->player2->p2display, 0, true); // if not gives the invalid texture LOG. (player2 uses the player 1 ui texture)
 
-	App->fonts->BlitText(120, 79, App->player->font_score, "      0");
-	App->fonts->BlitText(120, 103, App->player->font_score, "      0");
-	App->fonts->BlitText(120, 127, App->player->font_score, "      0");
-	App->fonts->BlitText(120, 151, App->player->font_score, "      0");
-	App->fonts->BlitText(120, 175, App->player->font_score, "      0");
-	App->fonts->BlitText(120, 199, App->player->font_score, "      0");
-	App->fonts->BlitText(120, 223, App->player->font_score, "      0");
-	App->fonts->BlitText(120, 247, App->player->font_score, "      0");
-	App->fonts->BlitText(120, 271, App->player->font_score, "      0");
-	App->fonts->BlitText(120, 55, App->player->font_score, App->player->text_score);
-	App->fonts->BlitText(120, 79, App->player->font_score, App->player2->text_score2);
+	App->fonts->BlitText(120, 79, App->player->font_scorescene, "      0");
+	App->fonts->BlitText(120, 103, App->player->font_scorescene, "      0");
+	App->fonts->BlitText(120, 127, App->player->font_scorescene, "      0");
+	App->fonts->BlitText(120, 151, App->player->font_scorescene, "      0");
+	App->fonts->BlitText(120, 175, App->player->font_scorescene, "      0");
+	App->fonts->BlitText(120, 199, App->player->font_scorescene, "      0");
+	App->fonts->BlitText(120, 223, App->player->font_scorescene, "      0");
+	App->fonts->BlitText(120, 247, App->player->font_scorescene, "      0");
+	App->fonts->BlitText(120, 271, App->player->font_scorescene, "      0");
+	App->fonts->BlitText(120, 55, App->player->font_scorescene, App->player->text_score);
+	App->fonts->BlitText(120, 79, App->player->font_scorescene, App->player2->text_score2);
 
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] && !App->fade->fading)
 	{

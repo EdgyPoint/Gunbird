@@ -114,6 +114,7 @@ bool ModulePlayer::Start()
 	player_col = App->collision->AddCollider({ 0, 0, 8, 8 }, COLLIDER_PLAYER, this);
 
 	font_score = App->fonts->Load("assets/images/fonts.png", " 1234567890", 1, 1);
+	font_scorescene = App->fonts->Load("assets/images/fonts2.png", " 1234567890", 1, 1);
 
 	respawning = true;
 

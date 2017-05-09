@@ -50,6 +50,7 @@ public:
 	bool out = false;
 	uint shot;
 	int font_score = -1;
+	int font_scorescene = -1;
 	char text_score[10];
 };
 
