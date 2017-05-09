@@ -1,6 +1,10 @@
 # Gunbird
 
 This is a tribute to Gunbird, an arcade game developed by Psikyo. This project is used for the subject Project 1 in Game Development and Design in the CITM, from the Politecnical University of Catalonia.
+![](http://i.imgur.com/sazLASs.png)
+
+Check a brief gameplay video of our Gunbird tribute!
+
 
 # Installation
 
