@@ -6,6 +6,7 @@
 #include "ModuleFonts.h"
 #include "ModuleAudio.h"
 #include "ModuleIntroScene.h"
+#include "ModuleVillageScene.h"
 #include "ModuleCastleScene.h"
 #include "ModuleMineScene.h"
 #include "ModuleScoreScene.h"
@@ -25,6 +26,7 @@ Application::Application()
 	modules[i++] = textures = new ModuleTextures();
 	modules[i++] = audio = new ModuleAudio();
 	modules[i++] = scene_intro = new ModuleIntroScene();
+	modules[i++] = scene_village = new ModuleVillageScene();
 	modules[i++] = scene_castle = new ModuleCastleScene();
 	modules[i++] = scene_mine = new ModuleMineScene();
 	modules[i++] = scene_score = new ModuleScoreScene();
@@ -49,6 +51,7 @@ bool Application::Init()
 
 	// Player will be enabled on the first update of a new scene
 	scene_castle->Disable();
+	scene_village->Disable();
 	scene_mine->Disable();
 	scene_score->Disable();
 	player->Disable();

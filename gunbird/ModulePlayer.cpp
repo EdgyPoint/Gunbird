@@ -11,6 +11,7 @@
 #include "ModuleCollision.h"
 #include "ModuleFadeToBlack.h"
 #include "ModuleIntroScene.h"
+#include"ModuleVillageScene.h"
 #include "ModuleCastleScene.h"
 #include "ModuleScoreScene.h"
 #include "ModulePlayer.h"

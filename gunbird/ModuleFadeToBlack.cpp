@@ -4,6 +4,7 @@
 #include "ModuleFadeToBlack.h"
 #include "ModuleRender.h"
 #include "ModuleIntroScene.h"
+#include "ModuleVillageScene.h"
 #include "ModuleCastleScene.h"
 #include "ModuleMineScene.h"
 #include "ModuleScoreScene.h"

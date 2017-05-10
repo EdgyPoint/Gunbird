@@ -3,6 +3,7 @@
 #include "ModuleParticles.h"
 #include "ModulePlayer.h"
 #include "ModuleCastleScene.h"
+#include "ModuleVillageScene.h"
 
 #include "Enemy_Redbomb.h"
 #include "ModuleCollision.h"

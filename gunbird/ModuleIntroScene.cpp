@@ -5,6 +5,7 @@
 #include "ModuleInput.h"
 #include "ModuleRender.h"
 #include "ModuleIntroScene.h"
+#include "ModuleVillageScene.h"
 #include "ModuleCastleScene.h"
 #include "ModuleFadeToBlack.h"
 #include "ModuleScoreScene.h"
@@ -66,7 +67,7 @@ update_status ModuleIntroScene::Update()
 	{
 		App->audio->sfx = App->audio->LoadSFX("assets/SFX/ganbaado.wav");
 		Mix_PlayChannel(-1, App->audio->sfx, 0);
-		App->fade->FadeToBlack(this, App->scene_castle, 2.0f);	
+		App->fade->FadeToBlack(this, App->scene_village, 2.0f);	
 	}
 	
 	return UPDATE_CONTINUE;
