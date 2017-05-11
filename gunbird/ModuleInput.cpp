@@ -184,6 +184,21 @@ void ModuleInput::inputGamepad() {
 		if (gamepad.LEFT_AXIS_POS_Y == BUTTON_REPEAT || gamepad.LEFT_AXIS_POS_X == BUTTON_DOWN)
 			gamepad.LEFT_AXIS_POS_Y = BUTTON_UP;
 		else
-			gamepad.LEFT_AXIS_POS_Y = BUTTON_IDLE;
+			gamepad.LEFT_AXIS_POS_Y  = BUTTON_IDLE;
+	}
+
+	//LEFT STICK AXIS Y NEGATIVE
+	if (SDL_GameControllerGetAxis(controller, SDL_CONTROLLER_AXIS_LEFTY) < -8191) {
+		if (gamepad.LEFT_AXIS_NEG_Y == BUTTON_IDLE)
+			gamepad.LEFT_AXIS_NEG_Y = BUTTON_DOWN;
+		else
+			gamepad.LEFT_AXIS_NEG_Y = BUTTON_IDLE;
+	}
+	else
+	{
+		if (gamepad.LEFT_AXIS_NEG_Y == BUTTON_REPEAT || gamepad.LEFT_AXIS_POS_X == BUTTON_DOWN)
+			gamepad.LEFT_AXIS_NEG_Y = BUTTON_UP;
+		else
+		gamepad.LEFT_AXIS_NEG_Y = BUTTON_IDLE;
 	}
 }

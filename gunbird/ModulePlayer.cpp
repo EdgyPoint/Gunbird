@@ -145,7 +145,8 @@ update_status ModulePlayer::Update()
 
 	int speed = 2;
 
-	if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT && !_dying && !respawning && !App->fade->fading)
+	if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT || App->input->gamepad.LEFT_AXIS_NEG_X == KEY_STATE::KEY_REPEAT)
+	if (!_dying && !respawning && !App->fade->fading)
 	{
 		position.x -= speed;
 		if (position.x <= 0)
@@ -210,18 +211,20 @@ update_status ModulePlayer::Update()
 	
 	}
 
-
-	if (App->input->keyboard[SDL_SCANCODE_C] == KEY_STATE::KEY_DOWN && !_dying && !respawning && !stunned && !App->fade->fading)
+	if (App->input->keyboard[SDL_SCANCODE_C] == KEY_STATE::KEY_DOWN || App->input->gamepad.A == KEY_STATE::KEY_DOWN)
 	{
-		if (!shooting)
+		if (!_dying && !respawning && !stunned && !App->fade->fading)
 		{
-			shot = SDL_GetTicks();
+			if (!shooting)
+			{
+				shot = SDL_GetTicks();
 
-			App->audio->sfx = App->audio->LoadSFX("assets/SFX/Marion Shot.wav");
-			Mix_PlayChannel(-1, App->audio->sfx, 0);
+				App->audio->sfx = App->audio->LoadSFX("assets/SFX/Marion Shot.wav");
+				Mix_PlayChannel(-1, App->audio->sfx, 0);
+			}
+
+			shooting = true;
 		}
-
-		shooting = true;
 	}
 
 	//Adding all 4 particles
