@@ -1,6 +1,6 @@
-## Welcome to our Web Page!
+## Gunbird tribute by EdgyPoint
 
-You can use the [editor on GitHub](https://github.com/EdgyPoint/Gunbird/edit/gh-pages/README.md) to maintain and preview the content for your website in Markdown files.
+Gunbird is a shoot'em up like game developed by Psikyo and released in japanese arcade machines in 1994. 
 
 Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
 
