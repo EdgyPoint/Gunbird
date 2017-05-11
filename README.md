@@ -1,6 +1,6 @@
 ## Gunbird tribute by EdgyPoint
 
-Gunbird is a shoot'em up like game developed by Psikyo and released in japanese arcade machines in 1994. 
+Gunbird is a shoot'em up like game developed by Psikyo and released in japanese arcade machines in 1994. Soon in 1998, Gunbird would receive a sequel and a few years later (2002 and 2003) it got to the European and American market respectively. 
 
 Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
 
