@@ -31,7 +31,7 @@ public:
 	SDL_Rect background2;
 	SDL_Rect npi;
 
-	int yflag;
+	float yflag;
 	int xflag;
 	int track_repeat;
 	float ycounter;

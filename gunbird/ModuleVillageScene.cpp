@@ -91,12 +91,7 @@ bool ModuleVillageScene::CleanUp()
 // Update: draw background
 update_status ModuleVillageScene::Update()
 {
-	ycounter++;
-	if (ycounter == 3)
-	{
-		yflag++;
-		ycounter = 0;
-	}
+	yflag += 0.4;
 
 	App->render->Blit(graphics, -320, yflag, &background1, 10.0f);
 	App->render->Blit(graphics2, -320, yflag, &background1, 10.0f);
