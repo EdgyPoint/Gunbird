@@ -34,7 +34,7 @@ public:
 	int yflag;
 	int xflag;
 	int track_repeat;
-	int ycounter;
+	float ycounter;
 
 };
 
