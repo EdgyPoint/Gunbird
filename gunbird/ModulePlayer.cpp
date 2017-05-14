@@ -426,10 +426,20 @@ void ModulePlayer::shootburst(int level)
 	switch (level)
 	{
 	case 0:
-		App->particles->AddParticle(App->particles->marionbeam_lv1[beam++], position.x + 11, position.y - 25, COLLIDER_PLAYER_SHOT);
+		App->particles->AddParticle(App->particles->marionbeam_lv1[beam++], position.x - 3, position.y, COLLIDER_PLAYER_SHOT);
 		break;
 	case 1:
-		App->particles->AddParticle(App->particles->marionbeam_lv2[beam++], position.x + 7, position.y - 25, COLLIDER_PLAYER_SHOT);
+		App->particles->AddParticle(App->particles->marionbeam_lv2[beam++], position.x - 7, position.y, COLLIDER_PLAYER_SHOT);
+		break;
+	case 2:
+		App->particles->AddParticle(App->particles->marionbeam_lv1[beam], position.x - 3, position.y, COLLIDER_PLAYER_SHOT);
+		App->particles->AddParticle(App->particles->marionbeamleft_lv1[beam], position.x - 6, position.y, COLLIDER_PLAYER_SHOT, -1.75f);
+		App->particles->AddParticle(App->particles->marionbeamright_lv1[beam++], position.x + 2, position.y, COLLIDER_PLAYER_SHOT, 1.75f);
+		break;
+	case 3:
+		App->particles->AddParticle(App->particles->marionbeam_lv2[beam], position.x - 2, position.y, COLLIDER_PLAYER_SHOT);
+		App->particles->AddParticle(App->particles->marionbeamleft_lv2[beam], position.x - 7, position.y, COLLIDER_PLAYER_SHOT, -1.75f);
+		App->particles->AddParticle(App->particles->marionbeamright_lv2[beam++], position.x + 3, position.y, COLLIDER_PLAYER_SHOT, 1.75f);
 		break;
 	}
 

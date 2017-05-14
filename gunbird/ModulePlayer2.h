@@ -7,7 +7,6 @@
 #include "p2Point.h"
 #include "ModuleCollision.h"
 
-#define MAX_LEVEL 2
 #define MARION_RELOAD 120
 
 struct SDL_Texture;
