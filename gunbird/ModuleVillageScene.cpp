@@ -57,7 +57,7 @@ bool ModuleVillageScene::Start()
 	ycounter = 0;
 	cinematic = false;
 	timerup = false;
-	
+
 	graphics = App->textures->Load("assets/images/backgrounds/Village lower background.png");
 	graphics2 = App->textures->Load("assets/images/backgrounds/Village upper background.png");
 	graphics3 = App->textures->Load("assets/images/backgrounds/Village lower train background.png");
@@ -78,7 +78,13 @@ bool ModuleVillageScene::Start()
 	//--Adding Window Guns--
 	App->enemies->AddEnemy(ENEMY_TYPES::WINDOWGUN, 26, -122, 0);
 
-	return true; 
+	return true;
+}
+
+bool ModuleVillageScene::CleanUp()
+{
+	LOG("Unloading castle scene");
+		
 	App->enemies->Disable();
 	App->particles->Disable();
 	App->collision->Disable();
@@ -86,7 +92,6 @@ bool ModuleVillageScene::Start()
 	App->textures->Unload(graphics2);
 	App->textures->Unload(graphics3);
 	App->textures->Unload(graphics4);
-
 
 	return true;
 }
