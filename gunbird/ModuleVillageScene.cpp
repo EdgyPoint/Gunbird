@@ -53,7 +53,10 @@ bool ModuleVillageScene::Start()
 	App->enemies->Enable();
 
 	yflag = -5312;
+	xflag = -320;
 	ycounter = 0;
+	cinematic = false;
+	timerup = false;
 	
 	graphics = App->textures->Load("assets/images/backgrounds/Village lower background.png");
 	graphics2 = App->textures->Load("assets/images/backgrounds/Village upper background.png");
@@ -91,10 +94,41 @@ bool ModuleVillageScene::CleanUp()
 // Update: draw background
 update_status ModuleVillageScene::Update()
 {
-	yflag += 0.4;
 
-	App->render->Blit(graphics, -320, yflag, &background1, 10.0f);
-	App->render->Blit(graphics2, -320, yflag, &background1, 10.0f);
+	if(yflag <= -4350)
+	{
+		yflag += 0.4;
+	}
+	if (yflag >= -4350 && yflag <= -3904 && xflag < -129)
+	{
+		xflag += 0.66;
+		yflag += 0.4;
+	}
+	if (yflag >= -3904 && !cinematic)
+	{
+		if (!timerup)
+		{
+			timer = SDL_GetTicks() + 3500;
+			timerup = true;
+		}
+		if (SDL_GetTicks() > timer)
+		{
+			cinematic = true;
+		}
+	}
+	
+	if (xflag < -60 && cinematic)
+	{
+		xflag += 0.66;
+		yflag += 0.4;
+	}
+
+	
+
+
+
+	App->render->Blit(graphics, xflag, yflag, &background1, 10.0f);
+	App->render->Blit(graphics2,xflag, yflag, &background1, 10.0f);
 	
 
 	return UPDATE_CONTINUE;
