@@ -58,7 +58,7 @@ bool ModuleVillageScene::Start()
 	cinematic = false;
 	timerup = false;
 	on_rails = false;
-	
+
 	graphics = App->textures->Load("assets/images/backgrounds/Village lower background.png");
 	graphics2 = App->textures->Load("assets/images/backgrounds/Village upper background.png");
 	graphics3 = App->textures->Load("assets/images/backgrounds/Village lower train background.png");
@@ -67,19 +67,25 @@ bool ModuleVillageScene::Start()
 
 	App->collision->AddCollider(npi, COLLIDER_WALL);
 
-	
+	//---ENEMIES---
+
+	//--Adding Balloons--
+	App->enemies->AddEnemy(ENEMY_TYPES::BALLOON, 50, 20, 0);
+	App->enemies->AddEnemy(ENEMY_TYPES::BALLOON, 150, -50, 0);
+
+	//--Adding Rotating Turrets--
+	App->enemies->AddEnemy(ENEMY_TYPES::ROTATINGTURRET, 20, -70, 0);
+
+	//--Adding Window Guns--
+	App->enemies->AddEnemy(ENEMY_TYPES::WINDOWGUN, 26, -122, 0);
 
 	return true;
 }
 
-// UnLoad assets
 bool ModuleVillageScene::CleanUp()
 {
-	LOG("Unloading Village scene");
-
-	
-	App->player->Disable();
-	App->player2->Disable();
+	LOG("Unloading castle scene");
+		
 	App->enemies->Disable();
 	App->particles->Disable();
 	App->collision->Disable();
@@ -87,7 +93,6 @@ bool ModuleVillageScene::CleanUp()
 	App->textures->Unload(graphics2);
 	App->textures->Unload(graphics3);
 	App->textures->Unload(graphics4);
-
 
 	return true;
 }
