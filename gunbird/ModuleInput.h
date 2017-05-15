@@ -3,7 +3,9 @@
 
 #include "Module.h"
 #include "Globals.h"
+#include "p2Point.h"
 #include "SDL\include\SDL_scancode.h"
+#include "SDL/include/SDL_gamecontroller.h"
 
 #define MAX_KEYS 300
 
@@ -15,6 +17,17 @@ enum KEY_STATE
 	KEY_UP
 };
 
+struct Gamepad
+{
+	p2Point<float> left_joystick;
+	bool f1_button;
+	bool f2_button;
+	bool f3_button;
+	bool f4_button;
+	bool f5_button;
+	bool c_button;
+	bool space_button;
+};
 
 class ModuleInput : public Module
 {
@@ -29,6 +42,10 @@ public:
 
 public:
 	KEY_STATE keyboard[MAX_KEYS];
+	SDL_GameController* Controller = nullptr;
+		Gamepad controller1;
+
+		bool controller_connected;
 };
 
 #endif // __ModuleInput_H__

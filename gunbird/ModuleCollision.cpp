@@ -182,7 +182,7 @@ update_status ModuleCollision::Update()
 
 void ModuleCollision::DebugDraw()
 {
-	if (App->input->keyboard[SDL_SCANCODE_F1] == KEY_DOWN && !App->fade->fading)
+	if ((App->input->keyboard[SDL_SCANCODE_F1] == KEY_DOWN || App->input->controller1.f1_button == KEY_DOWN) && !App->fade->fading)
 		debug = !debug;
 
 	if (debug == false)

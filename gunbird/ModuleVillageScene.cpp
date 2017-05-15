@@ -129,11 +129,9 @@ update_status ModuleVillageScene::Update()
 		{
 			timer = SDL_GetTicks() + 2000;
 			timerup = true;
+
 		}
-		if (SDL_GetTicks() > timer)
-		{
-			yflag += 3;
-		}
+		
 	}
 
 	
@@ -143,6 +141,15 @@ update_status ModuleVillageScene::Update()
 	App->render->Blit(graphics, xflag, yflag, &background1, 10.0f);
 	App->render->Blit(graphics2,xflag, yflag, &background1, 10.0f);
 	
+	if ((App->input->keyboard[SDL_SCANCODE_F3] == KEY_STATE::KEY_DOWN || yflag >= -10 || App->input->controller1.f3_button == KEY_DOWN) && !App->fade->fading)
+	{
+		App->fade->FadeToBlack(this, App->scene_score, 2.0f);
+
+	}
+	if ((App->input->keyboard[SDL_SCANCODE_F4] == KEY_STATE::KEY_DOWN || App->input->controller1.f4_button == KEY_DOWN) && !App->fade->fading)
+	{
+		App->fade->FadeToBlack(this, App->scene_intro, 2.0f);
+	}
 
 	return UPDATE_CONTINUE;
 }

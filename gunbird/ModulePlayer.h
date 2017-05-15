@@ -52,6 +52,10 @@ public:
 	int font_score = -1;
 	int font_scorescene = -1;
 	char text_score[10];
+	bool joystick_up;
+	bool joystick_down;
+	bool joystick_left;
+	bool joystick_right;
 };
 
 #endif
