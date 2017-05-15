@@ -38,6 +38,9 @@ public:
 	bool cinematic;
 	int timer;
 	bool timerup;
+	bool on_rails;
+	bool going_right;
+	bool going_left;
 
 };
 

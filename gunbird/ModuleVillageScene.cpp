@@ -57,6 +57,7 @@ bool ModuleVillageScene::Start()
 	ycounter = 0;
 	cinematic = false;
 	timerup = false;
+	on_rails = false;
 	
 	graphics = App->textures->Load("assets/images/backgrounds/Village lower background.png");
 	graphics2 = App->textures->Load("assets/images/backgrounds/Village upper background.png");
@@ -94,33 +95,45 @@ bool ModuleVillageScene::CleanUp()
 // Update: draw background
 update_status ModuleVillageScene::Update()
 {
-
-	if(yflag <= -4350)
+	if (!on_rails)
 	{
-		yflag += 0.4;
-	}
-	if (yflag >= -4350 && yflag <= -3904 && xflag < -129)
-	{
-		xflag += 0.66;
-		yflag += 0.4;
-	}
-	if (yflag >= -3904 && !cinematic)
-	{
-		if (!timerup)
+		if (yflag <= -4350)
 		{
-			timer = SDL_GetTicks() + 3500;
+			yflag += 0.4;
+		}
+		if (yflag >= -4350 && xflag < -129)
+		{
+			xflag += 0.66;
+			yflag += 0.4;
+		}
+		if (yflag >= -4234 && !cinematic)
+		{
+			if (!timerup)
+			{
+				timer = SDL_GetTicks() + 3500;
+				timerup = true;
+			}
+			if (SDL_GetTicks() > timer)
+			{
+				cinematic = true;
+			}
+		}
+
+		if (xflag < -60 && cinematic)
+		{
+			xflag += 0.66;
+			yflag += 0.4;
+			timerup = false;
+		}
+		if (xflag >= -60 && !timerup)
+		{
+			timer = SDL_GetTicks() + 2000;
 			timerup = true;
 		}
 		if (SDL_GetTicks() > timer)
 		{
-			cinematic = true;
+			yflag += 3;
 		}
-	}
-	
-	if (xflag < -60 && cinematic)
-	{
-		xflag += 0.66;
-		yflag += 0.4;
 	}
 
 	
