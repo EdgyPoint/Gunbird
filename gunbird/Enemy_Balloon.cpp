@@ -15,10 +15,10 @@ Enemy_Balloon::Enemy_Balloon(int x, int y, int option) : Enemy(x, y, option)
 	fly.PushBack({ 106, 0, 53, 53 });
 	fly.PushBack({ 159, 0, 53, 53 });
 	fly.PushBack({ 212, 0, 53, 53 });
-	fly.speed = 0.65f;
+	fly.speed = 0.45f;
 	
 	fly2.PushBack({ 265, 0, 53, 53 });
-	fly2.speed = 0.65f;
+	fly2.speed = 0.45f;
 
 	fly3.PushBack({ 0, 0, 53, 53 });
 	fly3.PushBack({ 53, 0, 53, 53 });
@@ -26,16 +26,39 @@ Enemy_Balloon::Enemy_Balloon(int x, int y, int option) : Enemy(x, y, option)
 	fly3.PushBack({ 159, 0, 53, 53 });
 	fly3.PushBack({ 212, 0, 53, 53 });
 	fly3.PushBack({ 318, 0, 53, 53 });
-	fly3.speed = 0.65f;
+	fly3.speed = 0.45f;
 
 	animation = &fly;
 
-	path.PushBack({ 0.0f, 0.55f }, 220);
-	path.PushBack({ 0.0f, 2.0f }, 55);
-	path.PushBack({ 0.0f, 0.0f }, 120);
-	path.PushBack({ 0.0f, 2.0f }, 55);
-	path.PushBack({ 0.0f, 0.0f }, 120);
-	path.PushBack({ 0.0f, 2.0f }, 10000);
+	//path.PushBack({ 0.0f, 0.55f }, 220);
+	//path.PushBack({ 0.0f, 2.0f }, 55);
+	if (position.y < 0)
+	{
+		path.PushBack({ 0.0f, 0.0f }, 25);
+		path.PushBack({ 0.0f, 1.5f }, 46);
+		counter++;
+	}
+	
+	if (counter != 0)
+	{
+		path.PushBack({ 0.0f, 0.0f }, 140);
+		path.PushBack({ 0.0f, 1.5f }, 65);
+		path.PushBack({ 0.0f, 0.0f }, 345);
+		path.PushBack({ 0.0f, 1.0f }, 500);
+	}
+	else	
+	{
+		path.PushBack({ 0.0f, 0.0f }, 120);
+		path.PushBack({ 0.0f, 1.5f }, 65);
+		path.PushBack({ 0.0f, 0.0f }, 270);
+		path.PushBack({ 0.0f, 1.0f }, 500);
+	}
+	
+	
+	
+	
+	//.PushBack({ 0.0f, 0.0f }, 120);
+	//path.PushBack({ 0.0f, 2.0f }, 10000);
 
 
 	collider = App->collision->AddCollider({ 0, 0, 42, 53 }, COLLIDER_TYPE::COLLIDER_ENEMY_F, (Module*)App->enemies);

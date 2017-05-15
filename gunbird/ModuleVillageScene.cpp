@@ -66,19 +66,19 @@ bool ModuleVillageScene::Start()
 
 	App->collision->AddCollider(npi, COLLIDER_WALL);
 
-	
+	//---ENEMIES---
 
-	return true;
-}
+	//--Adding Balloons--
+	App->enemies->AddEnemy(ENEMY_TYPES::BALLOON, 50, 20, 0);
+	App->enemies->AddEnemy(ENEMY_TYPES::BALLOON, 150, -50, 0);
 
-// UnLoad assets
-bool ModuleVillageScene::CleanUp()
-{
-	LOG("Unloading Village scene");
+	//--Adding Rotating Turrets--
+	App->enemies->AddEnemy(ENEMY_TYPES::ROTATINGTURRET, 20, -70, 0);
 
-	
-	App->player->Disable();
-	App->player2->Disable();
+	//--Adding Window Guns--
+	App->enemies->AddEnemy(ENEMY_TYPES::WINDOWGUN, 26, -122, 0);
+
+	return true; 
 	App->enemies->Disable();
 	App->particles->Disable();
 	App->collision->Disable();

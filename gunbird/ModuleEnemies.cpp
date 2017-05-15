@@ -12,6 +12,8 @@
 #include "Enemy_Turretcopter.h"
 #include "Enemy_CastleMortar.h"
 #include "Enemy_Vase.h"
+#include "Enemy_RotatingTurret.h"
+#include "Enemy_WindowGun.h"
 
 
 #define SPAWN_MARGIN 500
@@ -163,6 +165,12 @@ void ModuleEnemies::SpawnEnemy(const EnemyInfo& info)
 			break;
 		case ENEMY_TYPES::VASE:
 			enemies[i] = new Enemy_Vase(info.x, info.y, info.pathoption);
+			break;
+		case ENEMY_TYPES::ROTATINGTURRET:
+			enemies[i] = new Enemy_RotatingTurret(info.x, info.y, info.pathoption);
+			break;
+		case ENEMY_TYPES::WINDOWGUN:
+			enemies[i] = new Enemy_WindowGun(info.x, info.y, info.pathoption);
 			break;
 		}
 	}
