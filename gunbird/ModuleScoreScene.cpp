@@ -79,7 +79,7 @@ update_status ModuleScoreScene::Update()
 	App->fonts->BlitText(120, 55, App->player->font_scorescene, App->player->text_score);
 	App->fonts->BlitText(120, 79, App->player->font_scorescene, App->player2->text_score2);
 
-	if (App->input->keyboard[SDL_SCANCODE_SPACE] && !App->fade->fading)
+	if ((App->input->keyboard[SDL_SCANCODE_SPACE] || App->input->controller1.c_button == KEY_STATE::KEY_DOWN) && !App->fade->fading)
 	{
 		App->fade->FadeToBlack(this, App->scene_intro, 2.0f);
 	}

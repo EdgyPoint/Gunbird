@@ -85,10 +85,14 @@ bool ModuleVillageScene::Start()
 bool ModuleVillageScene::CleanUp()
 {
 	LOG("Unloading castle scene");
-		
+	
 	App->enemies->Disable();
 	App->particles->Disable();
 	App->collision->Disable();
+	App->player->Disable();
+	App->player2->Disable();
+
+	
 	App->textures->Unload(graphics);
 	App->textures->Unload(graphics2);
 	App->textures->Unload(graphics3);
