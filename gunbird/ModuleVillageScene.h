@@ -37,6 +37,8 @@ public:
 	float ycounter;
 	bool cinematic;
 	int timer;
+	int timer2;
+	float speed;
 	bool timerup;
 	bool on_rails;
 	bool going_right;

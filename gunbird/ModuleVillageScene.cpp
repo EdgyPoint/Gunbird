@@ -55,14 +55,15 @@ bool ModuleVillageScene::Start()
 	yflag = -5312;
 	xflag = -320;
 	ycounter = 0;
+	speed = 0.4;
 	cinematic = false;
 	timerup = false;
 	on_rails = false;
 
 	graphics = App->textures->Load("assets/images/backgrounds/Village lower background.png");
 	graphics2 = App->textures->Load("assets/images/backgrounds/Village upper background.png");
-	graphics3 = App->textures->Load("assets/images/backgrounds/Village lower train background.png");
-	graphics4 = App->textures->Load("assets/images/backgrounds/Village upper train background.png");
+	graphics3 = App->textures->Load("assets/images/backgrounds/Village train background.png");
+	graphics4 = App->textures->Load("assets/images/backgrounds/Village train background.png");
 
 
 	App->collision->AddCollider(npi, COLLIDER_WALL);
@@ -96,7 +97,6 @@ bool ModuleVillageScene::CleanUp()
 	App->textures->Unload(graphics);
 	App->textures->Unload(graphics2);
 	App->textures->Unload(graphics3);
-	App->textures->Unload(graphics4);
 
 	return true;
 }
@@ -108,12 +108,12 @@ update_status ModuleVillageScene::Update()
 	{
 		if (yflag <= -4350)
 		{
-			yflag += 0.4;
+			yflag += speed;
 		}
 		if (yflag >= -4350 && xflag < -129)
 		{
 			xflag += 0.66;
-			yflag += 0.4;
+			yflag +=speed;
 		}
 		if (yflag >= -4234 && !cinematic)
 		{
@@ -131,24 +131,39 @@ update_status ModuleVillageScene::Update()
 		if (xflag < -60 && cinematic)
 		{
 			xflag += 0.66;
-			yflag += 0.4;
+			yflag += speed;
 			timerup = false;
 		}
 		if (xflag >= -60 && !timerup)
 		{
-			timer = SDL_GetTicks() + 2000;
+			timer2 = SDL_GetTicks() + 2000;
 			timerup = true;
-
 		}
-		
+		if (SDL_GetTicks() > timer2 && xflag >= -60 && speed < 10.0)
+		{
+			speed *= 1.05;
+			yflag += speed;
+		}
+		if (SDL_GetTicks() > timer2 && xflag >= -60 && speed > 10.0)
+		{
+			yflag += speed;
+		}
+	App->render->Blit(graphics, xflag, yflag, &background1, 10.0f);
+	App->render->Blit(graphics2, xflag, yflag, &background1, 10.0f);
 	}
 
 	
+   	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_REPEAT)
+	{
+  		speed = 10.0;
+	}
+
+	else if(xflag < -60)
+	speed = 0.4;
 
 
 
-	App->render->Blit(graphics, xflag, yflag, &background1, 10.0f);
-	App->render->Blit(graphics2,xflag, yflag, &background1, 10.0f);
+	
 	
 	if ((App->input->keyboard[SDL_SCANCODE_F3] == KEY_STATE::KEY_DOWN || yflag >= -10 || App->input->controller1.f3_button == KEY_DOWN) && !App->fade->fading)
 	{
