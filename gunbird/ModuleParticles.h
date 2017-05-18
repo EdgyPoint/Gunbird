@@ -23,6 +23,7 @@ enum ITEM_TYPE
 struct Particle
 {
 	Collider* collider = nullptr;
+	SDL_Rect aux;
 	Animation anim;
 	uint fx = 0;
 	fPoint position;
