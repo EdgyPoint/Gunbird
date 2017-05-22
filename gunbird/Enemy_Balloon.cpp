@@ -30,13 +30,13 @@ Enemy_Balloon::Enemy_Balloon(int x, int y, int option) : Enemy(x, y, option)
 
 	animation = &fly;
 
-	path.PushBack({ 0.0f, 0.55f }, 220);
+	/*path.PushBack({ 0.0f, 0.55f }, 220);
 	path.PushBack({ 0.0f, 2.0f }, 55);
 	path.PushBack({ 0.0f, 0.0f }, 120);
 	path.PushBack({ 0.0f, 2.0f }, 55);
 	path.PushBack({ 0.0f, 0.0f }, 120);
-	path.PushBack({ 0.0f, 2.0f }, 10000);
-
+	path.PushBack({ 0.0f, 2.0f }, 10000);*/
+	path.PushBack({ 0.0f, 0.0f }, 10000);
 
 	collider = App->collision->AddCollider({ 0, 0, 42, 53 }, COLLIDER_TYPE::COLLIDER_ENEMY_F, (Module*)App->enemies);
 
@@ -73,11 +73,25 @@ void Enemy_Balloon::Shoot()
 	{
 		if (reload == 0 || reload == 40)
 		{
+			/*distance.x = App->player->position.x - position.x;
+			distance.y = App->player->position.y - position.y;
+
+			module = sqrtf(powf(distance.x, 2) + powf(distance.y, 2));
+
+			distance.x /= module;
+			distance.y /= module;
+
+			speed.x = distance.x*BULLET_SPEED;
+			speed.y = distance.y*BULLET_SPEED;*/
+
 
 			App->particles->AddParticle(App->particles->smallshot, position.x + 25, position.y + 44, COLLIDER_ENEMY_SHOT, 2, 1, false);
 			App->particles->AddParticle(App->particles->smallshot, position.x + 9, position.y + 44, COLLIDER_ENEMY_SHOT, -2, 1, false);
 			App->particles->AddParticle(App->particles->presmallshot, position.x + 24, position.y + 43, COLLIDER_ENEMY_SHOT, 2, 1, false);
 			App->particles->AddParticle(App->particles->presmallshot, position.x + 8, position.y + 43, COLLIDER_ENEMY_SHOT, -2, 1, false);
+
+			//App->particles->AddParticle(App->particles->smallshot, position.x + 9, position.y + 44, COLLIDER_ENEMY_SHOT, speed.x, speed.y, false);
+
 		}
 		reload++;
 }

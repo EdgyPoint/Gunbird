@@ -4,6 +4,8 @@
 #include "p2Point.h"
 #include "Animation.h"
 
+#define BULLET_SPEED 4
+
 struct SDL_Texture;
 struct Collider;
 
