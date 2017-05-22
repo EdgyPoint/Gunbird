@@ -389,6 +389,7 @@ update_status ModulePlayer::Update()
 	{
 		App->particles->AddParticle(App->particles->magicspark[0], position.x + 8, position.y + 31, COLLIDER_NONE);
 	}
+
 	if (magicsparks == 12)
 	{
 		App->particles->AddParticle(App->particles->magicspark[1], position.x + 8, position.y + 31, COLLIDER_NONE);

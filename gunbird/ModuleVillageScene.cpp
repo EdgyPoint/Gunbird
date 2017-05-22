@@ -80,6 +80,9 @@ bool ModuleVillageScene::Start()
 	//--Adding Window Guns--
 	App->enemies->AddEnemy(ENEMY_TYPES::WINDOWGUN, 26, -122, 0);
 
+	//--Adding Rooftop Turrets--
+	App->enemies->AddEnemy(ENEMY_TYPES::TWOCANNONTURRET, 26, -525, 0);
+
 	return true;
 }
 
