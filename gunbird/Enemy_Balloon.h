@@ -22,8 +22,8 @@ public:
 	int reload = 0;
 	int initcounter = 0;
 	float aux_float;
-
-
+	fPoint speeds;
+	int counter = 0;
 };
 #endif
 

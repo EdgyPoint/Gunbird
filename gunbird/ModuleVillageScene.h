@@ -32,9 +32,17 @@ public:
 	SDL_Rect npi;
 
 	float yflag;
-	int xflag;
+	float xflag;
 	int track_repeat;
 	float ycounter;
+	bool cinematic;
+	int timer;
+	int timer2;
+	float speed;
+	bool timerup;
+	bool on_rails;
+	bool going_right;
+	bool going_left;
 
 };
 

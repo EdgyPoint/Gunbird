@@ -58,6 +58,14 @@ void Enemy::OnCollision(Collider* collider, Enemy* enemy)
 			enemy->hp -= 1.25f;
 		else if (collider->type == COLLIDER_PLAYER2_SHOT && App->player2->powerup_lv == 1)
 			enemy->hp -= 1.25f;
+		else if (collider->type == COLLIDER_PLAYER_SHOT && App->player->powerup_lv == 2)
+			enemy->hp -= 1.0f;
+		else if (collider->type == COLLIDER_PLAYER2_SHOT && App->player2->powerup_lv == 2)
+			enemy->hp -= 1.0f;
+		else if (collider->type == COLLIDER_PLAYER_SHOT && App->player->powerup_lv == 3)
+			enemy->hp -= 1.25f;
+		else if (collider->type == COLLIDER_PLAYER2_SHOT && App->player2->powerup_lv == 3)
+			enemy->hp -= 1.25f;
 
 		if (collider->type == COLLIDER_PLAYER_SHOT || collider->type == COLLIDER_PLAYER2_SHOT)
 		{

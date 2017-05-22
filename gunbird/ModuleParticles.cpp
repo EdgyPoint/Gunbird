@@ -424,9 +424,13 @@ void ModuleParticles::AddParticle(const Particle& particle, int x, int y, COLLID
 			if(speed_y != 0)
 			p->speed.y = speed_y;
 
+			p->aux = p->anim.GetCurrentFrame();
+			p->aux.x = x;
+			p->aux.y = y;
+
 			p->position.x = x;
 			p->position.y = y;
-			p->collider = App->collision->AddCollider(p->anim.GetCurrentFrame(), collider_type, this);
+			p->collider = App->collision->AddCollider(p->aux, collider_type, this);
 			p->itemtype = item_type;
 			active[i] = p;
 			break;

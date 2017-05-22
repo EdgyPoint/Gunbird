@@ -19,6 +19,7 @@
 #include "ModuleEnemies.h"
 #include "ModuleFonts.h"
 #include "SDL/include/SDL_timer.h"
+#include "SDL/include/SDL_gamecontroller.h"
 
 ModulePlayer::ModulePlayer()
 {
@@ -146,7 +147,37 @@ update_status ModulePlayer::Update()
 
 	int speed = 2;
 
-	if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT && !_dying && !respawning && !App->fade->fading)
+
+	if (App->input->controller1.left_joystick.x > 0.25)
+	{
+		joystick_right = true;
+	}
+	else
+		joystick_right = false;
+	if (App->input->controller1.left_joystick.x < -0.25)
+	{
+		joystick_left = true;
+	}
+	else
+		joystick_left = false;
+
+	joystick_down = 0;
+	joystick_up = 0;
+
+	if (App->input->controller1.left_joystick.y > 0.25)
+	{
+		joystick_down = true;
+	}
+	else
+		joystick_down = false;
+	if (App->input->controller1.left_joystick.y < -0.25)
+	{
+		joystick_up = true;
+	}
+	else
+		joystick_up = false;
+
+	if ((App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT || joystick_left) && !_dying && !respawning && !App->fade->fading)
 	{
 		position.x -= speed;
 		if (position.x <= 0)
@@ -168,7 +199,7 @@ update_status ModulePlayer::Update()
 		}
 	}
 
-	if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT && !_dying && !respawning && !App->fade->fading)
+	if ((App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT ||  joystick_right) && !_dying && !respawning && !App->fade->fading)
 	{
 		position.x += speed;
 		if (position.x >= 196)
@@ -191,7 +222,7 @@ update_status ModulePlayer::Update()
 		}
 	}
 
-	if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT && !_dying && !respawning && !App->fade->fading)
+	if ((App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT || joystick_down) && !_dying && !respawning && !App->fade->fading)
 	{
 		position.y += speed;
 		if (position.y >= 288)
@@ -201,7 +232,7 @@ update_status ModulePlayer::Update()
 	
 	}
 
-	if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT && !_dying && !respawning && !App->fade->fading)
+	if ((App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT || joystick_up) && !_dying && !respawning && !App->fade->fading)
 	{
 		position.y -= speed;
 		if (position.y <= 0)
@@ -212,7 +243,7 @@ update_status ModulePlayer::Update()
 	}
 
 
-	if (App->input->keyboard[SDL_SCANCODE_C] == KEY_STATE::KEY_DOWN && !_dying && !respawning && !stunned && !App->fade->fading)
+	if ((App->input->keyboard[SDL_SCANCODE_C] == KEY_STATE::KEY_DOWN || App->input->controller1.c_button == KEY_STATE::KEY_DOWN) && !_dying && !respawning && !stunned && !App->fade->fading)
 	{
 		if (!shooting)
 		{
@@ -242,7 +273,7 @@ update_status ModulePlayer::Update()
 		}
 	}
 
-	if (App->input->keyboard[SDL_SCANCODE_F2] == KEY_STATE::KEY_DOWN && godmode == false && !App->fade->fading)
+	if ((App->input->keyboard[SDL_SCANCODE_F2] == KEY_STATE::KEY_DOWN || App->input->controller1.f2_button) && godmode == false && !App->fade->fading)
 	{
 		godmode = true;
 		App->collision->EditMatrix(COLLIDER_PLAYER, COLLIDER_ENEMY_F, false);
@@ -255,7 +286,7 @@ update_status ModulePlayer::Update()
 		App->collision->EditMatrix(COLLIDER_ENEMY_SHOT, COLLIDER_PLAYER2, false);
 	}
 
-	else if (App->input->keyboard[SDL_SCANCODE_F2] == KEY_STATE::KEY_DOWN && godmode == true && !App->fade->fading)
+	else if ((App->input->keyboard[SDL_SCANCODE_F2] == KEY_STATE::KEY_DOWN || App->input->controller1.f2_button) && godmode == true && !App->fade->fading)
 	{
 		godmode = false;
 		App->collision->EditMatrix(COLLIDER_PLAYER, COLLIDER_ENEMY_F, true);

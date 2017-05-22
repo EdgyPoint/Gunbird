@@ -80,8 +80,10 @@
     <ClInclude Include="Enemy_House1.h" />
     <ClInclude Include="Enemy_House2.h" />
     <ClInclude Include="Enemy_Redbomb.h" />
+    <ClInclude Include="Enemy_RotatingTurret.h" />
     <ClInclude Include="Enemy_Turretcopter.h" />
     <ClInclude Include="Enemy_Vase.h" />
+    <ClInclude Include="Enemy_WindowGun.h" />
     <ClInclude Include="Globals.h" />
     <ClInclude Include="ModuleFonts.h" />
     <ClInclude Include="ModuleEnemies.h" />
@@ -113,8 +115,10 @@
     <ClCompile Include="Enemy_House1.cpp" />
     <ClCompile Include="Enemy_House2.cpp" />
     <ClCompile Include="Enemy_Redbomb.cpp" />
+    <ClCompile Include="Enemy_RotatingTurret.cpp" />
     <ClCompile Include="Enemy_Turretcopter.cpp" />
     <ClCompile Include="Enemy_Vase.cpp" />
+    <ClCompile Include="Enemy_WindowGun.cpp" />
     <ClCompile Include="Globals.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="ModuleFonts.cpp" />
