@@ -23,109 +23,109 @@ ModuleParticles::~ModuleParticles()
 bool ModuleParticles::Init()
 {
 
-	marionbeam_lv1[0].anim.PushBack({ 150, 60, 30, 30 });
+	marionbeam_lv1[0].anim.PushBack({ 163, 60, 5, 28 });
 	marionbeam_lv1[0].anim.loop = false;
 	marionbeam_lv1[0].anim.speed = 0.3f;
 	marionbeam_lv1[0].speed.y = -10;
 	marionbeam_lv1[0].life = 4000;
 
-	marionbeam_lv1[1].anim.PushBack({ 150, 90, 30, 30 });
+	marionbeam_lv1[1].anim.PushBack({ 162, 90, 6, 29 });
 	marionbeam_lv1[1].anim.loop = false;
 	marionbeam_lv1[1].anim.speed = 0.3f;
 	marionbeam_lv1[1].speed.y = -10;
 	marionbeam_lv1[1].life = 4000;
 
-	marionbeam_lv1[2].anim.PushBack({ 150, 120, 30, 30 });
+	marionbeam_lv1[2].anim.PushBack({ 162, 120, 6, 29 });
 	marionbeam_lv1[2].anim.loop = false;
 	marionbeam_lv1[2].anim.speed = 0.3f;
 	marionbeam_lv1[2].speed.y = -10;
 	marionbeam_lv1[2].life = 4000;
 
-	marionbeam_lv2[0].anim.PushBack({ 180, 60, 30, 30 });
+	marionbeam_lv2[0].anim.PushBack({ 188, 60, 15, 28 });
 	marionbeam_lv2[0].anim.loop = false;
 	marionbeam_lv2[0].anim.speed = 0.3f;
 	marionbeam_lv2[0].speed.y = -10;
 	marionbeam_lv2[0].life = 4000;
 
-	marionbeam_lv2[1].anim.PushBack({ 180, 90, 30, 30 });
+	marionbeam_lv2[1].anim.PushBack({ 189, 90, 13, 29 });
 	marionbeam_lv2[1].anim.loop = false;
 	marionbeam_lv2[1].anim.speed = 0.3f;
 	marionbeam_lv2[1].speed.y = -10;
 	marionbeam_lv2[1].life = 4000;
 
-	marionbeam_lv2[2].anim.PushBack({ 180, 120, 30, 30 });
+	marionbeam_lv2[2].anim.PushBack({ 188, 120, 15, 29 });
 	marionbeam_lv2[2].anim.loop = false;
 	marionbeam_lv2[2].anim.speed = 0.3f;
 	marionbeam_lv2[2].speed.y = -10;
 	marionbeam_lv2[2].life = 4000;
 
-	marionbeamleft_lv1[0].anim.PushBack({ 210, 60, 30, 30 });
+	marionbeamleft_lv1[0].anim.PushBack({ 222, 60, 5, 29 });
 	marionbeamleft_lv1[0].anim.loop = false;
 	marionbeamleft_lv1[0].anim.speed = 0.3f;
 	marionbeamleft_lv1[0].speed.y = -10;
 	marionbeamleft_lv1[0].life = 4000;
 
-	marionbeamleft_lv1[1].anim.PushBack({ 210, 90, 30, 30 });
+	marionbeamleft_lv1[1].anim.PushBack({ 221, 90, 6, 29 });
 	marionbeamleft_lv1[1].anim.loop = false;
 	marionbeamleft_lv1[1].anim.speed = 0.3f;
 	marionbeamleft_lv1[1].speed.y = -10;
 	marionbeamleft_lv1[1].life = 4000;
 
-	marionbeamleft_lv1[2].anim.PushBack({ 210, 120, 30, 30 });
+	marionbeamleft_lv1[2].anim.PushBack({ 221, 120, 6, 29 });
 	marionbeamleft_lv1[2].anim.loop = false;
 	marionbeamleft_lv1[2].anim.speed = 0.3f;
 	marionbeamleft_lv1[2].speed.y = -10;
 	marionbeamleft_lv1[2].life = 4000;
 
-	marionbeamleft_lv2[0].anim.PushBack({ 270, 60, 30, 30 });
+	marionbeamleft_lv2[0].anim.PushBack({ 278, 60, 14, 30 });
 	marionbeamleft_lv2[0].anim.loop = false;
 	marionbeamleft_lv2[0].anim.speed = 0.3f;
 	marionbeamleft_lv2[0].speed.y = -10;
 	marionbeamleft_lv2[0].life = 4000;
 
-	marionbeamleft_lv2[1].anim.PushBack({ 270, 90, 30, 30 });
+	marionbeamleft_lv2[1].anim.PushBack({ 277, 90, 16, 30 });
 	marionbeamleft_lv2[1].anim.loop = false;
 	marionbeamleft_lv2[1].anim.speed = 0.3f;
 	marionbeamleft_lv2[1].speed.y = -10;
 	marionbeamleft_lv2[1].life = 4000;
 
-	marionbeamleft_lv2[2].anim.PushBack({ 270, 120, 30, 30 });
+	marionbeamleft_lv2[2].anim.PushBack({ 280, 120, 12, 30 });
 	marionbeamleft_lv2[2].anim.loop = false;
 	marionbeamleft_lv2[2].anim.speed = 0.3f;
 	marionbeamleft_lv2[2].speed.y = -10;
 	marionbeamleft_lv2[2].life = 4000;
 
-	marionbeamright_lv1[0].anim.PushBack({ 240, 60, 30, 30 });
+	marionbeamright_lv1[0].anim.PushBack({ 253, 60, 5, 29 });
 	marionbeamright_lv1[0].anim.loop = false;
 	marionbeamright_lv1[0].anim.speed = 0.3f;
 	marionbeamright_lv1[0].speed.y = -10;
 	marionbeamright_lv1[0].life = 4000;
 
-	marionbeamright_lv1[1].anim.PushBack({ 240, 90, 30, 30 });
+	marionbeamright_lv1[1].anim.PushBack({ 253, 90, 6, 29 });
 	marionbeamright_lv1[1].anim.loop = false;
 	marionbeamright_lv1[1].anim.speed = 0.3f;
 	marionbeamright_lv1[1].speed.y = -10;
 	marionbeamright_lv1[1].life = 4000;
 
-	marionbeamright_lv1[2].anim.PushBack({ 240, 120, 30, 30 });
+	marionbeamright_lv1[2].anim.PushBack({ 253, 120, 6, 29 });
 	marionbeamright_lv1[2].anim.loop = false;
 	marionbeamright_lv1[2].anim.speed = 0.3f;
 	marionbeamright_lv1[2].speed.y = -10;
 	marionbeamright_lv1[2].life = 4000;
 
-	marionbeamright_lv2[0].anim.PushBack({ 300, 60, 30, 30 });
+	marionbeamright_lv2[0].anim.PushBack({ 308, 60, 14, 30 });
 	marionbeamright_lv2[0].anim.loop = false;
 	marionbeamright_lv2[0].anim.speed = 0.3f;
 	marionbeamright_lv2[0].speed.y = -10;
 	marionbeamright_lv2[0].life = 4000;
 
-	marionbeamright_lv2[1].anim.PushBack({ 300, 90, 30, 30 });
+	marionbeamright_lv2[1].anim.PushBack({ 307, 90, 16, 30 });
 	marionbeamright_lv2[1].anim.loop = false;
 	marionbeamright_lv2[1].anim.speed = 0.3f;
 	marionbeamright_lv2[1].speed.y = -10;
 	marionbeamright_lv2[1].life = 4000;
 
-	marionbeamright_lv2[2].anim.PushBack({ 300, 120, 30, 30 });
+	marionbeamright_lv2[2].anim.PushBack({ 308, 120, 12, 30 });
 	marionbeamright_lv2[2].anim.loop = false;
 	marionbeamright_lv2[2].anim.speed = 0.3f;
 	marionbeamright_lv2[2].speed.y = -10;
@@ -424,13 +424,13 @@ void ModuleParticles::AddParticle(const Particle& particle, int x, int y, COLLID
 			if(speed_y != 0)
 			p->speed.y = speed_y;
 
-			p->aux = p->anim.GetCurrentFrame();
-			p->aux.x = x;
-			p->aux.y = y;
+			p->collider_size = p->anim.GetCurrentFrame();
+			p->collider_size.x = x;
+			p->collider_size.y = y;
 
 			p->position.x = x;
 			p->position.y = y;
-			p->collider = App->collision->AddCollider(p->aux, collider_type, this);
+			p->collider = App->collision->AddCollider(p->collider_size, collider_type, this);
 			p->itemtype = item_type;
 			active[i] = p;
 			break;
