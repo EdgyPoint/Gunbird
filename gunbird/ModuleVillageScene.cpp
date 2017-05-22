@@ -59,6 +59,9 @@ bool ModuleVillageScene::Start()
 	cinematic = false;
 	timerup = false;
 	on_rails = false;
+	going_left = true;
+	scroll_timer = false;
+	scrolling = false;
 
 	graphics = App->textures->Load("assets/images/backgrounds/Village lower background.png");
 	graphics2 = App->textures->Load("assets/images/backgrounds/Village upper background.png");
@@ -100,6 +103,7 @@ bool ModuleVillageScene::CleanUp()
 	App->textures->Unload(graphics);
 	App->textures->Unload(graphics2);
 	App->textures->Unload(graphics3);
+	App->textures->Unload(graphics4);
 
 	return true;
 }
@@ -137,38 +141,65 @@ update_status ModuleVillageScene::Update()
 			yflag += speed;
 			timerup = false;
 		}
-		if (xflag >= -60 && !timerup)
+		if (xflag >= -60 && !timerup && !scrolling)
 		{
 			timer2 = SDL_GetTicks() + 2000;
 			timerup = true;
 		}
-		if (SDL_GetTicks() > timer2 && xflag >= -60 && speed < 10.0)
+		if (SDL_GetTicks() > timer2 && xflag >= -60 && speed < 10.0 && !scrolling)
 		{
-			speed *= 1.05;
+			speed *= 1.02;
 			yflag += speed;
 		}
-		if (SDL_GetTicks() > timer2 && xflag >= -60 && speed > 10.0)
+		if (yflag >= 320.0f)
 		{
-			yflag += speed;
+			on_rails = true;
+			yflag = -3680;
 		}
+
+		if (speed >= 10.0)
+		{
+			Side_scrolling();
+			scrolling == true;
+		}
+
+		
+
 	App->render->Blit(graphics, xflag, yflag, &background1, 10.0f);
 	App->render->Blit(graphics2, xflag, yflag, &background1, 10.0f);
+	App->render->Blit(graphics3, xflag, yflag-4000, &background2, 10.0f);
+
 	}
 
+	if (on_rails)
+	{
+
+		Side_scrolling();
+		if(yflag >= 3680)
+		{
+			yflag = -3680;
+		}
+		App->render->Blit(graphics3, xflag, yflag - 4000, &background2, 10.0f);
+		App->render->Blit(graphics4, xflag, yflag, &background2, 10.0f);
+	}
 	
    	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_REPEAT)
 	{
-  		speed = 10.0;
+  		speed = 9.0;
 	}
 
-	else if(xflag < -60)
-	speed = 0.4;
+	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_UP)
+	{
+		speed = 0.4;
+	}
+
+	
 
 
 
 	
 	
-	if ((App->input->keyboard[SDL_SCANCODE_F3] == KEY_STATE::KEY_DOWN || yflag >= -10 || App->input->controller1.f3_button == KEY_DOWN) && !App->fade->fading)
+	if ((App->input->keyboard[SDL_SCANCODE_F3] == KEY_STATE::KEY_DOWN ||  App->input->controller1.f3_button == KEY_DOWN) && !App->fade->fading)
 	{
 		App->fade->FadeToBlack(this, App->scene_score, 2.0f);
 
@@ -179,6 +210,48 @@ update_status ModuleVillageScene::Update()
 	}
 
 	return UPDATE_CONTINUE;
+}
+
+void ModuleVillageScene::Side_scrolling()
+{
+	if (going_left && !scroll_timer)
+	{
+		yflag += speed;
+		xflag += 0.66;
+		if (xflag >= 0)
+		{
+			timer = SDL_GetTicks() + 1000;
+			scroll_timer = true;
+		}
+	}
+
+	else if (scroll_timer)
+	{
+		yflag += speed;
+		if (SDL_GetTicks() >= timer)
+		{
+			scroll_timer = false;
+			if (going_left)
+			{
+				going_left = false;
+			}
+			else
+			{
+				going_left = true;
+			}
+		}
+	}
+
+	if (!going_left && !scroll_timer)
+	{
+		yflag += speed;
+		xflag -= 0.66;
+		if (xflag <= -60)
+		{
+			timer = SDL_GetTicks() + 1000;
+			scroll_timer = true;
+		}
+	}
 }
 
 void ModuleVillageScene::OnCollision(Collider* c1, Collider* c2)

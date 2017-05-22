@@ -18,7 +18,7 @@ public:
 	update_status Update();
 	bool CleanUp();
 
-
+	void ModuleVillageScene::Side_scrolling();
 	void ModuleVillageScene::OnCollision(Collider* c1, Collider* c2);
 
 public:
@@ -41,8 +41,9 @@ public:
 	float speed;
 	bool timerup;
 	bool on_rails;
-	bool going_right;
 	bool going_left;
+	bool scroll_timer;
+	bool scrolling;
 
 };
 
