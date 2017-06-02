@@ -76,7 +76,7 @@ Enemy_2CannonTurret::Enemy_2CannonTurret(int x, int y, int option) : Enemy(x, y,
 	attacking_hit.PushBack({ 329, 597, 30, 42 });
 	attacking_hit.PushBack({ 299, 597, 30, 42 });
 	attacking_hit.PushBack({ 269, 597, 30, 42 });
-	attacking_hit.speed = 0.1f;
+	attacking_hit.speed = 0.155f;
 
 	attacking_damaged.PushBack({ 269, 513, 30, 42 });
 	attacking_damaged.PushBack({ 299, 513, 30, 42 });
@@ -103,7 +103,7 @@ Enemy_2CannonTurret::Enemy_2CannonTurret(int x, int y, int option) : Enemy(x, y,
 	attacking_damaged.PushBack({ 329, 513, 30, 42 });
 	attacking_damaged.PushBack({ 299, 513, 30, 42 });
 	attacking_damaged.PushBack({ 269, 513, 30, 42 });
-	attacking_damaged.speed = 0.1f;
+	attacking_damaged.speed = 0.155f;
 
 	animation = &attacking;
 

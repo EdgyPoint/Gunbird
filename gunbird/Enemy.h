@@ -57,6 +57,7 @@ public:
 
 	const Collider* GetCollider() const;
 	fPoint ShootCalculator(iPoint position, iPoint player);
+	float angle(iPoint position, iPoint player);
 
 	virtual void Move() {};
 	virtual void Shoot() {};

@@ -1,5 +1,6 @@
 #include "Application.h"
 #include "Enemy.h"
+#include <math.h>
 #include <stdlib.h>
 #include <time.h>
 #include "ModuleCollision.h"
@@ -42,6 +43,33 @@ fPoint Enemy::ShootCalculator(iPoint position, iPoint player)
 	speed.y = distance.y*BULLET_SPEED;
 
 	return speed;
+}
+
+float Enemy::angle(iPoint position, iPoint player)
+{
+	int module;
+	fPoint distance;
+	float angle;
+
+	distance.x = player.x - position.x;
+	distance.y = player.y - position.y;
+
+	module = sqrtf(powf(distance.x, 2) + powf(distance.y, 2));
+
+	angle = abs(distance.x) / module;
+
+	angle = acosf(angle);
+
+	angle *= 180 / PI;
+
+	if (position.x < player.x && position.y >= player.y)
+		angle = 360 - angle;
+	if (position.x >= player.x && position.y >= player.y)
+		angle = 180 + angle;
+	if (position.x < player.x && position.y < player.y)
+		angle = 180 - angle;
+
+	return angle;
 }
 
 void Enemy::Draw(SDL_Texture* sprites, Enemy* enemy)
