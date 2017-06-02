@@ -195,8 +195,11 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 			if (enemies[i]->hp <= 0.0f)
 			{
 				enemies[i]->ToDie(enemies[i], c2);
-				delete enemies[i];
-				enemies[i] = nullptr;
+				if (!enemies[i]->dead_anim)
+				{
+					delete enemies[i];
+					enemies[i] = nullptr;
+				}
 			}
 			break;
 		}

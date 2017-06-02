@@ -48,6 +48,7 @@ public:
 	int damaged_hp = 0;
 	bool aditionalanimation = false;
 	bool following = false;
+	bool dead_anim = false;
 
 
 public:
