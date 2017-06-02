@@ -72,16 +72,16 @@ bool ModuleVillageScene::Start()
 	App->collision->AddCollider(npi, COLLIDER_WALL);
 
 	//---ENEMIES---
-
-	//--Adding Balloons--
-	App->enemies->AddEnemy(ENEMY_TYPES::BALLOON, 50, 20, 0);
-	App->enemies->AddEnemy(ENEMY_TYPES::BALLOON, 150, -50, 0);
-
 	//--Adding Rotating Turrets--
 	App->enemies->AddEnemy(ENEMY_TYPES::ROTATINGTURRET, 20, -70, 0);
 
 	//--Adding Window Guns--
 	App->enemies->AddEnemy(ENEMY_TYPES::WINDOWGUN, 26, -122, 0);
+	App->enemies->AddEnemy(ENEMY_TYPES::WINDOWGUN, 170, -122, 0);
+
+	//--Adding Balloons--
+	App->enemies->AddEnemy(ENEMY_TYPES::BALLOON, 50, 20, 0);
+	App->enemies->AddEnemy(ENEMY_TYPES::BALLOON, 150, -50, 0);
 
 	//--Adding Rooftop Turrets--
 	App->enemies->AddEnemy(ENEMY_TYPES::TWOCANNONTURRET, 26, -525, 0);

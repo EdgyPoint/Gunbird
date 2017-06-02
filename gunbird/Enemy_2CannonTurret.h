@@ -6,14 +6,13 @@
 
 class Enemy_2CannonTurret : public Enemy
 {
-
 private:
 	iPoint original_pos;
 	Animation closed, closed_hit, closed_damaged;
 	Animation attacking, attacking_hit, attacking_damaged;
 	int counter = 0;
-
 	Path path;
+
 public:
 	Enemy_2CannonTurret(int x, int y, int option);
 	void Shoot();

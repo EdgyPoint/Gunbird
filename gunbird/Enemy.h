@@ -48,6 +48,7 @@ public:
 	int damaged_hp = 0;
 	bool aditionalanimation = false;
 	bool following = false;
+	bool dead_anim = false;
 
 
 public:
@@ -56,6 +57,7 @@ public:
 
 	const Collider* GetCollider() const;
 	fPoint ShootCalculator(iPoint position, iPoint player);
+	float angle(iPoint position, iPoint player);
 
 	virtual void Move() {};
 	virtual void Shoot() {};
