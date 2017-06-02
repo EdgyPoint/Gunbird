@@ -267,7 +267,14 @@ update_status ModulePlayer::Update()
 	// --------------------------
 
 	// Bomb
-//	if ((App->input->keyboard[SDL_SCANCODE_V] == KEY_STATE::KEY_DOWN || App->input->controller1.))
+	if (App->input->keyboard[SDL_SCANCODE_V] == KEY_STATE::KEY_DOWN && !_dying && !respawning && !stunned && !App->fade->fading && bombCD == 0)
+	{
+		bombCD = 125;
+
+	}
+	if (bombCD != 0)
+		bombCD--;
+	// --------------------------
 
 	// Adding all 4 particles
 	if (shot <= SDL_GetTicks() && shooting)
