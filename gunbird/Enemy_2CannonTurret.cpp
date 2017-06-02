@@ -12,7 +12,7 @@
 
 Enemy_2CannonTurret::Enemy_2CannonTurret(int x, int y, int option) : Enemy(x, y, option)
 {
-
+	reload = 30;
 	status = NORMAL;
 
 	closed.PushBack({ 239, 429, 30, 42 });
@@ -49,7 +49,7 @@ Enemy_2CannonTurret::Enemy_2CannonTurret(int x, int y, int option) : Enemy(x, y,
 	attacking.PushBack({ 329, 429, 30, 42 });
 	attacking.PushBack({ 299, 429, 30, 42 });
 	attacking.PushBack({ 269, 429, 30, 42 });
-	attacking.speed = 0.1f;
+	attacking.speed = 0.155f;
 
 	attacking_hit.PushBack({ 269, 597, 30, 42 });
 	attacking_hit.PushBack({ 299, 597, 30, 42 });
@@ -137,6 +137,7 @@ void Enemy_2CannonTurret::Move()
 	if (status == NORMAL)
 		animation = &attacking;
 
+
 	if (status == HIT)
 		animation = &attacking_hit;
 
@@ -153,13 +154,26 @@ void Enemy_2CannonTurret::Move()
 
 void Enemy_2CannonTurret::Shoot()
 {
-	if (reload == 0)
+	if (reload == 10)
 	{
-		bullet_speed = ShootCalculator({ position.x + 12, position.y + 10 }, { App->player->position.x + 11, App->player->position.y + 11 });
-		App->particles->AddParticle(App->particles->smallshot, position.x + 12, position.y + 10, COLLIDER_ENEMY_SHOT, bullet_speed.x, bullet_speed.y, false);
-		bullet_speed = ShootCalculator({ position.x + 12, position.y + 3 }, { App->player->position.x + 11, App->player->position.y + 11 });
-		App->particles->AddParticle(App->particles->smallshot, position.x + 12, position.y + 3, COLLIDER_ENEMY_SHOT, bullet_speed.x, bullet_speed.y, false);
+		bullet_speed = ShootCalculator({ position.x + 16, position.y + 20 }, { App->player->position.x + 14, App->player->position.y + 16 });
+		App->particles->AddParticle(App->particles->smallshot, position.x + 16, position.y + 20, COLLIDER_ENEMY_SHOT, bullet_speed.x, bullet_speed.y, false);
+	}
+	if (reload == 19)
+	{
+		bullet_speed = ShootCalculator({ position.x + 16, position.y + 11 }, { App->player->position.x + 14, App->player->position.y + 16 });
+		App->particles->AddParticle(App->particles->smallshot, position.x + 16, position.y + 11, COLLIDER_ENEMY_SHOT, bullet_speed.x, bullet_speed.y, false);
+	}
+	if (reload == 43)
+	{
+		bullet_speed = ShootCalculator({ position.x + 16, position.y + 20 }, { App->player->position.x + 14, App->player->position.y + 16 });
+		App->particles->AddParticle(App->particles->smallshot, position.x + 16, position.y + 20, COLLIDER_ENEMY_SHOT, bullet_speed.x, bullet_speed.y, false);
+	}
+	if (reload == 53)
+	{
+		bullet_speed = ShootCalculator({ position.x + 16, position.y + 11 }, { App->player->position.x + 14, App->player->position.y + 16 });
+		App->particles->AddParticle(App->particles->smallshot, position.x + 16, position.y + 11, COLLIDER_ENEMY_SHOT, bullet_speed.x, bullet_speed.y, false);
 	}
 	reload++;
-	if (reload == 40)reload = 0;
+	if (reload == 155)reload = 0;
 }
