@@ -85,6 +85,10 @@ bool ModuleVillageScene::Start()
 
 	//--Adding Rooftop Turrets--
 	App->enemies->AddEnemy(ENEMY_TYPES::TWOCANNONTURRET, 26, -525, 0);
+	App->enemies->AddEnemy(ENEMY_TYPES::TWOCANNONTURRET, 26, -585, 0);
+
+	App->enemies->AddEnemy(ENEMY_TYPES::FOURCANNONTURRET, 135, -520, 0);
+	App->enemies->AddEnemy(ENEMY_TYPES::FOURCANNONTURRET, 135, -570, 0);
 
 	return true;
 }
