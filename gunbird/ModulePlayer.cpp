@@ -147,7 +147,7 @@ update_status ModulePlayer::Update()
 
 	int speed = 2;
 
-
+	// Controller input variables
 	if (App->input->controller1.left_joystick.x > 0.25)
 	{
 		joystick_right = true;
@@ -176,7 +176,9 @@ update_status ModulePlayer::Update()
 	}
 	else
 		joystick_up = false;
+	// --------------------------
 
+	// Move left
 	if ((App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT || joystick_left) && !_dying && !respawning && !App->fade->fading)
 	{
 		position.x -= speed;
@@ -198,7 +200,9 @@ update_status ModulePlayer::Update()
 			transition++;
 		}
 	}
+	// --------------------------
 
+	// Move right
 	if ((App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT ||  joystick_right) && !_dying && !respawning && !App->fade->fading)
 	{
 		position.x += speed;
@@ -221,7 +225,9 @@ update_status ModulePlayer::Update()
 			transition++;
 		}
 	}
+	// --------------------------
 
+	// Move down
 	if ((App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT || joystick_down) && !_dying && !respawning && !App->fade->fading)
 	{
 		position.y += speed;
@@ -231,7 +237,9 @@ update_status ModulePlayer::Update()
 		}
 	
 	}
+	// --------------------------
 
+	// Move up
 	if ((App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT || joystick_up) && !_dying && !respawning && !App->fade->fading)
 	{
 		position.y -= speed;
@@ -241,8 +249,9 @@ update_status ModulePlayer::Update()
 		}
 	
 	}
+	// --------------------------
 
-
+	// Shoot
 	if ((App->input->keyboard[SDL_SCANCODE_C] == KEY_STATE::KEY_DOWN || App->input->controller1.c_button == KEY_STATE::KEY_DOWN) && !_dying && !respawning && !stunned && !App->fade->fading)
 	{
 		if (!shooting)
@@ -255,14 +264,18 @@ update_status ModulePlayer::Update()
 
 		shooting = true;
 	}
+	// --------------------------
 
-	//Adding all 4 particles
+	// Bomb
+//	if ((App->input->keyboard[SDL_SCANCODE_V] == KEY_STATE::KEY_DOWN || App->input->controller1.))
+
+	// Adding all 4 particles
 	if (shot <= SDL_GetTicks() && shooting)
 		shootburst(powerup_lv);
-		
+	// --------------------------
 
 
-
+	// Returning to idle if no side movement input is detected
 	if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_IDLE
 		&& App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_IDLE)
 	{
@@ -272,7 +285,9 @@ update_status ModulePlayer::Update()
 			transition = 0;
 		}
 	}
+	// --------------------------
 
+	// Debug functionality
 	if ((App->input->keyboard[SDL_SCANCODE_F2] == KEY_STATE::KEY_DOWN || App->input->controller1.f2_button) && godmode == false && !App->fade->fading)
 	{
 		godmode = true;
@@ -304,9 +319,13 @@ update_status ModulePlayer::Update()
 		App->player2->Enable();
 		App->player2->out = false;
 	}
+	// --------------------------
 
+	// Update player's collider to current position
 	player_col->SetPos(position.x + 10, position.y + 9);
+	// --------------------------
 
+	// Stun, death and respawn
 	if (stunned)
 	{
 		
@@ -382,6 +401,7 @@ update_status ModulePlayer::Update()
 			invincibilitycounter = 0;
 		}
 	}
+	// --------------------------
 
 	//Leave particles behind (yay! magic sparks)
 	magicsparks++;
@@ -405,31 +425,36 @@ update_status ModulePlayer::Update()
 		App->particles->AddParticle(App->particles->magicspark[3], position.x + 8, position.y + 31, COLLIDER_NONE);
 		magicsparks = 0;
 	}
+	// --------------------------
 
 	//Return to intro scene if both players are out
 	if (out && App->player2->out)
 	{
 		App->fade->FadeToBlack(App->scene_castle, App->scene_intro, 2.0f);
 	}
+	// --------------------------
 
 
-
+	// Blit score
 	sprintf_s(text_score, 10, "%7d", score);
+	// --------------------------
 	
+
+	// Blit player
 	blink++;
 	if (blink == 6)
-	blink = 0;
+		blink = 0;
 
 	blinkcounter++;
 	if (blinkcounter == 6)
 		blinkcounter = 0;
 
-	// Draw everything --------------------------------------
 	if (blinkcounter > 3 && (respawning || temp_invincibility))
 		App->render->Blit(graphics, position.x, position.y, &(current_animation->GetCurrentFrame()));
 
 	else if (!respawning && !temp_invincibility)
 		App->render->Blit(graphics, position.x, position.y, &(current_animation->GetCurrentFrame()));
+	// --------------------------
 
 	//Blit UI
 	App->render->Blit(ui, 5, 6, &p1display, 0, true);
@@ -449,6 +474,7 @@ update_status ModulePlayer::Update()
 	{
 		App->render->Blit(ui2, 117, 6, &(startbutton.GetCurrentFrame()), 0, true);
 	}
+	// --------------------------
 
 	return UPDATE_CONTINUE;
 }
