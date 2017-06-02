@@ -8,6 +8,8 @@ ModuleInput::ModuleInput() : Module()
 {
 	for (uint i = 0; i < MAX_KEYS; ++i)
 		keyboard[i] = KEY_IDLE;
+	for (uint i = 0; i < SDL_CONTROLLER_BUTTON_MAX; ++i)
+		controller[i] =B_IDLE;
 }
 
 // Destructor
@@ -76,19 +78,44 @@ update_status ModuleInput::PreUpdate()
 		}
 	}
 
+	 Uint8 buttons[SDL_CONTROLLER_BUTTON_MAX];
+	buttons[SDL_CONTROLLER_BUTTON_A] = SDL_GameControllerGetButton(App->input->Controller, SDL_CONTROLLER_BUTTON_A);
+	buttons[SDL_CONTROLLER_BUTTON_Y] = SDL_GameControllerGetButton(App->input->Controller, SDL_CONTROLLER_BUTTON_Y);
+	buttons[SDL_CONTROLLER_BUTTON_B] = SDL_GameControllerGetButton(App->input->Controller, SDL_CONTROLLER_BUTTON_B);
+	buttons[SDL_CONTROLLER_BUTTON_RIGHTSHOULDER] = SDL_GameControllerGetButton(App->input->Controller, SDL_CONTROLLER_BUTTON_RIGHTSHOULDER);
+	buttons[SDL_CONTROLLER_BUTTON_LEFTSHOULDER] = SDL_GameControllerGetButton(App->input->Controller, SDL_CONTROLLER_BUTTON_LEFTSHOULDER);
 
+	
+	for (int i = 0; i < SDL_CONTROLLER_BUTTON_MAX; ++i)
+	{
+		if (buttons[i] == 1)
+		{
+			if (controller[i] == B_IDLE)
+				controller[i] = B_DOWN;
+			else
+				controller[i] =B_REPEAT;
+		}
+		else
+		{
+			if (controller[i] == B_REPEAT || keyboard[i] ==B_DOWN)
+				controller[i] = B_UP;
+			else
+				controller[i] = B_IDLE;
+		}
+	}
 
 	if (keyboard[SDL_SCANCODE_ESCAPE])
 		return update_status::UPDATE_STOP;
 
-	controller1.left_joystick.x = ((float)SDL_GameControllerGetAxis(Controller, SDL_CONTROLLER_AXIS_LEFTX) / 32767.0f);
-	controller1.left_joystick.y = ((float)SDL_GameControllerGetAxis(Controller, SDL_CONTROLLER_AXIS_LEFTY) / 32767.0f);
-	controller1.c_button = ((bool)SDL_GameControllerGetButton(Controller, SDL_CONTROLLER_BUTTON_A));
-	controller1.f1_button = ((bool)SDL_GameControllerGetButton(Controller, SDL_CONTROLLER_BUTTON_Y));
-	controller1.f2_button = ((bool)SDL_GameControllerGetButton(Controller, SDL_CONTROLLER_BUTTON_B));
-	controller1.f3_button = ((bool)SDL_GameControllerGetButton(Controller, SDL_CONTROLLER_BUTTON_RIGHTSHOULDER));
-	controller1.f4_button = ((bool)SDL_GameControllerGetButton(Controller, SDL_CONTROLLER_BUTTON_LEFTSHOULDER));
-	controller1.space_button = ((bool)SDL_GameControllerGetButton(Controller, SDL_CONTROLLER_BUTTON_A));
+	//Uint8
+	//controller1.left_joystick.x = ((float)SDL_GameControllerGetAxis(Controller, SDL_CONTROLLER_AXIS_LEFTX) / 32767.0f);
+	//controller1.left_joystick.y = ((float)SDL_GameControllerGetAxis(Controller, SDL_CONTROLLER_AXIS_LEFTY) / 32767.0f);
+	//controller1.c_button = ((bool)SDL_GameControllerGetButton(Controller, SDL_CONTROLLER_BUTTON_A));
+	//controller1.f1_button = ((bool)SDL_GameControllerGetButton(Controller, SDL_CONTROLLER_BUTTON_Y));
+	//controller1.f2_button = ((bool)SDL_GameControllerGetButton(Controller, SDL_CONTROLLER_BUTTON_B));
+	//controller1.f3_button = ((bool)SDL_GameControllerGetButton(Controller, SDL_CONTROLLER_BUTTON_RIGHTSHOULDER));
+	//controller1.f4_button = ((bool)SDL_GameControllerGetButton(Controller, SDL_CONTROLLER_BUTTON_LEFTSHOULDER));
+	//controller1.space_button = ((bool)SDL_GameControllerGetButton(Controller, SDL_CONTROLLER_BUTTON_A));
 	return update_status::UPDATE_CONTINUE;
 }
 

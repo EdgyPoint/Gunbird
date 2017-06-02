@@ -203,12 +203,12 @@ update_status ModuleVillageScene::Update()
 
 	
 	
-	if ((App->input->keyboard[SDL_SCANCODE_F3] == KEY_STATE::KEY_DOWN ||  App->input->controller1.f3_button == KEY_DOWN) && !App->fade->fading)
+	if ((App->input->keyboard[SDL_SCANCODE_F3] == KEY_STATE::KEY_DOWN ) && !App->fade->fading)
 	{
 		App->fade->FadeToBlack(this, App->scene_score, 2.0f);
 
 	}
-	if ((App->input->keyboard[SDL_SCANCODE_F4] == KEY_STATE::KEY_DOWN || App->input->controller1.f4_button == KEY_DOWN) && !App->fade->fading)
+	if ((App->input->keyboard[SDL_SCANCODE_F4] == KEY_STATE::KEY_DOWN ) && !App->fade->fading)
 	{
 		App->fade->FadeToBlack(this, App->scene_intro, 2.0f);
 	}
