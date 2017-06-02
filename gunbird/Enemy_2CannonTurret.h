@@ -9,7 +9,6 @@ class Enemy_2CannonTurret : public Enemy
 
 private:
 	iPoint original_pos;
-	fPoint distance;
 	Animation closed, closed_hit, closed_damaged;
 	Animation attacking, attacking_hit, attacking_damaged;
 	int counter = 0;
@@ -21,6 +20,5 @@ public:
 	void Move();
 	int initcounter = 0;
 	float aux_float;
-	fPoint speeds;
 };
 #endif

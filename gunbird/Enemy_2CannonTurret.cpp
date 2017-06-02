@@ -153,5 +153,13 @@ void Enemy_2CannonTurret::Move()
 
 void Enemy_2CannonTurret::Shoot()
 {
-
+	if (reload == 0)
+	{
+		bullet_speed = ShootCalculator({ position.x + 12, position.y + 10 }, { App->player->position.x + 11, App->player->position.y + 11 });
+		App->particles->AddParticle(App->particles->smallshot, position.x + 12, position.y + 10, COLLIDER_ENEMY_SHOT, bullet_speed.x, bullet_speed.y, false);
+		bullet_speed = ShootCalculator({ position.x + 12, position.y + 3 }, { App->player->position.x + 11, App->player->position.y + 11 });
+		App->particles->AddParticle(App->particles->smallshot, position.x + 12, position.y + 3, COLLIDER_ENEMY_SHOT, bullet_speed.x, bullet_speed.y, false);
+	}
+	reload++;
+	if (reload == 40)reload = 0;
 }

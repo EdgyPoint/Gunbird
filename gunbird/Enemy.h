@@ -35,6 +35,8 @@ protected:
 
 public:
 	iPoint position;
+	fPoint bullet_speed;
+	int reload = 0;
 	int pathoption = 0;
 	float hp = 1.0f;
 	int killscore = 0;
@@ -53,7 +55,7 @@ public:
 	virtual ~Enemy();
 
 	const Collider* GetCollider() const;
-
+	fPoint ShootCalculator(iPoint position, iPoint player);
 
 	virtual void Move() {};
 	virtual void Shoot() {};

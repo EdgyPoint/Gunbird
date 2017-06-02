@@ -24,6 +24,26 @@ const Collider* Enemy::GetCollider() const
 	return collider;
 }
 
+fPoint Enemy::ShootCalculator(iPoint position, iPoint player)
+{
+	int module;
+	fPoint distance;
+	fPoint speed;
+
+	distance.x = App->player->position.x - position.x;
+	distance.y = App->player->position.y - position.y;
+
+	module = sqrtf(powf(distance.x, 2) + powf(distance.y, 2));
+
+	distance.x /= module;
+	distance.y /= module;
+
+	speed.x = distance.x*BULLET_SPEED;
+	speed.y = distance.y*BULLET_SPEED;
+
+	return speed;
+}
+
 void Enemy::Draw(SDL_Texture* sprites, Enemy* enemy)
 {
 	if (collider != nullptr)
