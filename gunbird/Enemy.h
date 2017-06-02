@@ -29,7 +29,7 @@ class Enemy
 {
 protected:
 	Animation* animation = nullptr;
-	Animation* aditional_animation = nullptr;
+	Animation* extra_animation = nullptr;
 	Collider* collider = nullptr;
 
 
@@ -37,6 +37,7 @@ public:
 	iPoint position;
 	fPoint bullet_speed;
 	int reload = 0;
+	float angle;
 	int pathoption = 0;
 	float hp = 1.0f;
 	int killscore = 0;
@@ -57,7 +58,7 @@ public:
 
 	const Collider* GetCollider() const;
 	fPoint ShootCalculator(iPoint position, iPoint player);
-	float angle(iPoint position, iPoint player);
+	float AngleCalc(iPoint position, iPoint player);
 
 	virtual void Move() {};
 	virtual void Shoot() {};
