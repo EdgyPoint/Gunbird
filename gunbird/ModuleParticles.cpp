@@ -166,6 +166,143 @@ bool ModuleParticles::Init()
 	bigshot.anim.speed = 0.55f;
 	bigshot.speed.y = 3;
 	bigshot.life = 4000;
+
+	// Bomb shots
+	bombshot_up.anim.PushBack({ 683, 92, 46, 46 });
+	bombshot_up.anim.PushBack({ 683, 46, 46, 46 });
+	bombshot_up.anim.PushBack({ 683, 0, 46, 46 });
+	bombshot_up.anim.loop = false;
+	bombshot_up.anim.speed = 0.2f;
+	bombshot_up.speed.y = -2.5f;
+	bombshot_up.life = 4000;
+
+	bombshot_upleft.anim.PushBack({ 637, 92, 46, 46 });
+	bombshot_upleft.anim.PushBack({ 637, 46, 46, 46 });
+	bombshot_upleft.anim.PushBack({ 637, 0, 46, 46 });
+	bombshot_upleft.anim.PushBack({ 625, 226, 44, 44 });
+	bombshot_upleft.anim.PushBack({ 669, 226, 44, 44 });
+	bombshot_upleft.anim.PushBack({ 713, 182, 44, 44 });
+	bombshot_upleft.anim.PushBack({ 669, 182, 44, 44 });
+	bombshot_upleft.anim.PushBack({ 625, 182, 44, 44 });
+	bombshot_upleft.anim.PushBack({ 581, 182, 44, 44 });
+	bombshot_upleft.anim.PushBack({ 713, 138, 44, 44 });
+	bombshot_upleft.anim.PushBack({ 669, 138, 44, 44 });
+	bombshot_upleft.anim.PushBack({ 625, 138, 44, 44 });
+	bombshot_upleft.anim.PushBack({ 581, 138, 44, 44 });
+	bombshot_upleft.anim.PushBack({ 361, 138, 44, 44 });
+	bombshot_upleft.anim.PushBack({ 405, 138, 44, 44 });
+	bombshot_upleft.anim.PushBack({ 449, 138, 44, 44 });
+	bombshot_upleft.anim.PushBack({ 493, 138, 44, 44 });
+	bombshot_upleft.anim.PushBack({ 537, 138, 44, 44 });
+	bombshot_upleft.anim.PushBack({ 581, 226, 44, 44 });
+	bombshot_upleft.anim.PushBack({ 625, 226, 44, 44 });
+	bombshot_upleft.anim.loop = false;
+	bombshot_upleft.anim.speed = 0.4f;
+	bombshot_upleft.speed.y = -2.5f;
+	bombshot_upleft.speed.x = -2.5f;
+	bombshot_upleft.life = 4000;
+
+	bombshot_left.anim.PushBack({ 591, 92, 46, 46 });
+	bombshot_left.anim.PushBack({ 591, 46, 46, 46 });
+	bombshot_left.anim.PushBack({ 591, 0, 46, 46 });
+	bombshot_left.anim.loop = false;
+	bombshot_left.anim.speed = 0.2f;
+	bombshot_left.speed.x = -2.5f;
+	bombshot_left.life = 4000;
+
+	bombshot_downleft.anim.PushBack({ 545, 92, 46, 46 });
+	bombshot_downleft.anim.PushBack({ 545, 46, 46, 46 });
+	bombshot_downleft.anim.PushBack({ 545, 0, 46, 46 });
+	bombshot_downleft.anim.PushBack({ 625, 182, 44, 44 });
+	bombshot_downleft.anim.PushBack({ 669, 182, 44, 44 });
+	bombshot_downleft.anim.PushBack({ 713, 182, 44, 44 });
+	bombshot_downleft.anim.PushBack({ 669, 226, 44, 44 });
+	bombshot_downleft.anim.PushBack({ 625, 226, 44, 44 });
+	bombshot_downleft.anim.PushBack({ 581, 226, 44, 44 });
+	bombshot_downleft.anim.PushBack({ 537, 138, 44, 44 });
+	bombshot_downleft.anim.PushBack({ 493, 138, 44, 44 });
+	bombshot_downleft.anim.PushBack({ 449, 138, 44, 44 });
+	bombshot_downleft.anim.PushBack({ 405, 138, 44, 44 });
+	bombshot_downleft.anim.PushBack({ 361, 138, 44, 44 });
+	bombshot_downleft.anim.PushBack({ 581, 138, 44, 44 });
+	bombshot_downleft.anim.PushBack({ 625, 138, 44, 44 });
+	bombshot_downleft.anim.PushBack({ 669, 138, 44, 44 });
+	bombshot_downleft.anim.PushBack({ 713, 138, 44, 44 });
+	bombshot_downleft.anim.PushBack({ 581, 182, 44, 44 });
+	bombshot_downleft.anim.PushBack({ 625, 182, 44, 44 });
+	bombshot_downleft.anim.speed = 0.4f;
+	bombshot_downleft.speed.y = 2.5f;
+	bombshot_downleft.speed.x = -2.5f;
+	bombshot_downleft.life = 4000;
+
+	bombshot_down.anim.PushBack({ 499, 92, 46, 46 });
+	bombshot_down.anim.PushBack({ 499, 46, 46, 46 });
+	bombshot_down.anim.PushBack({ 499, 0, 46, 46 });
+	bombshot_down.anim.loop = false;
+	bombshot_down.anim.speed = 0.2f;
+	bombshot_down.speed.y = 2.5f;
+	bombshot_down.life = 4000;
+
+	bombshot_downright.anim.PushBack({ 453, 92, 46, 46 });
+	bombshot_downright.anim.PushBack({ 453, 46, 46, 46 });
+	bombshot_downright.anim.PushBack({ 453, 0, 46, 46 });
+	bombshot_downright.anim.PushBack({ 625, 138, 44, 44 });
+	bombshot_downright.anim.PushBack({ 625, 138, 44, 44 });
+	bombshot_downright.anim.PushBack({ 581, 138, 44, 44 });
+	bombshot_downright.anim.PushBack({ 361, 138, 44, 44 });
+	bombshot_downright.anim.PushBack({ 405, 138, 44, 44 });
+	bombshot_downright.anim.PushBack({ 449, 138, 44, 44 });
+	bombshot_downright.anim.PushBack({ 493, 138, 44, 44 });
+	bombshot_downright.anim.PushBack({ 537, 138, 44, 44 });
+	bombshot_downright.anim.PushBack({ 581, 226, 44, 44 });
+	bombshot_downright.anim.PushBack({ 625, 226, 44, 44 });
+	bombshot_downright.anim.PushBack({ 669, 226, 44, 44 });
+	bombshot_downright.anim.PushBack({ 713, 182, 44, 44 });
+	bombshot_downright.anim.PushBack({ 669, 182, 44, 44 });
+	bombshot_downright.anim.PushBack({ 625, 182, 44, 44 });
+	bombshot_downright.anim.PushBack({ 581, 182, 44, 44 });
+	bombshot_downright.anim.PushBack({ 713, 138, 44, 44 });
+	bombshot_downright.anim.PushBack({ 669, 138, 44, 44 });
+	bombshot_downright.anim.PushBack({ 625, 138, 44, 44 });
+	bombshot_downright.anim.speed = 0.4f;
+	bombshot_downright.speed.y = 2.5f;
+	bombshot_downright.speed.x = 2.5f;
+	bombshot_downright.life = 4000;
+
+	bombshot_right.anim.PushBack({ 407, 92, 46, 46 });
+	bombshot_right.anim.PushBack({ 407, 46, 46, 46 });
+	bombshot_right.anim.PushBack({ 407, 0, 46, 46 });
+	bombshot_right.anim.loop = false;
+	bombshot_right.anim.speed = 0.2f;
+	bombshot_right.speed.x = 2.5f;
+	bombshot_right.life = 4000;
+
+	bombshot_upright.anim.PushBack({ 361, 92, 46, 46 });
+	bombshot_upright.anim.PushBack({ 361, 46, 46, 46 });
+	bombshot_upright.anim.PushBack({ 361, 0, 46, 46 });
+	bombshot_upright.anim.PushBack({ 449, 138, 44, 44});
+	bombshot_upright.anim.PushBack({ 405, 138, 44, 44 });
+	bombshot_upright.anim.PushBack({ 361, 138, 44, 44 });
+	bombshot_upright.anim.PushBack({ 581, 138, 44, 44 });
+	bombshot_upright.anim.PushBack({ 625, 138, 44, 44 });
+	bombshot_upright.anim.PushBack({ 669, 138, 44, 44 });
+	bombshot_upright.anim.PushBack({ 713, 138, 44, 44 });
+	bombshot_upright.anim.PushBack({ 581, 182, 44, 44 });
+	bombshot_upright.anim.PushBack({ 625, 182, 44, 44 });
+	bombshot_upright.anim.PushBack({ 669, 182, 44, 44 });
+	bombshot_upright.anim.PushBack({ 713, 182, 44, 44 });
+	bombshot_upright.anim.PushBack({ 669, 226, 44, 44 });
+	bombshot_upright.anim.PushBack({ 625, 226, 44, 44 });
+	bombshot_upright.anim.PushBack({ 581, 226, 44, 44 });
+	bombshot_upright.anim.PushBack({ 537, 138, 44, 44 });
+	bombshot_upright.anim.PushBack({ 493, 138, 44, 44 });
+	bombshot_upright.anim.PushBack({ 449, 138, 44, 44 });
+	bombshot_upright.anim.speed = 0.4f;
+	bombshot_upright.speed.y = -2.5f;
+	bombshot_upright.speed.x = 2.5f;
+	bombshot_upright.life = 4000;
+
+	// --------------------------
 	
 	//coin
 	coin.anim.PushBack({ 234, 362, 16, 16 });
@@ -194,6 +331,8 @@ bool ModuleParticles::Init()
 	powerup.speed.x = 1;
 	powerup.speed.y = 1;
 	powerup.life = 20000;
+
+
 
 	impact.anim.PushBack({448, 768, 16, 42});
 	impact.anim.PushBack({464, 768, 16, 42 });
