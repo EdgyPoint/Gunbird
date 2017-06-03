@@ -125,6 +125,7 @@ bool ModuleVillageScene::CleanUp()
 	App->collision->Disable();
 	App->player->Disable();
 	App->player2->Disable();
+	App->scene_village->Disable();
 
 	
 	App->textures->Unload(graphics);
@@ -220,13 +221,7 @@ update_status ModuleVillageScene::Update()
 		speed = 0.4;
 	}
 
-	
-
-
-
-	
-	
-	if ((App->input->keyboard[SDL_SCANCODE_F3] == KEY_STATE::KEY_DOWN ) && !App->fade->fading)
+	if ((App->input->keyboard[SDL_SCANCODE_F3] == KEY_STATE::KEY_DOWN || App->player->out && App->player2->out) && !App->fade->fading)
 	{
 		App->fade->FadeToBlack(this, App->scene_score, 2.0f);
 
