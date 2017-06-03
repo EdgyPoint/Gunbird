@@ -101,6 +101,9 @@ bool ModuleVillageScene::Start()
 	App->enemies->AddEnemy(ENEMY_TYPES::ROTATINGTURRET, -60, -840, 2);
 	App->enemies->AddEnemy(ENEMY_TYPES::ROTATINGTURRET, -90, -840, 2);
 
+	//--Adding Green Robot--
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENROBOT, 73, -90, 0);
+
 	//--Adding Window Guns--
 	App->enemies->AddEnemy(ENEMY_TYPES::WINDOWGUN, 26, -122, 0);
 	App->enemies->AddEnemy(ENEMY_TYPES::WINDOWGUN, 170, -122, 0);

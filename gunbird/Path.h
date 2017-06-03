@@ -67,6 +67,14 @@ public:
 	{
 		current_frame = 0;
 	}
+
+
+	void Stop()
+	{
+		last_step = 0;
+		current_frame = 0;
+		PushBack({ 0.0f, 0.0f }, 10000);
+	}
 };
 
 #endif // __PATH_H__

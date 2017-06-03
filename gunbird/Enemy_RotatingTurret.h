@@ -10,6 +10,7 @@ class Enemy_RotatingTurret : public Enemy
 private:
 	iPoint original_pos;
 	fPoint distance;
+	Animation* aux;
 	Animation aditional_animation;
 	Animation normal_base_anim;
 	Animation hit_base_anim;
