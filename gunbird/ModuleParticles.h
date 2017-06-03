@@ -71,7 +71,16 @@ public:
 	Particle smallshot;
 	Particle prebigshot;
 	Particle bigshot;
+	Particle bombshot_up;
+	Particle bombshot_upleft;
+	Particle bombshot_left;
+	Particle bombshot_downleft;
+	Particle bombshot_down;
+	Particle bombshot_downright;
+	Particle bombshot_right;
+	Particle bombshot_upright;
 	Particle powerup;
+	Particle bomb;
 	Particle magicspark[4];
 	Particle impact;
 	Particle small_explosion;

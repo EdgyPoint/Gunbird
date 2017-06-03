@@ -278,7 +278,25 @@ if ((App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT || SDL_GameCo
 	if (App->input->keyboard[SDL_SCANCODE_V] == KEY_STATE::KEY_DOWN && !_dying && !respawning && !stunned && !App->fade->fading && bombCD == 0)
 	{
 		bombCD = 125;
-
+		App->particles->AddParticle(App->particles->bombshot_up, position.x - 8, position.y - 35, COLLIDER_PLAYER_SHOT);
+		App->particles->AddParticle(App->particles->bombshot_upleft, position.x - 6, position.y - 6, COLLIDER_PLAYER_SHOT);
+		App->particles->AddParticle(App->particles->bombshot_left, position.x - 35, position.y - 8, COLLIDER_PLAYER_SHOT);
+		App->particles->AddParticle(App->particles->bombshot_downleft, position.x - 6, position.y - 10, COLLIDER_PLAYER_SHOT);
+		App->particles->AddParticle(App->particles->bombshot_down, position.x - 8, position.y + 23, COLLIDER_PLAYER_SHOT);
+		App->particles->AddParticle(App->particles->bombshot_downright, position.x - 10, position.y - 10, COLLIDER_PLAYER_SHOT);
+		App->particles->AddParticle(App->particles->bombshot_right, position.x + 23, position.y - 8, COLLIDER_PLAYER_SHOT);
+		App->particles->AddParticle(App->particles->bombshot_upright, position.x - 10, position.y - 6, COLLIDER_PLAYER_SHOT);
+	}
+	if (bombCD == 95)
+	{
+		App->particles->AddParticle(App->particles->bombshot_up, position.x - 8, position.y - 35, COLLIDER_PLAYER_SHOT);
+		App->particles->AddParticle(App->particles->bombshot_upleft, position.x - 6, position.y - 6, COLLIDER_PLAYER_SHOT);
+		App->particles->AddParticle(App->particles->bombshot_left, position.x - 35, position.y - 8, COLLIDER_PLAYER_SHOT);
+		App->particles->AddParticle(App->particles->bombshot_downleft, position.x - 6, position.y - 10, COLLIDER_PLAYER_SHOT);
+		App->particles->AddParticle(App->particles->bombshot_down, position.x - 8, position.y + 23, COLLIDER_PLAYER_SHOT);
+		App->particles->AddParticle(App->particles->bombshot_downright, position.x - 10, position.y - 10, COLLIDER_PLAYER_SHOT);
+		App->particles->AddParticle(App->particles->bombshot_right, position.x + 23, position.y - 8, COLLIDER_PLAYER_SHOT);
+		App->particles->AddParticle(App->particles->bombshot_upright, position.x - 10, position.y - 6, COLLIDER_PLAYER_SHOT);
 	}
 	if (bombCD != 0)
 		bombCD--;
