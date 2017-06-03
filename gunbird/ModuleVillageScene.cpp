@@ -89,9 +89,9 @@ bool ModuleVillageScene::Start()
 	App->enemies->AddEnemy(ENEMY_TYPES::ROTATINGTURRET, 101, -890, 0);
 
 	//---Three moving right
-	App->enemies->AddEnemy(ENEMY_TYPES::ROTATINGTURRET, 10, -840, 1);
-	App->enemies->AddEnemy(ENEMY_TYPES::ROTATINGTURRET, 133, -840, 1);
-	App->enemies->AddEnemy(ENEMY_TYPES::ROTATINGTURRET, 133, -840, 1);
+	App->enemies->AddEnemy(ENEMY_TYPES::ROTATINGTURRET,-66, -840, 0);
+	App->enemies->AddEnemy(ENEMY_TYPES::ROTATINGTURRET,-102, -840, 0);
+	App->enemies->AddEnemy(ENEMY_TYPES::ROTATINGTURRET,-30, -840, 0);
 
 	//---Three moving down---
 	App->enemies->AddEnemy(ENEMY_TYPES::ROTATINGTURRET, 133, -340, 2);
@@ -110,8 +110,9 @@ bool ModuleVillageScene::Start()
 	App->enemies->AddEnemy(ENEMY_TYPES::TWOCANNONTURRET, 26, -525, 0);
 	App->enemies->AddEnemy(ENEMY_TYPES::TWOCANNONTURRET, 26, -585, 0);
 
-	App->enemies->AddEnemy(ENEMY_TYPES::FOURCANNONTURRET, 135, -520, 0);
-	App->enemies->AddEnemy(ENEMY_TYPES::FOURCANNONTURRET, 135, -570, 0);
+	App->enemies->AddEnemy(ENEMY_TYPES::FOURCANNONTURRET, 160, -460, 0);
+	App->enemies->AddEnemy(ENEMY_TYPES::FOURCANNONTURRET, 160, -523, 0);
+	App->enemies->AddEnemy(ENEMY_TYPES::FOURCANNONTURRET, 160, -583, 0);
 
 	return true;
 }

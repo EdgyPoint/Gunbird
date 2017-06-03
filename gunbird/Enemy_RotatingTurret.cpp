@@ -169,9 +169,9 @@ Enemy_RotatingTurret::Enemy_RotatingTurret(int x, int y, int option) : Enemy(x, 
 	if (option == 1)	
 	{ 
 		path.PushBack({ 0.0f, 0.4f }, 2500);
-		path.PushBack({ 0.2f,0.0f }, 10000); 
+		path.PushBack({ 0.4f, 0.4f }, 10000); 
 	}//move right
-	if (option == 2)	{ path.PushBack({ 0.4f, -0.8f }, 10000); }//move down
+	if (option == 2)	{ path.PushBack({ 0.0f, 0.0f }, 10000); }//move down
 	
 	
 
