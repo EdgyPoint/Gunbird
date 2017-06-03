@@ -282,7 +282,9 @@ if ((App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT || SDL_GameCo
 	// Bomb
 	if (App->input->keyboard[SDL_SCANCODE_V] == KEY_STATE::KEY_DOWN && !_dying && !respawning && !stunned && !App->fade->fading && bombCD == 0 && bombs > 0)
 	{
+		if (bombs > 0)
 		bombs--;
+
 		bombCD = 125;
 		App->audio->sfx = App->audio->LoadSFX("assets/SFX/marionbomb.wav");
 		Mix_PlayChannel(-1, App->audio->sfx, 0);
@@ -357,7 +359,28 @@ if ((App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT || SDL_GameCo
 		App->collision->EditMatrix(COLLIDER_ENEMY_SHOT, COLLIDER_PLAYER2, true);
 	}
 
-	if (App->input->keyboard[SDL_SCANCODE_F5] == KEY_STATE::KEY_DOWN && !App->fade->fading)
+	else if ((App->input->keyboard[SDL_SCANCODE_F5] == KEY_STATE::KEY_DOWN) && !App->fade->fading)
+	{
+		if (powerup_lv != MAX_LEVEL)
+			powerup_lv++;
+		if (App->player2->powerup_lv != MAX_LEVEL)
+			App->player2->powerup_lv++;
+
+		App->audio->sfx = App->audio->LoadSFX("assets/SFX/marionpowerup.wav");
+		Mix_PlayChannel(-1, App->audio->sfx, 0);
+	}
+	else if ((App->input->keyboard[SDL_SCANCODE_F6] == KEY_STATE::KEY_DOWN) && !App->fade->fading)
+	{
+		if (bombs != 4)
+			bombs++;
+		if (App->player2->bombs != 4)
+			App->player2->bombs++;
+
+		App->audio->sfx = App->audio->LoadSFX("assets/SFX/collectbomb.wav");
+		Mix_PlayChannel(-1, App->audio->sfx, 0);
+	}
+
+	if (App->input->keyboard[SDL_SCANCODE_KP_ENTER] == KEY_STATE::KEY_DOWN && !App->fade->fading)
 	{
 		App->player2->Enable();
 		App->player2->out = false;
@@ -619,7 +642,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 
 	if (c2->type == COLLIDER_POWERUP)
 	{
-		if (powerup_lv == 0)
+		if (powerup_lv > MAX_LEVEL)
 		{
 			App->audio->sfx = App->audio->LoadSFX("assets/SFX/marionpowerup.wav");;
 			Mix_PlayChannel(-1, App->audio->sfx, 0);
@@ -639,16 +662,18 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 
 	if (c2->type == COLLIDER_BOMB)
 	{
-		if (bombs == 6)
-		{
-			score += 10000;
-		}
-		if (bombs < 6)
+		if (bombs == 4)
+		score += 10000;
+
+		if (bombs < 4)
 		{
 			bombs++;
 		}
+
 		App->audio->sfx = App->audio->LoadSFX("assets/SFX/collectbomb.wav");
 		Mix_PlayChannel(-1, App->audio->sfx, 0);
+
+		App->particles->DeleteParticle(c2);
 	}
 
 	if (c2->type == COLLIDER_COIN)

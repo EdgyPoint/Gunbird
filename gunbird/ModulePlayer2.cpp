@@ -461,6 +461,25 @@ void ModulePlayer2::OnCollision(Collider* c1, Collider* c2)
 			Mix_PlayChannel(-1, App->audio->sfx, 0);
 			
 			poweruping = true;
+
+
+			App->particles->DeleteParticle(c2);
+		}
+
+		if (c2->type == COLLIDER_BOMB)
+		{
+			if (bombs == 4)
+				score += 10000;
+
+			if (bombs < 4)
+			{
+				bombs++;
+			}
+
+			App->audio->sfx = App->audio->LoadSFX("assets/SFX/collectbomb.wav");
+			Mix_PlayChannel(-1, App->audio->sfx, 0);
+
+			App->particles->DeleteParticle(c2);
 		}
 
 		if (c2->type == COLLIDER_COIN)

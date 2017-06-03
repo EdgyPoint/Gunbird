@@ -139,7 +139,7 @@ void Enemy::ToDie(Enemy* enemy, Collider* col)
 
 	if (enemy->drops_bomb)
 	{
-		App->particles->AddParticle(App->particles->bomb, enemy->position.x + 12, enemy->position.y + 26, COLLIDER_POWERUP, 1, 1, 0, true, ITEM_BOMB);
+		App->particles->AddParticle(App->particles->bomb, enemy->position.x + 12, enemy->position.y + 26, COLLIDER_BOMB, 1, 1, 0, true, ITEM_BOMB);
 	}
 
 	if (enemy->drops_coin)
