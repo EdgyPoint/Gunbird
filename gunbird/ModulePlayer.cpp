@@ -236,6 +236,8 @@ if ((App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT || SDL_GameCo
 		}
 	}
 	// --------------------------
+
+	// Move down
 	if ((App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT || SDL_GameControllerGetAxis(App->input->Controller, SDL_CONTROLLER_AXIS_LEFTY) > 10000) && !_dying && !respawning && !App->fade->fading)
 	{
 		position.y += speed;
@@ -247,6 +249,7 @@ if ((App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT || SDL_GameCo
 	}
 	// --------------------------
 
+	// Move up
 	if ((App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT || SDL_GameControllerGetAxis(App->input->Controller, SDL_CONTROLLER_AXIS_LEFTY) < -13000) && !_dying && !respawning && !App->fade->fading)
 	{
 		position.y -= speed;
@@ -259,7 +262,7 @@ if ((App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT || SDL_GameCo
 	// --------------------------
 
 
-
+	// Shoot
 	if ((App->input->keyboard[SDL_SCANCODE_C] == KEY_STATE::KEY_DOWN || App->input->controller[SDL_CONTROLLER_BUTTON_A] ==BUTTON_STATE::B_DOWN) && !_dying && !respawning && !stunned && !App->fade->fading)
 	{
 		if (!shooting)
@@ -324,7 +327,7 @@ if ((App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT || SDL_GameCo
 	}
 	// --------------------------
 
-
+	// Debug features
 	if ((App->input->keyboard[SDL_SCANCODE_F2] == KEY_STATE::KEY_DOWN ) && godmode == false && !App->fade->fading)
 	{
 		godmode = true;
@@ -615,6 +618,8 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 		{
 			bombs++;
 		}
+		App->audio->sfx = App->audio->LoadSFX("assets/SFX/collectbomb.wav");
+		Mix_PlayChannel(-1, App->audio->sfx, 0);
 	}
 
 	if (c2->type == COLLIDER_COIN)

@@ -99,7 +99,6 @@ void Enemy::Draw(SDL_Texture* sprites, Enemy* enemy)
 
 void Enemy::OnCollision(Collider* collider, Enemy* enemy)
 {
-
 		if (collider->type == COLLIDER_PLAYER_SHOT && App->player->powerup_lv == 0)
 			enemy->hp -= 1.0f;
 		else if (collider->type == COLLIDER_PLAYER2_SHOT && App->player2->powerup_lv == 0)
@@ -127,8 +126,6 @@ void Enemy::OnCollision(Collider* collider, Enemy* enemy)
 			App->audio->sfx = App->audio->LoadSFX("assets/SFX/impact.wav");
 			Mix_PlayChannel(-1, App->audio->sfx, 0);
 		}
-	
-
 }
 
 

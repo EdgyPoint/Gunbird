@@ -68,6 +68,8 @@ bool ModuleVillageScene::Start()
 	graphics3 = App->textures->Load("assets/images/backgrounds/Village train background.png");
 	graphics4 = App->textures->Load("assets/images/backgrounds/Village train background.png");
 
+	App->audio->audio = App->audio->Load("assets/bgm/village.ogg");
+	Mix_PlayMusic(App->audio->audio, -1);
 
 	App->collision->AddCollider(npi, COLLIDER_WALL);
 
