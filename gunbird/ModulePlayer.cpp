@@ -75,6 +75,27 @@ ModulePlayer::ModulePlayer()
 	tilting.loop = true;
 	tilting.speed = 0.5f;
 
+	completingcharge.PushBack({ 0, 160, 32, 37 });
+	completingcharge.PushBack({ 32, 160, 32, 37 });
+	completingcharge.PushBack({ 32, 160, 32, 37 });
+	completingcharge.PushBack({ 32, 160, 32, 37 });
+	completingcharge.PushBack({ 32, 160, 32, 37 });
+	completingcharge.PushBack({ 64, 160, 32, 37 });
+	completingcharge.PushBack({ 64, 160, 32, 37 });
+	completingcharge.PushBack({ 64, 160, 32, 37 });
+	completingcharge.PushBack({ 64, 160, 32, 37 });
+	completingcharge.PushBack({ 96, 160, 32, 37 });
+	completingcharge.PushBack({ 96, 160, 32, 37 });
+	completingcharge.PushBack({ 96, 160, 32, 37 });
+	completingcharge.PushBack({ 96, 160, 32, 37 });
+	completingcharge.loop = true;
+	completingcharge.speed = 0.5f;
+
+	shotcharged.PushBack({ 0, 197, 32, 37 });
+	shotcharged.PushBack({ 32, 197, 32, 37 });
+	shotcharged.loop = true;
+	shotcharged.speed = 0.25f;
+
 	startbutton.PushBack({ 0, 320, 68, 13 });
 	startbutton.PushBack({ 0, 333, 68, 13 });
 	startbutton.speed = 0.03f;
@@ -263,6 +284,27 @@ if ((App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT || SDL_GameCo
 	}
 	// --------------------------
 
+	// Charged shot
+		// Charge up
+	if ((App->input->keyboard[SDL_SCANCODE_C] == KEY_STATE::KEY_REPEAT || App->input->controller[SDL_CONTROLLER_BUTTON_A] == BUTTON_STATE::B_REPEAT) && !_dying && !respawning && !stunned && !App->fade->fading && charge_up < 110)
+	{
+		charge_up++;
+	}
+		// Finishing charge
+	if ((App->input->keyboard[SDL_SCANCODE_C] == KEY_STATE::KEY_REPEAT || App->input->controller[SDL_CONTROLLER_BUTTON_A] == BUTTON_STATE::B_REPEAT) && !_dying && !respawning && !stunned && !App->fade->fading && charge_up == 110 && finishing_charge < 26)
+	{
+		finishing_charge++;
+	}
+		// Release
+	if ((App->input->keyboard[SDL_SCANCODE_C] == KEY_STATE::KEY_UP || App->input->controller[SDL_CONTROLLER_BUTTON_A] == BUTTON_STATE::B_UP) && !_dying && !respawning && !stunned && !App->fade->fading)
+	{
+		if (charge_up == 110)
+		{
+			App->particles->AddParticle(App->particles->chargedbeam, position.x - 2, position.y - 32, COLLIDER_BOMBSHOT);
+		}
+		charge_up = 0;
+		finishing_charge = 0;
+	}
 
 	// Shoot
 	if ((App->input->keyboard[SDL_SCANCODE_C] == KEY_STATE::KEY_DOWN || App->input->controller[SDL_CONTROLLER_BUTTON_A] ==BUTTON_STATE::B_DOWN) && !_dying && !respawning && !stunned && !App->fade->fading)
@@ -329,6 +371,15 @@ if ((App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT || SDL_GameCo
 			current_animation = &idle;
 			transition = 0;
 		}
+	}
+
+	if (charge_up == 110)
+	{
+		current_animation = &completingcharge;
+	}
+	if (finishing_charge == 26)
+	{
+		current_animation = &shotcharged;
 	}
 	// --------------------------
 
@@ -518,8 +569,15 @@ if ((App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT || SDL_GameCo
 	if (blinkcounter > 3 && (respawning || temp_invincibility))
 		App->render->Blit(graphics, position.x, position.y, &(current_animation->GetCurrentFrame()));
 
-	else if (!respawning && !temp_invincibility)
+	else if (!respawning && !temp_invincibility && charge_up != 110)
 		App->render->Blit(graphics, position.x, position.y, &(current_animation->GetCurrentFrame()));
+	// --------------------------
+
+	// Blit shot charging
+	if (charge_up == 110)
+	{
+		App->render->Blit(graphics, position.x, position.y - 5, &(current_animation->GetCurrentFrame()));
+	}
 	// --------------------------
 
 	//Blit UI
@@ -557,9 +615,11 @@ if ((App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT || SDL_GameCo
 		App->render->Blit(ui, 38, 300, &bombdisplay, 0, true);
 		App->render->Blit(ui, 56, 300, &bombdisplay, 0, true);
 	}
-	
+	// --------------------------
 
+	// Blit score
 	App->fonts->BlitText(20, 6, font_score, text_score);
+	// --------------------------
 
 	if (App->player2->out == true)
 	{
@@ -606,6 +666,9 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 {
 	if (c2->type == COLLIDER_ENEMY_SHOT)
 	{
+		charge_up = 0;
+		finishing_charge = 0;
+
 		lives -= 1;
 		_dying = true;
 		
@@ -629,6 +692,9 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 
 	if (c2->type == COLLIDER_ENEMY_F && !stunned)
 	{
+		charge_up = 0;
+		finishing_charge = 0;
+
 		stunned = true;
 		powerup_lv--;
 		App->particles->AddParticle(App->particles->playercollision, position.x, position.y, COLLIDER_NONE);

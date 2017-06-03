@@ -43,6 +43,7 @@ private:
 	Animation leftd4, leftd4_hit, leftd4_damaged;
 	Animation leftd5, leftd5_hit, leftd5_damaged;
 	Animation leftd6, leftd6_hit, leftd6_damaged;
+	Animation dead;
 	Path path;
 
 public:

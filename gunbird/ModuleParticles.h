@@ -69,6 +69,7 @@ public:
 	Particle marionbeamleft_lv2[3];
 	Particle marionbeamright_lv1[3];
 	Particle marionbeamright_lv2[3];
+	Particle chargedbeam;
 	Particle smallshot;
 	Particle prebigshot;
 	Particle bigshot;

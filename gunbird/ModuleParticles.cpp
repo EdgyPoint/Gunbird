@@ -131,6 +131,16 @@ bool ModuleParticles::Init()
 	marionbeamright_lv2[2].speed.y = -10;
 	marionbeamright_lv2[2].life = 4000;
 
+	chargedbeam.anim.PushBack({ 264, 202, 32, 64 });
+	chargedbeam.anim.PushBack({ 328, 202, 32, 64 });
+	chargedbeam.anim.PushBack({ 392, 202, 32, 64 });
+	chargedbeam.anim.PushBack({ 456, 202, 32, 64 });
+	chargedbeam.anim.PushBack({ 520, 202, 32, 64 });
+	chargedbeam.anim.loop = true;
+	chargedbeam.anim.speed = 0.5f;
+	chargedbeam.speed.y = -7;
+	chargedbeam.life = 4000;
+
 	smallshot.anim.PushBack({ 31, 425, 6, 6 });
 	smallshot.anim.PushBack({ 47, 425, 6, 6 });
 	smallshot.anim.PushBack({ 79, 425, 6, 6 });

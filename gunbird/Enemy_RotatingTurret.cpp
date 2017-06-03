@@ -158,6 +158,8 @@ Enemy_RotatingTurret::Enemy_RotatingTurret(int x, int y, int option) : Enemy(x, 
 	leftd6_hit.PushBack({ 484, 608, 27, 32 });
 	leftd6_damaged.PushBack({ 484, 736, 27, 32 });
 
+	dead.PushBack({ 426, 428, 32, 33 });
+
 	
 	collider = App->collision->AddCollider({ 0, 0, 28, 36 }, COLLIDER_TYPE::COLLIDER_ENEMY, (Module*)App->enemies);
 
@@ -193,6 +195,7 @@ Enemy_RotatingTurret::Enemy_RotatingTurret(int x, int y, int option) : Enemy(x, 
 	damaged_hp = 1.0f;
 	death_type = SMALL_ENEMY;
 	flying = false;
+	dead_anim = true;
 	killscore = 500;
 }
 
