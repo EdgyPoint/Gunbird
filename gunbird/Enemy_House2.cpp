@@ -59,7 +59,7 @@ Enemy_House2::Enemy_House2(int x, int y, int option) : Enemy(x, y, option)
 
 	animation = &fly;
 
-	aditional_animation = &flag;
+	extra_animation = &flag;
 
 
 	path.PushBack({ 0.0f, 0.55f }, 10000);
@@ -79,18 +79,18 @@ void Enemy_House2::Move()
 	if (status == NORMAL)
 	{
 		animation = &fly;
-		aditional_animation = &flag;
+		extra_animation = &flag;
 	}
 	if (status == HIT)
 	{
 		animation = &fly2;
-		aditional_animation = &flag2;
+		extra_animation = &flag2;
 	}
 
 	if (status == DAMAGED)
 	{
 		animation = &fly3;
-		aditional_animation = &flag3;
+		extra_animation = &flag3;
 	}
 }
 void Enemy_House2::Extra_animation()

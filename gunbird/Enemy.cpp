@@ -45,7 +45,7 @@ fPoint Enemy::ShootCalculator(iPoint position, iPoint player)
 	return speed;
 }
 
-float Enemy::angle(iPoint position, iPoint player)
+float Enemy::AngleCalc(iPoint position, iPoint player)
 {
 	int module;
 	fPoint distance;
@@ -56,7 +56,9 @@ float Enemy::angle(iPoint position, iPoint player)
 
 	module = sqrtf(powf(distance.x, 2) + powf(distance.y, 2));
 
-angle = abs((int)distance.x) / module; // the int is just temporal, delet tis
+
+	angle = fabsf(distance.x) / module;
+
 
 	angle = acosf(angle);
 

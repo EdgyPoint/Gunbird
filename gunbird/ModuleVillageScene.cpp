@@ -73,7 +73,30 @@ bool ModuleVillageScene::Start()
 
 	//---ENEMIES---
 	//--Adding Rotating Turrets--
-	App->enemies->AddEnemy(ENEMY_TYPES::ROTATINGTURRET, 20, -70, 0);
+	//---Two at the beginning--
+	App->enemies->AddEnemy(ENEMY_TYPES::ROTATINGTURRET, 3, -60, 0);
+	App->enemies->AddEnemy(ENEMY_TYPES::ROTATINGTURRET, 35, -60, 0);
+
+	//---The four at the bridge---
+	App->enemies->AddEnemy(ENEMY_TYPES::ROTATINGTURRET, 35, -340, 0);
+	App->enemies->AddEnemy(ENEMY_TYPES::ROTATINGTURRET, 65, -340, 0);
+	App->enemies->AddEnemy(ENEMY_TYPES::ROTATINGTURRET, 133, -340, 0);
+	App->enemies->AddEnemy(ENEMY_TYPES::ROTATINGTURRET, 165, -340, 0);
+
+	//---Three standing---
+	App->enemies->AddEnemy(ENEMY_TYPES::ROTATINGTURRET, 133, -900, 0);
+	App->enemies->AddEnemy(ENEMY_TYPES::ROTATINGTURRET, 133, -340, 0);
+	App->enemies->AddEnemy(ENEMY_TYPES::ROTATINGTURRET, 133, -340, 0);
+
+	//---Three moving left
+	App->enemies->AddEnemy(ENEMY_TYPES::ROTATINGTURRET, 133, -340, 0);
+	App->enemies->AddEnemy(ENEMY_TYPES::ROTATINGTURRET, 133, -340, 0);
+	App->enemies->AddEnemy(ENEMY_TYPES::ROTATINGTURRET, 133, -340, 0);
+
+	//---Three moving down---
+	App->enemies->AddEnemy(ENEMY_TYPES::ROTATINGTURRET, 133, -340, 0);
+	App->enemies->AddEnemy(ENEMY_TYPES::ROTATINGTURRET, 133, -340, 0);
+	App->enemies->AddEnemy(ENEMY_TYPES::ROTATINGTURRET, 133, -340, 0);
 
 	//--Adding Window Guns--
 	App->enemies->AddEnemy(ENEMY_TYPES::WINDOWGUN, 26, -122, 0);

@@ -97,6 +97,7 @@
     <ClCompile Include="Enemy_GreenRobot.cpp">
       <Filter>Modules\Enemies</Filter>
     </ClCompile>
+    <ClCompile Include="Enemy_4CannonTurret.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animation.h">
@@ -207,6 +208,7 @@
     <ClInclude Include="Enemy_GreenRobot.h">
       <Filter>Modules\Enemies</Filter>
     </ClInclude>
+    <ClInclude Include="Enemy_4CannonTurret.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Containers">
