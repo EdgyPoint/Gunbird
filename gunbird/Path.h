@@ -73,7 +73,7 @@ public:
 	{
 		last_step = 0;
 		current_frame = 0;
-		PushBack({ 0.0f, 0.0f }, 10000);
+		PushBack({ 0.0f, 0.4f }, 10000);
 	}
 };
 

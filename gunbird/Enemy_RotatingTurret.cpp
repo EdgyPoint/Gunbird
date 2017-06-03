@@ -561,10 +561,22 @@ void Enemy_RotatingTurret::Move()
 
 void Enemy_RotatingTurret::Extra_animation()
 {
-	
+	if (status == NORMAL)
+		animation = &normal_base_anim;
+
+	if (status == HIT)
+		animation = &hit_base_anim;
+	if (status == DAMAGED)
+	{
+		if (counter == 0)
+			animation = &damaged_base_anim;
+		else
+			animation = &normal_base_anim;
+	}
+
 	aux = animation;
 	animation = extra_animation;
-	extra_animation = aux;
+	extra_animation = aux;	
 
 	App->render->Blit(App->enemies->sprites, position.x, position.y + 7, &(extra_animation->GetCurrentFrame()));
 		//flag2.GetCurrentFrame();

@@ -7,6 +7,8 @@
 
 class Enemy_WindowGun : public Enemy
 {
+	
+private:
 	enum anim_type
 	{
 		CLOSED,
@@ -15,7 +17,7 @@ class Enemy_WindowGun : public Enemy
 		CLOSING,
 		DEAD
 	};
-private:
+
 	iPoint original_pos;
 	Animation closed, opening, shooting, closing;
 	Animation closed_hit, opening_hit, shooting_hit, closing_hit;

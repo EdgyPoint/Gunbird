@@ -78,6 +78,7 @@ void Enemy::Draw(SDL_Texture* sprites, Enemy* enemy)
 {
 	if (collider != nullptr)
 	{
+		if (hp > 0)
 			collider->SetPos(position.x, position.y);
 	}
 
