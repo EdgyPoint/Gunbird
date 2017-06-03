@@ -118,16 +118,16 @@ void Enemy_WindowGun::Move()
 	if (anim_type == DEAD && position.x < 100)
 	{
 		animation = &left_dead;
-		position.x -= 25;
-		position.y -= 6;
+		position.x -= 11;
+		position.y -= 43;
 		collider->rect.h = 0;
 		collider->rect.w = 0;
 	}
 	if (anim_type == DEAD && position.x > 100)
 	{
 		animation = &right_dead;
-		position.x -= 17;
-		position.y -= 3;
+		position.x -= 11;
+		position.y -= 35;
 		collider->rect.h = 0;
 		collider->rect.w = 0;
 	}

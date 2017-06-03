@@ -302,9 +302,12 @@ bool ModuleParticles::Init()
 	bombshot_upright.speed.x = 2.5f;
 	bombshot_upright.life = 4000;
 
+	particle_clearer.anim.PushBack({ 0,0,0,0 });
+	particle_clearer.anim.speed = 1;
+	particle_clearer.life = 300;
 	// --------------------------
 	
-	//coin
+	// Coin
 	coin.anim.PushBack({ 234, 362, 16, 16 });
 	coin.anim.PushBack({ 256, 362, 16, 16 });
 	coin.anim.PushBack({ 282, 362, 16, 16 });
@@ -317,6 +320,20 @@ bool ModuleParticles::Init()
 	coin.life = 10000;
 	coin.anim.speed = 0.25f;
 
+	// Pickups
+	bomb.anim.PushBack({ 235, 439, 23, 12 });
+	bomb.anim.PushBack({ 259, 439, 23, 12 });
+	bomb.anim.PushBack({ 283, 439, 23, 12 });
+	bomb.anim.PushBack({ 307, 439, 23, 12 });
+	bomb.anim.PushBack({ 331, 439, 23, 12 });
+	bomb.anim.PushBack({ 355, 439, 23, 12 });
+	bomb.anim.PushBack({ 379, 439, 23, 12 });
+	bomb.anim.PushBack({ 403, 439, 23, 12 });
+	bomb.anim.loop = true;
+	bomb.anim.speed = 0.3f;
+	bomb.speed.x = 1;
+	bomb.speed.y = 1;
+	bomb.life = 20000;
 
 	powerup.anim.PushBack({ 235, 423, 22, 13 });
 	powerup.anim.PushBack({ 259, 423, 22, 13 });
@@ -331,8 +348,7 @@ bool ModuleParticles::Init()
 	powerup.speed.x = 1;
 	powerup.speed.y = 1;
 	powerup.life = 20000;
-
-
+	// --------------------------
 
 	impact.anim.PushBack({448, 768, 16, 42});
 	impact.anim.PushBack({464, 768, 16, 42 });
@@ -569,7 +585,17 @@ void ModuleParticles::AddParticle(const Particle& particle, int x, int y, COLLID
 
 			p->position.x = x;
 			p->position.y = y;
+			if (collider_type != COLLIDER_BOMBCLEAN)
 			p->collider = App->collision->AddCollider(p->collider_size, collider_type, this);
+			if (collider_type == COLLIDER_BOMBCLEAN)
+			{
+				SDL_Rect bombcleansize;
+				bombcleansize.x = 0;
+				bombcleansize.y = 0;
+				bombcleansize.w = 224;
+				bombcleansize.h = 320;
+				p->collider = App->collision->AddCollider(bombcleansize, collider_type, this);
+			}
 			p->itemtype = item_type;
 			active[i] = p;
 			break;
@@ -577,17 +603,22 @@ void ModuleParticles::AddParticle(const Particle& particle, int x, int y, COLLID
 	}
 }
 
-// TODO 5: Make so every time a particle hits a wall it triggers an explosion particle
 void ModuleParticles::OnCollision(Collider* c1, Collider* c2)
 {
-	for (uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
+
+	// Colliders that are deleted on contact are deleted here
+	if (c1->type == COLLIDER_ENEMY_SHOT || c1->type == COLLIDER_PLAYER_SHOT || c1->type == COLLIDER_PLAYER2_SHOT || c1->type == COLLIDER_BOMB || c1->type == COLLIDER_POWERUP || c2->type == COLLIDER_WALL)
 	{
-		
-		if (active[i] != nullptr && active[i]->collider == c1)
+		for (uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
 		{
-			delete active[i];
-			active[i] = nullptr;
-			break;
+
+
+			if (active[i] != nullptr && active[i]->collider == c1)
+			{
+				delete active[i];
+				active[i] = nullptr;
+				break;
+			}
 		}
 	}
 }
@@ -629,7 +660,7 @@ bool Particle::Update()
 	position.x += speed.x;
 	position.y += speed.y;
 
-	if (itemtype == ITEM_POWERUP)
+	if (itemtype == ITEM_POWERUP || itemtype == ITEM_BOMB)
 
 	{
 		if (position.x < 10 || position.x > 192)

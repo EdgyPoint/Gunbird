@@ -45,6 +45,7 @@ public:
 	int death_type = DEFAULT_ENEMY;
 	bool flying;
 	bool drops_powerup = false;
+	bool drops_bomb = false;
 	bool drops_coin = false;
 	int damaged_hp = 0;
 	bool aditionalanimation = false;

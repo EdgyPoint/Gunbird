@@ -47,6 +47,7 @@ public:
 	int transition, beam, powerup_lv, invincibilitycounter, respawncounter, burst_counter, deathcounter, stuncounter, magicsparks, blinkcounter, score, blink = 0, bombCD = 0;
 	bool godmode, _dying, respawning, temp_invincibility, stunned, shooting, poweruping = false;
 	int lives = 2;
+	int bombs = 0;
 	bool out = false;
 	uint shot;
 	int font_score = -1;

@@ -116,8 +116,10 @@ void Enemy::OnCollision(Collider* collider, Enemy* enemy)
 			enemy->hp -= 1.25f;
 		else if (collider->type == COLLIDER_PLAYER2_SHOT && App->player2->powerup_lv == 3)
 			enemy->hp -= 1.25f;
+		else if (collider->type == COLLIDER_BOMBSHOT)
+			enemy->hp -= 4;
 
-		if (collider->type == COLLIDER_PLAYER_SHOT || collider->type == COLLIDER_PLAYER2_SHOT)
+		if (collider->type == COLLIDER_PLAYER_SHOT || collider->type == COLLIDER_PLAYER2_SHOT || collider->type == COLLIDER_BOMBSHOT)
 		{
 			enemy->status = HIT;
 			collider->already_hit = true;
@@ -135,6 +137,11 @@ void Enemy::ToDie(Enemy* enemy, Collider* col)
 	if (enemy->drops_powerup)
 	{
 		App->particles->AddParticle(App->particles->powerup, enemy->position.x + 12, enemy->position.y + 26, COLLIDER_POWERUP, 1, 1, 0, true, ITEM_POWERUP);
+	}
+
+	if (enemy->drops_bomb)
+	{
+		App->particles->AddParticle(App->particles->bomb, enemy->position.x + 12, enemy->position.y + 26, COLLIDER_POWERUP, 1, 1, 0, true, ITEM_BOMB);
 	}
 
 	if (enemy->drops_coin)

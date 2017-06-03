@@ -278,25 +278,29 @@ if ((App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT || SDL_GameCo
 	if (App->input->keyboard[SDL_SCANCODE_V] == KEY_STATE::KEY_DOWN && !_dying && !respawning && !stunned && !App->fade->fading && bombCD == 0)
 	{
 		bombCD = 125;
-		App->particles->AddParticle(App->particles->bombshot_up, position.x - 8, position.y - 35, COLLIDER_PLAYER_SHOT);
-		App->particles->AddParticle(App->particles->bombshot_upleft, position.x - 6, position.y - 6, COLLIDER_PLAYER_SHOT);
-		App->particles->AddParticle(App->particles->bombshot_left, position.x - 35, position.y - 8, COLLIDER_PLAYER_SHOT);
-		App->particles->AddParticle(App->particles->bombshot_downleft, position.x - 6, position.y - 10, COLLIDER_PLAYER_SHOT);
-		App->particles->AddParticle(App->particles->bombshot_down, position.x - 8, position.y + 23, COLLIDER_PLAYER_SHOT);
-		App->particles->AddParticle(App->particles->bombshot_downright, position.x - 10, position.y - 10, COLLIDER_PLAYER_SHOT);
-		App->particles->AddParticle(App->particles->bombshot_right, position.x + 23, position.y - 8, COLLIDER_PLAYER_SHOT);
-		App->particles->AddParticle(App->particles->bombshot_upright, position.x - 10, position.y - 6, COLLIDER_PLAYER_SHOT);
+		App->audio->sfx = App->audio->LoadSFX("assets/SFX/marionbomb.wav");
+		Mix_PlayChannel(-1, App->audio->sfx, 0);
+		App->particles->AddParticle(App->particles->bombshot_up, position.x - 8, position.y - 35, COLLIDER_BOMBSHOT);
+		App->particles->AddParticle(App->particles->bombshot_upleft, position.x - 6, position.y - 6, COLLIDER_BOMBSHOT);
+		App->particles->AddParticle(App->particles->bombshot_left, position.x - 35, position.y - 8, COLLIDER_BOMBSHOT);
+		App->particles->AddParticle(App->particles->bombshot_downleft, position.x - 6, position.y - 10, COLLIDER_BOMBSHOT);
+		App->particles->AddParticle(App->particles->bombshot_down, position.x - 8, position.y + 23, COLLIDER_BOMBSHOT);
+		App->particles->AddParticle(App->particles->bombshot_downright, position.x - 10, position.y - 10, COLLIDER_BOMBSHOT);
+		App->particles->AddParticle(App->particles->bombshot_right, position.x + 23, position.y - 8, COLLIDER_BOMBSHOT);
+		App->particles->AddParticle(App->particles->bombshot_upright, position.x - 10, position.y - 6, COLLIDER_BOMBSHOT);
+
+		App->particles->AddParticle(App->particles->particle_clearer, 0, 0, COLLIDER_BOMBCLEAN);
 	}
 	if (bombCD == 95)
 	{
-		App->particles->AddParticle(App->particles->bombshot_up, position.x - 8, position.y - 35, COLLIDER_PLAYER_SHOT);
-		App->particles->AddParticle(App->particles->bombshot_upleft, position.x - 6, position.y - 6, COLLIDER_PLAYER_SHOT);
-		App->particles->AddParticle(App->particles->bombshot_left, position.x - 35, position.y - 8, COLLIDER_PLAYER_SHOT);
-		App->particles->AddParticle(App->particles->bombshot_downleft, position.x - 6, position.y - 10, COLLIDER_PLAYER_SHOT);
-		App->particles->AddParticle(App->particles->bombshot_down, position.x - 8, position.y + 23, COLLIDER_PLAYER_SHOT);
-		App->particles->AddParticle(App->particles->bombshot_downright, position.x - 10, position.y - 10, COLLIDER_PLAYER_SHOT);
-		App->particles->AddParticle(App->particles->bombshot_right, position.x + 23, position.y - 8, COLLIDER_PLAYER_SHOT);
-		App->particles->AddParticle(App->particles->bombshot_upright, position.x - 10, position.y - 6, COLLIDER_PLAYER_SHOT);
+		App->particles->AddParticle(App->particles->bombshot_up, position.x - 8, position.y - 35, COLLIDER_BOMBSHOT);
+		App->particles->AddParticle(App->particles->bombshot_upleft, position.x - 6, position.y - 6, COLLIDER_BOMBSHOT);
+		App->particles->AddParticle(App->particles->bombshot_left, position.x - 35, position.y - 8, COLLIDER_BOMBSHOT);
+		App->particles->AddParticle(App->particles->bombshot_downleft, position.x - 6, position.y - 10, COLLIDER_BOMBSHOT);
+		App->particles->AddParticle(App->particles->bombshot_down, position.x - 8, position.y + 23, COLLIDER_BOMBSHOT);
+		App->particles->AddParticle(App->particles->bombshot_downright, position.x - 10, position.y - 10, COLLIDER_BOMBSHOT);
+		App->particles->AddParticle(App->particles->bombshot_right, position.x + 23, position.y - 8, COLLIDER_BOMBSHOT);
+		App->particles->AddParticle(App->particles->bombshot_upright, position.x - 10, position.y - 6, COLLIDER_BOMBSHOT);
 	}
 	if (bombCD != 0)
 		bombCD--;
@@ -590,15 +594,27 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 			Mix_PlayChannel(-1, App->audio->sfx, 0);
 		}
 
-		if (powerup_lv == 1)
+		if (powerup_lv == MAX_LEVEL)
 		{
 			App->player->score += 2000;
 			App->particles->AddParticle(App->particles->powerupscore, position.x + 4, position.y + 4, COLLIDER_NONE);
-			App->audio->sfx = App->audio->LoadSFX("assets/SFX/MaxPower.wav");
+			App->audio->sfx = App->audio->LoadSFX("assets/SFX/marionmaxpowerup.wav");
 			Mix_PlayChannel(-1, App->audio->sfx, 0);
 		}
 
 		poweruping = true;
+	}
+
+	if (c2->type == COLLIDER_BOMB)
+	{
+		if (bombs == 6)
+		{
+			score += 10000;
+		}
+		if (bombs < 6)
+		{
+			bombs++;
+		}
 	}
 
 	if (c2->type == COLLIDER_COIN)

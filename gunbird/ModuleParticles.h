@@ -81,6 +81,7 @@ public:
 	Particle bombshot_upright;
 	Particle powerup;
 	Particle bomb;
+	Particle particle_clearer;
 	Particle magicspark[4];
 	Particle impact;
 	Particle small_explosion;
