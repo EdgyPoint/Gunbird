@@ -12,9 +12,6 @@
 
 Enemy_4CannonTurret::Enemy_4CannonTurret(int x, int y, int option) : Enemy(x, y, option)
 {
-
-	status = NONE;
-
 	closed.PushBack({ 0, 681, 30, 42 });
 	closed.loop = false;
 
@@ -52,7 +49,7 @@ Enemy_4CannonTurret::Enemy_4CannonTurret(int x, int y, int option) : Enemy(x, y,
 	attacking.PushBack({ 30, 891, 30, 42 });
 	attacking.PushBack({ 60, 891, 30, 42 });
 	attacking.PushBack({ 90, 891, 30, 42 });
-	attacking.speed = 0.5f;
+	attacking.speed = 0.2f;
 	
 	attacking_hit.PushBack({ 180, 681, 30, 42 });
 	attacking_hit.PushBack({ 210, 681, 30, 42 });
@@ -82,7 +79,7 @@ Enemy_4CannonTurret::Enemy_4CannonTurret(int x, int y, int option) : Enemy(x, y,
 	attacking_hit.PushBack({ 170, 891, 30, 42 });
 	attacking_hit.PushBack({ 210, 891, 30, 42 });
 	attacking_hit.PushBack({ 240, 891, 30, 42 });
-	attacking_hit.speed = 0.5f;
+	attacking_hit.speed = 0.2f;
 
 	attacking_damaged.PushBack({ 330, 681, 30, 42 });
 	attacking_damaged.PushBack({ 360, 681, 30, 42 });
@@ -112,7 +109,7 @@ Enemy_4CannonTurret::Enemy_4CannonTurret(int x, int y, int option) : Enemy(x, y,
 	attacking_damaged.PushBack({ 330, 891, 30, 42 });
 	attacking_damaged.PushBack({ 360, 891, 30, 42 });
 	attacking_damaged.PushBack({ 390, 891, 30, 42 });
-	attacking_damaged.speed = 0.5f;
+	attacking_damaged.speed = 0.2f;
 
 	animation = &closed;
 
@@ -126,6 +123,7 @@ Enemy_4CannonTurret::Enemy_4CannonTurret(int x, int y, int option) : Enemy(x, y,
 	hp = 10.0f;
 	damaged_hp = 7;
 	death_type = SMALL_ENEMY;
+	anim_type = CLOSED;
 	flying = false;
 	killscore = 200;
 }
@@ -134,41 +132,57 @@ void Enemy_4CannonTurret::Move()
 {
 	position = original_pos + path.GetCurrentPosition();
 
-	/*if (status == NORMAL)
-	aditional_animation = &closed;
+	if (position.y > 0 && position.y < 100) anim_type = ATTACKING;
+	else anim_type = CLOSED;
 
-	if (status == HIT)
-	aditional_animation = &closed_hit;
 
-	if (status == DAMAGED)
-	aditional_animation = &closed_damaged;*/
-		
-	if (status == NORMAL)
-		animation = &attacking;
-
-	if (status == HIT)
-		animation = &attacking_hit;
-
-	if (status == DAMAGED)
+	if (anim_type == CLOSED)
 	{
-		if (counter == 0)
-			animation = &attacking_damaged;
-		else
-			animation = &attacking;
-		counter++;
-		if (counter == 20)counter = 0;
+		if (status == NORMAL)
+			animation = &closed;
+
+		if (status == HIT)
+			animation = &closed_hit;
+
+		if (status == DAMAGED)
+		{
+			if (counter == 0)
+				animation = &closed_damaged;
+			else
+				animation = &closed;
+		}
 	}
+	if (anim_type == ATTACKING)
+	{
+		if (status == NORMAL)
+			animation = &attacking;
+
+		if (status == HIT)
+			animation = &attacking_hit;
+
+		if (status == DAMAGED)
+		{
+			if (counter == 0)
+				animation = &attacking_damaged;
+			else
+				animation = &attacking;
+		}
+	}
+	counter++;
+	if (counter == 20)counter = 0;
 }
 
 void Enemy_4CannonTurret::Shoot()
 {
-	if (reload == 0 && status != NONE)
+	if (anim_type == ATTACKING)
 	{
-		bullet_speed = ShootCalculator({ position.x + 12, position.y + 10 }, { App->player->position.x + 11, App->player->position.y + 11 });
-		App->particles->AddParticle(App->particles->smallshot, position.x + 12, position.y + 10, COLLIDER_ENEMY_SHOT, bullet_speed.x, bullet_speed.y, false);
-		bullet_speed = ShootCalculator({ position.x + 12, position.y + 3 }, { App->player->position.x + 11, App->player->position.y + 11 });
-		App->particles->AddParticle(App->particles->smallshot, position.x + 12, position.y + 3, COLLIDER_ENEMY_SHOT, bullet_speed.x, bullet_speed.y, false);
+		reload++;
+		if (reload == 5)
+		{
+			bullet_speed = ShootCalculator({ position.x + 12, position.y + 10 }, { App->player->position.x + 41, App->player->position.y + 11 });
+			App->particles->AddParticle(App->particles->smallshot, position.x + 12, position.y + 3, COLLIDER_ENEMY_SHOT, bullet_speed.x, bullet_speed.y);
+			bullet_speed = ShootCalculator({ position.x + 12, position.y + 3 }, { App->player->position.x - 41, App->player->position.y + 11 });
+			App->particles->AddParticle(App->particles->smallshot, position.x + 12, position.y + 3, COLLIDER_ENEMY_SHOT, bullet_speed.x, bullet_speed.y);
+		}
 	}
-	reload++;
-	if (reload == 40)reload = 0;
 }

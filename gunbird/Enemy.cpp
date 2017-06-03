@@ -31,8 +31,8 @@ fPoint Enemy::ShootCalculator(iPoint position, iPoint player)
 	fPoint distance;
 	fPoint speed;
 
-	distance.x = App->player->position.x - position.x;
-	distance.y = App->player->position.y - position.y;
+	distance.x = player.x - position.x;
+	distance.y = player.y - position.y;
 
 	module = sqrtf(powf(distance.x, 2) + powf(distance.y, 2));
 
