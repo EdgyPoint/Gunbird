@@ -12,6 +12,7 @@
 #include "Enemy_Turretcopter.h"
 #include "Enemy_CastleMortar.h"
 #include "Enemy_Vase.h"
+#include "Enemy_GreenRobot.h"
 #include "Enemy_RotatingTurret.h"
 #include "Enemy_WindowGun.h"
 #include "Enemy_2CannonTurret.h"
@@ -88,7 +89,7 @@ update_status ModuleEnemies::PostUpdate()
 		{
 			if (enemies[i]->position.y * SCREEN_SIZE > (App->render->camera.y) + SPAWN_MARGIN * SCREEN_SIZE)
 			{
-				LOG("DeSpawning enemy at %d", enemies[i]->position.x * SCREEN_SIZE);
+				LOG("DeSpawning enemy at %d", enemies[i]->position.y * SCREEN_SIZE);
 				delete enemies[i];
 				enemies[i] = nullptr;
 			}
@@ -183,6 +184,9 @@ void ModuleEnemies::SpawnEnemy(const EnemyInfo& info)
 			break;
 		case ENEMY_TYPES::FLYINGGUNNER:
 			enemies[i] = new Enemy_FlyingGunner(info.x, info.x, info.pathoption);
+			break;
+		case ENEMY_TYPES::GREENROBOT:
+			enemies[i] = new Enemy_GreenRobot(info.x, info.y, info.pathoption);
 			break;
 		}
 	}

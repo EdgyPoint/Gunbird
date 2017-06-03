@@ -215,5 +215,7 @@ void Enemy_WindowGun::Shoot()
 			reload[1] = SDL_GetTicks() + 500;
 		}
 	}
+
+	if (hp <= 0)collider->SetPos(-50, 500);
 }
 
