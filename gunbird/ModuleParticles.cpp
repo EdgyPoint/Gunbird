@@ -605,19 +605,30 @@ void ModuleParticles::AddParticle(const Particle& particle, int x, int y, COLLID
 
 void ModuleParticles::OnCollision(Collider* c1, Collider* c2)
 {
-
 	// Colliders that are deleted on contact are deleted here
-	if (c1->type != COLLIDER_BOMBSHOT || (c1->type == COLLIDER_POWERUP && c2->type == COLLIDER_PLAYER))	{
+	if (c1->type == COLLIDER_PLAYER_SHOT || c1->type == COLLIDER_PLAYER2_SHOT)
+	{
 		for (uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
 		{
-
-
 			if (active[i] != nullptr && active[i]->collider == c1)
 			{
 				delete active[i];
 				active[i] = nullptr;
 				break;
 			}
+		}
+	}
+}
+
+void ModuleParticles::DeleteParticle(Collider* c)
+{
+	for (uint i = 0; i < MAX_ACTIVE_PARTICLES; i++)
+	{
+		if (active[i] != nullptr && active[i]->collider == c)
+		{
+			delete active[i];
+			active[i] = nullptr;
+			break;
 		}
 	}
 }
