@@ -128,7 +128,7 @@ Enemy_GreenRobot::Enemy_GreenRobot(int x, int y, int option) : Enemy(x, y, optio
 
 	path.PushBack({ 0.0f, 0.4f }, 300);
 	path.PushBack({ 0.0f, 0.05f }, 1800);
-	path.PushBack({ 0.0f, 0.8f }, 300);
+	path.PushBack({ 0.0f, 1.2f }, 300);
 
 	collider = App->collision->AddCollider({ 0, 0, 76, 76 }, COLLIDER_TYPE::COLLIDER_ENEMY, (Module*)App->enemies);
 
@@ -630,10 +630,22 @@ void Enemy_GreenRobot::Move()
 
 void Enemy_GreenRobot::Shoot()
 {
+	if (SDL_GetTicks() >= straight_shot[0] && (position.y < 50 || position.y > 77) && path.steps[1].active)//first wave
+	{
+		speed = ShootCalculator({ position.x + 9, position.y + 13 }, { App->player->position.x - 10, App->player->position.y });
+		speed2 = ShootCalculator({ position.x + 9, position.y + 13 }, { App->player->position.x - 10, App->player->position.y });
+		App->particles->AddParticle(App->particles->smallshot, position.x + 8, position.y + 13, COLLIDER_ENEMY_SHOT, speed.x, speed.y);
+		App->particles->AddParticle(App->particles->smallshot, position.x + 48, position.y + 13, COLLIDER_ENEMY_SHOT, speed2.x, speed2.y);
 
-}
+		straight_shot[0] = SDL_GetTicks() + 3000;
+		straight_shot[1] = SDL_GetTicks() + 100;
+	}
 
-void Enemy_GreenRobot::Extra_animation()
-{
-	
+	if (SDL_GetTicks() >= straight_shot[1] && (position.y < 50 || position.y > 77) && position.y > -200 && path.steps[1].active)
+	{
+		App->particles->AddParticle(App->particles->smallshot, position.x + 8, position.y + 13, COLLIDER_ENEMY_SHOT, speed.x, speed.y);
+		App->particles->AddParticle(App->particles->smallshot, position.x + 48, position.y + 13, COLLIDER_ENEMY_SHOT, speed2.x, speed2.y);
+
+		straight_shot[1] = SDL_GetTicks() + 2900;
+	}
 }

@@ -46,9 +46,10 @@ public:
 	Enemy_GreenRobot(int x, int y, int option);
 	void Move();
 	void Shoot();
-	void Extra_animation();
-	int initcounter = 0;
+	int straight_shot[2];
+	int aimed_shot = 0;
 	float aux_float;
-	fPoint speeds;
+	fPoint speed;
+	fPoint speed2;
 };
 #endif
