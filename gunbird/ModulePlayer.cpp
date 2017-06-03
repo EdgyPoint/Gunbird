@@ -130,7 +130,7 @@ bool ModulePlayer::CleanUp()
 	App->textures->Unload(graphics);
 	App->textures -> Unload(ui);
 	App->textures->Unload(ui2);
-
+	out = false;
 	return true;
 }
 

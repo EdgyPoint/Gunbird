@@ -39,8 +39,8 @@ fPoint Enemy::ShootCalculator(iPoint position, iPoint player)
 	distance.x /= module;
 	distance.y /= module;
 
-	speed.x = distance.x*BULLET_SPEED;
-	speed.y = distance.y*BULLET_SPEED;
+	speed.x = distance.x*BULLET_SPEED +0.3f;
+	speed.y = distance.y*BULLET_SPEED + 0.3f;
 
 	return speed;
 }

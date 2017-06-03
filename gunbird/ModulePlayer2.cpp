@@ -118,6 +118,7 @@ bool ModulePlayer2::CleanUp()
 
 	App->textures->Unload(graphics);
 
+
 	return true;
 }
 
