@@ -33,6 +33,7 @@ public:
 	SDL_Texture* ui2 = nullptr;
 	SDL_Rect p1display;
 	SDL_Rect lifedisplay;
+	SDL_Rect bombdisplay;
 	Collider* player_col = nullptr;
 	Animation* current_animation = nullptr;
 	Animation idle;
@@ -47,7 +48,7 @@ public:
 	int transition, beam, powerup_lv, invincibilitycounter, respawncounter, burst_counter, deathcounter, stuncounter, magicsparks, blinkcounter, score, blink = 0, bombCD = 0;
 	bool godmode, _dying, respawning, temp_invincibility, stunned, shooting, poweruping = false;
 	int lives = 2;
-	int bombs = 0;
+	int bombs = 2;
 	bool out = false;
 	uint shot;
 	int font_score = -1;

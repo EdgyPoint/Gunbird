@@ -20,7 +20,6 @@
 
 ModuleVillageScene::ModuleVillageScene()
 {
-
 	background1.h = 5632;
 	background1.w = 544;
 	background1.x= 0;
@@ -31,14 +30,10 @@ ModuleVillageScene::ModuleVillageScene()
 	background2.x = 0;
 	background2.y = 0;
 
-
 	npi.h = 5;
 	npi.w = 1000;
 	npi.x = 0;
 	npi.y = -10;
-
-
-
 }
 
 ModuleVillageScene::~ModuleVillageScene()
@@ -153,6 +148,7 @@ update_status ModuleVillageScene::Update()
 		{
 			yflag += speed;
 		}
+
 		if (yflag >= -4350 && xflag < -129)
 		{
 			xflag += 0.66;
@@ -168,6 +164,8 @@ update_status ModuleVillageScene::Update()
 			if (SDL_GetTicks() > timer)
 			{
 				cinematic = true;
+				App->audio->audio = App->audio->Load("assets/bgm/trump.ogg");
+				Mix_PlayMusic(App->audio->audio, -1);
 			}
 		}
 
@@ -209,7 +207,6 @@ update_status ModuleVillageScene::Update()
 
 	if (on_rails)
 	{
-
 		Side_scrolling();
 		if(yflag >= 3680)
 		{

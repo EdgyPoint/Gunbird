@@ -25,7 +25,6 @@ ModulePlayer::ModulePlayer()
 {
 	graphics = NULL;
 	current_animation = NULL;
-	
 
 	// idle animation (arcade sprite sheet)
 	idle.PushBack({0, 64, 32, 32});
@@ -91,6 +90,7 @@ bool ModulePlayer::Start()
 
 	powerup_lv = 0;
 	lives = 2;
+	bombs = 2;
 
 	graphics = App->textures->Load("assets/images/Marion.png");
 
@@ -108,6 +108,11 @@ bool ModulePlayer::Start()
 	lifedisplay.y = 0;
 	lifedisplay.w = 13;
 	lifedisplay.h = 13;
+
+	bombdisplay.x = 15;
+	bombdisplay.y = 15;
+	bombdisplay.w = 12;
+	bombdisplay.h = 15;
 
 	position.x = 51;
 	position.y = 320;
@@ -278,8 +283,9 @@ if ((App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT || SDL_GameCo
 	// --------------------------
 
 	// Bomb
-	if (App->input->keyboard[SDL_SCANCODE_V] == KEY_STATE::KEY_DOWN && !_dying && !respawning && !stunned && !App->fade->fading && bombCD == 0)
+	if (App->input->keyboard[SDL_SCANCODE_V] == KEY_STATE::KEY_DOWN && !_dying && !respawning && !stunned && !App->fade->fading && bombCD == 0 && bombs > 0)
 	{
+		bombs--;
 		bombCD = 125;
 		App->audio->sfx = App->audio->LoadSFX("assets/SFX/marionbomb.wav");
 		Mix_PlayChannel(-1, App->audio->sfx, 0);
@@ -507,6 +513,31 @@ if ((App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT || SDL_GameCo
 		App->render->Blit(ui, 5, 21, &lifedisplay, 0, true);
 		App->render->Blit(ui, 21, 21, &lifedisplay, 0, true);
 	}
+	
+	if (bombs == 1)
+		App->render->Blit(ui, 6, 300, &bombdisplay, 0, true);
+
+	if (bombs == 2)
+	{
+		App->render->Blit(ui, 6, 300, &bombdisplay, 0, true);
+		App->render->Blit(ui, 22, 300, &bombdisplay, 0, true);
+	}
+
+	if (bombs == 3)
+	{
+		App->render->Blit(ui, 6, 300, &bombdisplay, 0, true);
+		App->render->Blit(ui, 22, 300, &bombdisplay, 0, true);
+		App->render->Blit(ui, 38, 300, &bombdisplay, 0, true);
+	}
+
+	if (bombs == 4)
+	{
+		App->render->Blit(ui, 6, 300, &bombdisplay, 0, true);
+		App->render->Blit(ui, 22, 300, &bombdisplay, 0, true);
+		App->render->Blit(ui, 38, 300, &bombdisplay, 0, true);
+		App->render->Blit(ui, 56, 300, &bombdisplay, 0, true);
+	}
+	
 
 	App->fonts->BlitText(20, 6, font_score, text_score);
 
