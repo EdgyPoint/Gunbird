@@ -52,6 +52,7 @@ public:
 	bool aditionalanimation = false;
 	bool following = false;
 	bool dead_anim = false;
+	bool to_draw = true;
 
 
 public:

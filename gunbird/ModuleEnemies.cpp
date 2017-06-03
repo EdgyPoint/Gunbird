@@ -65,12 +65,12 @@ update_status ModuleEnemies::Update()
 {
 	for (uint i = 0; i < MAX_ENEMIES; ++i)
 		if (enemies[i] != nullptr) enemies[i]->Move();
-	
-	for (uint i = 0; i < MAX_ENEMIES; ++i)
-		if (enemies[i] != nullptr &&  enemies[i]->aditionalanimation) enemies[i]->Extra_animation();
 
 	for (uint i = 0; i < MAX_ENEMIES; ++i)
 		if (enemies[i] != nullptr) enemies[i]->Draw(sprites, enemies[i]);
+
+	for (uint i = 0; i < MAX_ENEMIES; ++i)
+		if (enemies[i] != nullptr &&  enemies[i]->aditionalanimation) enemies[i]->Extra_animation();
 
 	for (uint i = 0; i < MAX_ENEMIES; ++i)
 		if (enemies[i] != nullptr) enemies[i]->Shoot();
@@ -183,7 +183,7 @@ void ModuleEnemies::SpawnEnemy(const EnemyInfo& info)
 			enemies[i] = new Enemy_4CannonTurret(info.x, info.y, info.pathoption);
 			break;
 		case ENEMY_TYPES::FLYINGGUNNER:
-			enemies[i] = new Enemy_FlyingGunner(info.x, info.x, info.pathoption);
+			enemies[i] = new Enemy_FlyingGunner(info.x, info.y, info.pathoption);
 			break;
 		case ENEMY_TYPES::GREENROBOT:
 			enemies[i] = new Enemy_GreenRobot(info.x, info.y, info.pathoption);

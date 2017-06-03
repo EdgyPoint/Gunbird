@@ -33,7 +33,7 @@ Enemy_RotatingTurret::Enemy_RotatingTurret(int x, int y, int option) : Enemy(x, 
 	hit_base_anim.PushBack({ 626, 311, 28, 35 });
 	hit_base_anim.PushBack({ 656, 311, 28, 35 });
 	hit_base_anim.loop = true;
-	hit_base_anim.speed = 0.6f;
+	hit_base_anim.speed = 0.2f;
 
 	//damaged base animation
 	damaged_base_anim.PushBack({ 506, 250, 28, 35 });
@@ -43,7 +43,7 @@ Enemy_RotatingTurret::Enemy_RotatingTurret(int x, int y, int option) : Enemy(x, 
 	damaged_base_anim.PushBack({ 626, 250, 28, 35 });
 	damaged_base_anim.PushBack({ 656, 250, 28, 35 });
 	damaged_base_anim.loop = true;
-	damaged_base_anim.speed = 0.6f;
+	damaged_base_anim.speed = 0.2f;
 
 
 	down.PushBack({ 484, 384, 27, 32 });
@@ -574,11 +574,7 @@ void Enemy_RotatingTurret::Extra_animation()
 			animation = &normal_base_anim;
 	}
 
-	aux = animation;
-	animation = extra_animation;
-	extra_animation = aux;	
-
-	App->render->Blit(App->enemies->sprites, position.x, position.y + 7, &(extra_animation->GetCurrentFrame()));
+	App->render->Blit(App->enemies->sprites, position.x + 1, position.y - 10, &(extra_animation->GetCurrentFrame()));
 		//flag2.GetCurrentFrame();
 		//flag3.GetCurrentFrame();
 

@@ -1,8 +1,11 @@
 #include "Application.h"
+#include "ModuleRender.h"
+#include "ModuleEnemies.h"
 #include "ModuleParticles.h"
 #include "Enemy_GreenRobot.h"
 #include "ModulePlayer.h"
 #include "ModuleCollision.h"
+#include "ModuleVillageScene.h"
 #include "SDL/include/SDL_timer.h"
 #include <cmath>
 
@@ -57,6 +60,70 @@ Enemy_GreenRobot::Enemy_GreenRobot(int x, int y, int option) : Enemy(x, y, optio
 	walk_backward_damaged.loop = true;
 	walk_backward_damaged.speed = 0.15f;
 
+	down.PushBack({ 920, 460, 20, 20 });
+	down_hit.PushBack({ 920, 480, 20, 20 });
+	down_damaged.PushBack({ 920, 500, 20, 20 });
+
+	downr1.PushBack({ 940, 460, 20, 20 });
+	downr1_hit.PushBack({ 940, 480, 20, 20 });
+	downr1_damaged.PushBack({ 940, 500, 20, 20 });
+
+	downr2.PushBack({ 960, 460, 20, 20 });
+	downr2_hit.PushBack({ 960, 480, 20, 20 });
+	downr2_damaged.PushBack({ 960, 500, 20, 20 });
+
+	downr3.PushBack({ 980, 460, 20, 20 });
+	downr3_hit.PushBack({ 980, 480, 20, 20 });
+	downr3_damaged.PushBack({ 980, 500, 20, 20 });
+
+	right.PushBack({ 1000, 460, 20, 20 });
+	right_hit.PushBack({ 1000, 480, 20, 20 });
+	right_damaged.PushBack({ 1000, 500, 20, 20 });
+
+	rightu1.PushBack({ 1020, 460, 20, 20 });
+	rightu1_hit.PushBack({ 1020, 480, 20, 20 });
+	rightu1_damaged.PushBack({ 1020, 500, 20, 20 });
+
+	rightu2.PushBack({ 1040, 460, 20, 20 });
+	rightu2_hit.PushBack({ 1040, 480, 20, 20 });
+	rightu2_damaged.PushBack({ 1040, 500, 20, 20 });
+
+	rightu3.PushBack({ 1060, 460, 20, 20 });
+	rightu3_hit.PushBack({ 1060, 480, 20, 20 });
+	rightu3_damaged.PushBack({ 1060, 500, 20, 20 });
+
+	up.PushBack({ 1080, 460, 20, 20 });
+	up_hit.PushBack({ 1080, 480, 20, 20 });
+	up_damaged.PushBack({ 1080, 500, 20, 20 });
+
+	upl1.PushBack({ 1100, 460, 20, 20 });
+	upl1_hit.PushBack({ 1100, 480, 20, 20 });
+	upl1_damaged.PushBack({ 1100, 500, 20, 20 });
+
+	upl2.PushBack({ 1120, 460, 20, 20 });
+	upl2_hit.PushBack({ 1120, 480, 20, 20 });
+	upl2_damaged.PushBack({ 1120, 500, 20, 20 });
+
+	upl3.PushBack({ 1140, 460, 20, 20 });
+	upl3_hit.PushBack({ 1140, 480, 20, 20 });
+	upl3_damaged.PushBack({ 1140, 500, 20, 20 });
+
+	left.PushBack({ 1160, 460, 20, 20 });
+	left_hit.PushBack({ 1160, 480, 20, 20 });
+	left_damaged.PushBack({ 1160, 500, 20, 20 });
+
+	leftd1.PushBack({ 1180, 460, 20, 20 });
+	leftd1_hit.PushBack({ 1180, 480, 20, 20 });
+	leftd1_damaged.PushBack({ 1180, 500, 20, 20 });
+
+	leftd2.PushBack({ 1200, 460, 20, 20 });
+	leftd2_hit.PushBack({ 1200, 480, 20, 20 });
+	leftd2_damaged.PushBack({ 1200, 500, 20, 20 });
+
+	leftd3.PushBack({ 1220, 460, 20, 20 });
+	leftd3_hit.PushBack({ 1220, 480, 20, 20 });
+	leftd3_damaged.PushBack({ 1120, 500, 20, 20 });
+
 	animation = &walk_backward;
 
 	path.PushBack({ 0.0f, 0.4f }, 300);
@@ -67,6 +134,8 @@ Enemy_GreenRobot::Enemy_GreenRobot(int x, int y, int option) : Enemy(x, y, optio
 
 	original_pos.x = x;
 	original_pos.y = y;
+
+	to_draw = false;
 
 	hp = 87.0f;
 	damaged_hp = 20.0f;
@@ -79,6 +148,9 @@ Enemy_GreenRobot::Enemy_GreenRobot(int x, int y, int option) : Enemy(x, y, optio
 void Enemy_GreenRobot::Move()
 {
 	position = original_pos + path.GetCurrentPosition();
+
+	App->scene_village->tank_position.x = position.x;
+	App->scene_village->tank_position.y = position.y;
 
 	counter++;
 	if (counter == 20)
@@ -243,7 +315,7 @@ void Enemy_GreenRobot::Move()
 				extra_animation = &upl3;
 		}
 	}
-	else if (angle > 168.75 && angle <= 191, 25)
+	else if (angle > 168.75 && angle <= 191.25)
 	{
 		if (status == NORMAL) { extra_animation = &left; }
 		if (status == HIT) { extra_animation = &left_hit; }
@@ -440,7 +512,7 @@ void Enemy_GreenRobot::Move()
 				extra_animation2 = &upl3;
 		}
 	}
-	else if (angle2 > 168.75 && angle2 <= 191, 25)
+	else if (angle2 > 168.75 && angle2 <= 191.25)
 	{
 		if (status == NORMAL) { extra_animation2 = &left; }
 		if (status == HIT) { extra_animation2 = &left_hit; }
@@ -549,10 +621,19 @@ void Enemy_GreenRobot::Move()
 		}
 	}
 
+	App->scene_village->tank_anim = animation;
+	App->scene_village->tank_extra1 = extra_animation;
+	App->scene_village->tank_extra2 = extra_animation2;
+	App->scene_village->tank_hp = hp;
 
 }
 
 void Enemy_GreenRobot::Shoot()
 {
 
+}
+
+void Enemy_GreenRobot::Extra_animation()
+{
+	
 }

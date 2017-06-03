@@ -86,7 +86,7 @@ void Enemy::Draw(SDL_Texture* sprites, Enemy* enemy)
 	if (enemy->hp <= enemy->damaged_hp && enemy->hp > 0)
 		enemy->status = DAMAGED;
 
-	if (animation != nullptr)
+	if (animation != nullptr && to_draw)
 		App->render->Blit(sprites, position.x, position.y, &(animation->GetCurrentFrame()));
 
 	if (enemy->status == HIT)

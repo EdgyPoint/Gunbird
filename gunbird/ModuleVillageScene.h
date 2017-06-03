@@ -31,6 +31,12 @@ public:
 	SDL_Rect background2;
 	SDL_Rect npi;
 
+	Animation* tank_anim;
+	Animation* tank_extra1;
+	Animation* tank_extra2;
+	fPoint tank_position;
+	bool tank_on = false;
+	float tank_hp;
 	float yflag;
 	float xflag;
 	int track_repeat;

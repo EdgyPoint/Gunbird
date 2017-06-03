@@ -18,6 +18,7 @@ private:
 	Anim_Type anim_type = STAND;
 	iPoint original_pos;
 	fPoint distance;
+	Animation* aux;
 	Animation dead;
 	Animation stand, stand_hit, stand_damaged;
 	Animation walk_backward, walk_backward_hit, walk_backward_damaged;
@@ -45,6 +46,7 @@ public:
 	Enemy_GreenRobot(int x, int y, int option);
 	void Move();
 	void Shoot();
+	void Extra_animation();
 	int initcounter = 0;
 	float aux_float;
 	fPoint speeds;
