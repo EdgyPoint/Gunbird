@@ -13,7 +13,7 @@
 Enemy_4CannonTurret::Enemy_4CannonTurret(int x, int y, int option) : Enemy(x, y, option)
 {
 
-	status = NORMAL;
+	status = NONE;
 
 	closed.PushBack({ 0, 681, 30, 42 });
 	closed.loop = false;
@@ -53,7 +53,7 @@ Enemy_4CannonTurret::Enemy_4CannonTurret(int x, int y, int option) : Enemy(x, y,
 	attacking.PushBack({ 60, 891, 30, 42 });
 	attacking.PushBack({ 90, 891, 30, 42 });
 	attacking.speed = 0.5f;
-
+	
 	attacking_hit.PushBack({ 180, 681, 30, 42 });
 	attacking_hit.PushBack({ 210, 681, 30, 42 });
 	attacking_hit.PushBack({ 240, 681, 30, 42 });
@@ -114,9 +114,7 @@ Enemy_4CannonTurret::Enemy_4CannonTurret(int x, int y, int option) : Enemy(x, y,
 	attacking_damaged.PushBack({ 390, 891, 30, 42 });
 	attacking_damaged.speed = 0.5f;
 
-	
-
-	animation = &attacking;
+	animation = &closed;
 
 	collider = App->collision->AddCollider({ 0, 0, 30, 43 }, COLLIDER_TYPE::COLLIDER_ENEMY, (Module*)App->enemies);
 
@@ -144,7 +142,7 @@ void Enemy_4CannonTurret::Move()
 
 	if (status == DAMAGED)
 	aditional_animation = &closed_damaged;*/
-
+		
 	if (status == NORMAL)
 		animation = &attacking;
 
@@ -164,7 +162,7 @@ void Enemy_4CannonTurret::Move()
 
 void Enemy_4CannonTurret::Shoot()
 {
-	if (reload == 0)
+	if (reload == 0 && status != NONE)
 	{
 		bullet_speed = ShootCalculator({ position.x + 12, position.y + 10 }, { App->player->position.x + 11, App->player->position.y + 11 });
 		App->particles->AddParticle(App->particles->smallshot, position.x + 12, position.y + 10, COLLIDER_ENEMY_SHOT, bullet_speed.x, bullet_speed.y, false);
