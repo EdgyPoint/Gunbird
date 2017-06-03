@@ -89,6 +89,7 @@ bool ModuleVillageScene::Start()
 	App->enemies->AddEnemy(ENEMY_TYPES::ROTATINGTURRET, 101, -890, 0);
 
 	//---Three moving right
+
 	App->enemies->AddEnemy(ENEMY_TYPES::ROTATINGTURRET, 133, -840, 1);
 	App->enemies->AddEnemy(ENEMY_TYPES::ROTATINGTURRET, 163, -840, 1);
 	App->enemies->AddEnemy(ENEMY_TYPES::ROTATINGTURRET, 193, -840, 1);
@@ -113,6 +114,7 @@ bool ModuleVillageScene::Start()
 	App->enemies->AddEnemy(ENEMY_TYPES::FOURCANNONTURRET, 160, -520, 0);
 	App->enemies->AddEnemy(ENEMY_TYPES::FOURCANNONTURRET, 160, -580, 0);
 	App->enemies->AddEnemy(ENEMY_TYPES::FOURCANNONTURRET, 160, -460, 0);
+
 
 	return true;
 }
