@@ -165,19 +165,23 @@ Enemy_RotatingTurret::Enemy_RotatingTurret(int x, int y, int option) : Enemy(x, 
 
 	aditional_animation = down;
 
-	if (option == 0)	{ path.PushBack({ 0.0f, 0.4f }, 10000); }//stand
+	if (option == 0)
+	{ 
+		path.PushBack({ 0.0f, 0.4f }, 2400); 
+		path.PushBack({ 0.66f, 0.4f },10000);
+	}//stand
 	if (option == 1)	
 	{ 
 
 		path.PushBack({ 0.0f, 0.4f }, 2100);
-		path.PushBack({ 0.0f,0.6f }, 300); 
-		path.PushBack({ 0.66f,0.6f }, 100000);
+		path.PushBack({ 0.0f, 0.6f }, 300);
+		path.PushBack({ 0.66f, 0.6f }, 10000);
 		
-	}//move right
-	if (option == 2)	//move down
+	}//move down
+	if (option == 2)	//move right
 	{
-		path.PushBack({ 0.0f, 0.4f }, 2350);
-		path.PushBack({ 0.86f,0.4f }, 100000);
+		path.PushBack({ 0.0f, 0.4f }, 2400);
+		path.PushBack({ 0.99f ,0.4f }, 100000);
 	}
 
 	
