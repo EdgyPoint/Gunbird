@@ -16,6 +16,7 @@
 #include "Enemy_WindowGun.h"
 #include "Enemy_2CannonTurret.h"
 #include "Enemy_4CannonTurret.h"
+#include "Enemy_FlyingGunner.h"
 
 
 #define SPAWN_MARGIN 500
@@ -179,6 +180,9 @@ void ModuleEnemies::SpawnEnemy(const EnemyInfo& info)
 			break;
 		case ENEMY_TYPES::FOURCANNONTURRET:
 			enemies[i] = new Enemy_4CannonTurret(info.x, info.y, info.pathoption);
+			break;
+		case ENEMY_TYPES::FLYINGGUNNER:
+			enemies[i] = new Enemy_FlyingGunner(info.x, info.x, info.pathoption);
 			break;
 		}
 	}
