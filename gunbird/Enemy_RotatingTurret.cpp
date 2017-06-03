@@ -130,33 +130,33 @@ Enemy_RotatingTurret::Enemy_RotatingTurret(int x, int y, int option) : Enemy(x, 
 	upl6_hit.PushBack({ 538, 576, 27, 32 });
 	upl6_damaged.PushBack({ 538, 704, 27, 32 });
 
-	downr1.PushBack({ 565, 448, 27, 32 });
-	downr1_hit.PushBack({ 565, 576, 27, 32 });
-	downr1_damaged.PushBack({ 565, 704, 27, 32 });
+	left.PushBack({ 565, 448, 27, 32 });
+	left_hit.PushBack({ 565, 576, 27, 32 });
+	left_damaged.PushBack({ 565, 704, 27, 32 });
 
-	downr2.PushBack({ 592, 448, 27, 32 });
-	downr2_hit.PushBack({ 592, 576, 27, 32 });
-	downr2_damaged.PushBack({ 592, 704, 27, 32 });
+	leftd1.PushBack({ 592, 448, 27, 32 });
+	leftd1_hit.PushBack({ 592, 576, 27, 32 });
+	leftd1_damaged.PushBack({ 592, 704, 27, 32 });
 
-	downr3.PushBack({ 619, 448, 27, 32 });
-	downr3_hit.PushBack({ 619, 576, 27, 32 });
-	downr3_damaged.PushBack({ 619, 704, 27, 32 });
+	leftd2.PushBack({ 619, 448, 27, 32 });
+	leftd2_hit.PushBack({ 619, 576, 27, 32 });
+	leftd2_damaged.PushBack({ 619, 704, 27, 32 });
 
-	downr4.PushBack({ 647, 448, 27, 32 });
-	downr4_hit.PushBack({ 647, 576, 27, 32 });
-	downr4_damaged.PushBack({ 647, 704, 27, 32 });
+	leftd3.PushBack({ 647, 448, 27, 32 });
+	leftd3_hit.PushBack({ 647, 576, 27, 32 });
+	leftd3_damaged.PushBack({ 647, 704, 27, 32 });
 
-	downr5.PushBack({ 673, 448, 27, 32 });
-	downr5_hit.PushBack({ 673, 576, 27, 32 });
-	downr5_damaged.PushBack({ 673, 704, 27, 32 });
+	leftd4.PushBack({ 673, 448, 27, 32 });
+	leftd4_hit.PushBack({ 673, 576, 27, 32 });
+	leftd4_damaged.PushBack({ 673, 704, 27, 32 });
 
-	downr6.PushBack({ 700, 448, 27, 32 });
-	downr6_hit.PushBack({ 700, 576, 27, 32 });
-	downr6_damaged.PushBack({ 700, 704, 27, 32 });
+	leftd5.PushBack({ 700, 448, 27, 32 });
+	leftd5_hit.PushBack({ 700, 576, 27, 32 });
+	leftd5_damaged.PushBack({ 700, 704, 27, 32 });
 
-	downr7.PushBack({ 484, 480, 27, 32 });
-	downr7_hit.PushBack({ 484, 608, 27, 32 });
-	downr7_damaged.PushBack({ 484, 736, 27, 32 });
+	leftd6.PushBack({ 484, 480, 27, 32 });
+	leftd6_hit.PushBack({ 484, 608, 27, 32 });
+	leftd6_damaged.PushBack({ 484, 736, 27, 32 });
 
 	
 	collider = App->collision->AddCollider({ 0, 0, 28, 36 }, COLLIDER_TYPE::COLLIDER_ENEMY, (Module*)App->enemies);
@@ -179,7 +179,7 @@ Enemy_RotatingTurret::Enemy_RotatingTurret(int x, int y, int option) : Enemy(x, 
 	original_pos.y = y;
 
 	hp = 2.0f;
-
+	damaged_hp = 1.0f;
 	death_type = SMALL_ENEMY;
 	flying = false;
 	killscore = 500;
@@ -200,8 +200,10 @@ void Enemy_RotatingTurret::Move()
 	}
 	
 	
-	angle = AngleCalc(position, App->player->position);
+	angle = AngleCalc(App->player->position, position);
 
+	if (counter == 20)
+		counter = 0;
 
 	if (angle > 7.5 && angle <= 22.5)
 	{
@@ -263,7 +265,7 @@ void Enemy_RotatingTurret::Move()
 				aditional_animation = rightu5;
 		}
 	}
-	else if (angle > 95.625 && angle <= 106.875)
+	else if (angle > 82.5 && angle <= 96.43)
 	{
 		if (status == NORMAL) { aditional_animation = up; }
 		if (status == HIT) { aditional_animation = up_hit; }
@@ -275,7 +277,7 @@ void Enemy_RotatingTurret::Move()
 				aditional_animation = up;
 		}
 	}
-	else if (angle > 106.875 && angle <= 118.125)
+	else if (angle > 96.43 && angle <= 109.29)
 	{
 		if (status == NORMAL) { aditional_animation = upl1; }
 		if (status == HIT) { aditional_animation = upl1_hit; }
@@ -287,7 +289,7 @@ void Enemy_RotatingTurret::Move()
 				aditional_animation = upl1;
 		}
 	}
-	else if (angle > 118.125 && angle <= 129.375)
+	else if (angle > 109.29 && angle <= 122.15)
 	{
 		if (status == NORMAL) { aditional_animation = upl2; }
 		if (status == HIT) { aditional_animation = upl2_hit; }
@@ -299,7 +301,7 @@ void Enemy_RotatingTurret::Move()
 				aditional_animation = upl2;
 		}
 	}
-	else if (angle > 129.375 && angle <= 140.625)
+	else if (angle > 122.15 && angle <= 135.01)
 	{
 		if (status == NORMAL) { aditional_animation = upl3; }
 		if (status == HIT) { aditional_animation = upl3_hit; }
@@ -311,7 +313,7 @@ void Enemy_RotatingTurret::Move()
 				aditional_animation = upl3;
 		}
 	}
-	else if (angle > 140.625 && angle <= 151.875)
+	else if (angle > 135.01 && angle <= 147.87)
 	{
 		if (status == NORMAL) { aditional_animation = upl4; }
 		if (status == HIT) { aditional_animation = upl4_hit; }
@@ -323,7 +325,7 @@ void Enemy_RotatingTurret::Move()
 				aditional_animation = upl4;
 		}
 	}
-	else if (angle > 151.875 && angle <= 163.125)
+	else if (angle > 147.87 && angle <= 160.73)
 	{
 		if (status == NORMAL) { aditional_animation = upl5; }
 		if (status == HIT) { aditional_animation = upl5_hit; }
@@ -335,7 +337,7 @@ void Enemy_RotatingTurret::Move()
 				aditional_animation = upl5;
 		}
 	}
-	else if (angle > 163.125 && angle <= 174.375)
+	else if (angle > 160.73 && angle <= 173.59)
 	{
 		if (status == NORMAL) { aditional_animation = upl6; }
 		if (status == HIT) { aditional_animation = upl6_hit; }
@@ -347,7 +349,7 @@ void Enemy_RotatingTurret::Move()
 				aditional_animation = upl6;
 		}
 	}
-	else if (angle > 185.625 && angle <= 196.875)
+	else if (angle > 173,59 && angle <= 186.43)
 	{
 		if (status == NORMAL) { aditional_animation = left; }
 		if (status == HIT) { aditional_animation = left_hit; }
@@ -359,7 +361,7 @@ void Enemy_RotatingTurret::Move()
 				aditional_animation = left;
 		}
 	}
-	else if (angle > 196.875 && angle <= 208.125)
+	else if (angle > 186.43 && angle <= 199.29)
 	{
 		if (status == NORMAL) { aditional_animation = leftd1; }
 		if (status == HIT) { aditional_animation = leftd1_hit; }
@@ -371,7 +373,7 @@ void Enemy_RotatingTurret::Move()
 				aditional_animation = leftd1;
 		}
 	}
-	else if (angle > 208.125 && angle <= 219.375)
+	else if (angle > 199.29 && angle <= 212.15)
 	{
 		if (status == NORMAL) { aditional_animation = leftd2; }
 		if (status == HIT) { aditional_animation = leftd2_hit; }
@@ -383,7 +385,7 @@ void Enemy_RotatingTurret::Move()
 				aditional_animation = leftd2;
 		}
 	}
-	else if (angle > 219.375 && angle <= 230.625)
+	else if (angle > 212.15 && angle <= 225.01)
 	{
 		if (status == NORMAL) { aditional_animation = leftd3; }
 		if (status == HIT) { aditional_animation = leftd3_hit; }
@@ -395,7 +397,7 @@ void Enemy_RotatingTurret::Move()
 				aditional_animation = leftd3;
 		}
 	}
-	else if (angle > 230.625 && angle <= 241.875)
+	else if (angle > 225.01 && angle <= 237.87)
 	{
 		if (status == NORMAL) { aditional_animation = leftd4; }
 		if (status == HIT) { aditional_animation = leftd4_hit; }
@@ -407,7 +409,7 @@ void Enemy_RotatingTurret::Move()
 				aditional_animation = leftd4;
 		}
 	}
-	else if (angle > 241.875 && angle <= 253.125)
+	else if (angle > 237.87 && angle <= 250.73)
 	{
 		if (status == NORMAL) { aditional_animation = leftd5; }
 		if (status == HIT) { aditional_animation = leftd5_hit; }
@@ -419,7 +421,7 @@ void Enemy_RotatingTurret::Move()
 				aditional_animation = leftd5;
 		}
 	}
-	else if (angle > 253.125 && angle <= 264.375)
+	else if (angle > 250.73 && angle <= 263.59)
 	{
 		if (status == NORMAL) { aditional_animation = leftd6; }
 		if (status == HIT) { aditional_animation = leftd6_hit; }
@@ -431,7 +433,7 @@ void Enemy_RotatingTurret::Move()
 				aditional_animation = leftd6;
 		}
 	}
-	else if (angle > 264.375 && angle <= 196.875)
+	else if (angle > 263.59 && angle <= 275.625)
 	{
 		if (status == NORMAL) { aditional_animation = down; }
 		if (status == HIT) { aditional_animation = down_hit; }
@@ -443,7 +445,7 @@ void Enemy_RotatingTurret::Move()
 				aditional_animation = down;
 		}
 	}
-	else if (angle > 276.43 && angle <= 289.29)
+	else if (angle > 275.625 && angle <= 286.875)
 	{
 		if (status == NORMAL) { aditional_animation = downr1; }
 		if (status == HIT) { aditional_animation = downr1_hit; }
@@ -455,7 +457,7 @@ void Enemy_RotatingTurret::Move()
 				aditional_animation = downr1;
 		}
 	}
-	else if (angle > 276.43 && angle <= 289.29)
+	else if (angle > 286.875 && angle <= 298.125)
 	{
 		if (status == NORMAL) { aditional_animation = downr2; }
 		if (status == HIT) { aditional_animation = downr2_hit; }
@@ -467,7 +469,7 @@ void Enemy_RotatingTurret::Move()
 				aditional_animation = downr2;
 		}
 	}
-	else if (angle > 289.29 && angle <= 302.15)
+	else if (angle > 298.125 && angle <= 309.375)
 	{
 		if (status == NORMAL) { aditional_animation = downr3; }
 		if (status == HIT) { aditional_animation = downr3_hit; }
@@ -479,7 +481,7 @@ void Enemy_RotatingTurret::Move()
 				aditional_animation = downr3;
 		}
 	}
-	else if (angle > 302.15 && angle <= 315.01)
+	else if (angle > 309.375 && angle <= 320.625)
 	{
 		if (status == NORMAL) { aditional_animation = downr4; }
 		if (status == HIT) { aditional_animation = downr4_hit; }
@@ -491,7 +493,7 @@ void Enemy_RotatingTurret::Move()
 				aditional_animation = downr4;
 		}
 	}
-	else if (angle > 315.01 && angle <= 327.87)
+	else if (angle > 320.625 && angle <= 331.875)
 	{
 		if (status == NORMAL) { aditional_animation = downr5; }
 		if (status == HIT) { aditional_animation = downr5_hit; }
@@ -503,7 +505,7 @@ void Enemy_RotatingTurret::Move()
 				aditional_animation = downr5;
 		}
 	}
-	else if (angle > 327.87 && angle <= 340.73)
+	else if (angle > 331.875 && angle <= 343.125)
 	{
 		if (status == NORMAL) { aditional_animation = downr6; }
 		if (status == HIT) { aditional_animation = downr6_hit; }
@@ -515,7 +517,7 @@ void Enemy_RotatingTurret::Move()
 				aditional_animation = downr6;
 		}
 	}
-	else if (angle > 340.73 && angle <= 353.59)
+	else if (angle > 343.125 && angle <= 354.375)
 	{
 		if (status == NORMAL) { aditional_animation = downr7; }
 		if (status == HIT) { aditional_animation = downr7_hit; }
@@ -541,17 +543,16 @@ void Enemy_RotatingTurret::Move()
 	}
 
 	counter++;
-	if (counter == 20)counter = 0;
+	
 }
 
 void Enemy_RotatingTurret::Extra_animation()
 {
-	if (status == NORMAL)
-	{
+	
 		App->render->Blit(App->enemies->sprites, position.x - 1, position.y - 10, &aditional_animation.GetCurrentFrame());
 		//flag2.GetCurrentFrame();
 		//flag3.GetCurrentFrame();
-	}
+
 	/*if (status == HIT)
 	{
 		App->render->Blit(App->enemies->sprites, position.x + 29, position.y - 15, &flag2.GetCurrentFrame());

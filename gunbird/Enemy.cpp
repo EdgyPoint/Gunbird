@@ -47,7 +47,7 @@ fPoint Enemy::ShootCalculator(iPoint position, iPoint player)
 
 float Enemy::AngleCalc(iPoint position, iPoint player)
 {
-	int module;
+	float module;
 	fPoint distance;
 	float angle;
 
@@ -64,9 +64,9 @@ float Enemy::AngleCalc(iPoint position, iPoint player)
 
 	angle *= 180 / PI;
 
-	if (position.x < player.x && position.y >= player.y)
-		angle = 360 - angle;
 	if (position.x >= player.x && position.y >= player.y)
+		angle = 360 - angle;
+	if (position.x < player.x && position.y >= player.y)
 		angle = 180 + angle;
 	if (position.x < player.x && position.y < player.y)
 		angle = 180 - angle;
