@@ -10,6 +10,8 @@
 
 Enemy_GreenRobot::Enemy_GreenRobot(int x, int y, int option) : Enemy(x, y, option)
 {
+	aditionalanimation = true;
+
 	dead.PushBack({ 1292, 76, 76, 76 });
 
 	stand.PushBack({ 912, 0, 76, 76 });
@@ -77,6 +79,10 @@ Enemy_GreenRobot::Enemy_GreenRobot(int x, int y, int option) : Enemy(x, y, optio
 void Enemy_GreenRobot::Move()
 {
 	position = original_pos + path.GetCurrentPosition();
+
+	counter++;
+	if (counter == 20)
+		counter = 0;
 
 	if (hp <= 0)anim_type = DEAD;
 
@@ -149,7 +155,404 @@ void Enemy_GreenRobot::Move()
 		collider->SetPos(-100, 500);
 	}
 	}
-	counter++;
-	if (counter == 20)
-		counter = 0;
+	
+	angle = AngleCalc({ App->player->position.x + 14, App->player->position.y + 16 }, { position.x + 5, position.y + 7 });
+	angle2 = AngleCalc({ App->player->position.x + 14, App->player->position.y + 16 }, { position.x + 45, position.y + 7 });
+
+	if (angle > 11.25 && angle <= 33.75)
+	{
+		if (status == NORMAL) { extra_animation = &rightu1; }
+		if (status == HIT) { extra_animation = &rightu1_hit; }
+		if (status == DAMAGED)
+		{
+			if (counter == 0)
+				extra_animation = &rightu1_damaged;
+			else
+				extra_animation = &rightu1;
+		}
+	}
+	else if (angle > 33.75 && angle <= 56.25)
+	{
+		if (status == NORMAL) { extra_animation = &rightu2; }
+		if (status == HIT) { extra_animation = &rightu2_hit; }
+		if (status == DAMAGED)
+		{
+			if (counter == 0)
+				extra_animation = &rightu2_damaged;
+			else
+				extra_animation = &rightu2;
+		}
+	}
+	else if (angle > 56.25 && angle <= 78.75)
+	{
+		if (status == NORMAL) { extra_animation = &rightu3; }
+		if (status == HIT) { extra_animation = &rightu3_hit; }
+		if (status == DAMAGED)
+		{
+			if (counter == 0)
+				extra_animation = &rightu3_damaged;
+			else
+				extra_animation = &rightu3;
+		}
+	}
+	else if (angle > 78.75 && angle <= 101.25)
+	{
+		if (status == NORMAL) { extra_animation = &up; }
+		if (status == HIT) { extra_animation = &up_hit; }
+		if (status == DAMAGED)
+		{
+			if (counter == 0)
+				extra_animation = &up_damaged;
+			else
+				extra_animation = &up;
+		}
+	}
+	else if (angle > 101.25 && angle <= 123.75)
+	{
+		if (status == NORMAL) { extra_animation = &upl1; }
+		if (status == HIT) { extra_animation = &upl1_hit; }
+		if (status == DAMAGED)
+		{
+			if (counter == 0)
+				extra_animation = &upl1_damaged;
+			else
+				extra_animation = &upl1;
+		}
+	}
+	else if (angle > 123.75 && angle <= 146.25)
+	{
+		if (status == NORMAL) { extra_animation = &upl2; }
+		if (status == HIT) { extra_animation = &upl2_hit; }
+		if (status == DAMAGED)
+		{
+			if (counter == 0)
+				extra_animation = &upl2_damaged;
+			else
+				extra_animation = &upl2;
+		}
+	}
+	else if (angle > 146.25 && angle <= 168.75) 
+	{
+		if (status == NORMAL) { extra_animation = &upl3; }
+		if (status == HIT) { extra_animation = &upl3_hit; }
+		if (status == DAMAGED)
+		{
+			if (counter == 0)
+				extra_animation = &upl3_damaged;
+			else
+				extra_animation = &upl3;
+		}
+	}
+	else if (angle > 168.75 && angle <= 191, 25)
+	{
+		if (status == NORMAL) { extra_animation = &left; }
+		if (status == HIT) { extra_animation = &left_hit; }
+		if (status == DAMAGED)
+		{
+			if (counter == 0)
+				extra_animation = &left_damaged;
+			else
+				extra_animation = &left;
+		}
+	}
+	else if (angle > 191, 25 && angle <= 213.75)
+	{
+		if (status == NORMAL) { extra_animation = &leftd1; }
+		if (status == HIT) { extra_animation = &leftd1_hit; }
+		if (status == DAMAGED)
+		{
+			if (counter == 0)
+				extra_animation = &leftd1_damaged;
+			else
+				extra_animation = &leftd1;
+		}
+	}
+	else if (angle > 213.75 && angle <= 236.25)
+	{
+		if (status == NORMAL) { extra_animation = &leftd2; }
+		if (status == HIT) { extra_animation = &leftd2_hit; }
+		if (status == DAMAGED)
+		{
+			if (counter == 0)
+				extra_animation = &leftd2_damaged;
+			else
+				extra_animation = &leftd2;
+		}
+	}
+	else if (angle > 236.25 && angle <= 258.75) 
+	{
+		if (status == NORMAL) { extra_animation = &leftd3; }
+		if (status == HIT) { extra_animation = &leftd3_hit; }
+		if (status == DAMAGED)
+		{
+			if (counter == 0)
+				extra_animation = &leftd3_damaged;
+			else
+				extra_animation = &leftd3;
+		}
+	}
+	else if (angle > 258.75 && angle <= 281.25)
+	{
+		if (status == NORMAL) { extra_animation = &down; }
+		if (status == HIT) { extra_animation = &down_hit; }
+		if (status == DAMAGED)
+		{
+			if (counter == 0)
+				extra_animation = &down_damaged;
+			else
+				extra_animation = &down;
+		}
+	}
+	else if (angle > 281.25 && angle <= 303.75)
+	{
+		if (status == NORMAL) { extra_animation = &downr1; }
+		if (status == HIT) { extra_animation = &downr1_hit; }
+		if (status == DAMAGED)
+		{
+			if (counter == 0)
+				extra_animation = &downr1_damaged;
+			else
+				extra_animation = &downr1;
+		}
+	}
+	else if (angle > 303.75 && angle <= 326.25)
+	{
+		if (status == NORMAL) { extra_animation = &downr2; }
+		if (status == HIT) { extra_animation = &downr2_hit; }
+		if (status == DAMAGED)
+		{
+			if (counter == 0)
+				extra_animation = &downr2_damaged;
+			else
+				extra_animation = &downr2;
+		}
+	}
+	else if (angle > 326.25 && angle <= 348.75) 
+	{
+		if (status == NORMAL) { extra_animation = &downr3; }
+		if (status == HIT) { extra_animation = &downr3_hit; }
+		if (status == DAMAGED)
+		{
+			if (counter == 0)
+				extra_animation = &downr3_damaged;
+			else
+				extra_animation = &downr3;
+		}
+	}
+	else
+	{
+		if (status == NORMAL) { extra_animation = &right; }
+		if (status == HIT) { extra_animation = &right_hit; }
+		if (status == DAMAGED)
+		{
+			if (counter == 0)
+				extra_animation = &right_damaged;
+			else
+				extra_animation = &right;
+		}
+	}
+
+
+
+
+
+	if (angle2 > 11.25 && angle2 <= 33.75)
+	{
+		if (status == NORMAL) { extra_animation2 = &rightu1; }
+		if (status == HIT) { extra_animation2 = &rightu1_hit; }
+		if (status == DAMAGED)
+		{
+			if (counter == 0)
+				extra_animation2 = &rightu1_damaged;
+			else
+				extra_animation2 = &rightu1;
+		}
+	}
+	else if (angle2 > 33.75 && angle2 <= 56.25)
+	{
+		if (status == NORMAL) { extra_animation2 = &rightu2; }
+		if (status == HIT) { extra_animation2 = &rightu2_hit; }
+		if (status == DAMAGED)
+		{
+			if (counter == 0)
+				extra_animation2 = &rightu2_damaged;
+			else
+				extra_animation2 = &rightu2;
+		}
+	}
+	else if (angle2 > 56.25 && angle2 <= 78.75)
+	{
+		if (status == NORMAL) { extra_animation2 = &rightu3; }
+		if (status == HIT) { extra_animation2 = &rightu3_hit; }
+		if (status == DAMAGED)
+		{
+			if (counter == 0)
+				extra_animation2 = &rightu3_damaged;
+			else
+				extra_animation2 = &rightu3;
+		}
+	}
+	else if (angle2 > 78.75 && angle2 <= 101.25)
+	{
+		if (status == NORMAL) { extra_animation2 = &up; }
+		if (status == HIT) { extra_animation2 = &up_hit; }
+		if (status == DAMAGED)
+		{
+			if (counter == 0)
+				extra_animation2 = &up_damaged;
+			else
+				extra_animation2 = &up;
+		}
+	}
+	else if (angle2 > 101.25 && angle2 <= 123.75)
+	{
+		if (status == NORMAL) { extra_animation2 = &upl1; }
+		if (status == HIT) { extra_animation2 = &upl1_hit; }
+		if (status == DAMAGED)
+		{
+			if (counter == 0)
+				extra_animation2 = &upl1_damaged;
+			else
+				extra_animation2 = &upl1;
+		}
+	}
+	else if (angle2 > 123.75 && angle2 <= 146.25)
+	{
+		if (status == NORMAL) { extra_animation2 = &upl2; }
+		if (status == HIT) { extra_animation2 = &upl2_hit; }
+		if (status == DAMAGED)
+		{
+			if (counter == 0)
+				extra_animation2 = &upl2_damaged;
+			else
+				extra_animation2 = &upl2;
+		}
+	}
+	else if (angle2 > 146.25 && angle2 <= 168.75)
+	{
+		if (status == NORMAL) { extra_animation2 = &upl3; }
+		if (status == HIT) { extra_animation2 = &upl3_hit; }
+		if (status == DAMAGED)
+		{
+			if (counter == 0)
+				extra_animation2 = &upl3_damaged;
+			else
+				extra_animation2 = &upl3;
+		}
+	}
+	else if (angle2 > 168.75 && angle2 <= 191, 25)
+	{
+		if (status == NORMAL) { extra_animation2 = &left; }
+		if (status == HIT) { extra_animation2 = &left_hit; }
+		if (status == DAMAGED)
+		{
+			if (counter == 0)
+				extra_animation2 = &left_damaged;
+			else
+				extra_animation2 = &left;
+		}
+	}
+	else if (angle2 > 191, 25 && angle2 <= 213.75)
+	{
+		if (status == NORMAL) { extra_animation2 = &leftd1; }
+		if (status == HIT) { extra_animation2 = &leftd1_hit; }
+		if (status == DAMAGED)
+		{
+			if (counter == 0)
+				extra_animation2 = &leftd1_damaged;
+			else
+				extra_animation2 = &leftd1;
+		}
+	}
+	else if (angle2 > 213.75 && angle2 <= 236.25)
+	{
+		if (status == NORMAL) { extra_animation2 = &leftd2; }
+		if (status == HIT) { extra_animation2 = &leftd2_hit; }
+		if (status == DAMAGED)
+		{
+			if (counter == 0)
+				extra_animation2 = &leftd2_damaged;
+			else
+				extra_animation2 = &leftd2;
+		}
+	}
+	else if (angle2 > 236.25 && angle2 <= 258.75)
+	{
+		if (status == NORMAL) { extra_animation2 = &leftd3; }
+		if (status == HIT) { extra_animation2 = &leftd3_hit; }
+		if (status == DAMAGED)
+		{
+			if (counter == 0)
+				extra_animation2 = &leftd3_damaged;
+			else
+				extra_animation2 = &leftd3;
+		}
+	}
+	else if (angle2 > 258.75 && angle2 <= 281.25)
+	{
+		if (status == NORMAL) { extra_animation2 = &down; }
+		if (status == HIT) { extra_animation2 = &down_hit; }
+		if (status == DAMAGED)
+		{
+			if (counter == 0)
+				extra_animation2 = &down_damaged;
+			else
+				extra_animation2 = &down;
+		}
+	}
+	else if (angle2 > 281.25 && angle2 <= 303.75)
+	{
+		if (status == NORMAL) { extra_animation2 = &downr1; }
+		if (status == HIT) { extra_animation2 = &downr1_hit; }
+		if (status == DAMAGED)
+		{
+			if (counter == 0)
+				extra_animation2 = &downr1_damaged;
+			else
+				extra_animation2 = &downr1;
+		}
+	}
+	else if (angle2 > 303.75 && angle2 <= 326.25)
+	{
+		if (status == NORMAL) { extra_animation2 = &downr2; }
+		if (status == HIT) { extra_animation2 = &downr2_hit; }
+		if (status == DAMAGED)
+		{
+			if (counter == 0)
+				extra_animation2 = &downr2_damaged;
+			else
+				extra_animation2 = &downr2;
+		}
+	}
+	else if (angle2 > 326.25 && angle2 <= 348.75)
+	{
+		if (status == NORMAL) { extra_animation2 = &downr3; }
+		if (status == HIT) { extra_animation2 = &downr3_hit; }
+		if (status == DAMAGED)
+		{
+			if (counter == 0)
+				extra_animation2 = &downr3_damaged;
+			else
+				extra_animation2 = &downr3;
+		}
+	}
+	else
+	{
+		if (status == NORMAL) { extra_animation2 = &right; }
+		if (status == HIT) { extra_animation2 = &right_hit; }
+		if (status == DAMAGED)
+		{
+			if (counter == 0)
+				extra_animation2 = &right_damaged;
+			else
+				extra_animation2 = &right;
+		}
+	}
+
+
+}
+
+void Enemy_GreenRobot::Shoot()
+{
+
 }

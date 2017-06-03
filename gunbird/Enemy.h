@@ -30,6 +30,7 @@ class Enemy
 protected:
 	Animation* animation = nullptr;
 	Animation* extra_animation = nullptr;
+	Animation* extra_animation2 = nullptr;
 	Collider* collider = nullptr;
 
 
@@ -37,7 +38,7 @@ public:
 	iPoint position;
 	fPoint bullet_speed;
 	int reload = 0;
-	float angle;
+	float angle, angle2;
 	int pathoption = 0;
 	float hp = 1.0f;
 	int killscore = 0;

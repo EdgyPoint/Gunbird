@@ -161,7 +161,7 @@ void Enemy::ToDie(Enemy* enemy, Collider* col)
 	}
 
 	if (col->type == COLLIDER_PLAYER_SHOT)
-	App->player->score += enemy->killscore;
+		App->player->score += enemy->killscore;
 
 	if (col->type == COLLIDER_PLAYER2_SHOT)
 		App->player2->score += enemy->killscore;

@@ -607,8 +607,7 @@ void ModuleParticles::OnCollision(Collider* c1, Collider* c2)
 {
 
 	// Colliders that are deleted on contact are deleted here
-	if (c1->type == COLLIDER_ENEMY_SHOT || c1->type == COLLIDER_PLAYER_SHOT || c1->type == COLLIDER_PLAYER2_SHOT || c1->type == COLLIDER_BOMB || c1->type == COLLIDER_POWERUP || c2->type == COLLIDER_WALL)
-	{
+	if (c1->type != COLLIDER_BOMBSHOT || (c1->type == COLLIDER_POWERUP && c2->type == COLLIDER_PLAYER))	{
 		for (uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
 		{
 
