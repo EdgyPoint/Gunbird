@@ -10,6 +10,7 @@ class Enemy_RotatingTurret : public Enemy
 private:
 	iPoint original_pos;
 	fPoint distance;
+	Animation* aux;
 	Animation aditional_animation;
 	Animation normal_base_anim;
 	Animation hit_base_anim;
@@ -42,6 +43,7 @@ private:
 	Animation leftd4, leftd4_hit, leftd4_damaged;
 	Animation leftd5, leftd5_hit, leftd5_damaged;
 	Animation leftd6, leftd6_hit, leftd6_damaged;
+	Animation dead;
 	Path path;
 
 public:

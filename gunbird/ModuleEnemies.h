@@ -8,7 +8,11 @@
 #include "Enemy_CastleMortar.h"
 #include "Enemy_RotatingTurret.h"
 #include "Enemy_WindowGun.h"
+#include "Enemy_GreenRobot.h"
 #include "Enemy_2CannonTurret.h"
+#include "Enemy_FlyingGunner.h"
+#include "Enemy_4CannonTurret.h"
+
 
 #define MAX_ENEMIES 100
 
@@ -23,10 +27,12 @@ enum ENEMY_TYPES
 	TURRETCOPTER,
 	CASTLEMORTAR,
 	VASE,
+	GREENROBOT,
 	ROTATINGTURRET,
 	WINDOWGUN,
 	TWOCANNONTURRET,
 	FOURCANNONTURRET,
+	FLYINGGUNNER,
 };
 
 class Enemy;

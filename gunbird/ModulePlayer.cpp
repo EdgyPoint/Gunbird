@@ -25,7 +25,6 @@ ModulePlayer::ModulePlayer()
 {
 	graphics = NULL;
 	current_animation = NULL;
-	
 
 	// idle animation (arcade sprite sheet)
 	idle.PushBack({0, 64, 32, 32});
@@ -76,6 +75,27 @@ ModulePlayer::ModulePlayer()
 	tilting.loop = true;
 	tilting.speed = 0.5f;
 
+	completingcharge.PushBack({ 0, 160, 32, 37 });
+	completingcharge.PushBack({ 32, 160, 32, 37 });
+	completingcharge.PushBack({ 32, 160, 32, 37 });
+	completingcharge.PushBack({ 32, 160, 32, 37 });
+	completingcharge.PushBack({ 32, 160, 32, 37 });
+	completingcharge.PushBack({ 64, 160, 32, 37 });
+	completingcharge.PushBack({ 64, 160, 32, 37 });
+	completingcharge.PushBack({ 64, 160, 32, 37 });
+	completingcharge.PushBack({ 64, 160, 32, 37 });
+	completingcharge.PushBack({ 96, 160, 32, 37 });
+	completingcharge.PushBack({ 96, 160, 32, 37 });
+	completingcharge.PushBack({ 96, 160, 32, 37 });
+	completingcharge.PushBack({ 96, 160, 32, 37 });
+	completingcharge.loop = true;
+	completingcharge.speed = 0.5f;
+
+	shotcharged.PushBack({ 0, 197, 32, 37 });
+	shotcharged.PushBack({ 32, 197, 32, 37 });
+	shotcharged.loop = true;
+	shotcharged.speed = 0.25f;
+
 	startbutton.PushBack({ 0, 320, 68, 13 });
 	startbutton.PushBack({ 0, 333, 68, 13 });
 	startbutton.speed = 0.03f;
@@ -91,6 +111,7 @@ bool ModulePlayer::Start()
 
 	powerup_lv = 0;
 	lives = 2;
+	bombs = 2;
 
 	graphics = App->textures->Load("assets/images/Marion.png");
 
@@ -108,6 +129,11 @@ bool ModulePlayer::Start()
 	lifedisplay.y = 0;
 	lifedisplay.w = 13;
 	lifedisplay.h = 13;
+
+	bombdisplay.x = 15;
+	bombdisplay.y = 15;
+	bombdisplay.w = 12;
+	bombdisplay.h = 15;
 
 	position.x = 51;
 	position.y = 320;
@@ -150,10 +176,8 @@ update_status ModulePlayer::Update()
 
 
 	/*if (SDL_GameControllerGetAxis(App->input->Controller, SDL_CONTROLLER_AXIS_LEFTX) > 10000)
-=======
 	// Controller input variables
 	if (App->input->controller1.left_joystick.x > 0.25)
->>>>>>> origin/master
 	{
 		joystick_right = true;
 	}
@@ -179,7 +203,6 @@ update_status ModulePlayer::Update()
 	{
 		joystick_up = true;
 	}
-<<<<<<< HEAD
 	else if(SDL_GameControllerGetAxis(App->input->Controller, SDL_CONTROLLER_AXIS_LEFTY) > -15000)
 		joystick_up = false;*/
 
@@ -236,6 +259,8 @@ if ((App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT || SDL_GameCo
 		}
 	}
 	// --------------------------
+
+	// Move down
 	if ((App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT || SDL_GameControllerGetAxis(App->input->Controller, SDL_CONTROLLER_AXIS_LEFTY) > 10000) && !_dying && !respawning && !App->fade->fading)
 	{
 		position.y += speed;
@@ -247,6 +272,7 @@ if ((App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT || SDL_GameCo
 	}
 	// --------------------------
 
+	// Move up
 	if ((App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT || SDL_GameControllerGetAxis(App->input->Controller, SDL_CONTROLLER_AXIS_LEFTY) < -13000) && !_dying && !respawning && !App->fade->fading)
 	{
 		position.y -= speed;
@@ -258,8 +284,35 @@ if ((App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT || SDL_GameCo
 	}
 	// --------------------------
 
+	// Charged shot
+		// Charge up
+	if ((App->input->keyboard[SDL_SCANCODE_C] == KEY_STATE::KEY_REPEAT || App->input->controller[SDL_CONTROLLER_BUTTON_A] == BUTTON_STATE::B_REPEAT) && !_dying && !respawning && !stunned && !App->fade->fading && charge_up < 110)
+	{
+		charge_up++;
+	}
+		// Finishing charge
+	if ((App->input->keyboard[SDL_SCANCODE_C] == KEY_STATE::KEY_REPEAT || App->input->controller[SDL_CONTROLLER_BUTTON_A] == BUTTON_STATE::B_REPEAT) && !_dying && !respawning && !stunned && !App->fade->fading && charge_up == 110 && finishing_charge < 26)
+	{
+		finishing_charge++;
+	}
+	if (time_since_last_charged < 100)
+	time_since_last_charged++;
+		// Release
+	if ((App->input->keyboard[SDL_SCANCODE_C] == KEY_STATE::KEY_UP || App->input->controller[SDL_CONTROLLER_BUTTON_A] == BUTTON_STATE::B_UP) && !_dying && !respawning && !stunned && !App->fade->fading)
+	{
+		if (charge_up == 110)
+		{
+			App->audio->sfx = App->audio->LoadSFX("assets/SFX/marionchargedshot.wav");
+			Mix_PlayChannel(-1, App->audio->sfx, 0);
 
+			App->particles->AddParticle(App->particles->chargedbeam, position.x - 2, position.y - 32, COLLIDER_CHARGEDSHOT);
+		}
+		charge_up = 0;
+		finishing_charge = 0;
+		time_since_last_charged = 0;
+	}
 
+	// Shoot
 	if ((App->input->keyboard[SDL_SCANCODE_C] == KEY_STATE::KEY_DOWN || App->input->controller[SDL_CONTROLLER_BUTTON_A] ==BUTTON_STATE::B_DOWN) && !_dying && !respawning && !stunned && !App->fade->fading)
 	{
 		if (!shooting)
@@ -275,8 +328,11 @@ if ((App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT || SDL_GameCo
 	// --------------------------
 
 	// Bomb
-	if (App->input->keyboard[SDL_SCANCODE_V] == KEY_STATE::KEY_DOWN && !_dying && !respawning && !stunned && !App->fade->fading && bombCD == 0)
+	if (App->input->keyboard[SDL_SCANCODE_V] == KEY_STATE::KEY_DOWN && !_dying && !respawning && !stunned && !App->fade->fading && bombCD == 0 && bombs > 0)
 	{
+		if (bombs > 0)
+		bombs--;
+
 		bombCD = 125;
 		App->audio->sfx = App->audio->LoadSFX("assets/SFX/marionbomb.wav");
 		Mix_PlayChannel(-1, App->audio->sfx, 0);
@@ -322,9 +378,18 @@ if ((App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT || SDL_GameCo
 			transition = 0;
 		}
 	}
+
+	if (charge_up == 110)
+	{
+		current_animation = &completingcharge;
+	}
+	if (finishing_charge == 26)
+	{
+		current_animation = &shotcharged;
+	}
 	// --------------------------
 
-
+	// Debug features
 	if ((App->input->keyboard[SDL_SCANCODE_F2] == KEY_STATE::KEY_DOWN ) && godmode == false && !App->fade->fading)
 	{
 		godmode = true;
@@ -351,7 +416,28 @@ if ((App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT || SDL_GameCo
 		App->collision->EditMatrix(COLLIDER_ENEMY_SHOT, COLLIDER_PLAYER2, true);
 	}
 
-	if (App->input->keyboard[SDL_SCANCODE_F5] == KEY_STATE::KEY_DOWN && !App->fade->fading)
+	else if ((App->input->keyboard[SDL_SCANCODE_F5] == KEY_STATE::KEY_DOWN) && !App->fade->fading)
+	{
+		if (powerup_lv != MAX_LEVEL)
+			powerup_lv++;
+		if (App->player2->powerup_lv != MAX_LEVEL)
+			App->player2->powerup_lv++;
+
+		App->audio->sfx = App->audio->LoadSFX("assets/SFX/marionpowerup.wav");
+		Mix_PlayChannel(-1, App->audio->sfx, 0);
+	}
+	else if ((App->input->keyboard[SDL_SCANCODE_F6] == KEY_STATE::KEY_DOWN) && !App->fade->fading)
+	{
+		if (bombs != 4)
+			bombs++;
+		if (App->player2->bombs != 4)
+			App->player2->bombs++;
+
+		App->audio->sfx = App->audio->LoadSFX("assets/SFX/collectbomb.wav");
+		Mix_PlayChannel(-1, App->audio->sfx, 0);
+	}
+
+	if (App->input->keyboard[SDL_SCANCODE_KP_ENTER] == KEY_STATE::KEY_DOWN && !App->fade->fading)
 	{
 		App->player2->Enable();
 		App->player2->out = false;
@@ -489,8 +575,15 @@ if ((App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT || SDL_GameCo
 	if (blinkcounter > 3 && (respawning || temp_invincibility))
 		App->render->Blit(graphics, position.x, position.y, &(current_animation->GetCurrentFrame()));
 
-	else if (!respawning && !temp_invincibility)
+	else if (!respawning && !temp_invincibility && charge_up != 110)
 		App->render->Blit(graphics, position.x, position.y, &(current_animation->GetCurrentFrame()));
+	// --------------------------
+
+	// Blit shot charging
+	if (charge_up == 110)
+	{
+		App->render->Blit(graphics, position.x, position.y - 5, &(current_animation->GetCurrentFrame()));
+	}
 	// --------------------------
 
 	//Blit UI
@@ -504,8 +597,35 @@ if ((App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT || SDL_GameCo
 		App->render->Blit(ui, 5, 21, &lifedisplay, 0, true);
 		App->render->Blit(ui, 21, 21, &lifedisplay, 0, true);
 	}
+	
+	if (bombs == 1)
+		App->render->Blit(ui, 6, 300, &bombdisplay, 0, true);
 
+	if (bombs == 2)
+	{
+		App->render->Blit(ui, 6, 300, &bombdisplay, 0, true);
+		App->render->Blit(ui, 22, 300, &bombdisplay, 0, true);
+	}
+
+	if (bombs == 3)
+	{
+		App->render->Blit(ui, 6, 300, &bombdisplay, 0, true);
+		App->render->Blit(ui, 22, 300, &bombdisplay, 0, true);
+		App->render->Blit(ui, 38, 300, &bombdisplay, 0, true);
+	}
+
+	if (bombs == 4)
+	{
+		App->render->Blit(ui, 6, 300, &bombdisplay, 0, true);
+		App->render->Blit(ui, 22, 300, &bombdisplay, 0, true);
+		App->render->Blit(ui, 38, 300, &bombdisplay, 0, true);
+		App->render->Blit(ui, 56, 300, &bombdisplay, 0, true);
+	}
+	// --------------------------
+
+	// Blit score
 	App->fonts->BlitText(20, 6, font_score, text_score);
+	// --------------------------
 
 	if (App->player2->out == true)
 	{
@@ -552,6 +672,9 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 {
 	if (c2->type == COLLIDER_ENEMY_SHOT)
 	{
+		charge_up = 0;
+		finishing_charge = 0;
+
 		lives -= 1;
 		_dying = true;
 		
@@ -575,6 +698,9 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 
 	if (c2->type == COLLIDER_ENEMY_F && !stunned)
 	{
+		charge_up = 0;
+		finishing_charge = 0;
+
 		stunned = true;
 		powerup_lv--;
 		App->particles->AddParticle(App->particles->playercollision, position.x, position.y, COLLIDER_NONE);
@@ -588,7 +714,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 
 	if (c2->type == COLLIDER_POWERUP)
 	{
-		if (powerup_lv == 0)
+		if (powerup_lv > MAX_LEVEL)
 		{
 			App->audio->sfx = App->audio->LoadSFX("assets/SFX/marionpowerup.wav");;
 			Mix_PlayChannel(-1, App->audio->sfx, 0);
@@ -601,20 +727,25 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 			App->audio->sfx = App->audio->LoadSFX("assets/SFX/marionmaxpowerup.wav");
 			Mix_PlayChannel(-1, App->audio->sfx, 0);
 		}
+		App->particles->DeleteParticle(c2);
 
 		poweruping = true;
 	}
 
 	if (c2->type == COLLIDER_BOMB)
 	{
-		if (bombs == 6)
-		{
-			score += 10000;
-		}
-		if (bombs < 6)
+		if (bombs == 4)
+		score += 10000;
+
+		if (bombs < 4)
 		{
 			bombs++;
 		}
+
+		App->audio->sfx = App->audio->LoadSFX("assets/SFX/collectbomb.wav");
+		Mix_PlayChannel(-1, App->audio->sfx, 0);
+
+		App->particles->DeleteParticle(c2);
 	}
 
 	if (c2->type == COLLIDER_COIN)

@@ -53,6 +53,7 @@ public:
 	void OnCollision(Collider* c1, Collider* c2);
 
 	void AddParticle(const Particle& particle, int x, int y, COLLIDER_TYPE collider_type, float speed_x = 0.0f, float speed_y = 0.0f, Uint32 delay = 0, bool using_camera = true, ITEM_TYPE item_type = ITEM_NONE);
+	void DeleteParticle(Collider* c);
 
 private:
 
@@ -68,6 +69,7 @@ public:
 	Particle marionbeamleft_lv2[3];
 	Particle marionbeamright_lv1[3];
 	Particle marionbeamright_lv2[3];
+	Particle chargedbeam;
 	Particle smallshot;
 	Particle prebigshot;
 	Particle bigshot;

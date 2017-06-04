@@ -31,8 +31,8 @@ fPoint Enemy::ShootCalculator(iPoint position, iPoint player)
 	fPoint distance;
 	fPoint speed;
 
-	distance.x = App->player->position.x - position.x;
-	distance.y = App->player->position.y - position.y;
+	distance.x = player.x - position.x;
+	distance.y = player.y - position.y;
 
 	module = sqrtf(powf(distance.x, 2) + powf(distance.y, 2));
 
@@ -78,6 +78,7 @@ void Enemy::Draw(SDL_Texture* sprites, Enemy* enemy)
 {
 	if (collider != nullptr)
 	{
+		if (hp > 0)
 			collider->SetPos(position.x, position.y);
 	}
 
@@ -85,7 +86,7 @@ void Enemy::Draw(SDL_Texture* sprites, Enemy* enemy)
 	if (enemy->hp <= enemy->damaged_hp && enemy->hp > 0)
 		enemy->status = DAMAGED;
 
-	if (animation != nullptr)
+	if (animation != nullptr && to_draw)
 		App->render->Blit(sprites, position.x, position.y, &(animation->GetCurrentFrame()));
 
 	if (enemy->status == HIT)
@@ -99,36 +100,42 @@ void Enemy::Draw(SDL_Texture* sprites, Enemy* enemy)
 
 void Enemy::OnCollision(Collider* collider, Enemy* enemy)
 {
+	if (collider->type == COLLIDER_PLAYER_SHOT && App->player->powerup_lv == 0)
+		enemy->hp -= 1.0f;
+	else if (collider->type == COLLIDER_PLAYER2_SHOT && App->player2->powerup_lv == 0)
+		enemy->hp -= 1.0f;
+	else if (collider->type == COLLIDER_PLAYER_SHOT && App->player->powerup_lv == 1)
+		enemy->hp -= 1.25f;
+	else if (collider->type == COLLIDER_PLAYER2_SHOT && App->player2->powerup_lv == 1)
+		enemy->hp -= 1.25f;
+	else if (collider->type == COLLIDER_PLAYER_SHOT && App->player->powerup_lv == 2)
+		enemy->hp -= 1.0f;
+	else if (collider->type == COLLIDER_PLAYER2_SHOT && App->player2->powerup_lv == 2)
+		enemy->hp -= 1.0f;
+	else if (collider->type == COLLIDER_PLAYER_SHOT && App->player->powerup_lv == 3)
+		enemy->hp -= 1.25f;
+	else if (collider->type == COLLIDER_PLAYER2_SHOT && App->player2->powerup_lv == 3)
+		enemy->hp -= 1.25f;
+	else if (collider->type == COLLIDER_BOMBSHOT)
+		enemy->hp -= 3;
+	else if (collider->type == COLLIDER_CHARGEDSHOT)
+		enemy->hp -= 15;
 
-		if (collider->type == COLLIDER_PLAYER_SHOT && App->player->powerup_lv == 0)
-			enemy->hp -= 1.0f;
-		else if (collider->type == COLLIDER_PLAYER2_SHOT && App->player2->powerup_lv == 0)
-			enemy->hp -= 1.0f;
-		else if (collider->type == COLLIDER_PLAYER_SHOT && App->player->powerup_lv == 1)
-			enemy->hp -= 1.25f;
-		else if (collider->type == COLLIDER_PLAYER2_SHOT && App->player2->powerup_lv == 1)
-			enemy->hp -= 1.25f;
-		else if (collider->type == COLLIDER_PLAYER_SHOT && App->player->powerup_lv == 2)
-			enemy->hp -= 1.0f;
-		else if (collider->type == COLLIDER_PLAYER2_SHOT && App->player2->powerup_lv == 2)
-			enemy->hp -= 1.0f;
-		else if (collider->type == COLLIDER_PLAYER_SHOT && App->player->powerup_lv == 3)
-			enemy->hp -= 1.25f;
-		else if (collider->type == COLLIDER_PLAYER2_SHOT && App->player2->powerup_lv == 3)
-			enemy->hp -= 1.25f;
-		else if (collider->type == COLLIDER_BOMBSHOT)
-			enemy->hp -= 4;
-
-		if (collider->type == COLLIDER_PLAYER_SHOT || collider->type == COLLIDER_PLAYER2_SHOT || collider->type == COLLIDER_BOMBSHOT)
-		{
-			enemy->status = HIT;
-			collider->already_hit = true;
-			App->particles->AddParticle(App->particles->impact, collider->rect.x - 6, collider->rect.y - 47, COLLIDER_NONE);
-			App->audio->sfx = App->audio->LoadSFX("assets/SFX/impact.wav");
-			Mix_PlayChannel(-1, App->audio->sfx, 0);
-		}
-	
-
+	if (collider->type == COLLIDER_PLAYER_SHOT || collider->type == COLLIDER_PLAYER2_SHOT)
+	{
+		enemy->status = HIT;
+		collider->already_hit = true;
+		App->particles->AddParticle(App->particles->impact, collider->rect.x - 6, collider->rect.y - 47, COLLIDER_NONE);
+		App->audio->sfx = App->audio->LoadSFX("assets/SFX/impact.wav");
+		Mix_PlayChannel(-1, App->audio->sfx, 0);
+	}
+	if (collider->type == COLLIDER_BOMBSHOT || collider->type == COLLIDER_CHARGEDSHOT)
+	{
+		enemy->status = HIT;
+		collider->already_hit = true;
+		App->audio->sfx = App->audio->LoadSFX("assets/SFX/impact.wav");
+		Mix_PlayChannel(-1, App->audio->sfx, 0);
+	}
 }
 
 
@@ -141,7 +148,7 @@ void Enemy::ToDie(Enemy* enemy, Collider* col)
 
 	if (enemy->drops_bomb)
 	{
-		App->particles->AddParticle(App->particles->bomb, enemy->position.x + 12, enemy->position.y + 26, COLLIDER_POWERUP, 1, 1, 0, true, ITEM_BOMB);
+		App->particles->AddParticle(App->particles->bomb, enemy->position.x + 12, enemy->position.y + 26, COLLIDER_BOMB, 1, 1, 0, true, ITEM_BOMB);
 	}
 
 	if (enemy->drops_coin)
@@ -163,7 +170,7 @@ void Enemy::ToDie(Enemy* enemy, Collider* col)
 	}
 
 	if (col->type == COLLIDER_PLAYER_SHOT)
-	App->player->score += enemy->killscore;
+		App->player->score += enemy->killscore;
 
 	if (col->type == COLLIDER_PLAYER2_SHOT)
 		App->player2->score += enemy->killscore;

@@ -20,7 +20,6 @@
 
 ModuleVillageScene::ModuleVillageScene()
 {
-
 	background1.h = 5632;
 	background1.w = 544;
 	background1.x= 0;
@@ -31,11 +30,11 @@ ModuleVillageScene::ModuleVillageScene()
 	background2.x = 0;
 	background2.y = 0;
 
-
 	npi.h = 5;
 	npi.w = 1000;
 	npi.x = 0;
 	npi.y = -10;
+
 
 	train_back.PushBack({ 9, 801, 75, 187 });
 	train_back.PushBack({ 116, 801, 75, 187 });
@@ -55,7 +54,6 @@ ModuleVillageScene::ModuleVillageScene()
 	train_front.PushBack({ 865,241, 88, 296 });
 
 	train_front.speed = 0.5f;
-
 
 
 }
@@ -95,6 +93,11 @@ bool ModuleVillageScene::Start()
 	graphics4 = App->textures->Load("assets/images/backgrounds/Village train background.png");
 	train = App->textures->Load("assets/images/train.png");
 
+
+	App->audio->audio = App->audio->Load("assets/bgm/village.ogg");
+	Mix_PlayMusic(App->audio->audio, -1);
+
+
 	App->collision->AddCollider(npi, COLLIDER_WALL);
 
 	//---ENEMIES---
@@ -114,16 +117,19 @@ bool ModuleVillageScene::Start()
 	App->enemies->AddEnemy(ENEMY_TYPES::ROTATINGTURRET, 39,-890, 0);
 	App->enemies->AddEnemy(ENEMY_TYPES::ROTATINGTURRET, 101, -890, 0);
 
-	//---Three moving right
+	//---Three moving down
 
-	App->enemies->AddEnemy(ENEMY_TYPES::ROTATINGTURRET, 133, -840, 1);
-	App->enemies->AddEnemy(ENEMY_TYPES::ROTATINGTURRET, 163, -840, 1);
-	App->enemies->AddEnemy(ENEMY_TYPES::ROTATINGTURRET, 193, -840, 1);
+	App->enemies->AddEnemy(ENEMY_TYPES::ROTATINGTURRET, 137, -890, 1);
+	App->enemies->AddEnemy(ENEMY_TYPES::ROTATINGTURRET, 173, -890, 1);
+	App->enemies->AddEnemy(ENEMY_TYPES::ROTATINGTURRET, 209, -890, 1);
 
 	//---Three moving down---
-	App->enemies->AddEnemy(ENEMY_TYPES::ROTATINGTURRET, -30, -820, 2);
-	App->enemies->AddEnemy(ENEMY_TYPES::ROTATINGTURRET, -60, -820, 2);
-	App->enemies->AddEnemy(ENEMY_TYPES::ROTATINGTURRET, -90, -820, 2);
+	App->enemies->AddEnemy(ENEMY_TYPES::ROTATINGTURRET, -30, -840, 2);
+	App->enemies->AddEnemy(ENEMY_TYPES::ROTATINGTURRET, -60, -840, 2);
+	App->enemies->AddEnemy(ENEMY_TYPES::ROTATINGTURRET, -90, -840, 2);
+
+	//--Adding Green Robot--
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENROBOT, 73, -90, 0);
 
 	//--Adding Window Guns--
 	App->enemies->AddEnemy(ENEMY_TYPES::WINDOWGUN, 26, -122, 0);
@@ -140,7 +146,10 @@ bool ModuleVillageScene::Start()
 	App->enemies->AddEnemy(ENEMY_TYPES::FOURCANNONTURRET, 160, -520, 0);
 	App->enemies->AddEnemy(ENEMY_TYPES::FOURCANNONTURRET, 160, -580, 0);
 	App->enemies->AddEnemy(ENEMY_TYPES::FOURCANNONTURRET, 160, -460, 0);
-
+	
+	//--Adding Flying Gunners--
+	//App->enemies->AddEnemy(ENEMY_TYPES::FLYINGGUNNER, 160, -520, 0);
+	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGGUNNER, 160, -460, 0);
 
 	return true;
 }
@@ -176,6 +185,7 @@ update_status ModuleVillageScene::Update()
 			train_speedy = 0.4f;
 			train_speedx = 0.0f;
 		}
+
 		if (yflag >= -4350 && xflag < -129)
 		{
 			xflag += 0.66;
@@ -196,6 +206,8 @@ update_status ModuleVillageScene::Update()
 			if (SDL_GetTicks() > timer)
 			{
 				cinematic = true;
+				App->audio->audio = App->audio->Load("assets/bgm/trump.ogg");
+				Mix_PlayMusic(App->audio->audio, -1);
 			}
 		}
 
@@ -236,12 +248,29 @@ update_status ModuleVillageScene::Update()
 
 		
 
-	
+
+	App->render->Blit(graphics, xflag, yflag, &background1, 10.0f);
+
+	//BS to make the tank blit under the bridge v
+	if (tank_on)
+	{
+		App->render->Blit(App->enemies->sprites, tank_position.x, tank_position.y, &(tank_anim->GetCurrentFrame()));
+		if (tank_hp > 0)
+		{
+			App->render->Blit(App->enemies->sprites, tank_position.x + 10, tank_position.y + 13, &(tank_extra1->GetCurrentFrame()));
+			App->render->Blit(App->enemies->sprites, tank_position.x + 46, tank_position.y + 13, &(tank_extra2->GetCurrentFrame()));
+		}
+	}
+	tank_on = true;
+	//BS to make the tank blit under the bridge ^
+
+	App->render->Blit(graphics2, xflag, yflag, &background1, 10.0f);
+	App->render->Blit(graphics3, xflag, yflag-4000, &background2, 10.0f);
+
 	}
 
 	if (on_rails)
 	{
-
 		Side_scrolling();
 		if(yflag >= 3680)
 		{

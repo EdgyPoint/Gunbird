@@ -35,6 +35,13 @@ public:
 	Animation train_back;
 	Animation train_mid;
 	Animation train_front;
+
+	Animation* tank_anim;
+	Animation* tank_extra1;
+	Animation* tank_extra2;
+	fPoint tank_position;
+	bool tank_on = false;
+	float tank_hp;
 	float yflag;
 	float xflag;
 	int track_repeat;
