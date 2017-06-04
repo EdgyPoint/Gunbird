@@ -112,6 +112,7 @@ bool ModulePlayer::Start()
 	powerup_lv = 0;
 	lives = 2;
 	bombs = 2;
+	godmode = false;
 
 	graphics = App->textures->Load("assets/images/Marion.png");
 
@@ -134,6 +135,11 @@ bool ModulePlayer::Start()
 	bombdisplay.y = 15;
 	bombdisplay.w = 12;
 	bombdisplay.h = 15;
+
+	gmdisplay.x = 28;
+	gmdisplay.y = 12;
+	gmdisplay.w = 11;
+	gmdisplay.h = 16;
 
 	position.x = 51;
 	position.y = 320;
@@ -167,8 +173,8 @@ update_status ModulePlayer::Update()
 	{
 		powerup_lv++;
 		poweruping = false;
-		if (powerup_lv == MAX_LEVEL)
-			powerup_lv = MAX_LEVEL - 1;
+		if (powerup_lv > MAX_LEVEL)
+			powerup_lv = MAX_LEVEL;
 	}
 
 	int speed = 2;
@@ -210,7 +216,7 @@ update_status ModulePlayer::Update()
 
 
 	// Move left
-if ((App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT || SDL_GameControllerGetAxis(App->input->Controller, SDL_CONTROLLER_AXIS_LEFTX) < -13000) && !_dying && !respawning && !App->fade->fading)
+if ((App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT || SDL_GameControllerGetAxis(App->input->Controller1, SDL_CONTROLLER_AXIS_LEFTX) < -13000) && !_dying && !respawning && !App->fade->fading)
 	{
 		position.x -= speed;
 		if (position.x <= 0)
@@ -231,13 +237,14 @@ if ((App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT || SDL_GameCo
 			transition++;
 		}
 	}
+
 	// --------------------------
 
 
 	
 
 	// Move right
-if ((App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT || SDL_GameControllerGetAxis(App->input->Controller, SDL_CONTROLLER_AXIS_LEFTX) > 10000) && !_dying && !respawning && !App->fade->fading)
+if ((App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT || SDL_GameControllerGetAxis(App->input->Controller1, SDL_CONTROLLER_AXIS_LEFTX) > 10000) && !_dying && !respawning && !App->fade->fading)
 	{
 		position.x += speed;
 		if (position.x >= 196)
@@ -262,7 +269,7 @@ if ((App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT || SDL_GameCo
 	// --------------------------
 
 	// Move down
-	if ((App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT || SDL_GameControllerGetAxis(App->input->Controller, SDL_CONTROLLER_AXIS_LEFTY) > 10000) && !_dying && !respawning && !App->fade->fading)
+	if ((App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT || SDL_GameControllerGetAxis(App->input->Controller1, SDL_CONTROLLER_AXIS_LEFTY) > 10000) && !_dying && !respawning && !App->fade->fading)
 	{
 		position.y += speed;
 		if (position.y >= 288)
@@ -274,7 +281,7 @@ if ((App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT || SDL_GameCo
 	// --------------------------
 
 	// Move up
-	if ((App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT || SDL_GameControllerGetAxis(App->input->Controller, SDL_CONTROLLER_AXIS_LEFTY) < -13000) && !_dying && !respawning && !App->fade->fading)
+	if ((App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT || SDL_GameControllerGetAxis(App->input->Controller1, SDL_CONTROLLER_AXIS_LEFTY) < -13000) && !_dying && !respawning && !App->fade->fading)
 	{
 		position.y -= speed;
 		if (position.y <= 0)
@@ -287,19 +294,19 @@ if ((App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT || SDL_GameCo
 
 	// Charged shot
 		// Charge up
-	if ((App->input->keyboard[SDL_SCANCODE_C] == KEY_STATE::KEY_REPEAT || App->input->controller[SDL_CONTROLLER_BUTTON_A] == BUTTON_STATE::B_REPEAT) && !_dying && !respawning && !stunned && !App->fade->fading && charge_up < 110)
+	if ((App->input->keyboard[SDL_SCANCODE_C] == KEY_STATE::KEY_REPEAT || App->input->controller1[SDL_CONTROLLER_BUTTON_A] == BUTTON_STATE::B_REPEAT) && !_dying && !respawning && !stunned && !App->fade->fading && charge_up < 110)
 	{
 		charge_up++;
 	}
 		// Finishing charge
-	if ((App->input->keyboard[SDL_SCANCODE_C] == KEY_STATE::KEY_REPEAT || App->input->controller[SDL_CONTROLLER_BUTTON_A] == BUTTON_STATE::B_REPEAT) && !_dying && !respawning && !stunned && !App->fade->fading && charge_up == 110 && finishing_charge < 26)
+	if ((App->input->keyboard[SDL_SCANCODE_C] == KEY_STATE::KEY_REPEAT || App->input->controller1[SDL_CONTROLLER_BUTTON_A] == BUTTON_STATE::B_REPEAT) && !_dying && !respawning && !stunned && !App->fade->fading && charge_up == 110 && finishing_charge < 26)
 	{
 		finishing_charge++;
 	}
 	if (time_since_last_charged < 100)
 	time_since_last_charged++;
 		// Release
-	if ((App->input->keyboard[SDL_SCANCODE_C] == KEY_STATE::KEY_UP || App->input->controller[SDL_CONTROLLER_BUTTON_A] == BUTTON_STATE::B_UP) && !_dying && !respawning && !stunned && !App->fade->fading)
+	if ((App->input->keyboard[SDL_SCANCODE_C] == KEY_STATE::KEY_UP || App->input->controller1[SDL_CONTROLLER_BUTTON_A] == BUTTON_STATE::B_UP) && !_dying && !respawning && !stunned && !App->fade->fading)
 	{
 		if (charge_up == 110)
 		{
@@ -315,7 +322,7 @@ if ((App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT || SDL_GameCo
 	}
 
 	// Shoot
-	if ((App->input->keyboard[SDL_SCANCODE_C] == KEY_STATE::KEY_DOWN || App->input->controller[SDL_CONTROLLER_BUTTON_A] ==BUTTON_STATE::B_DOWN) && !_dying && !respawning && !stunned && !App->fade->fading)
+	if ((App->input->keyboard[SDL_SCANCODE_C] == KEY_STATE::KEY_DOWN || App->input->controller1[SDL_CONTROLLER_BUTTON_A] ==BUTTON_STATE::B_DOWN) && !_dying && !respawning && !stunned && !App->fade->fading)
 	{
 		if (!shooting)
 		{
@@ -420,10 +427,14 @@ if ((App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT || SDL_GameCo
 
 	else if ((App->input->keyboard[SDL_SCANCODE_F5] == KEY_STATE::KEY_DOWN) && !App->fade->fading)
 	{
-		if (powerup_lv != MAX_LEVEL)
 			powerup_lv++;
-		if (App->player2->powerup_lv != MAX_LEVEL)
+			if (powerup_lv > MAX_LEVEL)
+				powerup_lv = MAX_LEVEL;
+			
 			App->player2->powerup_lv++;
+			if (App->player2->powerup_lv > MAX_LEVEL)
+				App->player2->powerup_lv = MAX_LEVEL;
+			
 
 		App->audio->sfx = App->audio->LoadSFX("assets/SFX/marionpowerup.wav");
 		Mix_PlayChannel(-1, App->audio->sfx, 0);
@@ -591,8 +602,11 @@ if ((App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT || SDL_GameCo
 	//Blit UI
 	App->render->Blit(ui, 5, 6, &p1display, 0, true);
 
+	if (godmode == true)
+		App->render->Blit(ui, 6, 282, &gmdisplay, 0, true);
+
 	if (lives == 1)
-	App->render->Blit(ui, 5, 21, &lifedisplay, 0, true);
+		App->render->Blit(ui, 5, 21, &lifedisplay, 0, true);
 	 
 	if (lives == 2)
 	{
@@ -695,6 +709,8 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 
 		lives -= 1;
 		_dying = true;
+
+		powerup_lv = 0;
 		
 		App->collision->EditMatrix(COLLIDER_PLAYER, COLLIDER_ENEMY_F, false);
 		App->collision->EditMatrix(COLLIDER_PLAYER, COLLIDER_ENEMY_SHOT, false);
@@ -724,10 +740,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 		App->particles->AddParticle(App->particles->playercollision, position.x, position.y, COLLIDER_NONE);
 		current_animation = &tilting;
 
-		if (powerup_lv < 0)
-		{
-			powerup_lv = 0;
-		}
+		powerup_lv--;
 	}
 
 	if (c2->type == COLLIDER_POWERUP)

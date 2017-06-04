@@ -100,11 +100,6 @@ void Enemy::Draw(SDL_Texture* sprites, Enemy* enemy)
 
 void Enemy::OnCollision(Collider* collider, Enemy* enemy)
 {
-	// Omit collision when robot is under the bridge
-	if (enemy->is_robot == true && (enemy->position.y > 50 && enemy->position.y < 77))
-		return;
-	// ----------------
-
 	if (collider->type == COLLIDER_PLAYER_SHOT && App->player->powerup_lv == 0)
 			enemy->hp -= 1.0f;
 		else if (collider->type == COLLIDER_PLAYER2_SHOT && App->player2->powerup_lv == 0)

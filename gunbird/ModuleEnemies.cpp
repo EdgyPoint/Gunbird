@@ -38,7 +38,6 @@ ModuleEnemies::~ModuleEnemies()
 
 bool ModuleEnemies::Start()
 {
-	// Create a prototype for each enemy available so we can copy them around
 	sprites = App->textures->Load("assets/images/Enemies.png");
 
 	return true;
@@ -77,8 +76,6 @@ update_status ModuleEnemies::Update()
 
 	for (uint i = 0; i < MAX_ENEMIES; ++i)
 		if (enemies[i] != nullptr) enemies[i]->Shoot();
-
-
 
 	return UPDATE_CONTINUE;
 }

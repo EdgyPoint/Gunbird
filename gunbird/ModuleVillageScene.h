@@ -30,7 +30,7 @@ public:
 	SDL_Texture* train = nullptr;
 	SDL_Rect background1;
 	SDL_Rect background2;
-	SDL_Rect offscreen_wall;
+	SDL_Rect offscreen_wall_down, offscreen_wall_up, offscreen_wall_left, offscreen_wall_right;
 
 	Animation train_back;
 	Animation train_mid;
@@ -62,6 +62,13 @@ public:
 	float train_x;
 	float train_speedy;
 	float train_speedx;
+	bool back_eliminated;
+	bool mid_eliminated;
+	bool front_eliminated;
+	bool retardation_needed;
+	bool retard_finished;
+	bool timer_on;
+	int ticks;
 
 };
 

@@ -7,7 +7,7 @@
 #include "p2Point.h"
 #include "ModuleCollision.h"
 
-#define MAX_LEVEL 4
+#define MAX_LEVEL 3
 #define MARION_RELOAD 90
 
 struct SDL_Texture;
@@ -34,6 +34,7 @@ public:
 	SDL_Rect p1display;
 	SDL_Rect lifedisplay;
 	SDL_Rect bombdisplay;
+	SDL_Rect gmdisplay;
 	Collider* player_col = nullptr;
 	Animation* current_animation = nullptr;
 	Animation idle;
