@@ -391,13 +391,15 @@ update_status ModulePlayer2::Update()
 	{
 		invincibilitycounter++;
 		if (invincibilitycounter == 120)
-		{
-			App->collision->EditMatrix(COLLIDER_PLAYER2, COLLIDER_ENEMY, true);
-			App->collision->EditMatrix(COLLIDER_PLAYER2, COLLIDER_ENEMY_SHOT, true);
-			App->collision->EditMatrix(COLLIDER_ENEMY, COLLIDER_PLAYER2, true);
-			App->collision->EditMatrix(COLLIDER_ENEMY_SHOT, COLLIDER_PLAYER2, true);
-			invincibilitycounter = 0;
-		}
+			{
+				App->collision->EditMatrix(COLLIDER_PLAYER, COLLIDER_ENEMY_F, true);
+				App->collision->EditMatrix(COLLIDER_PLAYER, COLLIDER_ENEMY_SHOT, true);
+				App->collision->EditMatrix(COLLIDER_ENEMY_F, COLLIDER_PLAYER, true);
+				App->collision->EditMatrix(COLLIDER_ENEMY_SHOT, COLLIDER_PLAYER, true);
+
+				temp_invincibility = false;
+				invincibilitycounter = 0;
+			}
 	}
 
 	//Leave particles behind (yay! magic sparks)
