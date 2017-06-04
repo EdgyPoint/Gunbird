@@ -628,7 +628,7 @@ void Enemy_RotatingTurret::Special_animation()
 }
 void Enemy_RotatingTurret::Shoot()
 {
-	if (position.y > 0 && position.y < SCREEN_HEIGHT && reloadd == 0)
+	if (position.y > 0 && position.y < SCREEN_HEIGHT && reloadd == 0 && anim_type != DEAD)
 	{
 		bullet_speed = ShootCalculator({ position.x + 5, position.y + 10 }, { App->player->position.x, App->player->position.y });
 		App->particles->AddParticle(App->particles->smallshot, position.x + 5, position.y + 10, COLLIDER_ENEMY_SHOT, bullet_speed.x/1.5, bullet_speed.y/1.5);

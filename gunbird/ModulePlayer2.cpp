@@ -151,8 +151,8 @@ update_status ModulePlayer2::Update()
 	{
 		powerup_lv++;
 		poweruping = false;
-		if (powerup_lv == MAX_LEVEL)
-			powerup_lv = MAX_LEVEL - 1;
+		if (powerup_lv > MAX_LEVEL)
+			powerup_lv = MAX_LEVEL;
 	}
 
 	int speed = 2;
@@ -496,10 +496,36 @@ void ModulePlayer2::shootburst(int level)
 	switch (level)
 	{
 	case 0:
-		App->particles->AddParticle(App->particles->marionbeam_lv1[beam++], position.x + 11, position.y - 25, COLLIDER_PLAYER_SHOT);
+		App->particles->AddParticle(App->particles->marionbeam_lv1[beam++], position.x + 11, position.y, COLLIDER_PLAYER_SHOT);
 		break;
 	case 1:
-		App->particles->AddParticle(App->particles->marionbeam_lv2[beam++], position.x + 7, position.y - 25, COLLIDER_PLAYER_SHOT);
+		App->particles->AddParticle(App->particles->marionbeam_lv2[beam++], position.x + 6, position.y, COLLIDER_PLAYER_SHOT);
+		break;
+	case 2:
+		App->particles->AddParticle(App->particles->marionbeam_lv1[beam], position.x + 11, position.y, COLLIDER_PLAYER_SHOT);
+		App->particles->AddParticle(App->particles->marionbeamleft_lv1[beam], position.x + 9, position.y, COLLIDER_PLAYER_SHOT, -1.75f);
+		App->particles->AddParticle(App->particles->marionbeamright_lv1[beam++], position.x + 14, position.y, COLLIDER_PLAYER_SHOT, 1.75f);
+		if (counter == 0)
+		{
+			counter = 1;
+			App->particles->AddParticle(App->particles->star, position.x + 14, position.y, COLLIDER_PLAYER_SHOT, 0, true, NONE, false);
+			App->particles->AddParticle(App->particles->star, position.x - 1, position.y, COLLIDER_PLAYER_SHOT, 0, true, NONE, false);
+		}
+		break;
+	case 3:
+		App->particles->AddParticle(App->particles->marionbeam_lv2[beam], position.x + 6, position.y, COLLIDER_PLAYER_SHOT);
+		App->particles->AddParticle(App->particles->marionbeamleft_lv2[beam], position.x + 3, position.y, COLLIDER_PLAYER_SHOT, -1.75f);
+		App->particles->AddParticle(App->particles->marionbeamright_lv2[beam++], position.x + 10, position.y, COLLIDER_PLAYER_SHOT, 1.75f);
+		if (counter == 0)
+		{
+			if (burst_counter != 3)
+			{
+				App->particles->AddParticle(App->particles->star, position.x + 14, position.y, COLLIDER_PLAYER_SHOT, 0, true, NONE, false);
+				App->particles->AddParticle(App->particles->star, position.x - 1, position.y, COLLIDER_PLAYER_SHOT, 0, true, NONE, false);
+			}
+			else
+				counter = 1;
+		}
 		break;
 	}
 
@@ -512,6 +538,7 @@ void ModulePlayer2::shootburst(int level)
 		shooting = false;
 	}
 }
+
 
 void ModulePlayer2::OnCollision(Collider* c1, Collider* c2)
 {

@@ -48,7 +48,10 @@ Enemy_TrumpThird::Enemy_TrumpThird(int x, int y, int option) : Enemy(x, y, optio
 	original_pos.x = x;
 	original_pos.y = y;
 
+
 	hp = 106.0f;
+	if (hp <= 0)	{ App->scene_village->ending = true; }
+
 	damaged_hp = 7;
 	death_type = SMALL_ENEMY;
 	anim_type = ATTACKING;

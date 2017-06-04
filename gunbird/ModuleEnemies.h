@@ -14,7 +14,7 @@
 #include "Enemy_4CannonTurret.h"
 
 
-#define MAX_ENEMIES 100
+#define MAX_ENEMIES 200
 #define STAR_SPEED 2
 
 
