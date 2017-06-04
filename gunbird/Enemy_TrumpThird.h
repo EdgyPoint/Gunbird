@@ -23,6 +23,7 @@ public:
 	void Shoot();
 	int straight_shot[3];
 	float aux_float;
+	bool discount;
 	fPoint speed;
 };
 #endif

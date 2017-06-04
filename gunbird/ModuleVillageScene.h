@@ -69,6 +69,8 @@ public:
 	bool retard_finished;
 	bool timer_on;
 	int ticks;
+	bool notrump;
+	int trumpcounter;
 
 };
 

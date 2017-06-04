@@ -271,15 +271,17 @@ void ModuleEnemies::SpawnEnemy(const EnemyInfo& info)
 		case ENEMY_TYPES::GREENROBOT:
 			enemies[i] = new Enemy_GreenRobot(info.x, info.y, info.pathoption);
 			break; 
-		case ENEMY_TYPES::TRUMPFIRST:
-			enemies[i] = new Enemy_TrumpFirst(info.x, info.y, info.pathoption);
+		case ENEMY_TYPES::TRUMPTHIRD:
+			enemies[i] = new Enemy_TrumpThird(info.x, info.y, info.pathoption);
 			break;
 		case ENEMY_TYPES::TRUMPSECOND:
 			enemies[i] = new Enemy_TrumpSecond(info.x, info.y, info.pathoption);
 			break;
-		case ENEMY_TYPES::TRUMPTHIRD:
-			enemies[i] = new Enemy_TrumpThird(info.x, info.y, info.pathoption);
+		case ENEMY_TYPES::TRUMPFIRST:
+			enemies[i] = new Enemy_TrumpFirst(info.x, info.y, info.pathoption);
 			break;
+	
+
 		}
 	}
 }

@@ -93,7 +93,7 @@ bool ModuleVillageScene::Start()
 	mid_train_y = -730 + 261;
 	front_train_y = -730;
 	train_x = -183;
-	
+	trumpcounter = 3;
 	
 	cinematic = false;
 	timerup = false;
@@ -107,6 +107,7 @@ bool ModuleVillageScene::Start()
 	retardation_needed = false;
 	retard_finished = false;
 	timer_on = false;
+	notrump = true;
 
 	graphics = App->textures->Load("assets/images/backgrounds/Village lower background.png");
 	graphics2 = App->textures->Load("assets/images/backgrounds/Village upper background.png");
@@ -217,6 +218,7 @@ bool ModuleVillageScene::Start()
 	//--Adding Turretcopters--
 	App->enemies->AddEnemy(ENEMY_TYPES::TURRETCOPTER, 70, -1400, 0);
 	
+	App->enemies->AddEnemy(ENEMY_TYPES::TRUMPFIRST, 0, 0, 0);
 	return true;
 }
 
@@ -244,6 +246,7 @@ bool ModuleVillageScene::CleanUp()
 // Update: draw background
 update_status ModuleVillageScene::Update()
 {
+	
 	if (!on_rails)
 	{
 		if (yflag <= -4350)
@@ -327,9 +330,18 @@ update_status ModuleVillageScene::Update()
 			on_rails = true;
 			yflag = -3680;
 		}
+		if (speed >= 5.0 && notrump)
+		{
+			App->enemies->AddEnemy(ENEMY_TYPES::TRUMPSECOND, -100, -100, 0);
+			App->enemies->AddEnemy(ENEMY_TYPES::TRUMPFIRST, 0, 0, 0);
+			App->enemies->AddEnemy(ENEMY_TYPES::TRUMPTHIRD, -100, -100, 0);
+
+			notrump = false;
+		}
 
 		if (speed >= 10.0)
 		{
+			
 			Side_scrolling();
 			scrolling == true;
 		}
@@ -393,6 +405,8 @@ update_status ModuleVillageScene::Update()
 		}
 	}
 	tank_on = true;
+
+	
 	//BS to make the tank blit under the bridge ^
 	App->render->Blit(graphics2, xflag, yflag, &background1, 10.0f);
 	App->render->Blit(graphics3, xflag, yflag - 4000, &background2, 10.0f);

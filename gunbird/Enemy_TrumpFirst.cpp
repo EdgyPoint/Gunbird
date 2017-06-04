@@ -3,6 +3,7 @@
 #include "ModuleParticles.h"
 #include "Enemy_TrumpFirst.h"
 #include "ModulePlayer.h"
+#include "ModuleVillageScene.h"
 #include "ModuleEnemies.h"
 #include "ModuleCollision.h"
 #include "SDL/include/SDL_timer.h"
@@ -40,7 +41,7 @@ Enemy_TrumpFirst::Enemy_TrumpFirst(int x, int y, int option) : Enemy(x, y, optio
 
 	collider = App->collision->AddCollider({ 0, 0, 60, 60 }, COLLIDER_TYPE::COLLIDER_ENEMY, (Module*)App->enemies);
 
-	path.PushBack({ 0.0f, 0.0f }, 10000);
+ 
 
 
 
@@ -48,23 +49,28 @@ Enemy_TrumpFirst::Enemy_TrumpFirst(int x, int y, int option) : Enemy(x, y, optio
 	original_pos.x = x;
 	original_pos.y = y;
 
-	hp = 10.0f;
+	hp = 106.0f;
 	damaged_hp = 7;
 	death_type = SMALL_ENEMY;
-	anim_type = STAND;
+	anim_type = ATTACKING;
 	flying = false;
 	killscore = 200;
-	to_draw = false;
+	discount = false;
+
 }
 
 void Enemy_TrumpFirst::Move()
 {
-	position = original_pos + path.GetCurrentPosition();
 
-	if (position.y > 0 && position.y < 100 && anim_type != DEAD) anim_type = ATTACKING;
-	else if (anim_type != DEAD)
-		anim_type = STAND;
+	position.x = App->scene_village->train_x + 15;
+	position.y = App->scene_village->back_train_y + 100;
 
+	
+	if (hp <= 5 && !discount)
+	{
+		discount = true;
+		App->scene_village->trumpcounter--;
+	}
 
 	if (anim_type == STAND)
 	{
@@ -104,7 +110,7 @@ void Enemy_TrumpFirst::Move()
 
 void Enemy_TrumpFirst::Shoot()
 {
-	if (anim_type == ATTACKING)
+	if (anim_type != DEAD && App->scene_village->trumpcounter == 3)
 	{
 		if (reload == 0)
 		{
