@@ -1,10 +1,10 @@
-#ifndef __ENEMY_TRUMPFIRST__
-#define __ENEMY_TRUMPFIRST__
+#ifndef __ENEMY_TRUMPSECOND__
+#define __ENEMY_TRUMPSECOND__
 
 #include "Enemy.h"
 #include "Path.h"
 
-class Enemy_TrumpFirst : public Enemy
+class Enemy_TrumpSecond : public Enemy
 {
 private:
 
@@ -18,7 +18,7 @@ private:
 	Path path;
 	int counter = 0;
 public:
-	Enemy_TrumpFirst(int x, int y, int option);
+	Enemy_TrumpSecond(int x, int y, int option);
 	void Move();
 	void Shoot();
 	int straight_shot[3];

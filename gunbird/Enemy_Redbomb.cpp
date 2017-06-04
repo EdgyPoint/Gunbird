@@ -100,6 +100,56 @@ Enemy_Redbomb :: Enemy_Redbomb(int x, int y, int option) : Enemy(x, y, option)
 		path.PushBack({ 0.0f, 3.0f }, 100000);
 	}
 
+	if (option == 11)
+	{
+		path.PushBack({ 0.0f, 0.4f }, 2200);
+		path.PushBack({ 0.0f, 2.0f }, 10000);
+	}
+
+	if (option == 12)
+	{
+		path.PushBack({ 0.0f, 0.4f }, 660);
+		path.PushBack({ 0.0f, 2.0f }, 50);
+		path.PushBack({-0.5f, 2.0f }, 2);
+		path.PushBack({ -0.6f, 1.9f }, 2);
+		path.PushBack({ -0.7f, 1.8f }, 2);
+		path.PushBack({ -0.8f, 1.7f }, 2);
+		path.PushBack({ -0.9f, 1.6f }, 2);
+		path.PushBack({ -1.0f, 1.5f }, 2);
+		path.PushBack({ -1.1f, 1.4f }, 2);
+		path.PushBack({ -1.2f, 1.3f }, 2);
+		path.PushBack({ -1.3f, 1.2f }, 2);
+		path.PushBack({ -1.4f, 1.1f }, 2);
+		path.PushBack({ -1.5f, 1.0f }, 20000);
+		//path.PushBack({ -1.6f, 2.0f }, 2);
+	//	path.PushBack({ -1.7f, 2.0f }, 2);
+	//	path.PushBack({ -1.8f, 2.0f }, 2);
+	//	path.PushBack({ -1.9f, 2.0f }, 2);
+	//	path.PushBack({ -2.0f, 2.0f }, 200000);
+	}
+
+	if (option == 13)
+	{
+		path.PushBack({ 0.0f, 0.4f }, 660);
+		path.PushBack({ 0.0f, 2.0f }, 50);
+		path.PushBack({ 0.5f, 2.0f }, 2);
+		path.PushBack({ 0.6f, 1.9f }, 2);
+		path.PushBack({ 0.7f, 1.8f }, 2);
+		path.PushBack({ 0.8f, 1.7f }, 2);
+		path.PushBack({ 0.9f, 1.6f }, 2);
+		path.PushBack({ 1.0f, 1.5f }, 2);
+		path.PushBack({ 1.1f, 1.4f }, 2);
+		path.PushBack({ 1.2f, 1.3f }, 2);
+		path.PushBack({ 1.3f, 1.2f }, 2);
+		path.PushBack({ 1.4f, 1.1f }, 2);
+		path.PushBack({ 1.5f, 1.0f }, 2000);
+	//	path.PushBack({ 1.6f, 2.0f }, 20000);
+		//path.PushBack({ 1.7f, 2.0f }, 2);
+		//.PushBack({ 1.8f, 2.0f }, 2);
+		//path.PushBack({ 1.9f, 2.0f }, 2);
+		//path.PushBack({ 2.0f, 2.0f }, 200000);
+	}
+
 	collider = App->collision->AddCollider({ 0, 0,  28, 32 }, COLLIDER_TYPE::COLLIDER_ENEMY_F, (Module*)App->enemies);
 
 	original_pos.x = x;

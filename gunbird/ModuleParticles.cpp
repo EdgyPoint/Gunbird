@@ -688,6 +688,9 @@ bool Particle::Update()
 	position.y += speed.y;
 	
 
+	if (position.x > SCREEN_WIDTH || position.x < 0 || position.y > SCREEN_HEIGHT || position.y < 0)
+		life = 0;
+
 	if (itemtype == ITEM_POWERUP || itemtype == ITEM_BOMB)
 
 	{
