@@ -16,15 +16,16 @@ Here's a brief gameplay video of EdgyPoint's Gunbird tribute.
 
 ## EdgyPoint Development team
 ![](http://i.imgur.com/HZRrTIy.jpg)
-Github: 
+Github (from left to right): 
+
+[Witiza](https://github.com/Witiza)
+
+[Dynamiczero99](https://github.com/dynamiczero99)
 
 [Kistofe](https://github.com/kistofe)
 
 [Farmak09](https://github.com/Farmak09)
 
-[Dynamiczero99](https://github.com/dynamiczero99)
-
-[Witiza](https://github.com/Witiza)
 
 ## Game Controls
 The game can be played with keyboard or with Game Controller (taking XBOX 360/ONE controller as reference)
