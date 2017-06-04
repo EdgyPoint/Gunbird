@@ -18,6 +18,7 @@
 #include "Enemy_2CannonTurret.h"
 #include "Enemy_4CannonTurret.h"
 #include "Enemy_FlyingGunner.h"
+#include "Enemy_FirstTrump.h"
 
 
 #define SPAWN_MARGIN 500
@@ -187,6 +188,9 @@ void ModuleEnemies::SpawnEnemy(const EnemyInfo& info)
 			break;
 		case ENEMY_TYPES::GREENROBOT:
 			enemies[i] = new Enemy_GreenRobot(info.x, info.y, info.pathoption);
+			break; 
+		case ENEMY_TYPES::FIRSTTRUMP:
+			enemies[i] = new Enemy_FirstTrump(info.x, info.y, info.pathoption);
 			break;
 		}
 	}

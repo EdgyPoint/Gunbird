@@ -251,18 +251,7 @@ update_status ModuleVillageScene::Update()
 
 	App->render->Blit(graphics, xflag, yflag, &background1, 10.0f);
 
-	//BS to make the tank blit under the bridge v
-	if (tank_on)
-	{
-		App->render->Blit(App->enemies->sprites, tank_position.x, tank_position.y, &(tank_anim->GetCurrentFrame()));
-		if (tank_hp > 0)
-		{
-			App->render->Blit(App->enemies->sprites, tank_position.x + 10, tank_position.y + 13, &(tank_extra1->GetCurrentFrame()));
-			App->render->Blit(App->enemies->sprites, tank_position.x + 46, tank_position.y + 13, &(tank_extra2->GetCurrentFrame()));
-		}
-	}
-	tank_on = true;
-	//BS to make the tank blit under the bridge ^
+	
 
 	App->render->Blit(graphics2, xflag, yflag, &background1, 10.0f);
 	App->render->Blit(graphics3, xflag, yflag-4000, &background2, 10.0f);
@@ -300,6 +289,18 @@ update_status ModuleVillageScene::Update()
 		App->fade->FadeToBlack(this, App->scene_intro, 2.0f);
 	}
 	App->render->Blit(graphics, xflag, yflag, &background1, 10.0f);
+	//BS to make the tank blit under the bridge v
+	if (tank_on && tank_inScreen)
+	{
+		App->render->Blit(App->enemies->sprites, tank_position.x, tank_position.y, &(tank_anim->GetCurrentFrame()));
+		if (tank_hp > 0)
+		{
+			App->render->Blit(App->enemies->sprites, tank_position.x + 10, tank_position.y + 13, &(tank_extra1->GetCurrentFrame()));
+			App->render->Blit(App->enemies->sprites, tank_position.x + 46, tank_position.y + 13, &(tank_extra2->GetCurrentFrame()));
+		}
+	}
+	tank_on = true;
+	//BS to make the tank blit under the bridge ^
 	App->render->Blit(graphics2, xflag, yflag, &background1, 10.0f);
 	App->render->Blit(graphics3, xflag, yflag - 4000, &background2, 10.0f);
 	App->render->Blit(train, train_x += train_speedx, front_train_y += train_speedy, &(train_front.GetCurrentFrame()), 10.0f);

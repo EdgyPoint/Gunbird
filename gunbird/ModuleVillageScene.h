@@ -40,7 +40,8 @@ public:
 	Animation* tank_extra1;
 	Animation* tank_extra2;
 	fPoint tank_position;
-	bool tank_on = false;
+	bool tank_on = false; 
+	bool tank_inScreen = true;
 	float tank_hp;
 	float yflag;
 	float xflag;

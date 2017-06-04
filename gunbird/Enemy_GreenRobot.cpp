@@ -152,6 +152,12 @@ void Enemy_GreenRobot::Move()
 	App->scene_village->tank_position.x = position.x;
 	App->scene_village->tank_position.y = position.y;
 
+	if (position.y > SCREEN_HEIGHT)
+	{
+		App->scene_village->tank_inScreen = false;
+	}
+
+
 	counter++;
 	if (counter == 20)
 		counter = 0;
@@ -630,22 +636,25 @@ void Enemy_GreenRobot::Move()
 
 void Enemy_GreenRobot::Shoot()
 {
-	if (SDL_GetTicks() >= straight_shot[0] && (position.y < 50 || position.y > 77) && path.steps[1].active)
+	if (anim_type != DEAD)
 	{
-		speed = ShootCalculator({ position.x + 9, position.y + 13 }, { App->player->position.x - 25, App->player->position.y });
-		
-		App->particles->AddParticle(App->particles->smallshot, position.x + 8, position.y + 13, COLLIDER_ENEMY_SHOT, speed.x, speed.y);
-		App->particles->AddParticle(App->particles->smallshot, position.x + 48, position.y + 13, COLLIDER_ENEMY_SHOT, speed.x, speed.y);
+		if (SDL_GetTicks() >= straight_shot[0] && (position.y < 50 || position.y > 77) && path.steps[1].active)
+		{
+			speed = ShootCalculator({ position.x + 9, position.y + 13 }, { App->player->position.x - 25, App->player->position.y });
 
-		straight_shot[0] = SDL_GetTicks() + 3000;
-		straight_shot[1] = SDL_GetTicks() + 100;
-	}
+			App->particles->AddParticle(App->particles->smallshot, position.x + 8, position.y + 13, COLLIDER_ENEMY_SHOT, speed.x, speed.y);
+			App->particles->AddParticle(App->particles->smallshot, position.x + 48, position.y + 13, COLLIDER_ENEMY_SHOT, speed.x, speed.y);
 
-	if (SDL_GetTicks() >= straight_shot[1] && (position.y < 50 || position.y > 77) && position.y > -200 && path.steps[1].active)
-	{
-		App->particles->AddParticle(App->particles->smallshot, position.x + 8, position.y + 13, COLLIDER_ENEMY_SHOT, speed.x, speed.y);
-		App->particles->AddParticle(App->particles->smallshot, position.x + 48, position.y + 13, COLLIDER_ENEMY_SHOT, speed.x, speed.y);
+			straight_shot[0] = SDL_GetTicks() + 3000;
+			straight_shot[1] = SDL_GetTicks() + 100;
+		}
 
-		straight_shot[1] = SDL_GetTicks() + 2900;
+		if (SDL_GetTicks() >= straight_shot[1] && (position.y < 50 || position.y > 77) && position.y > -200 && path.steps[1].active)
+		{
+			App->particles->AddParticle(App->particles->smallshot, position.x + 8, position.y + 13, COLLIDER_ENEMY_SHOT, speed.x, speed.y);
+			App->particles->AddParticle(App->particles->smallshot, position.x + 48, position.y + 13, COLLIDER_ENEMY_SHOT, speed.x, speed.y);
+
+			straight_shot[1] = SDL_GetTicks() + 2900;
+		}
 	}
 }
