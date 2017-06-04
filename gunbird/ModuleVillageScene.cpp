@@ -93,7 +93,7 @@ bool ModuleVillageScene::Start()
 	back_train_y = -730 + 488;
 	mid_train_y = -730 + 261;
 	front_train_y = -730;
-	train_x = -187;
+	train_x = -183;
 	
 	
 	cinematic = false;
@@ -390,15 +390,20 @@ void ModuleVillageScene::Side_scrolling()
 		ticks = SDL_GetTicks();
 		if (!timer_on)
 		{
-			timer2 = SDL_GetTicks() + 10000;
+			timer2 = SDL_GetTicks() + 800;
 			timer_on = true;
-			train_speedy = 5.0;
+		}
+		if (ticks < timer2)
+		{
+			back_train_y += 5.0;
+			mid_train_y += 5.0;
+			front_train_y += 5.0;
 		}
 		if (ticks > timer2)
 		{
 			retard_finished = false;
 			timer_on = false;
-			train_speedy = 10.0;
+
 		}
 	}
 	if (going_left && !scroll_timer)
