@@ -20,11 +20,15 @@ WASD - Move character
 
 C - Shoot
 
+V - Bomb
+
 ### Player 2
 
 Arrow Keys - Move character
 
-O - Shoot
+Numpad 0 - Shoot
+
+Numpad 1 - Bomb
 
 ### Other
 
@@ -36,9 +40,17 @@ F3 - Automatic win
 
 F4 - Automatic lose
 
-F5 - Player 2 start
+F5 - Add a powerup
+
+F6 - Add a bomb.
+
+Numpad Intro - Player 2 start
 
 # History
+
+6/4/2017 - Final version 1.0 released.
+
+5/26/2017 - v0.5 released.
 
 5/17/2017 - v0.4.5 released.
 
