@@ -119,6 +119,11 @@ bool ModulePlayer2::Start()
 	lifedisplay.w = 13;
 	lifedisplay.h = 13;
 
+	bombdisplay.x = 15;
+	bombdisplay.y = 15;
+	bombdisplay.w = 12;
+	bombdisplay.h = 15;
+
 	position.x = 141;
 	position.y = 320;
 
@@ -218,7 +223,6 @@ update_status ModulePlayer2::Update()
 	}
 
 	// Charged shot
-<<<<<<< HEAD
 		// Charge up
 	if ((App->input->keyboard[SDL_SCANCODE_KP_0] == KEY_STATE::KEY_REPEAT || App->input->controller2[SDL_CONTROLLER_BUTTON_A] == BUTTON_STATE::B_REPEAT) && !_dying && !respawning && !stunned && !App->fade->fading && charge_up < 110)
 	{
@@ -233,20 +237,6 @@ update_status ModulePlayer2::Update()
 		time_since_last_charged++;
 		// Release
 	if ((App->input->keyboard[SDL_SCANCODE_KP_0] == KEY_STATE::KEY_UP || App->input->controller2[SDL_CONTROLLER_BUTTON_A] == BUTTON_STATE::B_UP) && !_dying && !respawning && !stunned && !App->fade->fading)
-=======
-	// Charge up
-	if ((App->input->keyboard[SDL_SCANCODE_C] == KEY_STATE::KEY_REPEAT || App->input->controller2[SDL_CONTROLLER_BUTTON_A] == BUTTON_STATE::B_REPEAT) && !_dying && !respawning && !stunned && !App->fade->fading && charge_up < 110)
-	{
-		charge_up++;
-	}
-	// Finishing charge
-	if ((App->input->keyboard[SDL_SCANCODE_C] == KEY_STATE::KEY_REPEAT || App->input->controller2[SDL_CONTROLLER_BUTTON_A] == BUTTON_STATE::B_REPEAT) && !_dying && !respawning && !stunned && !App->fade->fading && charge_up == 110 && finishing_charge < 26)
-	{
-		finishing_charge++;
-	}
-	// Release
-	if ((App->input->keyboard[SDL_SCANCODE_C] == KEY_STATE::KEY_UP || App->input->controller2[SDL_CONTROLLER_BUTTON_A] == BUTTON_STATE::B_UP) && !_dying && !respawning && !stunned && !App->fade->fading)
->>>>>>> origin/master
 	{
 		if (charge_up == 110)
 		{
@@ -260,7 +250,6 @@ update_status ModulePlayer2::Update()
 		charge_up = 0;
 		finishing_charge = 0;
 	}
-	// --------------------------
 
 	if (App->input->keyboard[SDL_SCANCODE_KP_0] == KEY_STATE::KEY_DOWN && !_dying && !respawning && !stunned && !App->fade->fading)
 
@@ -465,6 +454,29 @@ update_status ModulePlayer2::Update()
 			App->render->Blit(ui, 116, 21, &lifedisplay, 0, true);
 			App->render->Blit(ui, 132, 21, &lifedisplay, 0, true);
 		}
+		if (bombs == 1)
+			App->render->Blit(ui, 118, 300, &bombdisplay, 0, true);
+
+		if (bombs == 2)
+		{
+			App->render->Blit(ui, 118, 300, &bombdisplay, 0, true);
+			App->render->Blit(ui, 134, 300, &bombdisplay, 0, true);
+		}
+
+		if (bombs == 3)
+		{
+			App->render->Blit(ui, 118, 300, &bombdisplay, 0, true);
+			App->render->Blit(ui, 134, 300, &bombdisplay, 0, true);
+			App->render->Blit(ui, 150, 300, &bombdisplay, 0, true);
+		}
+
+		if (bombs == 4)
+		{
+			App->render->Blit(ui, 118, 300, &bombdisplay, 0, true);
+			App->render->Blit(ui, 134, 300, &bombdisplay, 0, true);
+			App->render->Blit(ui, 150, 300, &bombdisplay, 0, true);
+			App->render->Blit(ui, 166, 300, &bombdisplay, 0, true);
+		}
 
 		sprintf_s(text_score2, 10, "%7d", score);
 	}
@@ -516,7 +528,7 @@ void ModulePlayer2::OnCollision(Collider* c1, Collider* c2)
 		if (c1->type == COLLIDER_PLAYER2)
 		{
 
-			if (c2->type == COLLIDER_ENEMY_SHOT)
+			if (c2->type == COLLIDER_ENEMY_SHOT && App->player->godmode == false)
 			{
 				lives -= 1;
 				_dying = true;
@@ -538,7 +550,7 @@ void ModulePlayer2::OnCollision(Collider* c1, Collider* c2)
 				}
 			}
 
-			if (c2->type == COLLIDER_ENEMY_F && !stunned)
+			if (c2->type == COLLIDER_ENEMY_F && !stunned && App->player->godmode == false)
 			{
 				stunned = true;
 				powerup_lv--;

@@ -35,6 +35,7 @@ public:
 	SDL_Texture* ui = nullptr;
 	SDL_Rect p2display;
 	SDL_Rect lifedisplay;
+	SDL_Rect bombdisplay;
 	Collider* player_col = nullptr;
 	Animation* current_animation = nullptr;
 	Animation idle;
