@@ -169,6 +169,9 @@ bool ModulePlayer::CleanUp()
 // Update: draw background
 update_status ModulePlayer::Update()
 {
+	if (App->scene_village->ending)
+		position.y -= 3;
+
 	if (!shooting && poweruping)
 	{
 		powerup_lv++;

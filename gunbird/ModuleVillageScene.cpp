@@ -230,7 +230,9 @@ bool ModuleVillageScene::Start()
 bool ModuleVillageScene::CleanUp()
 {
 	LOG("Unloading village scene");
-	
+	ending = false;
+	tank_inScreen = true;
+	final_zone = false;
 	App->enemies->Disable();
 	App->particles->Disable();
 	App->collision->Disable();
@@ -251,6 +253,7 @@ bool ModuleVillageScene::CleanUp()
 // Update: draw background
 update_status ModuleVillageScene::Update()
 {
+	if (trumpcounter == 0) ending = true;
 
 	if (ending != true && final_zone && counter == 0)
 	{

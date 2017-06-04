@@ -119,11 +119,11 @@ void Enemy::OnCollision(Collider* collider, Enemy* enemy)
 		else if (collider->type == COLLIDER_BOMBSHOT && enemy->already_hit == false)
 			enemy->hp -= 10;
 		else if (collider->type == COLLIDER_CHARGEDSHOT && enemy->already_hit == false)
-			enemy->hp -= 5;
+			enemy->hp -= 12;
 		else if (collider->type == COLLIDER_BOMBSHOT2 && enemy->already_hit == false)
 			enemy->hp -= 10;
 		else if (collider->type == COLLIDER_CHARGEDSHOT2 && enemy->already_hit == false)
-			enemy->hp -= 5;
+			enemy->hp -= 12;
 
 	if (hitCD == 0)
 	{

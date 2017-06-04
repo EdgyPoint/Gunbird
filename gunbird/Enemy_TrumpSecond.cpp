@@ -28,12 +28,16 @@ Enemy_TrumpSecond::Enemy_TrumpSecond(int x, int y, int option) : Enemy(x, y, opt
 	attacking_hit.PushBack({ 1572, 120, 60, 60 });
 	attacking_hit.PushBack({ 1632, 120, 60, 60 });
 	attacking_hit.PushBack({ 1692, 120, 60, 60 });
+
 	attacking.speed = 0.1f;
+
 
 	attacking_damaged.PushBack({ 1752, 120, 60, 60 });
 	attacking_damaged.PushBack({ 1812, 120, 60, 60 });
 	attacking_damaged.PushBack({ 1872, 120, 60, 60 });
+
 	attacking.speed = 0.1f;
+
 
 
 	animation = &stand;
