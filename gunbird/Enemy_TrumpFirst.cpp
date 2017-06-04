@@ -54,7 +54,7 @@ Enemy_TrumpFirst::Enemy_TrumpFirst(int x, int y, int option) : Enemy(x, y, optio
 	death_type = SMALL_ENEMY;
 	anim_type = ATTACKING;
 	flying = false;
-	killscore = 200;
+	killscore = 6000;
 	discount = false;
 
 }

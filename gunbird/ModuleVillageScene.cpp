@@ -534,8 +534,6 @@ void ModuleVillageScene::Side_scrolling()
 			scroll_timer = true;
 		}
 	}
-
-
 }
 
 void ModuleVillageScene::OnCollision(Collider* c1, Collider* c2)
