@@ -1,3 +1,5 @@
+#include <stdlib.h>
+#include <time.h>
 #include "Globals.h"
 #include "Application.h"
 #include "ModuleTextures.h"
@@ -93,7 +95,8 @@ bool ModuleVillageScene::Start()
 	mid_train_y = -730 + 261;
 	front_train_y = -730;
 	train_x = -183;
-	
+	randxpos1 = rand() % 10 + 50;
+	randxpos2 = rand() % 100 + 80;
 	
 	cinematic = false;
 	timerup = false;
@@ -215,7 +218,12 @@ bool ModuleVillageScene::Start()
 	App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, 22, -1290, 11);
 
 	//--Adding Turretcopters--
-	App->enemies->AddEnemy(ENEMY_TYPES::TURRETCOPTER, 70, -1400, 0);
+	if (ending != true)
+	{
+		App->enemies->AddEnemy(ENEMY_TYPES::TURRETCOPTER, randxpos1, ypos1, 0);
+		App->enemies->AddEnemy(ENEMY_TYPES::TURRETCOPTER, randxpos2, ypos2, 1);
+	}
+	
 
 	
 	return true;
@@ -402,6 +410,10 @@ update_status ModuleVillageScene::Update()
 	App->render->Blit(train, train_x += train_speedx + 5, back_train_y +=train_speedy, &(train_back.GetCurrentFrame()), 10.0f);
 	train_x -= 5;
 	//-167
+
+	srand(time(NULL));
+	ypos1 += 50;
+	ypos2 += 50;
 
 	return UPDATE_CONTINUE;
 }

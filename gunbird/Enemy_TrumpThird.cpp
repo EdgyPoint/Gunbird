@@ -5,6 +5,7 @@
 #include "ModulePlayer.h"
 #include "ModuleEnemies.h"
 #include "ModuleCollision.h"
+#include "ModuleVillageScene.h"
 #include "SDL/include/SDL_timer.h"
 #include <cmath>
 
@@ -48,6 +49,7 @@ Enemy_TrumpThird::Enemy_TrumpThird(int x, int y, int option) : Enemy(x, y, optio
 	original_pos.y = y;
 
 	hp = 10.0f;
+	if (hp <= 0)	{ App->scene_village->ending = true; }
 	damaged_hp = 7;
 	death_type = SMALL_ENEMY;
 	anim_type = STAND;

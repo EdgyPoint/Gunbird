@@ -68,8 +68,12 @@ public:
 	bool retardation_needed;
 	bool retard_finished;
 	bool timer_on;
-	bool ending;
+	bool ending = false;
 	int ticks;
+	int randxpos1;
+	int randxpos2;
+	int ypos1 = -1400;
+	int ypos2 = -1470;
 
 };
 
