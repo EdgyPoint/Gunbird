@@ -31,7 +31,7 @@ The game can be played with keyboard or with Game Controller (taking XBOX 360/ON
 
 _KEYBOARD CONTROLS_
 
-    ### Player 1
+### Player 1
     SPACE         ->  Start
     WASD          ->  Move
     C             ->  Shoot
