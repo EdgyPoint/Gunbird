@@ -157,7 +157,7 @@ update_status ModulePlayer2::Update()
 
 	int speed = 2;
 
-	if (App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_REPEAT && !_dying && !respawning && !App->fade->fading)
+	if (!App->scene_village->ending && App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_REPEAT && !_dying && !respawning && !App->fade->fading)
 	{
 		position.x -= speed;
 		if (position.x <= 0)
@@ -179,7 +179,7 @@ update_status ModulePlayer2::Update()
 		}
 	}
 
-	if (App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_REPEAT && !_dying && !respawning && !App->fade->fading)
+	if (!App->scene_village->ending && App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_REPEAT && !_dying && !respawning && !App->fade->fading)
 	{
 		position.x += speed;
 		if (position.x >= 196)
@@ -202,7 +202,7 @@ update_status ModulePlayer2::Update()
 		}
 	}
 
-	if (App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_STATE::KEY_REPEAT && !_dying && !respawning && !App->fade->fading)
+	if (!App->scene_village->ending && App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_STATE::KEY_REPEAT && !_dying && !respawning && !App->fade->fading)
 	{
 		position.y += speed;
 		if (position.y >= 288)
@@ -212,7 +212,7 @@ update_status ModulePlayer2::Update()
 
 	}
 
-	if (App->input->keyboard[SDL_SCANCODE_UP] == KEY_STATE::KEY_REPEAT && !_dying && !respawning && !App->fade->fading)
+	if (!App->scene_village->ending && App->input->keyboard[SDL_SCANCODE_UP] == KEY_STATE::KEY_REPEAT && !_dying && !respawning && !App->fade->fading)
 	{
 		position.y -= speed;
 		if (position.y <= 0)
@@ -225,19 +225,19 @@ update_status ModulePlayer2::Update()
 	// Charged shot
 
 		// Charge up
-	if ((App->input->keyboard[SDL_SCANCODE_KP_0] == KEY_STATE::KEY_REPEAT || App->input->controller2[SDL_CONTROLLER_BUTTON_A] == BUTTON_STATE::B_REPEAT) && !_dying && !respawning && !stunned && !App->fade->fading && charge_up < 110)
+	if ((!App->scene_village->ending && App->input->keyboard[SDL_SCANCODE_KP_0] == KEY_STATE::KEY_REPEAT || App->input->controller2[SDL_CONTROLLER_BUTTON_A] == BUTTON_STATE::B_REPEAT) && !_dying && !respawning && !stunned && !App->fade->fading && charge_up < 110)
 	{
 		charge_up++;
 	}
 		// Finishing charge
-	if ((App->input->keyboard[SDL_SCANCODE_KP_0] == KEY_STATE::KEY_REPEAT || App->input->controller2[SDL_CONTROLLER_BUTTON_A] == BUTTON_STATE::B_REPEAT) && !_dying && !respawning && !stunned && !App->fade->fading && charge_up == 110 && finishing_charge < 26)
+	if ((!App->scene_village->ending && App->input->keyboard[SDL_SCANCODE_KP_0] == KEY_STATE::KEY_REPEAT || App->input->controller2[SDL_CONTROLLER_BUTTON_A] == BUTTON_STATE::B_REPEAT) && !_dying && !respawning && !stunned && !App->fade->fading && charge_up == 110 && finishing_charge < 26)
 	{
 		finishing_charge++;
 	}
 	if (time_since_last_charged < 100)
 		time_since_last_charged++;
 		// Release
-	if ((App->input->keyboard[SDL_SCANCODE_KP_0] == KEY_STATE::KEY_UP || App->input->controller2[SDL_CONTROLLER_BUTTON_A] == BUTTON_STATE::B_UP) && !_dying && !respawning && !stunned && !App->fade->fading)
+	if ((!App->scene_village->ending && App->input->keyboard[SDL_SCANCODE_KP_0] == KEY_STATE::KEY_UP || App->input->controller2[SDL_CONTROLLER_BUTTON_A] == BUTTON_STATE::B_UP) && !_dying && !respawning && !stunned && !App->fade->fading)
 
 	{
 		if (charge_up == 110)
@@ -253,7 +253,7 @@ update_status ModulePlayer2::Update()
 		finishing_charge = 0;
 	}
 
-	if (App->input->keyboard[SDL_SCANCODE_KP_0] == KEY_STATE::KEY_DOWN && !_dying && !respawning && !stunned && !App->fade->fading)
+	if (!App->scene_village->ending && App->input->keyboard[SDL_SCANCODE_KP_0] == KEY_STATE::KEY_DOWN && !_dying && !respawning && !stunned && !App->fade->fading)
 
 	{
 		if (!shooting)
@@ -268,7 +268,7 @@ update_status ModulePlayer2::Update()
 	}
 
 
-	if (App->input->keyboard[SDL_SCANCODE_KP_1] == KEY_STATE::KEY_DOWN && !_dying && !respawning && !stunned && !App->fade->fading && bombCD == 0 && bombs > 0)
+	if (!App->scene_village->ending && App->input->keyboard[SDL_SCANCODE_KP_1] == KEY_STATE::KEY_DOWN && !_dying && !respawning && !stunned && !App->fade->fading && bombCD == 0 && bombs > 0)
 	{
 		bombs--;
 		bombCD = 125;

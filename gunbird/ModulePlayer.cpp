@@ -186,7 +186,7 @@ update_status ModulePlayer::Update()
 
 
 	// Move left
-if ((App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT || SDL_GameControllerGetAxis(App->input->Controller1, SDL_CONTROLLER_AXIS_LEFTX) < -13000) && !_dying && !respawning && !App->fade->fading)
+if ((!App->scene_village->ending && App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT || SDL_GameControllerGetAxis(App->input->Controller1, SDL_CONTROLLER_AXIS_LEFTX) < -13000) && !_dying && !respawning && !App->fade->fading)
 	{
 		position.x -= speed;
 		if (position.x <= 0)
@@ -214,7 +214,7 @@ if ((App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT || SDL_GameCo
 	
 
 	// Move right
-if ((App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT || SDL_GameControllerGetAxis(App->input->Controller1, SDL_CONTROLLER_AXIS_LEFTX) > 10000) && !_dying && !respawning && !App->fade->fading)
+if ((!App->scene_village->ending && App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT || SDL_GameControllerGetAxis(App->input->Controller1, SDL_CONTROLLER_AXIS_LEFTX) > 10000) && !_dying && !respawning && !App->fade->fading)
 	{
 		position.x += speed;
 		if (position.x >= 196)
@@ -239,7 +239,7 @@ if ((App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT || SDL_GameCo
 	// --------------------------
 
 	// Move down
-	if ((App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT || SDL_GameControllerGetAxis(App->input->Controller1, SDL_CONTROLLER_AXIS_LEFTY) > 10000) && !_dying && !respawning && !App->fade->fading)
+if ((!App->scene_village->ending &&App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT || SDL_GameControllerGetAxis(App->input->Controller1, SDL_CONTROLLER_AXIS_LEFTY) > 10000) && !_dying && !respawning && !App->fade->fading)
 	{
 		position.y += speed;
 		if (position.y >= 288)
@@ -251,7 +251,7 @@ if ((App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT || SDL_GameCo
 	// --------------------------
 
 	// Move up
-	if ((App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT || SDL_GameControllerGetAxis(App->input->Controller1, SDL_CONTROLLER_AXIS_LEFTY) < -13000) && !_dying && !respawning && !App->fade->fading)
+if ((!App->scene_village->ending &&App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT || SDL_GameControllerGetAxis(App->input->Controller1, SDL_CONTROLLER_AXIS_LEFTY) < -13000) && !_dying && !respawning && !App->fade->fading)
 	{
 		position.y -= speed;
 		if (position.y <= 0)
@@ -264,19 +264,19 @@ if ((App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT || SDL_GameCo
 
 	// Charged shot
 		// Charge up
-	if ((App->input->keyboard[SDL_SCANCODE_C] == KEY_STATE::KEY_REPEAT || App->input->controller1[SDL_CONTROLLER_BUTTON_A] == BUTTON_STATE::B_REPEAT) && !_dying && !respawning && !stunned && !App->fade->fading && charge_up < 110)
+if ((!App->scene_village->ending &&App->input->keyboard[SDL_SCANCODE_C] == KEY_STATE::KEY_REPEAT || App->input->controller1[SDL_CONTROLLER_BUTTON_A] == BUTTON_STATE::B_REPEAT) && !_dying && !respawning && !stunned && !App->fade->fading && charge_up < 110)
 	{
 		charge_up++;
 	}
 		// Finishing charge
-	if ((App->input->keyboard[SDL_SCANCODE_C] == KEY_STATE::KEY_REPEAT || App->input->controller1[SDL_CONTROLLER_BUTTON_A] == BUTTON_STATE::B_REPEAT) && !_dying && !respawning && !stunned && !App->fade->fading && charge_up == 110 && finishing_charge < 26)
+if ((!App->scene_village->ending &&App->input->keyboard[SDL_SCANCODE_C] == KEY_STATE::KEY_REPEAT || App->input->controller1[SDL_CONTROLLER_BUTTON_A] == BUTTON_STATE::B_REPEAT) && !_dying && !respawning && !stunned && !App->fade->fading && charge_up == 110 && finishing_charge < 26)
 	{
 		finishing_charge++;
 	}
 	if (time_since_last_charged < 100)
 	time_since_last_charged++;
 		// Release
-	if ((App->input->keyboard[SDL_SCANCODE_C] == KEY_STATE::KEY_UP || App->input->controller1[SDL_CONTROLLER_BUTTON_A] == BUTTON_STATE::B_UP) && !_dying && !respawning && !stunned && !App->fade->fading)
+	if ((!App->scene_village->ending &&App->input->keyboard[SDL_SCANCODE_C] == KEY_STATE::KEY_UP || App->input->controller1[SDL_CONTROLLER_BUTTON_A] == BUTTON_STATE::B_UP) && !_dying && !respawning && !stunned && !App->fade->fading)
 	{
 		if (charge_up == 110)
 		{
@@ -293,7 +293,7 @@ if ((App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT || SDL_GameCo
 	// --------------------------
 
 	// Shoot
-	if ((App->input->keyboard[SDL_SCANCODE_C] == KEY_STATE::KEY_DOWN || App->input->controller1[SDL_CONTROLLER_BUTTON_A] ==BUTTON_STATE::B_DOWN) && !_dying && !respawning && !stunned && !App->fade->fading)
+	if ((!App->scene_village->ending &&App->input->keyboard[SDL_SCANCODE_C] == KEY_STATE::KEY_DOWN || App->input->controller1[SDL_CONTROLLER_BUTTON_A] == BUTTON_STATE::B_DOWN) && !_dying && !respawning && !stunned && !App->fade->fading)
 	{
 		if (!shooting)
 		{
@@ -308,7 +308,7 @@ if ((App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT || SDL_GameCo
 	// --------------------------
 
 	// Bomb
-	if ((App->input->keyboard[SDL_SCANCODE_V] == KEY_STATE::KEY_DOWN  || App->input->controller1[SDL_CONTROLLER_BUTTON_X] == BUTTON_STATE::B_DOWN) && !_dying && !respawning && !stunned && !App->fade->fading && bombCD == 0 && bombs > 0)
+	if ((!App->scene_village->ending &&App->input->keyboard[SDL_SCANCODE_V] == KEY_STATE::KEY_DOWN || App->input->controller1[SDL_CONTROLLER_BUTTON_X] == BUTTON_STATE::B_DOWN) && !_dying && !respawning && !stunned && !App->fade->fading && bombCD == 0 && bombs > 0)
 	{
 		bombs--;
 
@@ -369,7 +369,7 @@ if ((App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT || SDL_GameCo
 	// --------------------------
 
 	// Debug features
-	if ((App->input->keyboard[SDL_SCANCODE_F2] == KEY_STATE::KEY_DOWN ) && godmode == false && !App->fade->fading)
+	if ((!App->scene_village->ending &&App->input->keyboard[SDL_SCANCODE_F2] == KEY_STATE::KEY_DOWN) && godmode == false && !App->fade->fading)
 	{
 		godmode = true;
 		App->collision->EditMatrix(COLLIDER_PLAYER, COLLIDER_ENEMY_F, false);
@@ -382,7 +382,7 @@ if ((App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT || SDL_GameCo
 		App->collision->EditMatrix(COLLIDER_ENEMY_SHOT, COLLIDER_PLAYER2, false);
 	}
 
-	else if ((App->input->keyboard[SDL_SCANCODE_F2] == KEY_STATE::KEY_DOWN) && godmode == true && !App->fade->fading)
+	else if ((!App->scene_village->ending &&App->input->keyboard[SDL_SCANCODE_F2] == KEY_STATE::KEY_DOWN) && godmode == true && !App->fade->fading)
 	{
 		godmode = false;
 		App->collision->EditMatrix(COLLIDER_PLAYER, COLLIDER_ENEMY_F, true);
@@ -395,7 +395,7 @@ if ((App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT || SDL_GameCo
 		App->collision->EditMatrix(COLLIDER_ENEMY_SHOT, COLLIDER_PLAYER2, true);
 	}
 
-	else if ((App->input->keyboard[SDL_SCANCODE_F5] == KEY_STATE::KEY_DOWN) && !App->fade->fading)
+	else if ((!App->scene_village->ending &&App->input->keyboard[SDL_SCANCODE_F5] == KEY_STATE::KEY_DOWN) && !App->fade->fading)
 	{
 			powerup_lv++;
 			if (powerup_lv > MAX_LEVEL)
@@ -409,7 +409,7 @@ if ((App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT || SDL_GameCo
 		App->audio->sfx = App->audio->LoadSFX("assets/SFX/marionpowerup.wav");
 		Mix_PlayChannel(-1, App->audio->sfx, 0);
 	}
-	else if ((App->input->keyboard[SDL_SCANCODE_F6] == KEY_STATE::KEY_DOWN) && !App->fade->fading)
+	else if ((!App->scene_village->ending &&App->input->keyboard[SDL_SCANCODE_F6] == KEY_STATE::KEY_DOWN) && !App->fade->fading)
 	{
 		if (bombs != 4)
 			bombs++;
@@ -420,7 +420,7 @@ if ((App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT || SDL_GameCo
 		Mix_PlayChannel(-1, App->audio->sfx, 0);
 	}
 
-	if (App->input->keyboard[SDL_SCANCODE_KP_ENTER] == KEY_STATE::KEY_DOWN && !App->fade->fading)
+	if (!App->scene_village->ending &&App->input->keyboard[SDL_SCANCODE_KP_ENTER] == KEY_STATE::KEY_DOWN && !App->fade->fading)
 	{
 		App->player2->Enable();
 		App->player2->out = false;
