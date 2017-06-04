@@ -203,6 +203,26 @@ void Enemy_RotatingTurret::Move()
 {
 	position = original_pos + path.GetCurrentPosition();
 	
+	if (anim_type == DEAD)
+	{
+		path.Stop();
+		if (App->enemies->xcrolling == 1)
+		path.PushBack({ 0.66f, 0.4f }, 10000);
+		else if (App->enemies->xcrolling == 0)
+			path.PushBack({ 0.0f, 0.4f }, 10000);
+		else if (App->enemies->xcrolling == 2)
+			path.PushBack({ 0.0f, 0.0f }, 10000);
+		else if(App->enemies->xcrolling == 3)
+			path.PushBack({ 0.66f, 0.4f }, 10000);
+		else if (App->enemies->xcrolling == 4)
+			path.PushBack({ 0.0f, 0.0f }, 10000);
+		else
+			path.PushBack({ 0.0f, 0.4f }, 10000);
+
+	}
+
+	if (hp <= 0) anim_type = DEAD;
+
 	if (status == NORMAL) { animation = &normal_base_anim; }
 	if (status == HIT) { animation = &hit_base_anim; }
 	if (status == DAMAGED) 
@@ -575,6 +595,8 @@ void Enemy_RotatingTurret::Move()
 	{
 		animation = &dead;
 		collider->rect.h = 0;
+		collider->rect.y = -100;
+		collider->rect.x = 1000;
 		collider->rect.w = 0;
 	}
 

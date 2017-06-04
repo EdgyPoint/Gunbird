@@ -229,6 +229,7 @@ void Enemy_GreenRobot::Move()
 	{
 		animation = &dead;
 		path.Stop();
+		path.PushBack({ 0.0f, 0.4f }, 10000);
 		collider->rect.h = 0;
 		collider->rect.w = 0;
 		collider->SetPos(-100, 500);

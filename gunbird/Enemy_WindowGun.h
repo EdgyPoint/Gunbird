@@ -9,14 +9,6 @@ class Enemy_WindowGun : public Enemy
 {
 	
 private:
-	enum anim_type
-	{
-		CLOSED,
-		OPENING,
-		SHOOTING,
-		CLOSING,
-		DEAD
-	};
 
 	iPoint original_pos;
 	Animation closed, opening, shooting, closing;
@@ -27,7 +19,6 @@ private:
 	int counter = 0;
 	int counter2 = 0;
 	int reload[2];
-	anim_type anim_type;
 
 public:
 	Enemy_WindowGun(int x, int y, int option);

@@ -156,13 +156,12 @@ bool ModuleParticles::Init()
 
 	presmallshot.anim.PushBack({ 0, 424, 8, 8 });
 	presmallshot.anim.PushBack({ 8, 424, 8, 8 });
-	smallshot.anim.loop = true;
 	presmallshot.anim.speed = 0.3f;
 	presmallshot.life = 1;
 
 	//First two frames of the mortar shot
-	prebigshot.anim.PushBack({ 23, 388, 16, 16 }); 
-	prebigshot.anim.PushBack({ 47, 387, 19, 19 }); 
+	prebigshot.anim.PushBack({ 23, 388, 16, 16 });
+	prebigshot.anim.PushBack({ 47, 387, 19, 19 });
 	prebigshot.anim.loop = false;
 	prebigshot.anim.speed = 1;
 	prebigshot.speed.y = 0.55f;
@@ -290,7 +289,7 @@ bool ModuleParticles::Init()
 	bombshot_upright.anim.PushBack({ 361, 92, 46, 46 });
 	bombshot_upright.anim.PushBack({ 361, 46, 46, 46 });
 	bombshot_upright.anim.PushBack({ 361, 0, 46, 46 });
-	bombshot_upright.anim.PushBack({ 449, 138, 44, 44});
+	bombshot_upright.anim.PushBack({ 449, 138, 44, 44 });
 	bombshot_upright.anim.PushBack({ 405, 138, 44, 44 });
 	bombshot_upright.anim.PushBack({ 361, 138, 44, 44 });
 	bombshot_upright.anim.PushBack({ 581, 138, 44, 44 });
@@ -312,11 +311,11 @@ bool ModuleParticles::Init()
 	bombshot_upright.speed.x = 2.5f;
 	bombshot_upright.life = 4000;
 
-	particle_clearer.anim.PushBack({ 0,0,0,0 });
+	particle_clearer.anim.PushBack({ 0, 0, 0, 0 });
 	particle_clearer.anim.speed = 1;
 	particle_clearer.life = 300;
 	// --------------------------
-	
+
 	// Coin
 	coin.anim.PushBack({ 234, 362, 16, 16 });
 	coin.anim.PushBack({ 256, 362, 16, 16 });
@@ -360,47 +359,47 @@ bool ModuleParticles::Init()
 	powerup.life = 20000;
 	// --------------------------
 
-	impact.anim.PushBack({448, 768, 16, 42});
-	impact.anim.PushBack({464, 768, 16, 42 });
-	impact.anim.PushBack({480, 768, 16, 42 });
-	impact.anim.PushBack({496, 768, 16, 42 });
-	impact.anim.PushBack({512, 768, 16, 42 });
-	impact.anim.PushBack({528, 768, 16, 42 });
-	impact.anim.PushBack({544, 768, 16, 42 });
-	impact.anim.PushBack({560, 768, 16, 42 });
-	impact.anim.PushBack({576, 768, 16, 42 });
-	impact.anim.PushBack({592, 768, 16, 42 });
-	impact.anim.PushBack({608, 768, 16, 42 });
-	impact.anim.PushBack({448, 810, 16, 42});
-	impact.anim.PushBack({464, 810, 16, 42 });
-	impact.anim.PushBack({480, 810, 16, 42 });
-	impact.anim.PushBack({496, 810, 16, 42 });
-	impact.anim.PushBack({512, 810, 16, 42 });
-	impact.anim.PushBack({528, 810, 16, 42 });
-	impact.anim.PushBack({544, 810, 16, 42 });
-	impact.anim.PushBack({560, 810, 16, 42 });
-	impact.anim.PushBack({576, 810, 16, 42 });
-	impact.anim.PushBack({592, 810, 16, 42 });
+	impact.anim.PushBack({ 448, 768, 16, 42 });
+	impact.anim.PushBack({ 464, 768, 16, 42 });
+	impact.anim.PushBack({ 480, 768, 16, 42 });
+	impact.anim.PushBack({ 496, 768, 16, 42 });
+	impact.anim.PushBack({ 512, 768, 16, 42 });
+	impact.anim.PushBack({ 528, 768, 16, 42 });
+	impact.anim.PushBack({ 544, 768, 16, 42 });
+	impact.anim.PushBack({ 560, 768, 16, 42 });
+	impact.anim.PushBack({ 576, 768, 16, 42 });
+	impact.anim.PushBack({ 592, 768, 16, 42 });
+	impact.anim.PushBack({ 608, 768, 16, 42 });
+	impact.anim.PushBack({ 448, 810, 16, 42 });
+	impact.anim.PushBack({ 464, 810, 16, 42 });
+	impact.anim.PushBack({ 480, 810, 16, 42 });
+	impact.anim.PushBack({ 496, 810, 16, 42 });
+	impact.anim.PushBack({ 512, 810, 16, 42 });
+	impact.anim.PushBack({ 528, 810, 16, 42 });
+	impact.anim.PushBack({ 544, 810, 16, 42 });
+	impact.anim.PushBack({ 560, 810, 16, 42 });
+	impact.anim.PushBack({ 576, 810, 16, 42 });
+	impact.anim.PushBack({ 592, 810, 16, 42 });
 	impact.anim.loop = false;
 	impact.anim.speed = 0.5f;
 	impact.life = 500;
 
 
-	small_explosion.anim.PushBack({0, 768, 56, 64});
-	small_explosion.anim.PushBack({56, 768, 56, 64});
-	small_explosion.anim.PushBack({112, 768, 56, 64 });
-	small_explosion.anim.PushBack({168, 768, 56, 64 });
-	small_explosion.anim.PushBack({224, 768, 56, 64 });
-	small_explosion.anim.PushBack({280, 768, 56, 64 });
-	small_explosion.anim.PushBack({336, 768, 56, 64 });
-	small_explosion.anim.PushBack({392, 768, 56, 64 });
-	small_explosion.anim.PushBack({0, 832, 56, 64});
-	small_explosion.anim.PushBack({56, 832, 56, 64 });
-	small_explosion.anim.PushBack({112, 832, 56, 64 });
-	small_explosion.anim.PushBack({168, 832, 56, 64 });
-	small_explosion.anim.PushBack({224, 832, 56, 64 });
-	small_explosion.anim.PushBack({280, 832, 56, 64 });
-	small_explosion.anim.PushBack({336, 832, 56, 64 });
+	small_explosion.anim.PushBack({ 0, 768, 56, 64 });
+	small_explosion.anim.PushBack({ 56, 768, 56, 64 });
+	small_explosion.anim.PushBack({ 112, 768, 56, 64 });
+	small_explosion.anim.PushBack({ 168, 768, 56, 64 });
+	small_explosion.anim.PushBack({ 224, 768, 56, 64 });
+	small_explosion.anim.PushBack({ 280, 768, 56, 64 });
+	small_explosion.anim.PushBack({ 336, 768, 56, 64 });
+	small_explosion.anim.PushBack({ 392, 768, 56, 64 });
+	small_explosion.anim.PushBack({ 0, 832, 56, 64 });
+	small_explosion.anim.PushBack({ 56, 832, 56, 64 });
+	small_explosion.anim.PushBack({ 112, 832, 56, 64 });
+	small_explosion.anim.PushBack({ 168, 832, 56, 64 });
+	small_explosion.anim.PushBack({ 224, 832, 56, 64 });
+	small_explosion.anim.PushBack({ 280, 832, 56, 64 });
+	small_explosion.anim.PushBack({ 336, 832, 56, 64 });
 	small_explosion.anim.loop = false;
 	small_explosion.anim.speed = 0.5f;
 	small_explosion.life = 500;
@@ -446,7 +445,7 @@ bool ModuleParticles::Init()
 	playercollision.anim.speed = 0.5f;
 	playercollision.life = 450;
 
-	playerstunned.anim.PushBack({ 279, 896, 28, 20});
+	playerstunned.anim.PushBack({ 279, 896, 28, 20 });
 	playerstunned.anim.PushBack({ 307, 896, 28, 20 });
 	playerstunned.anim.PushBack({ 335, 896, 28, 20 });
 	playerstunned.anim.PushBack({ 363, 896, 28, 20 });
@@ -515,6 +514,10 @@ bool ModuleParticles::Init()
 	powerupscore.anim.speed = 0.1f;
 	powerupscore.life = 1000;
 
+	star.anim.PushBack({ 128, 67, 15, 15 });
+	star.life = 5000;
+	star.is_star = true;
+
 	return true;
 }
 
@@ -575,7 +578,7 @@ update_status ModuleParticles::Update()
 	return UPDATE_CONTINUE;
 }
 
-void ModuleParticles::AddParticle(const Particle& particle, int x, int y, COLLIDER_TYPE collider_type, float speed_x, float speed_y, Uint32 delay,  bool using_camera, ITEM_TYPE item_type)
+void ModuleParticles::AddParticle(const Particle& particle, int x, int y, COLLIDER_TYPE collider_type, float speed_x, float speed_y, Uint32 delay,  bool using_camera, ITEM_TYPE item_type, bool player1)
 {
 	for (uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
 	{
@@ -588,7 +591,7 @@ void ModuleParticles::AddParticle(const Particle& particle, int x, int y, COLLID
 			p->speed.x = speed_x;
 			if(speed_y != 0)
 			p->speed.y = speed_y;
-
+			p->player1 = player1;
 			p->collider_size = p->anim.GetCurrentFrame();
 			p->collider_size.x = x;
 			p->collider_size.y = y;
@@ -653,7 +656,7 @@ Particle::Particle()
 
 Particle::Particle(const Particle& p) :
 	anim(p.anim), position(p.position), speed(p.speed),
-	fx(p.fx), born(p.born), life(p.life)
+	fx(p.fx), born(p.born), life(p.life), is_star(p.is_star)
 {}
 
 Particle::~Particle()
@@ -677,8 +680,13 @@ bool Particle::Update()
 		if (anim.Finished())
 			ret = false;
 
+	if (is_star)
+		speed = App->enemies->NearestEnemy(position, player1);
+	
+	
 	position.x += speed.x;
 	position.y += speed.y;
+	
 
 	if (itemtype == ITEM_POWERUP || itemtype == ITEM_BOMB)
 
@@ -704,6 +712,7 @@ bool Particle::Update()
 			speed.y = -7;
 		}
 	}
+
 
 	if (collider != nullptr && SDL_GetTicks() >= born)
 		collider->SetPos(position.x, position.y);

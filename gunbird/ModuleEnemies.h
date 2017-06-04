@@ -15,6 +15,7 @@
 
 
 #define MAX_ENEMIES 100
+#define STAR_SPEED 2
 
 
 enum ENEMY_TYPES
@@ -57,7 +58,12 @@ public:
 	update_status PostUpdate();
 	bool CleanUp();
 	void OnCollision(Collider* c1, Collider* c2);
-
+	fPoint NearestEnemy(fPoint your_position, bool player1);
+	bool _enemy;
+	int xcrolling;
+	int j;
+	float ModuleCalc(iPoint target, fPoint you);
+	float module, min_module;
 	bool AddEnemy(ENEMY_TYPES type, int x, int y, int pathoption);
 
 private:

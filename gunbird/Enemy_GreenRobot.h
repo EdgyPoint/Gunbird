@@ -7,15 +7,7 @@
 class Enemy_GreenRobot : public Enemy
 {
 private:
-	enum Anim_Type
-	{
-		STAND,
-		BACKWARD,
-		FORWARD, 
-		DEAD
-	};
-
-	Anim_Type anim_type = STAND;
+	
 	iPoint original_pos;
 	fPoint distance;
 	Animation* aux;

@@ -107,7 +107,7 @@ void Enemy_WindowGun::Move()
 	if (hp > 0)
 	{
 		if (counter < 370 || counter >= 560)anim_type = CLOSED;
-		if (counter >= 370 && counter < 380)anim_type = OPENING;
+		if (counter >= 370 && counter < 380)anim_type = OPENIN;
 		if (counter >= 380 && counter < 550)anim_type = SHOOTING;
 		if (counter >= 550 && counter < 560)anim_type = CLOSING;
 		counter++;

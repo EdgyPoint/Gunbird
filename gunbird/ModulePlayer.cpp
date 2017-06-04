@@ -172,8 +172,9 @@ update_status ModulePlayer::Update()
 	}
 
 	int speed = 2;
-
-
+	if (counter != 0)
+	counter++;
+	if (counter == 120)counter = 0;
 
 	/*if (SDL_GameControllerGetAxis(App->input->Controller, SDL_CONTROLLER_AXIS_LEFTX) > 10000)
 	// Controller input variables
@@ -650,12 +651,28 @@ void ModulePlayer::shootburst(int level)
 	case 2:
 		App->particles->AddParticle(App->particles->marionbeam_lv1[beam], position.x +11, position.y, COLLIDER_PLAYER_SHOT);
 		App->particles->AddParticle(App->particles->marionbeamleft_lv1[beam], position.x +9, position.y, COLLIDER_PLAYER_SHOT, -1.75f);
-		App->particles->AddParticle(App->particles->marionbeamright_lv1[beam++], position.x +14, position.y, COLLIDER_PLAYER_SHOT, 1.75f);
+		App->particles->AddParticle(App->particles->marionbeamright_lv1[beam++], position.x + 14, position.y, COLLIDER_PLAYER_SHOT, 1.75f);
+		if (counter == 0)
+		{
+			counter = 1;
+			App->particles->AddParticle(App->particles->star, position.x + 14, position.y, COLLIDER_PLAYER_SHOT, 0, true, NONE, true);
+			App->particles->AddParticle(App->particles->star, position.x - 1, position.y, COLLIDER_PLAYER_SHOT, 0, true, NONE, true);
+		}
 		break;
 	case 3:
 		App->particles->AddParticle(App->particles->marionbeam_lv2[beam], position.x +6, position.y, COLLIDER_PLAYER_SHOT);
 		App->particles->AddParticle(App->particles->marionbeamleft_lv2[beam], position.x +3, position.y, COLLIDER_PLAYER_SHOT, -1.75f);
 		App->particles->AddParticle(App->particles->marionbeamright_lv2[beam++], position.x +10, position.y, COLLIDER_PLAYER_SHOT, 1.75f);
+		if (counter == 0)
+		{
+			if (burst_counter != 3)
+			{
+				App->particles->AddParticle(App->particles->star, position.x + 14, position.y, COLLIDER_PLAYER_SHOT, 0, true, NONE, true);
+				App->particles->AddParticle(App->particles->star, position.x - 1, position.y, COLLIDER_PLAYER_SHOT, 0, true, NONE, true);
+			}
+			else
+				counter = 1;
+		}
 		break;
 	}
 

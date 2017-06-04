@@ -170,22 +170,22 @@ void Enemy_2CannonTurret::Shoot()
 	{
 		if (reload == 10)
 		{
-			bullet_speed = ShootCalculator({ position.x + 16, position.y + 20 }, { App->player->position.x + 14, App->player->position.y + 16 });
+			bullet_speed = ShootCalculator({ position.x + 16, position.y + 20 }, { App->player->position.x, App->player->position.y + 16 });
 			App->particles->AddParticle(App->particles->smallshot, position.x + 16, position.y + 20, COLLIDER_ENEMY_SHOT, bullet_speed.x, bullet_speed.y, false);
 		}
 		if (reload == 19)
 		{
-			bullet_speed = ShootCalculator({ position.x + 16, position.y + 11 }, { App->player->position.x + 14, App->player->position.y + 16 });
+			bullet_speed = ShootCalculator({ position.x + 16, position.y + 11 }, { App->player->position.x, App->player->position.y + 16 });
 			App->particles->AddParticle(App->particles->smallshot, position.x + 16, position.y + 11, COLLIDER_ENEMY_SHOT, bullet_speed.x, bullet_speed.y, false);
 		}
 		if (reload == 43)
 		{
-			bullet_speed = ShootCalculator({ position.x + 16, position.y + 20 }, { App->player->position.x + 14, App->player->position.y + 16 });
+			bullet_speed = ShootCalculator({ position.x + 16, position.y + 20 }, { App->player->position.x, App->player->position.y + 16 });
 			App->particles->AddParticle(App->particles->smallshot, position.x + 16, position.y + 20, COLLIDER_ENEMY_SHOT, bullet_speed.x, bullet_speed.y, false);
 		}
 		if (reload == 53)
 		{
-			bullet_speed = ShootCalculator({ position.x + 16, position.y + 11 }, { App->player->position.x + 14, App->player->position.y + 16 });
+			bullet_speed = ShootCalculator({ position.x + 16, position.y + 11 }, { App->player->position.x, App->player->position.y + 16 });
 			App->particles->AddParticle(App->particles->smallshot, position.x + 16, position.y + 11, COLLIDER_ENEMY_SHOT, bullet_speed.x, bullet_speed.y, false);
 		}
 		reload++;

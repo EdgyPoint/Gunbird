@@ -9,6 +9,19 @@
 struct SDL_Texture;
 struct Collider;
 
+enum Anim_Type
+{
+	STAND,
+	BACKWARD,
+	FORWARD,
+	ATTACKING,
+	CLOSED,
+	OPENIN,
+	SHOOTING,
+	CLOSING,
+	DEAD,
+};
+
 enum ENEMY_STATUS
 {
 	NORMAL,
@@ -56,6 +69,7 @@ public:
 	bool following = false;
 	bool dead_anim = false;
 	bool to_draw = true;
+	Anim_Type anim_type = STAND;
 
 
 public:

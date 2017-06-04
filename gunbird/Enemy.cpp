@@ -27,7 +27,7 @@ const Collider* Enemy::GetCollider() const
 
 fPoint Enemy::ShootCalculator(iPoint position, iPoint player)
 {
-	int module;
+	float module;
 	fPoint distance;
 	fPoint speed;
 

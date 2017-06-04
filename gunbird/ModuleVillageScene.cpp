@@ -185,9 +185,10 @@ update_status ModuleVillageScene::Update()
 			train_speedy = 0.4f;
 			train_speedx = 0.0f;
 		}
-
+		if(xflag == -320) App->enemies->xcrolling = 0;
 		if (yflag >= -4350 && xflag < -129)
 		{
+			App->enemies->xcrolling = 1;
 			xflag += 0.66;
 			yflag += speed;
 			train_speedx = 0.22;
@@ -196,6 +197,7 @@ update_status ModuleVillageScene::Update()
 		}
 		if (yflag >= -4234 && !cinematic)
 		{
+			App->enemies->xcrolling = 2;
 			train_speedx = 0.0f;
 			train_speedy = 0.0f;
 			if (!timerup)
@@ -210,9 +212,10 @@ update_status ModuleVillageScene::Update()
 				Mix_PlayMusic(App->audio->audio, -1);
 			}
 		}
-
+		
 		if (xflag < -60 && cinematic)
 		{
+			App->enemies->xcrolling = 3;
 			xflag += 0.66;
 			yflag += speed;
 			timerup = false;
@@ -223,6 +226,8 @@ update_status ModuleVillageScene::Update()
 		}
 		if (xflag >= -60 && !timerup && !scrolling)
 		{
+			App->enemies->xcrolling = 4;
+
 			timer2 = SDL_GetTicks() + 2000;
 			timerup = true;
 			train_speedx = 0.0f;
@@ -230,6 +235,7 @@ update_status ModuleVillageScene::Update()
 		}
 		if (SDL_GetTicks() > timer2 && xflag >= -60 && speed < 10.0 && !scrolling)
 		{
+			App->enemies->xcrolling = 5;
 			if (train_speedy > -1.0) { train_speedy -= 0.1; }
 			speed *= 1.015;
 			yflag += speed;

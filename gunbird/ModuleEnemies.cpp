@@ -2,6 +2,8 @@
 #include "ModuleInput.h"
 #include "ModuleRender.h"
 #include "ModuleEnemies.h"
+#include "ModulePlayer.h"
+#include "ModulePlayer2.h"
 #include "ModuleParticles.h"
 #include "ModuleTextures.h"
 #include "Enemy.h"
@@ -139,6 +141,84 @@ bool ModuleEnemies::AddEnemy(ENEMY_TYPES type, int x, int y, int option)
 	return ret;
 }
 
+float ModuleEnemies::ModuleCalc(iPoint target, fPoint you)
+{
+	float modul;
+	fPoint distance;
+
+	distance.x = you.x - target.x;
+	distance.y = you.y - target.y;
+
+	modul = sqrtf(powf(distance.x, 2) + powf(distance.y, 2));
+
+	return modul;
+}
+
+fPoint ModuleEnemies::NearestEnemy(fPoint your_position, bool player1)
+{
+	min_module = 10000;
+	float modul;
+	fPoint distance;
+	fPoint speed;
+	_enemy = false;
+	for (uint i = 0; i < MAX_ENEMIES-1; ++i)
+	{
+		if (enemies[i] != nullptr)
+		if (enemies[i]->hp <= 0) enemies[i]->anim_type = DEAD;
+
+		if (enemies[i] != nullptr && enemies[i]->anim_type != DEAD && enemies[i]->position.y > 0 && enemies[i]->position.y < SCREEN_HEIGHT && enemies[i]->position.x > 0 && enemies[i]->position.x < SCREEN_WIDTH)
+		{
+			_enemy = true;
+			break;
+		}
+	}
+	if (_enemy)
+	{
+		for (uint i = 0; i < MAX_ENEMIES -1; ++i)
+		{
+			if (enemies[i] != nullptr && enemies[i]->anim_type != DEAD && enemies[i]->position.y > 0 && enemies[i]->position.y < SCREEN_HEIGHT && enemies[i]->position.x > 0 && enemies[i]->position.x < SCREEN_WIDTH)
+			{
+				module = ModuleCalc(enemies[i]->position, your_position);
+				if (module < min_module && enemies[i]->anim_type != DEAD)
+				{
+					min_module = module;
+					j = i;
+				}
+			}
+		}
+		
+
+		distance.x = enemies[j]->position.x - your_position.x;
+		distance.y = enemies[j]->position.y - your_position.y;
+
+		modul = sqrtf(powf(distance.x, 2) + powf(distance.y, 2));
+
+		distance.x /= modul;
+		distance.y /= modul;
+
+		speed.x = distance.x*STAR_SPEED + 0.3f;
+		speed.y = distance.y*STAR_SPEED + 0.3f;
+	}
+	else
+	{
+		if (player1)
+		{
+			if (your_position.x < App->player->position.x)
+				speed.x = -2;
+			else
+				speed.x = 2;
+		}
+		else
+		{
+			if (your_position.x < App->player2->position.x)
+				speed.x = -2;
+			else
+				speed.x = 2;
+		}
+		speed.y = -3;
+	}
+	return speed;
+}
 
 void ModuleEnemies::SpawnEnemy(const EnemyInfo& info)
 {

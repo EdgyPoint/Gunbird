@@ -23,6 +23,8 @@ enum ITEM_TYPE
 
 struct Particle
 {
+	bool is_star = false;
+	bool player1 = true;
 	Collider* collider = nullptr;
 	Animation anim;
 	uint fx = 0;
@@ -53,7 +55,7 @@ public:
 	bool CleanUp();
 	void OnCollision(Collider* c1, Collider* c2);
 
-	void AddParticle(const Particle& particle, int x, int y, COLLIDER_TYPE collider_type, float speed_x = 0.0f, float speed_y = 0.0f, Uint32 delay = 0, bool using_camera = true, ITEM_TYPE item_type = ITEM_NONE);
+	void AddParticle(const Particle& particle, int x, int y, COLLIDER_TYPE collider_type, float speed_x = 0.0f, float speed_y = 0.0f, Uint32 delay = 0, bool using_camera = true, ITEM_TYPE item_type = ITEM_NONE, bool player1 = true);
 	void DeleteParticle(Collider* c);
 
 private:
@@ -65,6 +67,7 @@ private:
 public:
 
 	Enemy* target;
+	Particle star;
 	Particle marionbeam_lv1[3];
 	Particle marionbeam_lv2[3];
 	Particle marionbeamleft_lv1[3];
