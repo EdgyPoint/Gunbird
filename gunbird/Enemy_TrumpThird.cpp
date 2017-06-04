@@ -53,6 +53,7 @@ Enemy_TrumpThird::Enemy_TrumpThird(int x, int y, int option) : Enemy(x, y, optio
 	anim_type = STAND;
 	flying = false;
 	killscore = 200;
+	to_draw = false;
 }
 
 void Enemy_TrumpThird::Move()

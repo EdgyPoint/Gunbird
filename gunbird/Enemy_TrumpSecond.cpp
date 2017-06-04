@@ -50,6 +50,7 @@ Enemy_TrumpSecond::Enemy_TrumpSecond(int x, int y, int option) : Enemy(x, y, opt
 	anim_type = STAND;
 	flying = false;
 	killscore = 200;
+	to_draw = false;
 }
 
 void Enemy_TrumpSecond::Move()

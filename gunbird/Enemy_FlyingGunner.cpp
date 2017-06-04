@@ -80,7 +80,7 @@ Enemy_FlyingGunner::Enemy_FlyingGunner(int x, int y, int option) : Enemy(x, y, o
 	{
 		animation = &arriving_right;
 		path.PushBack({ 0.0f, 0.4f }, 1900);
-		path.PushBack({ -0.6f, 0.0f }, 46);
+		path.PushBack({ -0.6f, 0.0f }, 136);
 		path.PushBack({-0.1f, 0.0f }, 10);
 		path.PushBack({ -0.1f, 0.0f }, 14);
 		path.PushBack({ 0.0f, 0.0f }, 8);
@@ -93,7 +93,7 @@ Enemy_FlyingGunner::Enemy_FlyingGunner(int x, int y, int option) : Enemy(x, y, o
 	{
 		animation = &arriving_left;
 		path.PushBack({ 0.0f, 0.4f }, 1900);
-		path.PushBack({ 0.6f, 0.0f }, 46);
+		path.PushBack({ 0.6f, 0.0f }, 136);
 		path.PushBack({ 0.1f, 0.0f }, 10);
 		path.PushBack({ 0.1f, 0.0f }, 14);
 		path.PushBack({ 0.0f, 0.0f }, 8);

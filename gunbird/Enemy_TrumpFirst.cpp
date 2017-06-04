@@ -54,6 +54,7 @@ Enemy_TrumpFirst::Enemy_TrumpFirst(int x, int y, int option) : Enemy(x, y, optio
 	anim_type = STAND;
 	flying = false;
 	killscore = 200;
+	to_draw = false;
 }
 
 void Enemy_TrumpFirst::Move()
