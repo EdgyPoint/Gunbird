@@ -15,7 +15,7 @@ Here's a brief gameplay video of EdgyPoint's Gunbird tribute.
 
 
 ## EdgyPoint Development team
-![](http://i.imgur.com/0B68slW.jpg)
+![](http://i.imgur.com/HZRrTIy.jpg)
 Github: 
 
 [Kistofe](https://github.com/kistofe)
