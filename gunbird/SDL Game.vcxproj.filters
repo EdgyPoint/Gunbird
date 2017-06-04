@@ -222,9 +222,6 @@
     <ClInclude Include="Enemy_FlyingGunner.h">
       <Filter>Modules\Enemies</Filter>
     </ClInclude>
-    <ClInclude Include="Enemy_FirstTrump.h">
-      <Filter>Modules\Enemies</Filter>
-    </ClInclude>
     <ClInclude Include="Enemy_TrumpFirst.h">
       <Filter>Modules\Enemies</Filter>
     </ClInclude>

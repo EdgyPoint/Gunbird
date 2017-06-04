@@ -79,7 +79,6 @@
     <ClInclude Include="Enemy_4CannonTurret.h" />
     <ClInclude Include="Enemy_Balloon.h" />
     <ClInclude Include="Enemy_CastleMortar.h" />
-    <ClInclude Include="Enemy_FirstTrump.h" />
     <ClInclude Include="Enemy_FlyingGunner.h" />
     <ClInclude Include="Enemy_GreenRobot.h" />
     <ClInclude Include="Enemy_House1.h" />
