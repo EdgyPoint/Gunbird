@@ -20,14 +20,14 @@ Enemy_Turretcopter::Enemy_Turretcopter(int x, int y, int option) : Enemy(x, y, o
 
 	if (option == 0)
 	{
-		path.PushBack({ 0.0f, 0.4f }, 4000);
-		path.PushBack({ -0.8f, 0.4f }, 4000);
+		path.PushBack({ 0.0f, 0.5f }, 4000);
+		path.PushBack({ -0.8f, 0.5f }, 10000);
 	}
 
 	if (option == 1)
 	{
-		path.PushBack({ 0.0f, 0.4f }, 4000);
-		path.PushBack({ 0.8f, 0.4f }, 4000);
+		path.PushBack({ 0.0f, 0.5f }, 4000);
+		path.PushBack({ 0.8f, 0.5f }, 10000);
 	}
 	
 	collider = App->collision->AddCollider({ 0, 0, 32, 35 }, COLLIDER_TYPE::COLLIDER_ENEMY_F, (Module*)App->enemies);

@@ -46,6 +46,7 @@ public:
 	float yflag;
 	float xflag;
 	int track_repeat;
+	int counter;
 	float ycounter;
 	bool cinematic;
 	int timer;
@@ -69,6 +70,7 @@ public:
 	bool retard_finished;
 	bool timer_on;
 	bool ending = false;
+	bool final_zone = false;
 	int ticks;
 	int randxpos1;
 	int randxpos2;

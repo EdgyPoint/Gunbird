@@ -95,8 +95,7 @@ bool ModuleVillageScene::Start()
 	mid_train_y = -730 + 261;
 	front_train_y = -730;
 	train_x = -183;
-	randxpos1 = rand() % 10 + 50;
-	randxpos2 = rand() % 100 + 80;
+	
 	
 	cinematic = false;
 	timerup = false;
@@ -218,11 +217,7 @@ bool ModuleVillageScene::Start()
 	App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, 22, -1290, 11);
 
 	//--Adding Turretcopters--
-	if (ending != true)
-	{
-		App->enemies->AddEnemy(ENEMY_TYPES::TURRETCOPTER, randxpos1, ypos1, 0);
-		App->enemies->AddEnemy(ENEMY_TYPES::TURRETCOPTER, randxpos2, ypos2, 1);
-	}
+	
 	
 
 	
@@ -253,6 +248,21 @@ bool ModuleVillageScene::CleanUp()
 // Update: draw background
 update_status ModuleVillageScene::Update()
 {
+	if (ending != true && final_zone && counter == 0)
+	{
+		App->enemies->AddEnemy(ENEMY_TYPES::TURRETCOPTER, randxpos1, -50, 0);		
+	}
+	if (ending != true && final_zone && counter == 360)
+	{
+		App->enemies->AddEnemy(ENEMY_TYPES::TURRETCOPTER, randxpos1, -50, 1);
+	}
+	counter++;
+	if (counter == 720)counter = 0;
+
+	randxpos1 = (rand() % 10) + 1;
+	randxpos2 = (rand() % 100) + 100;
+
+
 	if (!on_rails)
 	{
 		if (yflag <= -4350)
@@ -325,6 +335,7 @@ update_status ModuleVillageScene::Update()
 		}
 		if (SDL_GetTicks() > timer2 && xflag >= -60 && speed < 10.0 && !scrolling)
 		{
+			final_zone = true;
 			App->enemies->xcrolling = 5;
 			if (train_speedy > -5.0) { train_speedy -= 0.1; }
 			speed *= 1.015;
@@ -412,8 +423,7 @@ update_status ModuleVillageScene::Update()
 	//-167
 
 	srand(time(NULL));
-	ypos1 += 50;
-	ypos2 += 50;
+	
 
 	return UPDATE_CONTINUE;
 }
