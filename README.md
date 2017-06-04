@@ -12,7 +12,7 @@ EdgyPoint's tribute consists of a single level and only one playable character, 
 
 Here's a brief gameplay video of EdgyPoint's Gunbird tribute. 
 
-![](https://www.youtube.com/watch?v=V4Z60KCTpMQ)
+![Check it here](https://www.youtube.com/watch?v=V4Z60KCTpMQ)
 
 ## EdgyPoint Development team
 ![](http://i.imgur.com/UtBm2ur.jpg)
