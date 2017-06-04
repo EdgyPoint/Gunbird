@@ -262,7 +262,7 @@ update_status ModuleCollision::Update()
 
 			c2 = colliders[k];
 
-			if (c1->CheckCollision(c2->rect) == true &&  c1->already_hit == false && c2->already_hit == false) // This allows the bomb and charged shots not to hit too many times consequently (instead, they hit each 4 frames)
+			if (c1->CheckCollision(c2->rect) == true)
 			{
 				if (matrix[c1->type][c2->type] && c1->callback)
 					c1->callback->OnCollision(c1, c2);
@@ -270,25 +270,8 @@ update_status ModuleCollision::Update()
 				if (matrix[c2->type][c1->type] && c2->callback)
 					c2->callback->OnCollision(c2, c1);
 			}
-
-			if (c1->already_hit == true || c2->already_hit == true)
-			{
-				c1->collision_CD++;
-				c2->collision_CD++;
-			}
-
-			if (c2->collision_CD == 10 || c2->collision_CD == 10)
-			{
-				c1->already_hit = false;
-				c1->collision_CD = 0;
-				c2->already_hit = false;
-				c2->collision_CD = 0;
-			}
-
-			
 		}
 	}
-
 	DebugDraw();
 
 	return UPDATE_CONTINUE;

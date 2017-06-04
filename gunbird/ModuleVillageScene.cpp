@@ -30,10 +30,10 @@ ModuleVillageScene::ModuleVillageScene()
 	background2.x = 0;
 	background2.y = 0;
 
-	npi.h = 5;
-	npi.w = 1000;
-	npi.x = 0;
-	npi.y = -10;
+	offscreen_wall.h = 5;
+	offscreen_wall.w = 1000;
+	offscreen_wall.x = 0;
+	offscreen_wall.y = -10;
 
 
 	train_back.PushBack({ 9, 801, 75, 187 });
@@ -98,7 +98,7 @@ bool ModuleVillageScene::Start()
 	Mix_PlayMusic(App->audio->audio, -1);
 
 
-	App->collision->AddCollider(npi, COLLIDER_WALL);
+	App->collision->AddCollider(offscreen_wall, COLLIDER_WALL);
 
 	//---ENEMIES---
 	//--Adding Rotating Turrets--

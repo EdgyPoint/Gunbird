@@ -37,6 +37,8 @@ protected:
 public:
 	iPoint position;
 	fPoint bullet_speed;
+	int hitCD = 0;
+	bool already_hit = false;
 	int reload = 0;
 	float angle, angle2;
 	int pathoption = 0;

@@ -306,10 +306,11 @@ if ((App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT || SDL_GameCo
 			Mix_PlayChannel(-1, App->audio->sfx, 0);
 
 			App->particles->AddParticle(App->particles->chargedbeam, position.x - 2, position.y - 32, COLLIDER_CHARGEDSHOT);
+
+			time_since_last_charged = 0;
 		}
 		charge_up = 0;
 		finishing_charge = 0;
-		time_since_last_charged = 0;
 	}
 
 	// Shoot
