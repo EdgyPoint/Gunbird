@@ -181,9 +181,13 @@ bool ModuleVillageScene::Start()
 	//App->enemies->AddEnemy(ENEMY_TYPES::FLYINGGUNNER, -32, -650, 1);
 	//App->enemies->AddEnemy(ENEMY_TYPES::FLYINGGUNNER, -52, -600, 1);
 	//App->enemies->AddEnemy(ENEMY_TYPES::FLYINGGUNNER, -72, -650, 1);
-	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGGUNNER, 50, -720, 1);
-	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGGUNNER, 30, -670, 1);
-	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGGUNNER, 10, -720, 1);
+	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGGUNNER, -50, -720, 1);
+	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGGUNNER, -30, -670, 1);
+	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGGUNNER, -10, -720, 1);
+
+	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGGUNNER, 220, -720, 0);
+	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGGUNNER, 240, -670, 0);
+	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGGUNNER, 260, -720, 0);
 
 	return true;
 }
@@ -262,7 +266,21 @@ update_status ModuleVillageScene::Update()
 		if (xflag >= -60 && !timerup && !scrolling)
 		{
 			App->enemies->xcrolling = 4;
+			App->enemies->AddEnemy(ENEMY_TYPES::FLYINGGUNNER, -50, -720, 2);
+			App->enemies->AddEnemy(ENEMY_TYPES::FLYINGGUNNER, -30, -670, 2);
+			App->enemies->AddEnemy(ENEMY_TYPES::FLYINGGUNNER, -10, -720, 2);
 
+			App->enemies->AddEnemy(ENEMY_TYPES::FLYINGGUNNER, 220, -720, 3);
+			App->enemies->AddEnemy(ENEMY_TYPES::FLYINGGUNNER, 240, -670, 3);
+			App->enemies->AddEnemy(ENEMY_TYPES::FLYINGGUNNER, 260, -720, 3);
+
+			App->enemies->AddEnemy(ENEMY_TYPES::FLYINGGUNNER, -50, -720, 4);
+			App->enemies->AddEnemy(ENEMY_TYPES::FLYINGGUNNER, -30, -670, 4);
+			App->enemies->AddEnemy(ENEMY_TYPES::FLYINGGUNNER, -10, -720, 4);
+
+			App->enemies->AddEnemy(ENEMY_TYPES::FLYINGGUNNER, 220, -720, 5);
+			App->enemies->AddEnemy(ENEMY_TYPES::FLYINGGUNNER, 240, -670, 5);
+			App->enemies->AddEnemy(ENEMY_TYPES::FLYINGGUNNER, 260, -720, 5);
 			timer2 = SDL_GetTicks() + 2000;
 			timerup = true;
 			train_speedx = 0.0f;
@@ -405,7 +423,7 @@ void ModuleVillageScene::Side_scrolling()
 		ticks = SDL_GetTicks();
 		if (!timer_on)
 		{
-			timer2 = SDL_GetTicks() + 800;
+			timer2 = SDL_GetTicks() + 650;
 			timer_on = true;
 		}
 		if (ticks < timer2)

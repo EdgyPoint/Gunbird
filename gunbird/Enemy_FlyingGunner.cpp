@@ -32,14 +32,15 @@ Enemy_FlyingGunner::Enemy_FlyingGunner(int x, int y, int option) : Enemy(x, y, o
 	arriving_left2.PushBack({ 798, 338, 32, 36 });
 	arriving_left2.PushBack({ 798, 380, 32, 36 });
 	arriving_left2.PushBack({ 798, 422, 32, 36 });
-	arriving_left2.loop = false;
+	arriving_left2.loop = true;
 	arriving_left2.speed = 0.5f;
 	 //4frames
 	arriving_left3.PushBack({ 764, 380, 32, 36 });
 	arriving_left3.PushBack({ 764, 422, 32, 36 });
 	arriving_left3.PushBack({ 764, 338, 32, 36 });
 	arriving_left3.PushBack({ 764, 465, 32, 36 });
-	arriving_left3.speed = 0.5f;
+	arriving_left3.loop = true;
+	arriving_left3.speed = 0.1f;
 	//29 frames
 	staying.PushBack({ 732, 380, 32, 36 });
 	staying.PushBack({ 732, 422, 32, 36 });
@@ -47,21 +48,16 @@ Enemy_FlyingGunner::Enemy_FlyingGunner(int x, int y, int option) : Enemy(x, y, o
 	staying.loop = true;
 	staying.speed = 0.5f;
 
-	arriving_right1.PushBack({ 798, 380, 32, 36 });
-	arriving_right1.PushBack({ 798, 422, 32, 36 });
-	arriving_right1.PushBack({ 798, 338, 32, 36 });
-	arriving_right1.PushBack({ 798, 380, 32, 36 });
-	arriving_right1.PushBack({ 798, 422, 32, 36 });
-	arriving_right1.PushBack({ 798, 338, 32, 36 });
-	arriving_right1.PushBack({ 798, 380, 32, 36 });
-	arriving_right1.PushBack({ 798, 422, 32, 36 });
-	arriving_right1.PushBack({ 798, 338, 32, 36 });
+	arriving_right.PushBack({ 798, 380, 32, 36 });
+	arriving_right.PushBack({ 798, 422, 32, 36 });
+	arriving_right.PushBack({ 798, 338, 32, 36 });
+	
 
 	arriving_right1.PushBack({ 764, 380, 32, 36 });
 	arriving_right1.PushBack({ 764, 338, 32, 36 });
 	arriving_right1.PushBack({ 732, 422, 32, 36 });
 	arriving_right1.PushBack({ 874, 338, 32, 36 });
-	arriving_right1.loop = false;
+	arriving_right1.loop = true;
 	arriving_right1.speed = 0.3f;
 
 	arriving_right2.PushBack({ 836, 338, 32, 36 });
@@ -82,9 +78,15 @@ Enemy_FlyingGunner::Enemy_FlyingGunner(int x, int y, int option) : Enemy(x, y, o
 
 	if (option == 0)
 	{
-		path.PushBack({ 0.0f, 0.4f }, 17000); 
-		path.PushBack({ 0.6f, 0.4f }, 51);
-		path.PushBack({ 0.0f, 0.4f }, 45);
+		animation = &arriving_right;
+		path.PushBack({ 0.0f, 0.4f }, 1900);
+		path.PushBack({ -0.6f, 0.0f }, 46);
+		path.PushBack({-0.1f, 0.0f }, 10);
+		path.PushBack({ -0.1f, 0.0f }, 14);
+		path.PushBack({ 0.0f, 0.0f }, 8);
+		path.PushBack({ 0.0f, 0.0f }, 70);
+		path.PushBack({ 0.0f, 0.0f }, 8);
+		path.PushBack({ 0.6f, 0.0f }, 10000);
 	}
 
 	if (option == 1)
@@ -98,8 +100,58 @@ Enemy_FlyingGunner::Enemy_FlyingGunner(int x, int y, int option) : Enemy(x, y, o
 		path.PushBack({ 0.0f, 0.0f }, 70);
 		path.PushBack({ 0.0f, 0.0f }, 8);
 		path.PushBack({ -0.6f, 0.0f }, 10000);
+	}
 
-	//	path.PushBack({ 0.6f,0.0f }, 10000);
+	if (option == 2)
+	{
+		animation = &arriving_left;
+		path.PushBack({ 0.0f, 0.4f }, 1);
+		path.PushBack({ 0.6f, 0.0f }, 46);
+		path.PushBack({ 0.1f, 0.0f }, 10);
+		path.PushBack({ 0.1f, 0.0f }, 14);
+		path.PushBack({ 0.0f, 0.0f }, 8);
+		path.PushBack({ 0.0f, 0.0f }, 70);
+		path.PushBack({ 0.0f, 0.0f }, 8);
+		path.PushBack({ -0.6f, 0.0f }, 10000);
+	}
+
+	if (option == 3)
+	{
+		animation = &arriving_right;
+		path.PushBack({ 0.0f, 0.4f }, 1);
+		path.PushBack({ -0.6f, 0.0f }, 46);
+		path.PushBack({ -0.1f, 0.0f }, 10);
+		path.PushBack({ -0.1f, 0.0f }, 14);
+		path.PushBack({ 0.0f, 0.0f }, 8);
+		path.PushBack({ 0.0f, 0.0f }, 70);
+		path.PushBack({ 0.0f, 0.0f }, 8);
+		path.PushBack({ 0.6f, 0.0f }, 10000);
+	}
+
+	if (option == 4)
+	{
+		animation = &arriving_left;
+		path.PushBack({ 0.0f, 0.4f }, 300);
+		path.PushBack({ 0.6f, 0.0f }, 46);
+		path.PushBack({ 0.1f, 0.0f }, 10);
+		path.PushBack({ 0.1f, 0.0f }, 14);
+		path.PushBack({ 0.0f, 0.0f }, 8);
+		path.PushBack({ 0.0f, 0.0f }, 70);
+		path.PushBack({ 0.0f, 0.0f }, 8);
+		path.PushBack({ -0.6f, 0.0f }, 10000);
+	}
+
+	if (option == 5)
+	{
+		animation = &arriving_right;
+		path.PushBack({ 0.0f, 0.4f }, 300);
+		path.PushBack({ -0.6f, 0.0f }, 46);
+		path.PushBack({ -0.1f, 0.0f }, 10);
+		path.PushBack({ -0.1f, 0.0f }, 14);
+		path.PushBack({ 0.0f, 0.0f }, 8);
+		path.PushBack({ 0.0f, 0.0f }, 70);
+		path.PushBack({ 0.0f, 0.0f }, 8);
+		path.PushBack({ 0.6f, 0.0f }, 10000);
 	}
 
 	collider = App->collision->AddCollider({ 0, 0,  32, 36 }, COLLIDER_TYPE::COLLIDER_ENEMY_F, (Module*)App->enemies);
@@ -117,7 +169,7 @@ Enemy_FlyingGunner::Enemy_FlyingGunner(int x, int y, int option) : Enemy(x, y, o
 void Enemy_FlyingGunner::Move()
 {
 	position = original_pos + path.GetCurrentPosition();
-	if (pathoption == 1)
+	if (pathoption == 1 || pathoption == 2 || pathoption == 4)
 	{
 	if(path.steps[2].active)
 			animation = &arriving_left1;
@@ -129,9 +181,24 @@ void Enemy_FlyingGunner::Move()
 			animation = &staying;
 	if (path.steps[6].active)
 		animation = &arriving_left3;
-	if (path.steps[5].active)
+	if (path.steps[7].active)
 		animation = &arriving_left2;
 		}
+	else if (pathoption == 0 || pathoption == 3|| pathoption == 5)
+	{
+		if (path.steps[2].active)
+			animation = &arriving_right1;
+		if (path.steps[3].active)
+			animation = &arriving_right2;
+		if (path.steps[4].active)
+			animation = &arriving_right3;
+		if (path.steps[5].active)
+			animation = &staying;
+		if (path.steps[6].active)
+			animation = &arriving_right3;
+		if (path.steps[7].active)
+			animation = &arriving_right2;
+	}
 	
 
 	/*if (pathoption == 0 && position.y == -50) { hasfinishedleft = true; }

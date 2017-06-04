@@ -182,36 +182,6 @@ update_status ModulePlayer::Update()
 	counter++;
 	if (counter == 120)counter = 0;
 
-	/*if (SDL_GameControllerGetAxis(App->input->Controller, SDL_CONTROLLER_AXIS_LEFTX) > 10000)
-	// Controller input variables
-	if (App->input->controller1.left_joystick.x > 0.25)
-	{
-		joystick_right = true;
-	}
-	else if(SDL_GameControllerGetAxis(App->input->Controller, SDL_CONTROLLER_AXIS_LEFTX) > 10000)
-		joystick_right = false;
-	if (SDL_GameControllerGetAxis(App->input->Controller, SDL_CONTROLLER_AXIS_LEFTX) < -13000)
-	{
-		joystick_left = true;
-	}
-	else if(SDL_GameControllerGetAxis(App->input->Controller, SDL_CONTROLLER_AXIS_LEFTX) > -15000)
-		joystick_left = false;
-
-	joystick_down = 0;
-	joystick_up = 0;
-
-	if (SDL_GameControllerGetAxis(App->input->Controller, SDL_CONTROLLER_AXIS_LEFTY) < -13000)
-	{
-		joystick_down = true;
-	}
-	else if(SDL_GameControllerGetAxis(App->input->Controller, SDL_CONTROLLER_AXIS_LEFTY) < 10000)
-		joystick_down = false;
-	if (SDL_GameControllerGetAxis(App->input->Controller, SDL_CONTROLLER_AXIS_LEFTY) > 10000)
-	{
-		joystick_up = true;
-	}
-	else if(SDL_GameControllerGetAxis(App->input->Controller, SDL_CONTROLLER_AXIS_LEFTY) > -15000)
-		joystick_up = false;*/
 
 
 
@@ -338,7 +308,7 @@ if ((App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT || SDL_GameCo
 	// --------------------------
 
 	// Bomb
-	if (App->input->keyboard[SDL_SCANCODE_V] == KEY_STATE::KEY_DOWN && !_dying && !respawning && !stunned && !App->fade->fading && bombCD == 0 && bombs > 0)
+	if ((App->input->keyboard[SDL_SCANCODE_V] == KEY_STATE::KEY_DOWN  || App->input->controller1[SDL_CONTROLLER_BUTTON_X] == BUTTON_STATE::B_DOWN) && !_dying && !respawning && !stunned && !App->fade->fading && bombCD == 0 && bombs > 0)
 	{
 		if (bombs > 0)
 		bombs--;
@@ -737,11 +707,13 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 		finishing_charge = 0;
 
 		stunned = true;
-		powerup_lv--;
+		
 		App->particles->AddParticle(App->particles->playercollision, position.x, position.y, COLLIDER_NONE);
 		current_animation = &tilting;
 
 		powerup_lv--;
+		if (powerup_lv < 0)
+			powerup_lv = 0;
 	}
 
 	if (c2->type == COLLIDER_POWERUP)

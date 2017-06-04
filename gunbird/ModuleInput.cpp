@@ -80,7 +80,7 @@ update_status ModuleInput::PreUpdate()
 
 	 Uint8 buttons1[MAX_BUTTONS];
 	buttons1[SDL_CONTROLLER_BUTTON_A] = SDL_GameControllerGetButton(App->input->Controller1, SDL_CONTROLLER_BUTTON_A);
-	buttons1[SDL_CONTROLLER_BUTTON_Y] = SDL_GameControllerGetButton(App->input->Controller1, SDL_CONTROLLER_BUTTON_Y);
+	buttons1[SDL_CONTROLLER_BUTTON_X] = SDL_GameControllerGetButton(App->input->Controller1, SDL_CONTROLLER_BUTTON_X);
 	buttons1[SDL_CONTROLLER_BUTTON_B] = SDL_GameControllerGetButton(App->input->Controller1, SDL_CONTROLLER_BUTTON_B);
 	buttons1[SDL_CONTROLLER_BUTTON_DPAD_UP] = SDL_GameControllerGetButton(App->input->Controller1, SDL_CONTROLLER_BUTTON_DPAD_UP);
 	buttons1[SDL_CONTROLLER_BUTTON_DPAD_DOWN] = SDL_GameControllerGetButton(App->input->Controller1, SDL_CONTROLLER_BUTTON_DPAD_DOWN);
@@ -89,14 +89,12 @@ update_status ModuleInput::PreUpdate()
 	
 	Uint8 buttons2[MAX_BUTTONS];
 	buttons2[SDL_CONTROLLER_BUTTON_A] = SDL_GameControllerGetButton(App->input->Controller2, SDL_CONTROLLER_BUTTON_A);
-	buttons2[SDL_CONTROLLER_BUTTON_Y] = SDL_GameControllerGetButton(App->input->Controller2, SDL_CONTROLLER_BUTTON_Y);
+	buttons2[SDL_CONTROLLER_BUTTON_X] = SDL_GameControllerGetButton(App->input->Controller2, SDL_CONTROLLER_BUTTON_X);
 	buttons2[SDL_CONTROLLER_BUTTON_B] = SDL_GameControllerGetButton(App->input->Controller2, SDL_CONTROLLER_BUTTON_B);
 	buttons2[SDL_CONTROLLER_BUTTON_DPAD_UP] = SDL_GameControllerGetButton(App->input->Controller2, SDL_CONTROLLER_BUTTON_DPAD_UP);
 	buttons2[SDL_CONTROLLER_BUTTON_DPAD_DOWN] = SDL_GameControllerGetButton(App->input->Controller2, SDL_CONTROLLER_BUTTON_DPAD_DOWN);
 	buttons2[SDL_CONTROLLER_BUTTON_DPAD_RIGHT] = SDL_GameControllerGetButton(App->input->Controller2, SDL_CONTROLLER_BUTTON_DPAD_RIGHT);
 	buttons2[SDL_CONTROLLER_BUTTON_DPAD_LEFT] = SDL_GameControllerGetButton(App->input->Controller2, SDL_CONTROLLER_BUTTON_DPAD_LEFT);
-
-	SDL_GameControllerGetBindForButton(Controller1, SDL_CONTROLLER_BUTTON_DPAD_UP);
 
 	
 	for (int i = 0; i < MAX_BUTTONS; ++i)
@@ -121,17 +119,17 @@ update_status ModuleInput::PreUpdate()
 	{
 		if (buttons2[i] == 1)
 		{
-			if (controller1[i] == B_IDLE)
-				controller1[i] = B_DOWN;
+			if (controller2[i] == B_IDLE)
+				controller2[i] = B_DOWN;
 			else
-				controller1[i] = B_REPEAT;
+				controller2[i] = B_REPEAT;
 		}
 		else
 		{
-			if (controller1[i] == B_REPEAT || keyboard[i] == B_DOWN)
-				controller1[i] = B_UP;
+			if (controller2[i] == B_REPEAT || keyboard[i] == B_DOWN)
+				controller2[i] = B_UP;
 			else
-				controller1[i] = B_IDLE;
+				controller2[i] = B_IDLE;
 		}
 	}
 

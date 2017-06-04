@@ -15,6 +15,7 @@ private:
 	Animation arriving_left1;
 	Animation arriving_left2;
 	Animation arriving_left3;
+	Animation arriving_right;
 	Animation arriving_right1;
 	Animation arriving_right2;
 	Animation arriving_right3;
