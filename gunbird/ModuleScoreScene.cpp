@@ -1,3 +1,6 @@
+#include<cstring>
+#include<stdlib.h>
+#include <stdio.h>
 #include "Globals.h"
 #include "Application.h"
 #include "ModuleTextures.h"
@@ -73,8 +76,23 @@ update_status ModuleScoreScene::Update()
 	App->fonts->BlitText(120, 223, App->player->font_scorescene, "      0");
 	App->fonts->BlitText(120, 247, App->player->font_scorescene, "      0");
 	App->fonts->BlitText(120, 271, App->player->font_scorescene, "      0");
-	App->fonts->BlitText(120, 55, App->player->font_scorescene, App->player->text_score);
-	App->fonts->BlitText(120, 79, App->player->font_scorescene, App->player2->text_score2);
+
+	if (App->player->score > App->player->highscore)App->player->highscore = App->player->score;
+	if (App->player2->score > App->player2->highscore)App->player2->highscore = App->player2->score;
+
+	sprintf_s(App->player->text_score, 10, "%7d", App->player->highscore);
+	sprintf_s(App->player2->text_score2, 10, "%7d", App->player2->highscore);
+
+	if (App->player->highscore > App->player2->highscore)
+	{
+		App->fonts->BlitText(120, 55, App->player->font_scorescene, App->player->text_score);
+		App->fonts->BlitText(120, 79, App->player->font_scorescene, App->player2->text_score2);
+	}
+	else
+	{
+		App->fonts->BlitText(120, 55, App->player->font_scorescene, App->player2->text_score2);
+		App->fonts->BlitText(120, 79, App->player->font_scorescene, App->player->text_score);
+	}
 
 	if ((App->input->keyboard[SDL_SCANCODE_SPACE] || App->input->controller1[SDL_CONTROLLER_BUTTON_A] == BUTTON_STATE::B_DOWN) && !App->fade->fading)
 	{

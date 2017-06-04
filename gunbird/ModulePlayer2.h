@@ -54,6 +54,8 @@ public:
 	int bombs = 0;
 	int charge_up = 0;
 	int finishing_charge = 0;
+	int counter;
+	int highscore;
 	int time_since_last_charged = 0; // this variable is to use acceleration on the charged shot
 	bool out = true;
 	char text_score2[10];

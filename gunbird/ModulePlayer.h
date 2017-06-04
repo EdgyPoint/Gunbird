@@ -55,6 +55,7 @@ public:
 	int bombs = 2;
 	int charge_up = 0;
 	int finishing_charge = 0;
+	int highscore;
 	int time_since_last_charged = 0; // this variable is to use acceleration on the charged shot
 	bool out = false;
 	uint shot;
