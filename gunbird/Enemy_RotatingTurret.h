@@ -55,6 +55,7 @@ public:
 	int initcounter = 0;
 	float aux_float;
 	int counter = 0;
+	int reloadd = 0;
 	fPoint speeds;
 };
 #endif

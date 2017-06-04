@@ -65,6 +65,8 @@ public:
 	int status = NORMAL;
 	int death_type = DEFAULT_ENEMY;
 	bool flying;
+	bool firstdead = false;
+	bool secondead = false;
 	bool drops_powerup = false;
 	bool drops_bomb = false;
 	bool drops_coin = false;

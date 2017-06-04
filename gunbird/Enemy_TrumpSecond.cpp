@@ -12,24 +12,24 @@
 
 Enemy_TrumpSecond::Enemy_TrumpSecond(int x, int y, int option) : Enemy(x, y, option)
 {
-	stand.PushBack({ 1392, 0, 60, 60 });
+	stand.PushBack({ 1392, 120, 60, 60 });
 
-	stand_hit.PushBack({ 1572, 0, 60, 60 });
+	stand_hit.PushBack({ 1572, 120, 60, 60 });
 
-	stand_damaged.PushBack({ 1752, 0, 60, 60 });
+	stand_damaged.PushBack({ 1752, 120, 60, 60 });
 
 
-	attacking.PushBack({ 1392, 0, 60, 60 });
-	attacking.PushBack({ 1452, 0, 60, 60 });
-	attacking.PushBack({ 1512, 0, 60, 60 });
+	attacking.PushBack({ 1392, 120, 60, 60 });
+	attacking.PushBack({ 1452, 120, 60, 60 });
+	attacking.PushBack({ 1512, 120, 60, 60 });
 
-	attacking_hit.PushBack({ 1572, 0, 60, 60 });
-	attacking_hit.PushBack({ 1632, 0, 60, 60 });
-	attacking_hit.PushBack({ 1692, 0, 60, 60 });
+	attacking_hit.PushBack({ 1572, 120, 60, 60 });
+	attacking_hit.PushBack({ 1632, 120, 60, 60 });
+	attacking_hit.PushBack({ 1692, 120, 60, 60 });
 
-	attacking_damaged.PushBack({ 1752, 0, 60, 60 });
-	attacking_damaged.PushBack({ 1812, 0, 60, 60 });
-	attacking_damaged.PushBack({ 1872, 0, 60, 60 });
+	attacking_damaged.PushBack({ 1752, 120, 60, 60 });
+	attacking_damaged.PushBack({ 1812, 120, 60, 60 });
+	attacking_damaged.PushBack({ 1872, 120, 60, 60 });
 
 
 	animation = &stand;
@@ -56,8 +56,9 @@ void Enemy_TrumpSecond::Move()
 {
 	position = original_pos + path.GetCurrentPosition();
 
-	if (position.y > 0 && position.y < 100) anim_type = ATTACKING;
-	else anim_type = STAND;
+	if (position.y > 0 && position.y < 100 && anim_type != DEAD && firstdead) anim_type = ATTACKING;
+	else if (anim_type != DEAD)
+		anim_type = STAND;
 
 
 	if (anim_type == STAND)

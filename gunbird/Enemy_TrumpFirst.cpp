@@ -60,8 +60,9 @@ void Enemy_TrumpFirst::Move()
 {
 	position = original_pos + path.GetCurrentPosition();
 
-	if (position.y > 0 && position.y < 100) anim_type = ATTACKING;
-	else anim_type = STAND;
+	if (position.y > 0 && position.y < 100 && anim_type != DEAD) anim_type = ATTACKING;
+	else if (anim_type != DEAD)
+		anim_type = STAND;
 
 
 	if (anim_type == STAND)
