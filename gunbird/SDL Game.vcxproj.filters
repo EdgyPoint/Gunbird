@@ -112,6 +112,9 @@
     <ClCompile Include="Enemy_TrumpThird.cpp">
       <Filter>Modules\Enemies</Filter>
     </ClCompile>
+    <ClCompile Include="Enemy_TrainTurret.cpp">
+      <Filter>Modules\Enemies</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animation.h">
@@ -235,6 +238,9 @@
       <Filter>Modules\Enemies</Filter>
     </ClInclude>
     <ClInclude Include="Enemy_TrumpThird.h">
+      <Filter>Modules\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy_TrainTurret.h">
       <Filter>Modules\Enemies</Filter>
     </ClInclude>
   </ItemGroup>
