@@ -17,14 +17,45 @@ Here's a brief gameplay video of EdgyPoint's Gunbird tribute.
 ## EdgyPoint Development team
 ![](http://i.imgur.com/0B68slW.jpg)
 Github: 
+
 [Kistofe](https://github.com/kistofe)
+
 [Farmak09](https://github.com/Farmak09)
+
 [Dynamiczero99](https://github.com/dynamiczero99)
+
 [Witiza](https://github.com/Witiza)
 
-### Jekyll Themes
+## Game Controls
+The game can be played with keyboard or with Game Controller (taking XBOX 360/ONE controller as reference)
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/EdgyPoint/Project-1/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+*KEYBOARD CONTROLS*
+
+    ### Player 1
+    SPACE         ->  Start
+    WASD          ->  Move
+    C             ->  Shoot
+    V             ->  Bomb
+    
+    **Player 2:**
+    NUMPAD INTRO  ->  Start
+    ARROW KEYS    ->  Move
+    NUMPAD 0      ->  Shoot
+    NUMPAD 1      ->  Bomb
+    
+*GAME CONTROLLER CONTROLS*
+
+    START         ->  Start
+    Left Stick    ->  Move
+    A             ->  Shoot
+    X             ->  Bomb
+
+ *DEBUG FEATURES (Only available in Keyboard)*
+ 
+    F1            ->  Toggle Hitboxes
+    F2            ->  Godmode
+    F3            ->  Auto-win
+    F4            ->  Auto-lose
 
 ### Support or Contact
 
