@@ -100,9 +100,12 @@ void Enemy::Draw(SDL_Texture* sprites, Enemy* enemy)
 
 void Enemy::OnCollision(Collider* collider, Enemy* enemy)
 {
-	if (enemy->already_hit == false)
-	{
-		if (collider->type == COLLIDER_PLAYER_SHOT && App->player->powerup_lv == 0)
+	// Omit collision when robot is under the bridge
+	if (enemy->is_robot == true && (enemy->position.y > 50 && enemy->position.y < 77))
+		return;
+	// ----------------
+
+	if (collider->type == COLLIDER_PLAYER_SHOT && App->player->powerup_lv == 0)
 			enemy->hp -= 1.0f;
 		else if (collider->type == COLLIDER_PLAYER2_SHOT && App->player2->powerup_lv == 0)
 			enemy->hp -= 1.0f;
@@ -118,22 +121,19 @@ void Enemy::OnCollision(Collider* collider, Enemy* enemy)
 			enemy->hp -= 1.25f;
 		else if (collider->type == COLLIDER_PLAYER2_SHOT && App->player2->powerup_lv == 3)
 			enemy->hp -= 1.25f;
-		else if (collider->type == COLLIDER_BOMBSHOT)
+		else if (collider->type == COLLIDER_BOMBSHOT && enemy->already_hit == false)
 			enemy->hp -= 3;
-		else if (collider->type == COLLIDER_CHARGEDSHOT)
+		else if (collider->type == COLLIDER_CHARGEDSHOT && enemy->already_hit == false)
 			enemy->hp -= 5;
-	}
 
 	if (hitCD == 0)
 	{
 		enemy->already_hit = false;
 	}
 
-	if ((collider->type == COLLIDER_PLAYER_SHOT || collider->type == COLLIDER_PLAYER2_SHOT) && enemy->already_hit == false)
+	if ((collider->type == COLLIDER_PLAYER_SHOT || collider->type == COLLIDER_PLAYER2_SHOT))
 	{
 		enemy->status = HIT;
-		enemy->already_hit = true;
-		enemy->hitCD = 6;
 		App->particles->AddParticle(App->particles->impact, collider->rect.x - 6, collider->rect.y - 47, COLLIDER_NONE);
 		App->audio->sfx = App->audio->LoadSFX("assets/SFX/impact.wav");
 		Mix_PlayChannel(-1, App->audio->sfx, 0);
