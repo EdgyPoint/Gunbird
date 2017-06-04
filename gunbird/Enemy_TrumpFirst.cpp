@@ -22,21 +22,25 @@ Enemy_TrumpFirst::Enemy_TrumpFirst(int x, int y, int option) : Enemy(x, y, optio
 	attacking.PushBack({ 1392, 0, 60, 60 });
 	attacking.PushBack({ 1452, 0, 60, 60 });
 	attacking.PushBack({ 1512, 0, 60, 60 });
+	attacking.speed = 0.1f;
 
 	attacking_hit.PushBack({ 1572, 0, 60, 60 });
 	attacking_hit.PushBack({ 1632, 0, 60, 60 });
 	attacking_hit.PushBack({ 1692, 0, 60, 60 });
+	attacking_hit.speed = 0.1f;
+
 
 	attacking_damaged.PushBack({ 1752, 0, 60, 60 });
 	attacking_damaged.PushBack({ 1812, 0, 60, 60 });
 	attacking_damaged.PushBack({ 1872, 0, 60, 60 });
+	attacking_damaged.speed = 0.1f;
 
 
 	animation = &stand;
 
 	collider = App->collision->AddCollider({ 0, 0, 60, 60 }, COLLIDER_TYPE::COLLIDER_ENEMY, (Module*)App->enemies);
 
-	path.PushBack({ 0.0f, 0.4f }, 10000);
+	path.PushBack({ 0.0f, 0.0f }, 10000);
 
 
 
@@ -100,13 +104,62 @@ void Enemy_TrumpFirst::Shoot()
 {
 	if (anim_type == ATTACKING)
 	{
-		reload++;
-		if (reload == 5)
+		if (reload == 0)
 		{
-			bullet_speed = ShootCalculator({ position.x + 12, position.y + 10 }, { App->player->position.x + 41, App->player->position.y + 11 });
-			App->particles->AddParticle(App->particles->smallshot, position.x + 12, position.y + 3, COLLIDER_ENEMY_SHOT, bullet_speed.x, bullet_speed.y);
-			bullet_speed = ShootCalculator({ position.x + 12, position.y + 3 }, { App->player->position.x - 41, App->player->position.y + 11 });
-			App->particles->AddParticle(App->particles->smallshot, position.x + 12, position.y + 3, COLLIDER_ENEMY_SHOT, bullet_speed.x, bullet_speed.y);
+			App->particles->AddParticle(App->particles->smallshot, position.x + 10, position.y + 13, COLLIDER_ENEMY_SHOT, 0, 3);
+			App->particles->AddParticle(App->particles->smallshot, position.x + 46, position.y + 13, COLLIDER_ENEMY_SHOT, 0, 3);
 		}
+
+		if (reload == 10)
+		{
+			App->particles->AddParticle(App->particles->smallshot, position.x + 5, position.y + 13, COLLIDER_ENEMY_SHOT, 0, 3);
+			App->particles->AddParticle(App->particles->smallshot, position.x + 51, position.y + 13, COLLIDER_ENEMY_SHOT, 0, 3);
+		}
+
+		if (reload == 60)
+		{
+			bullet_speed = ShootCalculator({ position.x + 9, position.y + 13 }, { App->player->position.x - 60, App->player->position.y });
+			bullet_speed2 = ShootCalculator({ position.x + 9, position.y + 13 }, { App->player->position.x + 100, App->player->position.y });
+			bullet_speed3 = ShootCalculator({ position.x + 46, position.y + 13 }, { App->player->position.x - 60, App->player->position.y });
+			bullet_speed4 = ShootCalculator({ position.x + 46, position.y + 13 }, { App->player->position.x + 100, App->player->position.y });
+
+			App->particles->AddParticle(App->particles->bigshot, position.x + 9, position.y + 13, COLLIDER_ENEMY_SHOT, bullet_speed.x, bullet_speed.y);
+			App->particles->AddParticle(App->particles->bigshot, position.x + 46, position.y + 13, COLLIDER_ENEMY_SHOT, bullet_speed3.x, bullet_speed3.y);
+			App->particles->AddParticle(App->particles->bigshot, position.x + 9, position.y + 13, COLLIDER_ENEMY_SHOT, bullet_speed2.x, bullet_speed2.y);
+			App->particles->AddParticle(App->particles->bigshot, position.x + 46, position.y + 13, COLLIDER_ENEMY_SHOT, bullet_speed4.x, bullet_speed4.y);
+		}
+
+		if (reload == 90)
+		{
+			bullet_speed = ShootCalculator({ position.x + 9, position.y + 13 }, { App->player->position.x - 60, App->player->position.y });
+			bullet_speed2 = ShootCalculator({ position.x + 9, position.y + 13 }, { App->player->position.x + 100, App->player->position.y });
+			bullet_speed3 = ShootCalculator({ position.x + 46, position.y + 13 }, { App->player->position.x - 60, App->player->position.y });
+			bullet_speed4 = ShootCalculator({ position.x + 46, position.y + 13 }, { App->player->position.x + 100, App->player->position.y });
+
+			App->particles->AddParticle(App->particles->bigshot, position.x + 9, position.y + 13, COLLIDER_ENEMY_SHOT, bullet_speed.x, bullet_speed.y);
+			App->particles->AddParticle(App->particles->bigshot, position.x + 46, position.y + 13, COLLIDER_ENEMY_SHOT, bullet_speed3.x, bullet_speed3.y);
+			App->particles->AddParticle(App->particles->bigshot, position.x + 9, position.y + 13, COLLIDER_ENEMY_SHOT, bullet_speed2.x, bullet_speed2.y);
+			App->particles->AddParticle(App->particles->bigshot, position.x + 46, position.y + 13, COLLIDER_ENEMY_SHOT, bullet_speed4.x, bullet_speed4.y);
+		}
+
+		if (reload == 120)
+		{
+			bullet_speed = ShootCalculator({ position.x + 9, position.y + 13 }, { App->player->position.x - 100, App->player->position.y });
+			bullet_speed2 = ShootCalculator({ position.x + 9, position.y + 13 }, { App->player->position.x + 150, App->player->position.y });
+			bullet_speed3 = ShootCalculator({ position.x + 46, position.y + 13 }, { App->player->position.x - 100, App->player->position.y });
+			bullet_speed4 = ShootCalculator({ position.x + 46, position.y + 13 }, { App->player->position.x + 100, App->player->position.y });
+			bullet_speed5 = ShootCalculator({ position.x + 9, position.y + 13 }, { App->player->position.x, App->player->position.y });
+			bullet_speed6 = ShootCalculator({ position.x + 46, position.y + 13 }, { App->player->position.x, App->player->position.y });
+
+			App->particles->AddParticle(App->particles->bigshot, position.x + 9, position.y + 13, COLLIDER_ENEMY_SHOT, bullet_speed.x, bullet_speed.y);
+			App->particles->AddParticle(App->particles->bigshot, position.x + 46, position.y + 13, COLLIDER_ENEMY_SHOT, bullet_speed3.x, bullet_speed3.y);
+			App->particles->AddParticle(App->particles->bigshot, position.x + 9, position.y + 13, COLLIDER_ENEMY_SHOT, bullet_speed2.x, bullet_speed2.y);
+			App->particles->AddParticle(App->particles->bigshot, position.x + 46, position.y + 13, COLLIDER_ENEMY_SHOT, bullet_speed4.x, bullet_speed4.y);
+			App->particles->AddParticle(App->particles->bigshot, position.x + 9, position.y + 13, COLLIDER_ENEMY_SHOT, bullet_speed5.x, bullet_speed5.y);
+			App->particles->AddParticle(App->particles->bigshot, position.x + 46, position.y + 13, COLLIDER_ENEMY_SHOT, bullet_speed6.x, bullet_speed6.y);
+		}
+
+		reload++;
+		if (reload == 180)reload = 0;
 	}
 }

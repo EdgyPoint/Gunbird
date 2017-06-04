@@ -7,11 +7,7 @@
 class Enemy_2CannonTurret : public Enemy
 {
 private:
-	enum Anim_Type
-	{
-		CLOSED,
-		ATTACKING
-	};
+	
 	Anim_Type anim_type;
 	iPoint original_pos;
 	Animation closed, closed_hit, closed_damaged;

@@ -50,6 +50,11 @@ protected:
 public:
 	iPoint position;
 	fPoint bullet_speed;
+	fPoint bullet_speed2;
+	fPoint bullet_speed3;
+	fPoint bullet_speed4;
+	fPoint bullet_speed5;
+	fPoint bullet_speed6;
 	int hitCD = 0;
 	bool already_hit = false;
 	int reload = 0;

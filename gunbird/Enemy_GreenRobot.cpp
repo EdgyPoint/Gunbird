@@ -130,7 +130,7 @@ Enemy_GreenRobot::Enemy_GreenRobot(int x, int y, int option) : Enemy(x, y, optio
 	path.PushBack({ 0.0f, 0.05f }, 1800);
 	path.PushBack({ 0.0f, 1.2f }, 300);
 
-	collider = App->collision->AddCollider({ 0, 0, 76, 76 }, COLLIDER_TYPE::COLLIDER_ENEMY, (Module*)App->enemies);
+	collider = App->collision->AddCollider({ 0, 0, 76, 56 }, COLLIDER_TYPE::COLLIDER_ENEMY, (Module*)App->enemies);
 
 	original_pos.x = x;
 	original_pos.y = y;
