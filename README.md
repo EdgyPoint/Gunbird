@@ -2,31 +2,25 @@
 
 Gunbird is a shoot'em up like game developed by Psikyo and released in japanese arcade machines in 1994. Soon in 1998, Gunbird would receive a sequel and a few years later (2002 and 2003) it got to the European and American market respectively. 
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+![](http://i.imgur.com/bvAXY8G.jpg)
 
-### Markdown
+In the original Gubird game, you are be able to choose between a cast of five characters, with an original story and ending for each one of them, and go through several different stages facing an evil gang called The Trump. 
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+EdgyPoint's tribute consists of a single level and only one playable character, Marion. 
 
-```markdown
-Syntax highlighted code block
+## Gameplay preview
 
-# Header 1
-## Header 2
-### Header 3
+Here's a brief gameplay video of EdgyPoint's Gunbird tribute. 
 
-- Bulleted
-- List
 
-1. Numbered
-2. List
 
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+## EdgyPoint Development team
+![](http://i.imgur.com/0B68slW.jpg)
+Github: 
+[Kistofe](https://github.com/kistofe)
+[Farmak09](https://github.com/Farmak09)
+[Dynamiczero99](https://github.com/dynamiczero99)
+[Witiza](https://github.com/Witiza)
 
 ### Jekyll Themes
 
