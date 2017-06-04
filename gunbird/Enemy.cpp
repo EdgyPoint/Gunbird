@@ -117,6 +117,7 @@ void Enemy::OnCollision(Collider* collider, Enemy* enemy)
 	else if (collider->type == COLLIDER_PLAYER2_SHOT && App->player2->powerup_lv == 3)
 		enemy->hp -= 1.25f;
 	else if (collider->type == COLLIDER_BOMBSHOT)
+		enemy->hp -= 3;
 	else if (collider->type == COLLIDER_CHARGEDSHOT)
 		enemy->hp -= 15;
 
