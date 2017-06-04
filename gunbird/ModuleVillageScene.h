@@ -30,7 +30,7 @@ public:
 	SDL_Texture* train = nullptr;
 	SDL_Rect background1;
 	SDL_Rect background2;
-	SDL_Rect offscreen_wall;
+	SDL_Rect offscreen_wall_down, offscreen_wall_up, offscreen_wall_left, offscreen_wall_right;
 
 	Animation train_back;
 	Animation train_mid;

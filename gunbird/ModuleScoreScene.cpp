@@ -49,9 +49,6 @@ bool ModuleScoreScene::CleanUp()
 	App->player->score = 0;
 	App->player2->score = 0;
 	App->textures->Unload(graphics);
-	/*App->player->Disable();
-	App->player2->Disable();
-	App->collision->Disable();*/
 
 	return true;
 }

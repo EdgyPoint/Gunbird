@@ -34,6 +34,7 @@ public:
 	SDL_Rect p1display;
 	SDL_Rect lifedisplay;
 	SDL_Rect bombdisplay;
+	SDL_Rect gmdisplay;
 	Collider* player_col = nullptr;
 	Animation* current_animation = nullptr;
 	Animation idle;

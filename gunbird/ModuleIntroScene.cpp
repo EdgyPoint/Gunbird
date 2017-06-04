@@ -49,7 +49,6 @@ bool ModuleIntroScene::CleanUp()
 	LOG("Unloading intro scene");
 	App->textures->Unload(graphics);
 	App->scene_intro->Disable();
-	//App->collision->Disable();
 	
 	return true;
 }

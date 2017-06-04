@@ -112,6 +112,7 @@ bool ModulePlayer::Start()
 	powerup_lv = 0;
 	lives = 2;
 	bombs = 2;
+	godmode = false;
 
 	graphics = App->textures->Load("assets/images/Marion.png");
 
@@ -134,6 +135,11 @@ bool ModulePlayer::Start()
 	bombdisplay.y = 15;
 	bombdisplay.w = 12;
 	bombdisplay.h = 15;
+
+	gmdisplay.x = 28;
+	gmdisplay.y = 12;
+	gmdisplay.w = 11;
+	gmdisplay.h = 16;
 
 	position.x = 51;
 	position.y = 320;
@@ -590,8 +596,11 @@ if ((App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT || SDL_GameCo
 	//Blit UI
 	App->render->Blit(ui, 5, 6, &p1display, 0, true);
 
+	if (godmode == true)
+		App->render->Blit(ui, 6, 282, &gmdisplay, 0, true);
+
 	if (lives == 1)
-	App->render->Blit(ui, 5, 21, &lifedisplay, 0, true);
+		App->render->Blit(ui, 5, 21, &lifedisplay, 0, true);
 	 
 	if (lives == 2)
 	{
@@ -678,6 +687,8 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 
 		lives -= 1;
 		_dying = true;
+
+		powerup_lv = 0;
 		
 		App->collision->EditMatrix(COLLIDER_PLAYER, COLLIDER_ENEMY_F, false);
 		App->collision->EditMatrix(COLLIDER_PLAYER, COLLIDER_ENEMY_SHOT, false);
@@ -707,10 +718,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 		App->particles->AddParticle(App->particles->playercollision, position.x, position.y, COLLIDER_NONE);
 		current_animation = &tilting;
 
-		if (powerup_lv < 0)
-		{
-			powerup_lv = 0;
-		}
+		powerup_lv--;
 	}
 
 	if (c2->type == COLLIDER_POWERUP)

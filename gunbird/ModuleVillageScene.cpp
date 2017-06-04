@@ -30,11 +30,25 @@ ModuleVillageScene::ModuleVillageScene()
 	background2.x = 0;
 	background2.y = 0;
 
-	offscreen_wall.h = 5;
-	offscreen_wall.w = 1000;
-	offscreen_wall.x = 0;
-	offscreen_wall.y = -10;
+	offscreen_wall_down.h = 5;
+	offscreen_wall_down.w = 244;
+	offscreen_wall_down.x = -10;
+	offscreen_wall_down.y = 330;
 
+	offscreen_wall_up.h = 5;
+	offscreen_wall_up.w = 244;
+	offscreen_wall_up.x = -10;
+	offscreen_wall_up.y = -15;
+
+	offscreen_wall_left.h = 340;
+	offscreen_wall_left.w = 5;
+	offscreen_wall_left.x = -15;
+	offscreen_wall_left.y = -10;
+
+	offscreen_wall_right.h = 340;
+	offscreen_wall_right.w = 5;
+	offscreen_wall_right.x = 234;
+	offscreen_wall_right.y = -10;
 
 	train_back.PushBack({ 9, 801, 75, 187 });
 	train_back.PushBack({ 116, 801, 75, 187 });
@@ -64,17 +78,19 @@ ModuleVillageScene::~ModuleVillageScene()
 bool ModuleVillageScene::Start()
 {
 	LOG("Loading village scene");
-	App->player->Enable();
+	App->enemies->Enable();
 	App->particles->Enable();
 	App->collision->Enable();
-	App->enemies->Enable();
+	App->player->Enable();
+	App->player2->Enable();
+	App->scene_village->Enable();
 
 	yflag = -5312;
 	xflag = -320;
 	ycounter = 0;
 	speed = 0.4;
 
-	back_train_y = -730+ 488;
+	back_train_y = -730 + 488;
 	mid_train_y = -730 + 261;
 	front_train_y = -730;
 	train_x = -187;
@@ -98,7 +114,10 @@ bool ModuleVillageScene::Start()
 	Mix_PlayMusic(App->audio->audio, -1);
 
 
-	App->collision->AddCollider(offscreen_wall, COLLIDER_WALL);
+	App->collision->AddCollider(offscreen_wall_down, COLLIDER_WALL);
+	App->collision->AddCollider(offscreen_wall_up, COLLIDER_WALL);
+	App->collision->AddCollider(offscreen_wall_left, COLLIDER_WALL);
+	App->collision->AddCollider(offscreen_wall_right, COLLIDER_WALL);
 
 	//---ENEMIES---
 	//--Adding Rotating Turrets--
@@ -156,7 +175,7 @@ bool ModuleVillageScene::Start()
 
 bool ModuleVillageScene::CleanUp()
 {
-	LOG("Unloading castle scene");
+	LOG("Unloading village scene");
 	
 	App->enemies->Disable();
 	App->particles->Disable();
@@ -170,6 +189,7 @@ bool ModuleVillageScene::CleanUp()
 	App->textures->Unload(graphics2);
 	App->textures->Unload(graphics3);
 	App->textures->Unload(graphics4);
+	App->textures->Unload(train);
 
 	return true;
 }
@@ -267,11 +287,6 @@ update_status ModuleVillageScene::Update()
 		}
 		App->render->Blit(graphics3, xflag, yflag - 4000, &background2, 10.0f);
 		App->render->Blit(graphics4, xflag, yflag, &background2, 10.0f);
-	}
-	
-   	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_REPEAT)
-	{
-  		speed = 9.0;
 	}
 
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_UP)
