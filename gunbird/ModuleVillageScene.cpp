@@ -82,7 +82,6 @@ bool ModuleVillageScene::Start()
 	App->particles->Enable();
 	App->collision->Enable();
 	App->player->Enable();
-	App->player2->Enable();
 	App->scene_village->Enable();
 
 	yflag = -5312;

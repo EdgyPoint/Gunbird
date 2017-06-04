@@ -72,7 +72,26 @@ ModulePlayer2::ModulePlayer2()
 	tilting.loop = true;
 	tilting.speed = 0.5f;
 
-	lives = 2;
+	completingcharge.PushBack({ 0, 160, 32, 37 });
+	completingcharge.PushBack({ 32, 160, 32, 37 });
+	completingcharge.PushBack({ 32, 160, 32, 37 });
+	completingcharge.PushBack({ 32, 160, 32, 37 });
+	completingcharge.PushBack({ 32, 160, 32, 37 });
+	completingcharge.PushBack({ 64, 160, 32, 37 });
+	completingcharge.PushBack({ 64, 160, 32, 37 });
+	completingcharge.PushBack({ 64, 160, 32, 37 });
+	completingcharge.PushBack({ 64, 160, 32, 37 });
+	completingcharge.PushBack({ 96, 160, 32, 37 });
+	completingcharge.PushBack({ 96, 160, 32, 37 });
+	completingcharge.PushBack({ 96, 160, 32, 37 });
+	completingcharge.PushBack({ 96, 160, 32, 37 });
+	completingcharge.loop = true;
+	completingcharge.speed = 0.5f;
+
+	shotcharged.PushBack({ 0, 197, 32, 37 });
+	shotcharged.PushBack({ 32, 197, 32, 37 });
+	shotcharged.loop = true;
+	shotcharged.speed = 0.25f;
 }
 
 ModulePlayer2::~ModulePlayer2()
@@ -81,16 +100,14 @@ ModulePlayer2::~ModulePlayer2()
 // Load assets
 bool ModulePlayer2::Start()
 {
-	LOG("Loading player");
+	LOG("Loading player2");
 
 	powerup_lv = 0;
 	lives = 2;
+	bombs = 2;
 
 	graphics = App->textures->Load("assets/images/Marion.png");
 	ui = App->textures->Load("assets/images/UI.png");
-
-	//Init UI
-	//ui = App->textures->Load("assets/images/UI.png");
 
 	p2display.x = 28;
 	p2display.y = 0;
@@ -201,26 +218,29 @@ update_status ModulePlayer2::Update()
 	}
 
 	// Charged shot
-	// Charge up
-	if ((App->input->keyboard[SDL_SCANCODE_C] == KEY_STATE::KEY_REPEAT || App->input->controller[SDL_CONTROLLER_BUTTON_A] == BUTTON_STATE::B_REPEAT) && !_dying && !respawning && !stunned && !App->fade->fading && charge_up < 110)
+		// Charge up
+	if ((App->input->keyboard[SDL_SCANCODE_KP_0] == KEY_STATE::KEY_REPEAT || App->input->controller2[SDL_CONTROLLER_BUTTON_A] == BUTTON_STATE::B_REPEAT) && !_dying && !respawning && !stunned && !App->fade->fading && charge_up < 110)
 	{
 		charge_up++;
 	}
-	// Finishing charge
-	if ((App->input->keyboard[SDL_SCANCODE_C] == KEY_STATE::KEY_REPEAT || App->input->controller[SDL_CONTROLLER_BUTTON_A] == BUTTON_STATE::B_REPEAT) && !_dying && !respawning && !stunned && !App->fade->fading && charge_up == 110 && finishing_charge < 26)
+		// Finishing charge
+	if ((App->input->keyboard[SDL_SCANCODE_KP_0] == KEY_STATE::KEY_REPEAT || App->input->controller2[SDL_CONTROLLER_BUTTON_A] == BUTTON_STATE::B_REPEAT) && !_dying && !respawning && !stunned && !App->fade->fading && charge_up == 110 && finishing_charge < 26)
 	{
 		finishing_charge++;
 	}
-	// Release
-	if ((App->input->keyboard[SDL_SCANCODE_C] == KEY_STATE::KEY_UP || App->input->controller[SDL_CONTROLLER_BUTTON_A] == BUTTON_STATE::B_UP) && !_dying && !respawning && !stunned && !App->fade->fading)
+	if (time_since_last_charged < 100)
+		time_since_last_charged++;
+		// Release
+	if ((App->input->keyboard[SDL_SCANCODE_KP_0] == KEY_STATE::KEY_UP || App->input->controller2[SDL_CONTROLLER_BUTTON_A] == BUTTON_STATE::B_UP) && !_dying && !respawning && !stunned && !App->fade->fading)
 	{
 		if (charge_up == 110)
 		{
 			App->audio->sfx = App->audio->LoadSFX("assets/SFX/marionchargedshot.wav");
 			Mix_PlayChannel(-1, App->audio->sfx, 0);
 
-			App->particles->AddParticle(App->particles->chargedbeam, position.x - 2, position.y - 32, COLLIDER_CHARGEDSHOT);
+			App->particles->AddParticle(App->particles->chargedbeam, position.x - 2, position.y - 32, COLLIDER_CHARGEDSHOT2);
 
+			time_since_last_charged = 0;
 		}
 		charge_up = 0;
 		finishing_charge = 0;
@@ -242,32 +262,33 @@ update_status ModulePlayer2::Update()
 	}
 
 
-	if (App->input->keyboard[SDL_SCANCODE_KP_1] == KEY_STATE::KEY_DOWN && !_dying && !respawning && !stunned && !App->fade->fading && bombCD == 0)
+	if (App->input->keyboard[SDL_SCANCODE_KP_1] == KEY_STATE::KEY_DOWN && !_dying && !respawning && !stunned && !App->fade->fading && bombCD == 0 && bombs > 0)
 	{
+		bombs--;
 		bombCD = 125;
 		App->audio->sfx = App->audio->LoadSFX("assets/SFX/marionbomb.wav");
 		Mix_PlayChannel(-1, App->audio->sfx, 0);
-		App->particles->AddParticle(App->particles->bombshot_up, position.x - 8, position.y - 35, COLLIDER_BOMBSHOT);
-		App->particles->AddParticle(App->particles->bombshot_upleft, position.x - 6, position.y - 6, COLLIDER_BOMBSHOT);
-		App->particles->AddParticle(App->particles->bombshot_left, position.x - 35, position.y - 8, COLLIDER_BOMBSHOT);
-		App->particles->AddParticle(App->particles->bombshot_downleft, position.x - 6, position.y - 10, COLLIDER_BOMBSHOT);
-		App->particles->AddParticle(App->particles->bombshot_down, position.x - 8, position.y + 23, COLLIDER_BOMBSHOT);
-		App->particles->AddParticle(App->particles->bombshot_downright, position.x - 10, position.y - 10, COLLIDER_BOMBSHOT);
-		App->particles->AddParticle(App->particles->bombshot_right, position.x + 23, position.y - 8, COLLIDER_BOMBSHOT);
-		App->particles->AddParticle(App->particles->bombshot_upright, position.x - 10, position.y - 6, COLLIDER_BOMBSHOT);
+		App->particles->AddParticle(App->particles->bombshot_up, position.x - 8, position.y - 35, COLLIDER_BOMBSHOT2);
+		App->particles->AddParticle(App->particles->bombshot_upleft, position.x - 6, position.y - 6, COLLIDER_BOMBSHOT2);
+		App->particles->AddParticle(App->particles->bombshot_left, position.x - 35, position.y - 8, COLLIDER_BOMBSHOT2);
+		App->particles->AddParticle(App->particles->bombshot_downleft, position.x - 6, position.y - 10, COLLIDER_BOMBSHOT2);
+		App->particles->AddParticle(App->particles->bombshot_down, position.x - 8, position.y + 23, COLLIDER_BOMBSHOT2);
+		App->particles->AddParticle(App->particles->bombshot_downright, position.x - 10, position.y - 10, COLLIDER_BOMBSHOT2);
+		App->particles->AddParticle(App->particles->bombshot_right, position.x + 23, position.y - 8, COLLIDER_BOMBSHOT2);
+		App->particles->AddParticle(App->particles->bombshot_upright, position.x - 10, position.y - 6, COLLIDER_BOMBSHOT2);
 
 		App->particles->AddParticle(App->particles->particle_clearer, 0, 0, COLLIDER_BOMBCLEAN);
 	}
 	if (bombCD == 95)
 	{
-		App->particles->AddParticle(App->particles->bombshot_up, position.x - 8, position.y - 35, COLLIDER_BOMBSHOT);
-		App->particles->AddParticle(App->particles->bombshot_upleft, position.x - 6, position.y - 6, COLLIDER_BOMBSHOT);
-		App->particles->AddParticle(App->particles->bombshot_left, position.x - 35, position.y - 8, COLLIDER_BOMBSHOT);
-		App->particles->AddParticle(App->particles->bombshot_downleft, position.x - 6, position.y - 10, COLLIDER_BOMBSHOT);
-		App->particles->AddParticle(App->particles->bombshot_down, position.x - 8, position.y + 23, COLLIDER_BOMBSHOT);
-		App->particles->AddParticle(App->particles->bombshot_downright, position.x - 10, position.y - 10, COLLIDER_BOMBSHOT);
-		App->particles->AddParticle(App->particles->bombshot_right, position.x + 23, position.y - 8, COLLIDER_BOMBSHOT);
-		App->particles->AddParticle(App->particles->bombshot_upright, position.x - 10, position.y - 6, COLLIDER_BOMBSHOT);
+		App->particles->AddParticle(App->particles->bombshot_up, position.x - 8, position.y - 35, COLLIDER_BOMBSHOT2);
+		App->particles->AddParticle(App->particles->bombshot_upleft, position.x - 6, position.y - 6, COLLIDER_BOMBSHOT2);
+		App->particles->AddParticle(App->particles->bombshot_left, position.x - 35, position.y - 8, COLLIDER_BOMBSHOT2);
+		App->particles->AddParticle(App->particles->bombshot_downleft, position.x - 6, position.y - 10, COLLIDER_BOMBSHOT2);
+		App->particles->AddParticle(App->particles->bombshot_down, position.x - 8, position.y + 23, COLLIDER_BOMBSHOT2);
+		App->particles->AddParticle(App->particles->bombshot_downright, position.x - 10, position.y - 10, COLLIDER_BOMBSHOT2);
+		App->particles->AddParticle(App->particles->bombshot_right, position.x + 23, position.y - 8, COLLIDER_BOMBSHOT2);
+		App->particles->AddParticle(App->particles->bombshot_upright, position.x - 10, position.y - 6, COLLIDER_BOMBSHOT2);
 	}
 	if (bombCD != 0)
 		bombCD--;
@@ -287,6 +308,15 @@ update_status ModulePlayer2::Update()
 			current_animation = &idle;
 			transition = 0;
 		}
+	}
+
+	if (charge_up == 110)
+	{
+		current_animation = &completingcharge;
+	}
+	if (finishing_charge == 26)
+	{
+		current_animation = &shotcharged;
 	}
 
 	player_col->SetPos(position.x + 10, position.y + 9);
@@ -314,7 +344,7 @@ update_status ModulePlayer2::Update()
 		{
 			position.y += 3;
 		}
-
+		
 		deathcounter++;
 
 		if (position.y > 320)
@@ -329,16 +359,20 @@ update_status ModulePlayer2::Update()
 
 	if (respawning)
 	{
-		App->collision->EditMatrix(COLLIDER_PLAYER2, COLLIDER_ENEMY, false);
-		App->collision->EditMatrix(COLLIDER_PLAYER2, COLLIDER_ENEMY_SHOT, false);
-		App->collision->EditMatrix(COLLIDER_ENEMY, COLLIDER_PLAYER2, false);
-		App->collision->EditMatrix(COLLIDER_ENEMY_SHOT, COLLIDER_PLAYER2, false);
+		if (App->player->godmode == false)
+		{
+			App->collision->EditMatrix(COLLIDER_PLAYER, COLLIDER_ENEMY_F, false);
+			App->collision->EditMatrix(COLLIDER_PLAYER, COLLIDER_ENEMY_SHOT, false);
+			App->collision->EditMatrix(COLLIDER_ENEMY_F, COLLIDER_PLAYER, false);
+			App->collision->EditMatrix(COLLIDER_ENEMY_SHOT, COLLIDER_PLAYER, false);
+		}
 
 		if (!out)
 		{
 			position.y -= 1;
 			respawncounter++;
 		}
+
 		if (respawncounter == 80)
 		{
 			respawning = false;
@@ -381,10 +415,6 @@ update_status ModulePlayer2::Update()
 		App->particles->AddParticle(App->particles->magicspark[3], position.x + 8, position.y + 31, COLLIDER_NONE);
 		magicsparks = 0;
 	}
-
-	// Draw everything --------------------------------------
-
-	App->render->Blit(graphics, position.x, position.y, &(current_animation->GetCurrentFrame()));
 
 	//Blit UI
 	if (!out)
@@ -454,90 +484,92 @@ void ModulePlayer2::shootburst(int level)
 
 void ModulePlayer2::OnCollision(Collider* c1, Collider* c2)
 {
-	if (c2->type == COLLIDER_PLAYER2_SHOT)
+	if (!out)
 	{
-		if (c1->type == COLLIDER_ENEMY)
+		if (c2->type == COLLIDER_PLAYER2_SHOT)
 		{
-			c1->to_delete = true;
+			if (c1->type == COLLIDER_ENEMY)
+			{
+				c1->to_delete = true;
+			}
+			else if (c1->type == COLLIDER_WALL)
+			{
+				c2->to_delete = true;
+			}
 		}
-		else if (c1->type == COLLIDER_WALL)
+
+		if (c1->type == COLLIDER_PLAYER2)
 		{
-			c2->to_delete = true;
+
+			if (c2->type == COLLIDER_ENEMY_SHOT)
+			{
+				lives -= 1;
+				_dying = true;
+				App->collision->EditMatrix(COLLIDER_PLAYER2, COLLIDER_ENEMY, false);
+				App->collision->EditMatrix(COLLIDER_PLAYER2, COLLIDER_ENEMY_SHOT, false);
+				App->collision->EditMatrix(COLLIDER_ENEMY, COLLIDER_PLAYER2, false);
+				App->collision->EditMatrix(COLLIDER_ENEMY_SHOT, COLLIDER_PLAYER2, false);
+
+				App->particles->AddParticle(App->particles->medium_explosion, position.x - 40, position.y - 25, COLLIDER_NONE);
+				App->audio->sfx = App->audio->LoadSFX("assets/SFX/mediumexplosion.wav");
+				Mix_PlayChannel(-1, App->audio->sfx, 0);
+
+				App->audio->sfx = App->audio->LoadSFX("assets/SFX/mariondeath.wav");
+				Mix_PlayChannel(-1, App->audio->sfx, 0);
+
+				if (lives < 0)
+				{
+					out = true;
+				}
+			}
+
+			if (c2->type == COLLIDER_ENEMY_F && !stunned)
+			{
+				stunned = true;
+				powerup_lv--;
+				App->particles->AddParticle(App->particles->playercollision, position.x, position.y, COLLIDER_NONE);
+				current_animation = &tilting;
+
+				if (powerup_lv < 0)
+				{
+					powerup_lv = 0;
+				}
+			}
+
+			if (c2->type == COLLIDER_POWERUP)
+			{
+				App->audio->sfx = App->audio->LoadSFX("assets/SFX/marionpowerup.wav");;
+				Mix_PlayChannel(-1, App->audio->sfx, 0);
+
+				poweruping = true;
+
+
+				App->particles->DeleteParticle(c2);
+			}
+
+			if (c2->type == COLLIDER_BOMB)
+			{
+				if (bombs == 4)
+					score += 10000;
+
+				if (bombs < 4)
+				{
+					bombs++;
+				}
+
+				App->audio->sfx = App->audio->LoadSFX("assets/SFX/collectbomb.wav");
+				Mix_PlayChannel(-1, App->audio->sfx, 0);
+
+				App->particles->DeleteParticle(c2);
+			}
+
+			if (c2->type == COLLIDER_COIN)
+			{
+				App->audio->sfx = App->audio->LoadSFX("assets/SFX/collectcoin.wav");
+				Mix_PlayChannel(-1, App->audio->sfx, 0);
+				score += 200;
+			}
 		}
+
 	}
-	
-	if (c1->type == COLLIDER_PLAYER2)
-	{
-
-		if (c2->type == COLLIDER_ENEMY_SHOT)
-		{
-			lives -= 1;
-			_dying = true;
-			App->collision->EditMatrix(COLLIDER_PLAYER2, COLLIDER_ENEMY, false);
-			App->collision->EditMatrix(COLLIDER_PLAYER2, COLLIDER_ENEMY_SHOT, false);
-			App->collision->EditMatrix(COLLIDER_ENEMY, COLLIDER_PLAYER2, false);
-			App->collision->EditMatrix(COLLIDER_ENEMY_SHOT, COLLIDER_PLAYER2, false);
-
-			App->particles->AddParticle(App->particles->medium_explosion, position.x - 40, position.y - 25, COLLIDER_NONE);
-			App->audio->sfx = App->audio->LoadSFX("assets/SFX/mediumexplosion.wav");
-			Mix_PlayChannel(-1, App->audio->sfx, 0);
-
-			App->audio->sfx = App->audio->LoadSFX("assets/SFX/mariondeath.wav");
-			Mix_PlayChannel(-1, App->audio->sfx, 0);
-
-			if (lives < 0)
-			{
-				out = true;
-			}
-		}
-
-		if (c2->type == COLLIDER_ENEMY_F && !stunned)
-		{
-			stunned = true;
-			powerup_lv--;
-			App->particles->AddParticle(App->particles->playercollision, position.x, position.y, COLLIDER_NONE);
-			current_animation = &tilting;
-
-			if (powerup_lv < 0)
-			{
-				powerup_lv = 0;
-			}
-		}
-
-		if (c2->type == COLLIDER_POWERUP)
-		{
-			App->audio->sfx = App->audio->LoadSFX("assets/SFX/marionpowerup.wav");;
-			Mix_PlayChannel(-1, App->audio->sfx, 0);
-			
-			poweruping = true;
-
-
-			App->particles->DeleteParticle(c2);
-		}
-
-		if (c2->type == COLLIDER_BOMB)
-		{
-			if (bombs == 4)
-				score += 10000;
-
-			if (bombs < 4)
-			{
-				bombs++;
-			}
-
-			App->audio->sfx = App->audio->LoadSFX("assets/SFX/collectbomb.wav");
-			Mix_PlayChannel(-1, App->audio->sfx, 0);
-
-			App->particles->DeleteParticle(c2);
-		}
-
-		if (c2->type == COLLIDER_COIN)
-		{
-			App->audio->sfx = App->audio->LoadSFX("assets/SFX/collectcoin.wav");
-			Mix_PlayChannel(-1, App->audio->sfx, 0);
-			score += 200;
-		}
-	}
-
-
 }
