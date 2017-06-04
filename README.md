@@ -14,6 +14,7 @@ Here's a brief gameplay video of EdgyPoint's Gunbird tribute.
 
 
 
+
 ## EdgyPoint Development team
 ![](http://i.imgur.com/UtBm2ur.jpg)
 Github (from left to right): 
@@ -44,7 +45,7 @@ _KEYBOARD CONTROLS_
     NUMPAD 0      ->  Shoot
     NUMPAD 1      ->  Bomb
     
-*GAME CONTROLLER CONTROLS*
+*GAME CONTROLLER CONTROLS (Only available for the 1st Player)*
 
     START         ->  Start
     Left Stick    ->  Move
