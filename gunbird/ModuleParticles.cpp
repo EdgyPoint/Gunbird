@@ -325,10 +325,10 @@ bool ModuleParticles::Init()
 	coin.anim.PushBack({ 256, 388, 16, 16 });
 	coin.anim.PushBack({ 282, 388, 16, 16 });
 	coin.anim.PushBack({ 310, 388, 16, 16 });
-	coin.anim.loop = true;
-	coin.life = 10000;
 	coin.anim.speed = 0.25f;
+	coin.anim.loop = true;
 	coin.speed.y = 0.4f;
+	coin.life = 10000;
 
 	// Pickups
 	bomb.anim.PushBack({ 235, 439, 23, 12 });

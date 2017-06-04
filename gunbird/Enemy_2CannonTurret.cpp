@@ -116,6 +116,7 @@ Enemy_2CannonTurret::Enemy_2CannonTurret(int x, int y, int option) : Enemy(x, y,
 	hp = 10.0f;
 	damaged_hp = 7;
 	death_type = SMALL_ENEMY;
+	drops_powerup = true;
 	flying = false;
 	killscore = 200;
 }

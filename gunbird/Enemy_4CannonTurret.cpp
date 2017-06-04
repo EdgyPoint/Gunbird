@@ -123,6 +123,7 @@ Enemy_4CannonTurret::Enemy_4CannonTurret(int x, int y, int option) : Enemy(x, y,
 	hp = 10.0f;
 	damaged_hp = 7;
 	death_type = SMALL_ENEMY;
+	drops_coin = true;
 	anim_type = CLOSED;
 	flying = false;
 	killscore = 200;

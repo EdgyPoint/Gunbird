@@ -759,5 +759,6 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 		App->audio->sfx = App->audio->LoadSFX("assets/SFX/collectcoin.wav");
 		Mix_PlayChannel(-1, App->audio->sfx, 0);
 		score += 200;
+		App->particles->DeleteParticle(c2);
 	}
 }

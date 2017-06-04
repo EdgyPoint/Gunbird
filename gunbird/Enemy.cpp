@@ -165,7 +165,6 @@ void Enemy::ToDie(Enemy* enemy, Collider* col)
 	}
 
 	if (enemy->drops_coin)
-		App->particles->AddParticle(App->particles->coin, enemy->position.x + 10, enemy->position.y + 25, COLLIDER_COIN, 0, 0.55f);
 
 
 	if (enemy->death_type == MEDIUM_ENEMY)

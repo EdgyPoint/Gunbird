@@ -140,6 +140,7 @@ Enemy_GreenRobot::Enemy_GreenRobot(int x, int y, int option) : Enemy(x, y, optio
 	hp = 87.0f;
 	damaged_hp = 20.0f;
 	death_type = MEDIUM_ENEMY;
+	drops_powerup = true;
 	flying = false;
 	killscore = 4000;
 	dead_anim = true;
