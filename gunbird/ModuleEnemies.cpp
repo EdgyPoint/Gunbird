@@ -18,6 +18,7 @@
 #include "Enemy_2CannonTurret.h"
 #include "Enemy_4CannonTurret.h"
 #include "Enemy_FlyingGunner.h"
+#include "Enemy_TrumpFirst.h"
 
 
 #define SPAWN_MARGIN 500
@@ -35,7 +36,6 @@ ModuleEnemies::~ModuleEnemies()
 
 bool ModuleEnemies::Start()
 {
-	// Create a prototype for each enemy available so we can copy them around
 	sprites = App->textures->Load("assets/images/Enemies.png");
 
 	return true;
@@ -74,8 +74,6 @@ update_status ModuleEnemies::Update()
 
 	for (uint i = 0; i < MAX_ENEMIES; ++i)
 		if (enemies[i] != nullptr) enemies[i]->Shoot();
-
-
 
 	return UPDATE_CONTINUE;
 }
@@ -187,6 +185,9 @@ void ModuleEnemies::SpawnEnemy(const EnemyInfo& info)
 			break;
 		case ENEMY_TYPES::GREENROBOT:
 			enemies[i] = new Enemy_GreenRobot(info.x, info.y, info.pathoption);
+			break; 
+		case ENEMY_TYPES::TRUMPFIRST:
+			enemies[i] = new Enemy_TrumpFirst(info.x, info.y, info.pathoption);
 			break;
 		}
 	}

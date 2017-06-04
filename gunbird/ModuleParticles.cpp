@@ -131,6 +131,16 @@ bool ModuleParticles::Init()
 	marionbeamright_lv2[2].speed.y = -10;
 	marionbeamright_lv2[2].life = 4000;
 
+	chargedbeam.anim.PushBack({ 264, 202, 32, 64 });
+	chargedbeam.anim.PushBack({ 328, 202, 32, 64 });
+	chargedbeam.anim.PushBack({ 392, 202, 32, 64 });
+	chargedbeam.anim.PushBack({ 456, 202, 32, 64 });
+	chargedbeam.anim.PushBack({ 520, 202, 32, 64 });
+	chargedbeam.anim.loop = true;
+	chargedbeam.anim.speed = 0.5f;
+	chargedbeam.speed.y = -0.45f;
+	chargedbeam.life = 4000;
+
 	smallshot.anim.PushBack({ 31, 425, 6, 6 });
 	smallshot.anim.PushBack({ 47, 425, 6, 6 });
 	smallshot.anim.PushBack({ 79, 425, 6, 6 });
@@ -606,7 +616,7 @@ void ModuleParticles::AddParticle(const Particle& particle, int x, int y, COLLID
 void ModuleParticles::OnCollision(Collider* c1, Collider* c2)
 {
 	// Colliders that are deleted on contact are deleted here
-	if (c1->type == COLLIDER_PLAYER_SHOT || c1->type == COLLIDER_PLAYER2_SHOT)
+	if (c1->type == COLLIDER_PLAYER_SHOT || c1->type == COLLIDER_PLAYER2_SHOT || c2->type == COLLIDER_WALL)
 	{
 		for (uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
 		{
@@ -680,6 +690,18 @@ bool Particle::Update()
 		if (position.y < 45 || position.y > 222)
 		{
 			speed.y = speed.y * -1;
+		}
+	}
+
+	if (collider->type == COLLIDER_CHARGEDSHOT)
+	{
+		if (App->player->time_since_last_charged == 15)
+		{
+			speed.y = -3;
+		}
+		if (App->player->time_since_last_charged == 31)
+		{
+			speed.y = -7;
 		}
 	}
 

@@ -117,7 +117,6 @@ Enemy_2CannonTurret::Enemy_2CannonTurret(int x, int y, int option) : Enemy(x, y,
 	damaged_hp = 7;
 	death_type = SMALL_ENEMY;
 	flying = false;
-	drops_bomb = true;
 	killscore = 200;
 }
 

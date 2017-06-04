@@ -30,43 +30,100 @@ ModuleVillageScene::ModuleVillageScene()
 	background2.x = 0;
 	background2.y = 0;
 
-	npi.h = 5;
-	npi.w = 1000;
-	npi.x = 0;
-	npi.y = -10;
+	offscreen_wall_down.h = 5;
+	offscreen_wall_down.w = 244;
+	offscreen_wall_down.x = -10;
+	offscreen_wall_down.y = 330;
+
+	offscreen_wall_up.h = 5;
+	offscreen_wall_up.w = 244;
+	offscreen_wall_up.x = -10;
+	offscreen_wall_up.y = -15;
+
+	offscreen_wall_left.h = 340;
+	offscreen_wall_left.w = 5;
+	offscreen_wall_left.x = -15;
+	offscreen_wall_left.y = -10;
+
+	offscreen_wall_right.h = 340;
+	offscreen_wall_right.w = 5;
+	offscreen_wall_right.x = 234;
+	offscreen_wall_right.y = -10;
+
+	train_back.PushBack({ 9, 801, 75, 187 });
+	train_back.PushBack({ 116, 801, 75, 187 });
+	train_back.speed = 0.5f;
+
+	train_mid.PushBack({ 4, 553, 87, 245 });
+	train_mid.PushBack({ 111, 553, 87, 245 });
+	train_mid.speed = 0.5f;
+
+	train_front.PushBack({ 3,241, 88, 296 });
+	train_front.PushBack({ 116,241 , 88, 296 });
+	train_front.PushBack({ 219,241, 88, 296 });
+	train_front.PushBack({ 338,241, 88, 296 });
+	train_front.PushBack({ 460,241, 88, 296 });
+	train_front.PushBack({ 614,241, 88, 296 });
+	train_front.PushBack({ 730,241, 88, 296 });
+	train_front.PushBack({ 865,241, 88, 296 });
+
+	train_front.speed = 0.5f;
+
+
 }
 
 ModuleVillageScene::~ModuleVillageScene()
-{}
+{}    
 
 bool ModuleVillageScene::Start()
 {
 	LOG("Loading village scene");
-	App->player->Enable();
+	App->enemies->Enable();
 	App->particles->Enable();
 	App->collision->Enable();
-	App->enemies->Enable();
+	App->player->Enable();
+	App->player2->Enable();
+	App->scene_village->Enable();
 
 	yflag = -5312;
 	xflag = -320;
 	ycounter = 0;
 	speed = 0.4;
+
+	back_train_y = -730 + 488;
+	mid_train_y = -730 + 261;
+	front_train_y = -730;
+	train_x = -183;
+	
+	
 	cinematic = false;
 	timerup = false;
 	on_rails = false;
 	going_left = true;
 	scroll_timer = false;
 	scrolling = false;
+	back_eliminated = false;
+	 mid_eliminated = false;
+	front_eliminated = false;
+	retardation_needed = false;
+	retard_finished = false;
+	timer_on = false;
 
 	graphics = App->textures->Load("assets/images/backgrounds/Village lower background.png");
 	graphics2 = App->textures->Load("assets/images/backgrounds/Village upper background.png");
 	graphics3 = App->textures->Load("assets/images/backgrounds/Village train background.png");
 	graphics4 = App->textures->Load("assets/images/backgrounds/Village train background.png");
+	train = App->textures->Load("assets/images/train.png");
+
 
 	App->audio->audio = App->audio->Load("assets/bgm/village.ogg");
 	Mix_PlayMusic(App->audio->audio, -1);
 
-	App->collision->AddCollider(npi, COLLIDER_WALL);
+
+	App->collision->AddCollider(offscreen_wall_down, COLLIDER_WALL);
+	App->collision->AddCollider(offscreen_wall_up, COLLIDER_WALL);
+	App->collision->AddCollider(offscreen_wall_left, COLLIDER_WALL);
+	App->collision->AddCollider(offscreen_wall_right, COLLIDER_WALL);
 
 	//---ENEMIES---
 	//--Adding Rotating Turrets--
@@ -104,7 +161,7 @@ bool ModuleVillageScene::Start()
 	App->enemies->AddEnemy(ENEMY_TYPES::WINDOWGUN, 170, -122, 0);
 
 	//--Adding Balloons--
-	App->enemies->AddEnemy(ENEMY_TYPES::BALLOON, 50, 20, 0);
+	App->enemies->AddEnemy(ENEMY_TYPES::BALLOON, 70, 20, 0);
 	App->enemies->AddEnemy(ENEMY_TYPES::BALLOON, 150, -50, 0);
 
 	//--Adding Rooftop Turrets--
@@ -127,7 +184,7 @@ bool ModuleVillageScene::Start()
 
 bool ModuleVillageScene::CleanUp()
 {
-	LOG("Unloading castle scene");
+	LOG("Unloading village scene");
 	
 	App->enemies->Disable();
 	App->particles->Disable();
@@ -141,6 +198,7 @@ bool ModuleVillageScene::CleanUp()
 	App->textures->Unload(graphics2);
 	App->textures->Unload(graphics3);
 	App->textures->Unload(graphics4);
+	App->textures->Unload(train);
 
 	return true;
 }
@@ -153,15 +211,22 @@ update_status ModuleVillageScene::Update()
 		if (yflag <= -4350)
 		{
 			yflag += speed;
+			train_speedy = 0.4f;
+			train_speedx = 0.0f;
 		}
 
 		if (yflag >= -4350 && xflag < -129)
 		{
 			xflag += 0.66;
-			yflag +=speed;
+			yflag += speed;
+			train_speedx = 0.22;
+			train_speedy = 0.4f;
+			
 		}
 		if (yflag >= -4234 && !cinematic)
 		{
+			train_speedx = 0.0f;
+			train_speedy = 0.0f;
 			if (!timerup)
 			{
 				timer = SDL_GetTicks() + 3500;
@@ -170,6 +235,7 @@ update_status ModuleVillageScene::Update()
 			if (SDL_GetTicks() > timer)
 			{
 				cinematic = true;
+				train_speedy = -5.4;
 				App->audio->audio = App->audio->Load("assets/bgm/trump.ogg");
 				Mix_PlayMusic(App->audio->audio, -1);
 			}
@@ -180,16 +246,23 @@ update_status ModuleVillageScene::Update()
 			xflag += 0.66;
 			yflag += speed;
 			timerup = false;
+		
+			if (train_speedy < 0) { train_speedy += 0.01; }
+			train_speedx = 0.22;
 		}
 		if (xflag >= -60 && !timerup && !scrolling)
 		{
 			timer2 = SDL_GetTicks() + 2000;
 			timerup = true;
+			train_speedx = 0.0f;
+			train_speedy = 0.0f;
 		}
 		if (SDL_GetTicks() > timer2 && xflag >= -60 && speed < 10.0 && !scrolling)
 		{
-			speed *= 1.02;
+			if (train_speedy > -5.0) { train_speedy -= 0.1; }
+			speed *= 1.015;
 			yflag += speed;
+		
 		}
 		if (yflag >= 320.0f)
 		{
@@ -202,23 +275,20 @@ update_status ModuleVillageScene::Update()
 			Side_scrolling();
 			scrolling == true;
 		}
-
+		if (yflag >= -4000)
+		{
+			train_speedy = 5.0;
+		}
+		if (yflag >= -3700)
+		{
+			train_speedy = 0.0;
+		}
 		
+
 
 	App->render->Blit(graphics, xflag, yflag, &background1, 10.0f);
 
-	//BS to make the tank blit under the bridge v
-	if (tank_on)
-	{
-		App->render->Blit(App->enemies->sprites, tank_position.x, tank_position.y, &(tank_anim->GetCurrentFrame()));
-		if (tank_hp > 0)
-		{
-			App->render->Blit(App->enemies->sprites, tank_position.x + 10, tank_position.y + 13, &(tank_extra1->GetCurrentFrame()));
-			App->render->Blit(App->enemies->sprites, tank_position.x + 46, tank_position.y + 13, &(tank_extra2->GetCurrentFrame()));
-		}
-	}
-	tank_on = true;
-	//BS to make the tank blit under the bridge ^
+	
 
 	App->render->Blit(graphics2, xflag, yflag, &background1, 10.0f);
 	App->render->Blit(graphics3, xflag, yflag-4000, &background2, 10.0f);
@@ -226,7 +296,8 @@ update_status ModuleVillageScene::Update()
 	}
 
 	if (on_rails)
-	{
+	{ 
+		//	train_speedy = 5.0;
 		Side_scrolling();
 		if(yflag >= 3680)
 		{
@@ -234,11 +305,6 @@ update_status ModuleVillageScene::Update()
 		}
 		App->render->Blit(graphics3, xflag, yflag - 4000, &background2, 10.0f);
 		App->render->Blit(graphics4, xflag, yflag, &background2, 10.0f);
-	}
-	
-   	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_REPEAT)
-	{
-  		speed = 9.0;
 	}
 
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_UP)
@@ -251,20 +317,103 @@ update_status ModuleVillageScene::Update()
 		App->fade->FadeToBlack(this, App->scene_score, 2.0f);
 
 	}
+
 	if ((App->input->keyboard[SDL_SCANCODE_F4] == KEY_STATE::KEY_DOWN ) && !App->fade->fading)
 	{
-		App->fade->FadeToBlack(this, App->scene_intro, 2.0f);
+		//App->fade->FadeToBlack(this, App->scene_intro, 2.0f);
+		back_eliminated = true;
 	}
+	App->render->Blit(graphics, xflag, yflag, &background1, 10.0f);
+	//BS to make the tank blit under the bridge v
+	if (tank_on && tank_inScreen)
+	{
+		App->render->Blit(App->enemies->sprites, tank_position.x, tank_position.y, &(tank_anim->GetCurrentFrame()));
+		if (tank_hp > 0)
+		{
+			App->render->Blit(App->enemies->sprites, tank_position.x + 10, tank_position.y + 13, &(tank_extra1->GetCurrentFrame()));
+			App->render->Blit(App->enemies->sprites, tank_position.x + 46, tank_position.y + 13, &(tank_extra2->GetCurrentFrame()));
+		}
+	}
+	tank_on = true;
+	//BS to make the tank blit under the bridge ^
+	App->render->Blit(graphics2, xflag, yflag, &background1, 10.0f);
+	App->render->Blit(graphics3, xflag, yflag - 4000, &background2, 10.0f);
+	App->render->Blit(train, train_x += train_speedx, front_train_y += train_speedy, &(train_front.GetCurrentFrame()), 10.0f);
+	App->render->Blit(train, train_x += train_speedx, mid_train_y += train_speedy, &(train_mid.GetCurrentFrame()), 10.0f);
+	App->render->Blit(train, train_x += train_speedx + 5, back_train_y +=train_speedy, &(train_back.GetCurrentFrame()), 10.0f);
+	train_x -= 5;
+	//-167
 
 	return UPDATE_CONTINUE;
 }
 
 void ModuleVillageScene::Side_scrolling()
 {
+
+	if (back_eliminated == true)
+	{
+		back_train_y += 5.0;
+		retardation_needed = true;
+	}
+	if (mid_eliminated == true)
+	{
+		mid_train_y -= 5.0;
+		retardation_needed = true;
+	}
+	if (front_eliminated == true)
+	{
+		front_train_y -= 5.0;
+		retardation_needed = true;
+	}
+
+	if (retardation_needed)
+	{
+		ticks = SDL_GetTicks();
+		if (!timer_on)
+		{
+			
+			timer2 = SDL_GetTicks() + 1000;
+			
+			timer_on = true;
+		}
+
+		if (ticks > timer2)
+		{
+			retardation_needed = false;
+			back_eliminated = false;
+			mid_eliminated = false;
+			front_eliminated = false;
+			retard_finished = true;
+			timer_on = false;
+		}
+	}
+
+	if (retard_finished)
+	{
+		ticks = SDL_GetTicks();
+		if (!timer_on)
+		{
+			timer2 = SDL_GetTicks() + 800;
+			timer_on = true;
+		}
+		if (ticks < timer2)
+		{
+			back_train_y += 5.0;
+			mid_train_y += 5.0;
+			front_train_y += 5.0;
+		}
+		if (ticks > timer2)
+		{
+			retard_finished = false;
+			timer_on = false;
+
+		}
+	}
 	if (going_left && !scroll_timer)
 	{
 		yflag += speed;
 		xflag += 0.66;
+		train_speedx = 0.22;
 		if (xflag >= 0)
 		{
 			timer = SDL_GetTicks() + 1000;
@@ -274,9 +423,11 @@ void ModuleVillageScene::Side_scrolling()
 
 	else if (scroll_timer)
 	{
+		train_speedx = 0.0;
 		yflag += speed;
 		if (SDL_GetTicks() >= timer)
 		{
+			
 			scroll_timer = false;
 			if (going_left)
 			{
@@ -293,6 +444,7 @@ void ModuleVillageScene::Side_scrolling()
 	{
 		yflag += speed;
 		xflag -= 0.66;
+		train_speedx = -0.22;
 		if (xflag <= -60)
 		{
 			timer = SDL_GetTicks() + 1000;

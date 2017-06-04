@@ -21,7 +21,7 @@ Project 1 Gunbird tribute v
 
 		PLAYER 2:
 
-		ENTER		- Start
+		NUMPAD INTRO	- Start
 		ARROW KEYS	- Move
 		NUMPAD 0 	- Shoot
 		NUMPAD 1	- Bomb

@@ -158,6 +158,8 @@ Enemy_RotatingTurret::Enemy_RotatingTurret(int x, int y, int option) : Enemy(x, 
 	leftd6_hit.PushBack({ 484, 608, 27, 32 });
 	leftd6_damaged.PushBack({ 484, 736, 27, 32 });
 
+	dead.PushBack({ 426, 428, 32, 33 });
+
 	
 	collider = App->collision->AddCollider({ 0, 0, 28, 36 }, COLLIDER_TYPE::COLLIDER_ENEMY, (Module*)App->enemies);
 
@@ -192,6 +194,7 @@ Enemy_RotatingTurret::Enemy_RotatingTurret(int x, int y, int option) : Enemy(x, 
 	hp = 2.0f;
 	damaged_hp = 1.0f;
 	death_type = SMALL_ENEMY;
+	dead_anim = true;
 	flying = false;
 	killscore = 500;
 }
@@ -554,13 +557,7 @@ void Enemy_RotatingTurret::Move()
 	}
 
 	counter++;
-	
 
-
-}
-
-void Enemy_RotatingTurret::Extra_animation()
-{
 	if (status == NORMAL)
 		animation = &normal_base_anim;
 
@@ -574,6 +571,20 @@ void Enemy_RotatingTurret::Extra_animation()
 			animation = &normal_base_anim;
 	}
 
+	if (hp <= 0)
+	{
+		animation = &dead;
+		collider->rect.h = 0;
+		collider->rect.w = 0;
+	}
+
+}
+
+void Enemy_RotatingTurret::Extra_animation()
+{
+	
+
+	if (hp > 0)
 	App->render->Blit(App->enemies->sprites, position.x + 1, position.y - 10, &(extra_animation->GetCurrentFrame()));
 		//flag2.GetCurrentFrame();
 		//flag3.GetCurrentFrame();

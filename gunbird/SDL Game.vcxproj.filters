@@ -31,13 +31,7 @@
     <ClCompile Include="Enemy_Turretcopter.cpp">
       <Filter>Modules\Enemies</Filter>
     </ClCompile>
-    <ClCompile Include="ModuleCastleScene.cpp">
-      <Filter>Modules\Scenes</Filter>
-    </ClCompile>
     <ClCompile Include="ModuleIntroScene.cpp">
-      <Filter>Modules\Scenes</Filter>
-    </ClCompile>
-    <ClCompile Include="ModuleMineScene.cpp">
       <Filter>Modules\Scenes</Filter>
     </ClCompile>
     <ClCompile Include="ModuleScoreScene.cpp">
@@ -103,6 +97,15 @@
     <ClCompile Include="Enemy_FlyingGunner.cpp">
       <Filter>Modules\Enemies</Filter>
     </ClCompile>
+    <ClCompile Include="Enemy_TrumpFirst.cpp">
+      <Filter>Modules\Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleCastleScene.cpp">
+      <Filter>Modules\Scenes\Unused</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleMineScene.cpp">
+      <Filter>Modules\Scenes\Unused</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animation.h">
@@ -141,16 +144,10 @@
     <ClInclude Include="Enemy_Turretcopter.h">
       <Filter>Modules\Enemies</Filter>
     </ClInclude>
-    <ClInclude Include="ModuleCastleScene.h">
-      <Filter>Modules\Scenes</Filter>
-    </ClInclude>
     <ClInclude Include="Module.h">
       <Filter>Modules\Scenes</Filter>
     </ClInclude>
     <ClInclude Include="ModuleIntroScene.h">
-      <Filter>Modules\Scenes</Filter>
-    </ClInclude>
-    <ClInclude Include="ModuleMineScene.h">
       <Filter>Modules\Scenes</Filter>
     </ClInclude>
     <ClInclude Include="ModuleScoreScene.h">
@@ -219,6 +216,15 @@
     <ClInclude Include="Enemy_FlyingGunner.h">
       <Filter>Modules\Enemies</Filter>
     </ClInclude>
+    <ClInclude Include="Enemy_TrumpFirst.h">
+      <Filter>Modules\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleCastleScene.h">
+      <Filter>Modules\Scenes\Unused</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleMineScene.h">
+      <Filter>Modules\Scenes\Unused</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Containers">
@@ -235,6 +241,9 @@
     </Filter>
     <Filter Include="Modules\Scenes">
       <UniqueIdentifier>{dac3634b-546a-46a1-84a2-727c6b93bee5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Scenes\Unused">
+      <UniqueIdentifier>{940677d7-639c-4a8c-9806-5877a3c7fad5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

@@ -50,6 +50,5 @@ public:
 	int aimed_shot = 0;
 	float aux_float;
 	fPoint speed;
-	fPoint speed2;
 };
 #endif

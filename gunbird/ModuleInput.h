@@ -8,6 +8,7 @@
 #include "SDL/include/SDL_gamecontroller.h"
 
 #define MAX_KEYS 300
+#define MAX_BUTTONS 50
 
 enum KEY_STATE
 {
@@ -50,8 +51,10 @@ public:
 
 public:
 	KEY_STATE keyboard[MAX_KEYS];
-	BUTTON_STATE controller[SDL_CONTROLLER_BUTTON_MAX];
-	SDL_GameController* Controller = nullptr;
+	BUTTON_STATE controller1[MAX_BUTTONS];
+	BUTTON_STATE controller2[MAX_BUTTONS];
+	SDL_GameController* Controller1 = nullptr;
+	SDL_GameController* Controller2 = nullptr;
 		//Gamepad controller1;
 
 		bool controller_connected;

@@ -15,6 +15,7 @@ enum COLLIDER_TYPE
 	COLLIDER_ENEMY_F,
 	COLLIDER_PLAYER_SHOT,
 	COLLIDER_PLAYER2_SHOT,
+	COLLIDER_CHARGEDSHOT,
 	COLLIDER_ENEMY_SHOT,
 	COLLIDER_POWERUP,
 	COLLIDER_BOMB,
@@ -28,7 +29,6 @@ struct Collider
 {
 	SDL_Rect rect;
 	bool to_delete = false;
-	bool already_hit = false;
 	COLLIDER_TYPE type;
 	Module* callback = nullptr;
 
