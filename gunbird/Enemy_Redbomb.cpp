@@ -2,9 +2,9 @@
 #include "Application.h"
 #include "ModuleParticles.h"
 #include "ModulePlayer.h"
+#include "ModuleRender.h"
 #include "ModuleCastleScene.h"
 #include "ModuleVillageScene.h"
-
 #include "Enemy_Redbomb.h"
 #include "ModuleCollision.h"
 #include "SDL/include/SDL_timer.h"
@@ -12,6 +12,8 @@
 Enemy_Redbomb :: Enemy_Redbomb(int x, int y, int option) : Enemy(x, y, option)
 {
 	
+	aditionalanimation = true;
+
 	fly.PushBack({ 100, 58, 28, 32 });
 	fly.PushBack({ 128, 58, 28, 32 });
 	fly.PushBack({ 156, 58, 28, 32 });
@@ -23,7 +25,7 @@ Enemy_Redbomb :: Enemy_Redbomb(int x, int y, int option) : Enemy(x, y, option)
 
 	fly.speed = 0.3f;
 
-	animation = &fly;
+	extra_animation = &fly;
 
 	hp = 1.0f;
 
@@ -121,11 +123,6 @@ Enemy_Redbomb :: Enemy_Redbomb(int x, int y, int option) : Enemy(x, y, option)
 		path.PushBack({ -1.3f, 1.2f }, 2);
 		path.PushBack({ -1.4f, 1.1f }, 2);
 		path.PushBack({ -1.5f, 1.0f }, 20000);
-		//path.PushBack({ -1.6f, 2.0f }, 2);
-	//	path.PushBack({ -1.7f, 2.0f }, 2);
-	//	path.PushBack({ -1.8f, 2.0f }, 2);
-	//	path.PushBack({ -1.9f, 2.0f }, 2);
-	//	path.PushBack({ -2.0f, 2.0f }, 200000);
 	}
 
 	if (option == 13)
@@ -142,12 +139,7 @@ Enemy_Redbomb :: Enemy_Redbomb(int x, int y, int option) : Enemy(x, y, option)
 		path.PushBack({ 1.2f, 1.3f }, 2);
 		path.PushBack({ 1.3f, 1.2f }, 2);
 		path.PushBack({ 1.4f, 1.1f }, 2);
-		path.PushBack({ 1.5f, 1.0f }, 2000);
-	//	path.PushBack({ 1.6f, 2.0f }, 20000);
-		//path.PushBack({ 1.7f, 2.0f }, 2);
-		//.PushBack({ 1.8f, 2.0f }, 2);
-		//path.PushBack({ 1.9f, 2.0f }, 2);
-		//path.PushBack({ 2.0f, 2.0f }, 200000);
+		path.PushBack({ 1.5f, 1.0f }, 20000);
 	}
 
 	collider = App->collision->AddCollider({ 0, 0,  28, 32 }, COLLIDER_TYPE::COLLIDER_ENEMY_F, (Module*)App->enemies);
@@ -183,7 +175,7 @@ void Enemy_Redbomb::Move()
 	
 }
 
-void Enemy_Redbomb::Shoot()
+void Enemy_Redbomb::Extra_animation()
 {
-	
+	App->render->Blit(App->enemies->sprites, position.x, position.y, &(extra_animation->GetCurrentFrame()));
 }

@@ -328,6 +328,7 @@ bool ModuleParticles::Init()
 	coin.anim.loop = true;
 	coin.life = 10000;
 	coin.anim.speed = 0.25f;
+	coin.speed.y = 0.4f;
 
 	// Pickups
 	bomb.anim.PushBack({ 235, 439, 23, 12 });
