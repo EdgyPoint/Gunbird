@@ -78,6 +78,7 @@ public:
 	int randxpos2;
 	int ypos1 = -1400;
 	int ypos2 = -1470;
+	bool trumpattack;
 
 };
 

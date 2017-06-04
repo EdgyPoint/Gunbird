@@ -112,7 +112,7 @@ void Enemy_TrumpThird::Move()
 
 void Enemy_TrumpThird::Shoot()
 {
-	if (anim_type != DEAD && App->scene_village->trumpcounter == 1)
+	if (anim_type != DEAD && App->scene_village->trumpcounter == 1 && App->scene_village->trumpattack)
 	{
 		if (reload == 1)
 		{

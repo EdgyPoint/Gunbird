@@ -110,6 +110,7 @@ bool ModuleVillageScene::Start()
 	retard_finished = false;
 	timer_on = false;
 	notrump = true;
+	trumpattack = false;
 
 	graphics = App->textures->Load("assets/images/backgrounds/Village lower background.png");
 	graphics2 = App->textures->Load("assets/images/backgrounds/Village upper background.png");
@@ -310,28 +311,16 @@ update_status ModuleVillageScene::Update()
 			xflag += 0.66;
 			yflag += speed;
 			timerup = false;
-		
+
 			if (train_speedy < 0) { train_speedy += 0.01; }
 			train_speedx = 0.22;
 		}
 		if (xflag >= -60 && !timerup && !scrolling)
 		{
 			App->enemies->xcrolling = 4;
-			App->enemies->AddEnemy(ENEMY_TYPES::FLYINGGUNNER, -73, -720, 2);
-			App->enemies->AddEnemy(ENEMY_TYPES::FLYINGGUNNER, -53, -670, 2);
-			App->enemies->AddEnemy(ENEMY_TYPES::FLYINGGUNNER, -33, -720, 2);
-
-			App->enemies->AddEnemy(ENEMY_TYPES::FLYINGGUNNER, 243, -720, 3);
-			App->enemies->AddEnemy(ENEMY_TYPES::FLYINGGUNNER, 263, -670, 3);
-			App->enemies->AddEnemy(ENEMY_TYPES::FLYINGGUNNER, 283, -720, 3);
-
-			App->enemies->AddEnemy(ENEMY_TYPES::FLYINGGUNNER, -73, -720, 4);
-			App->enemies->AddEnemy(ENEMY_TYPES::FLYINGGUNNER, -53, -670, 4);
-			App->enemies->AddEnemy(ENEMY_TYPES::FLYINGGUNNER, -33, -720, 4);
-
-			App->enemies->AddEnemy(ENEMY_TYPES::FLYINGGUNNER, 243, -720, 5);
-			App->enemies->AddEnemy(ENEMY_TYPES::FLYINGGUNNER, 263, -670, 5);
-			App->enemies->AddEnemy(ENEMY_TYPES::FLYINGGUNNER, 283, -720, 5);
+			App->enemies->AddEnemy(ENEMY_TYPES::TRUMPFIRST, 0, 0, 0);
+			App->enemies->AddEnemy(ENEMY_TYPES::TRUMPSECOND, 0, 0, 0);
+			App->enemies->AddEnemy(ENEMY_TYPES::TRUMPTHIRD, 0, 0, 0);
 			timer2 = SDL_GetTicks() + 2000;
 			timerup = true;
 			train_speedx = 0.0f;
@@ -351,13 +340,9 @@ update_status ModuleVillageScene::Update()
 			on_rails = true;
 			yflag = -3680;
 		}
-		if (speed >= 5.0 && notrump)
+		if (speed >= 5.0)
 		{
-			App->enemies->AddEnemy(ENEMY_TYPES::TRUMPSECOND, -100, -100, 0);
-			App->enemies->AddEnemy(ENEMY_TYPES::TRUMPFIRST, 0, 0, 0);
-			App->enemies->AddEnemy(ENEMY_TYPES::TRUMPTHIRD, -100, -100, 0);
-
-			notrump = false;
+			trumpattack = true;
 		}
 
 		if (speed >= 10.0)
@@ -411,8 +396,7 @@ update_status ModuleVillageScene::Update()
 
 	if ((App->input->keyboard[SDL_SCANCODE_F4] == KEY_STATE::KEY_DOWN ) && !App->fade->fading)
 	{
-		//App->fade->FadeToBlack(this, App->scene_intro, 2.0f);
-		back_eliminated = true;
+		App->fade->FadeToBlack(this, App->scene_intro, 2.0f);
 	}
 	App->render->Blit(graphics, xflag, yflag, &background1, 10.0f);
 	//BS to make the tank blit under the bridge v
@@ -547,6 +531,8 @@ void ModuleVillageScene::Side_scrolling()
 			scroll_timer = true;
 		}
 	}
+
+
 }
 
 void ModuleVillageScene::OnCollision(Collider* c1, Collider* c2)
