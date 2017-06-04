@@ -13,7 +13,7 @@
 Enemy_RotatingTurret::Enemy_RotatingTurret(int x, int y, int option) : Enemy(x, y, option)
 {
 
-	aditionalanimation = true;
+	specialanimation = true;
 	
 	//normal base animation
 	normal_base_anim.PushBack({ 506, 250, 28, 35 });
@@ -602,7 +602,7 @@ void Enemy_RotatingTurret::Move()
 
 }
 
-void Enemy_RotatingTurret::Extra_animation()
+void Enemy_RotatingTurret::Special_animation()
 {
 	
 

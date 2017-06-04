@@ -50,7 +50,7 @@ public:
 	Enemy_RotatingTurret(int x, int y, int option);
 	void Shoot();
 	void Move();
-	void Extra_animation();
+	void Special_animation();
 	int reload[3];
 	int initcounter = 0;
 	float aux_float;

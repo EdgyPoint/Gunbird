@@ -65,6 +65,7 @@ public:
 	bool drops_coin = false;
 	int damaged_hp = 0;
 	bool aditionalanimation = false;
+	bool specialanimation = false;
 	bool following = false;
 	bool dead_anim = false;
 	bool to_draw = true;
@@ -82,6 +83,7 @@ public:
 	virtual void Move() {};
 	virtual void Shoot() {};
 	virtual void Draw(SDL_Texture* sprites, Enemy* enemy);
+	virtual void Special_animation() {};
 	virtual void Extra_animation() {};
 	virtual void OnCollision(Collider* collider, Enemy* enemy);
 	virtual void ToDie(Enemy* enemy, Collider* col);

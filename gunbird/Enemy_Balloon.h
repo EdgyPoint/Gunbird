@@ -16,6 +16,7 @@ public:
 	Enemy_Balloon(int x, int y, int option);
 	void Move();
 	void Shoot();
+	void Extra_animation();
 	int initcounter = 0;
 	float aux_float;
 	int counter = 0;

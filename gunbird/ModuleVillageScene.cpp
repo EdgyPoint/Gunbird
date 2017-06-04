@@ -161,7 +161,7 @@ bool ModuleVillageScene::Start()
 	App->enemies->AddEnemy(ENEMY_TYPES::WINDOWGUN, 170, -122, 0);
 
 	//--Adding Balloons--
-	App->enemies->AddEnemy(ENEMY_TYPES::BALLOON, 70, 20, 0);
+	App->enemies->AddEnemy(ENEMY_TYPES::BALLOON, 50, 20, 0);
 	App->enemies->AddEnemy(ENEMY_TYPES::BALLOON, 150, -50, 0);
 
 	//--Adding Rooftop Turrets--

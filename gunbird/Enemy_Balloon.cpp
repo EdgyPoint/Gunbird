@@ -2,6 +2,7 @@
 #include "ModuleParticles.h"
 #include "Enemy_Balloon.h"
 #include "ModulePlayer.h"
+#include "ModuleRender.h"
 #include "ModuleCollision.h"
 #include "SDL/include/SDL_timer.h"
 #include <cmath>
@@ -10,6 +11,8 @@
 
 Enemy_Balloon::Enemy_Balloon(int x, int y, int option) : Enemy(x, y, option)
 {
+	aditionalanimation = true;
+
 	fly.PushBack({ 0, 0, 53, 53 });
 	fly.PushBack({ 53, 0, 53, 53 });
 	fly.PushBack({ 106, 0, 53, 53 });
@@ -28,7 +31,7 @@ Enemy_Balloon::Enemy_Balloon(int x, int y, int option) : Enemy(x, y, option)
 	fly3.PushBack({ 318, 0, 53, 53 });
 	fly3.speed = 0.45f;
 
-	animation = &fly;
+	extra_animation = &fly;
 
 	//path.PushBack({ 0.0f, 0.55f }, 220);
 	//path.PushBack({ 0.0f, 2.0f }, 55);
@@ -80,13 +83,13 @@ void Enemy_Balloon::Move()
 	position = original_pos + path.GetCurrentPosition();
 
 	if (status == NORMAL)
-		animation = &fly;
+		extra_animation = &fly;
 
 	if (status == HIT)
-		animation = &fly2;
+		extra_animation = &fly2;
 
 	if (status == DAMAGED)
-		animation = &fly3;
+		extra_animation = &fly3;
 }
 
 
@@ -125,4 +128,8 @@ void Enemy_Balloon::Shoot()
 		reload = 0;
 	}
 	
+}
+void Enemy_Balloon::Extra_animation()
+{
+	App->render->Blit(App->enemies->sprites, position.x, position.y, &(extra_animation->GetCurrentFrame()));
 }

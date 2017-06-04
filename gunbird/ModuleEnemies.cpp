@@ -72,6 +72,9 @@ update_status ModuleEnemies::Update()
 		if (enemies[i] != nullptr) enemies[i]->Draw(sprites, enemies[i]);
 
 	for (uint i = 0; i < MAX_ENEMIES; ++i)
+		if (enemies[i] != nullptr &&  enemies[i]->specialanimation) enemies[i]->Special_animation();
+
+	for (uint i = 0; i < MAX_ENEMIES; ++i)
 		if (enemies[i] != nullptr &&  enemies[i]->aditionalanimation) enemies[i]->Extra_animation();
 
 	for (uint i = 0; i < MAX_ENEMIES; ++i)
