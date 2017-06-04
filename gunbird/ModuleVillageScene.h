@@ -62,6 +62,13 @@ public:
 	float train_x;
 	float train_speedy;
 	float train_speedx;
+	bool back_eliminated;
+	bool mid_eliminated;
+	bool front_eliminated;
+	bool retardation_needed;
+	bool retard_finished;
+	bool timer_on;
+	int ticks;
 
 };
 

@@ -102,6 +102,12 @@ bool ModuleVillageScene::Start()
 	going_left = true;
 	scroll_timer = false;
 	scrolling = false;
+	back_eliminated = false;
+	 mid_eliminated = false;
+	front_eliminated = false;
+	retardation_needed = false;
+	retard_finished = false;
+	timer_on = false;
 
 	graphics = App->textures->Load("assets/images/backgrounds/Village lower background.png");
 	graphics2 = App->textures->Load("assets/images/backgrounds/Village upper background.png");
@@ -155,7 +161,7 @@ bool ModuleVillageScene::Start()
 	App->enemies->AddEnemy(ENEMY_TYPES::WINDOWGUN, 170, -122, 0);
 
 	//--Adding Balloons--
-	App->enemies->AddEnemy(ENEMY_TYPES::BALLOON, 50, 20, 0);
+	App->enemies->AddEnemy(ENEMY_TYPES::BALLOON, 70, 20, 0);
 	App->enemies->AddEnemy(ENEMY_TYPES::BALLOON, 150, -50, 0);
 
 	//--Adding Rooftop Turrets--
@@ -226,6 +232,7 @@ update_status ModuleVillageScene::Update()
 			if (SDL_GetTicks() > timer)
 			{
 				cinematic = true;
+				train_speedy = -5.4;
 				App->audio->audio = App->audio->Load("assets/bgm/trump.ogg");
 				Mix_PlayMusic(App->audio->audio, -1);
 			}
@@ -237,8 +244,7 @@ update_status ModuleVillageScene::Update()
 			yflag += speed;
 			timerup = false;
 		
-			if (train_speedy > 0) { train_speedy *= 0.8; }
-			else { train_speedy = -5.4f; }
+			if (train_speedy < 0) { train_speedy += 0.01; }
 			train_speedx = 0.22;
 		}
 		if (xflag >= -60 && !timerup && !scrolling)
@@ -250,9 +256,10 @@ update_status ModuleVillageScene::Update()
 		}
 		if (SDL_GetTicks() > timer2 && xflag >= -60 && speed < 10.0 && !scrolling)
 		{
-			if (train_speedy > -1.0) { train_speedy -= 0.1; }
+			if (train_speedy > -5.0) { train_speedy -= 0.1; }
 			speed *= 1.015;
 			yflag += speed;
+		
 		}
 		if (yflag >= 320.0f)
 		{
@@ -265,7 +272,14 @@ update_status ModuleVillageScene::Update()
 			Side_scrolling();
 			scrolling == true;
 		}
-
+		if (yflag >= -4000)
+		{
+			train_speedy = 5.0;
+		}
+		if (yflag >= -3700)
+		{
+			train_speedy = 0.0;
+		}
 		
 
 
@@ -279,7 +293,8 @@ update_status ModuleVillageScene::Update()
 	}
 
 	if (on_rails)
-	{
+	{ 
+		//	train_speedy = 5.0;
 		Side_scrolling();
 		if(yflag >= 3680)
 		{
@@ -299,9 +314,11 @@ update_status ModuleVillageScene::Update()
 		App->fade->FadeToBlack(this, App->scene_score, 2.0f);
 
 	}
+
 	if ((App->input->keyboard[SDL_SCANCODE_F4] == KEY_STATE::KEY_DOWN ) && !App->fade->fading)
 	{
-		App->fade->FadeToBlack(this, App->scene_intro, 2.0f);
+		//App->fade->FadeToBlack(this, App->scene_intro, 2.0f);
+		back_eliminated = true;
 	}
 	App->render->Blit(graphics, xflag, yflag, &background1, 10.0f);
 	//BS to make the tank blit under the bridge v
@@ -320,8 +337,8 @@ update_status ModuleVillageScene::Update()
 	App->render->Blit(graphics3, xflag, yflag - 4000, &background2, 10.0f);
 	App->render->Blit(train, train_x += train_speedx, front_train_y += train_speedy, &(train_front.GetCurrentFrame()), 10.0f);
 	App->render->Blit(train, train_x += train_speedx, mid_train_y += train_speedy, &(train_mid.GetCurrentFrame()), 10.0f);
-	App->render->Blit(train, train_x += train_speedx, back_train_y +=train_speedy, &(train_back.GetCurrentFrame()), 10.0f);
-
+	App->render->Blit(train, train_x += train_speedx + 5, back_train_y +=train_speedy, &(train_back.GetCurrentFrame()), 10.0f);
+	train_x -= 5;
 	//-167
 
 	return UPDATE_CONTINUE;
@@ -329,6 +346,61 @@ update_status ModuleVillageScene::Update()
 
 void ModuleVillageScene::Side_scrolling()
 {
+
+	if (back_eliminated == true)
+	{
+		back_train_y += 5.0;
+		retardation_needed = true;
+	}
+	if (mid_eliminated == true)
+	{
+		mid_train_y -= 5.0;
+		retardation_needed = true;
+	}
+	if (front_eliminated == true)
+	{
+		front_train_y -= 5.0;
+		retardation_needed = true;
+	}
+
+	if (retardation_needed)
+	{
+		ticks = SDL_GetTicks();
+		if (!timer_on)
+		{
+			
+			timer2 = SDL_GetTicks() + 1000;
+			
+			timer_on = true;
+		}
+
+		if (ticks > timer2)
+		{
+			retardation_needed = false;
+			back_eliminated = false;
+			mid_eliminated = false;
+			front_eliminated = false;
+			retard_finished = true;
+			timer_on = false;
+		}
+	}
+
+	if (retard_finished)
+	{
+		ticks = SDL_GetTicks();
+		if (!timer_on)
+		{
+			timer2 = SDL_GetTicks() + 10000;
+			timer_on = true;
+			train_speedy = 5.0;
+		}
+		if (ticks > timer2)
+		{
+			retard_finished = false;
+			timer_on = false;
+			train_speedy = 10.0;
+		}
+	}
 	if (going_left && !scroll_timer)
 	{
 		yflag += speed;
@@ -343,9 +415,11 @@ void ModuleVillageScene::Side_scrolling()
 
 	else if (scroll_timer)
 	{
+		train_speedx = 0.0;
 		yflag += speed;
 		if (SDL_GetTicks() >= timer)
 		{
+			
 			scroll_timer = false;
 			if (going_left)
 			{
@@ -362,7 +436,7 @@ void ModuleVillageScene::Side_scrolling()
 	{
 		yflag += speed;
 		xflag -= 0.66;
-		train_speedx = 0.22;
+		train_speedx = -0.22;
 		if (xflag <= -60)
 		{
 			timer = SDL_GetTicks() + 1000;
