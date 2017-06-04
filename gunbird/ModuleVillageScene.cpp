@@ -229,7 +229,9 @@ bool ModuleVillageScene::Start()
 bool ModuleVillageScene::CleanUp()
 {
 	LOG("Unloading village scene");
-	
+	ending = false;
+	tank_inScreen = true;
+	final_zone = false;
 	App->enemies->Disable();
 	App->particles->Disable();
 	App->collision->Disable();
