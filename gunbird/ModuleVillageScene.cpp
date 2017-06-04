@@ -82,7 +82,6 @@ bool ModuleVillageScene::Start()
 	App->particles->Enable();
 	App->collision->Enable();
 	App->player->Enable();
-	App->player2->Enable();
 	App->scene_village->Enable();
 
 	yflag = -5312;
@@ -139,14 +138,14 @@ bool ModuleVillageScene::Start()
 
 	//---Three standing---
 	App->enemies->AddEnemy(ENEMY_TYPES::ROTATINGTURRET, 70, -890, 0);
-	App->enemies->AddEnemy(ENEMY_TYPES::ROTATINGTURRET, 39,-890, 0);
+	App->enemies->AddEnemy(ENEMY_TYPES::ROTATINGTURRET, 39, -890, 0);
 	App->enemies->AddEnemy(ENEMY_TYPES::ROTATINGTURRET, 101, -890, 0);
 
 	//---Three moving down
 
-	App->enemies->AddEnemy(ENEMY_TYPES::ROTATINGTURRET, 137, -890, 1);
-	App->enemies->AddEnemy(ENEMY_TYPES::ROTATINGTURRET, 173, -890, 1);
-	App->enemies->AddEnemy(ENEMY_TYPES::ROTATINGTURRET, 209, -890, 1);
+	App->enemies->AddEnemy(ENEMY_TYPES::ROTATINGTURRET, 132, -890, 1);
+	App->enemies->AddEnemy(ENEMY_TYPES::ROTATINGTURRET, 163, -890, 1);
+	App->enemies->AddEnemy(ENEMY_TYPES::ROTATINGTURRET, 194, -890, 1);
 
 	//---Three moving down---
 	App->enemies->AddEnemy(ENEMY_TYPES::ROTATINGTURRET, -30, -840, 2);
@@ -189,6 +188,35 @@ bool ModuleVillageScene::Start()
 	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGGUNNER, 240, -670, 0);
 	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGGUNNER, 260, -720, 0);
 
+	//--Adding Redbombs--
+	//---Bombs at the beginning---
+	App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, 20, -300, 12);
+	App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, 55, -310, 12);
+	App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, 85, -320, 12);
+	App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, 115, -330, 13);
+	App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, 145, -340, 13);
+	App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, 175,-350, 13);
+
+
+	//---Bombs at the back---
+	App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, 180, -940, 11);
+	App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, 50, -970, 11);
+	App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, 87, -990, 11);
+	App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, 190, -1020, 11);
+	App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, 5, -1050, 11);
+	App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, 118, -1080, 11);
+	App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, 180, -1110, 11);
+	App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, 22, -1110, 11);
+	App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, 50, -1140, 11);
+	App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, 87, -1170, 11);
+	App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, 190, -1200, 11);
+	App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, 5, -1230, 11);
+	App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, 118, -1260, 11);
+	App->enemies->AddEnemy(ENEMY_TYPES::REDBOMB, 22, -1290, 11);
+
+	//--Adding Turretcopters--
+	App->enemies->AddEnemy(ENEMY_TYPES::TURRETCOPTER, 70, -1400, 0);
+	
 	return true;
 }
 

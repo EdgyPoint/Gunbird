@@ -310,7 +310,6 @@ if ((App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT || SDL_GameCo
 	// Bomb
 	if ((App->input->keyboard[SDL_SCANCODE_V] == KEY_STATE::KEY_DOWN  || App->input->controller1[SDL_CONTROLLER_BUTTON_X] == BUTTON_STATE::B_DOWN) && !_dying && !respawning && !stunned && !App->fade->fading && bombCD == 0 && bombs > 0)
 	{
-		if (bombs > 0)
 		bombs--;
 
 		bombCD = 125;
@@ -718,7 +717,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 
 	if (c2->type == COLLIDER_POWERUP)
 	{
-		if (powerup_lv > MAX_LEVEL)
+		if (powerup_lv < MAX_LEVEL)
 		{
 			App->audio->sfx = App->audio->LoadSFX("assets/SFX/marionpowerup.wav");;
 			Mix_PlayChannel(-1, App->audio->sfx, 0);

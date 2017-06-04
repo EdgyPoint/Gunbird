@@ -2,9 +2,9 @@
 #include "Application.h"
 #include "ModuleParticles.h"
 #include "ModulePlayer.h"
+#include "ModuleRender.h"
 #include "ModuleCastleScene.h"
 #include "ModuleVillageScene.h"
-
 #include "Enemy_Redbomb.h"
 #include "ModuleCollision.h"
 #include "SDL/include/SDL_timer.h"
@@ -12,6 +12,8 @@
 Enemy_Redbomb :: Enemy_Redbomb(int x, int y, int option) : Enemy(x, y, option)
 {
 	
+	aditionalanimation = true;
+
 	fly.PushBack({ 100, 58, 28, 32 });
 	fly.PushBack({ 128, 58, 28, 32 });
 	fly.PushBack({ 156, 58, 28, 32 });
@@ -23,7 +25,7 @@ Enemy_Redbomb :: Enemy_Redbomb(int x, int y, int option) : Enemy(x, y, option)
 
 	fly.speed = 0.3f;
 
-	animation = &fly;
+	extra_animation = &fly;
 
 	hp = 1.0f;
 
@@ -100,6 +102,46 @@ Enemy_Redbomb :: Enemy_Redbomb(int x, int y, int option) : Enemy(x, y, option)
 		path.PushBack({ 0.0f, 3.0f }, 100000);
 	}
 
+	if (option == 11)
+	{
+		path.PushBack({ 0.0f, 0.4f }, 2200);
+		path.PushBack({ 0.0f, 2.0f }, 10000);
+	}
+
+	if (option == 12)
+	{
+		path.PushBack({ 0.0f, 0.4f }, 660);
+		path.PushBack({ 0.0f, 2.0f }, 50);
+		path.PushBack({-0.5f, 2.0f }, 2);
+		path.PushBack({ -0.6f, 1.9f }, 2);
+		path.PushBack({ -0.7f, 1.8f }, 2);
+		path.PushBack({ -0.8f, 1.7f }, 2);
+		path.PushBack({ -0.9f, 1.6f }, 2);
+		path.PushBack({ -1.0f, 1.5f }, 2);
+		path.PushBack({ -1.1f, 1.4f }, 2);
+		path.PushBack({ -1.2f, 1.3f }, 2);
+		path.PushBack({ -1.3f, 1.2f }, 2);
+		path.PushBack({ -1.4f, 1.1f }, 2);
+		path.PushBack({ -1.5f, 1.0f }, 20000);
+	}
+
+	if (option == 13)
+	{
+		path.PushBack({ 0.0f, 0.4f }, 660);
+		path.PushBack({ 0.0f, 2.0f }, 50);
+		path.PushBack({ 0.5f, 2.0f }, 2);
+		path.PushBack({ 0.6f, 1.9f }, 2);
+		path.PushBack({ 0.7f, 1.8f }, 2);
+		path.PushBack({ 0.8f, 1.7f }, 2);
+		path.PushBack({ 0.9f, 1.6f }, 2);
+		path.PushBack({ 1.0f, 1.5f }, 2);
+		path.PushBack({ 1.1f, 1.4f }, 2);
+		path.PushBack({ 1.2f, 1.3f }, 2);
+		path.PushBack({ 1.3f, 1.2f }, 2);
+		path.PushBack({ 1.4f, 1.1f }, 2);
+		path.PushBack({ 1.5f, 1.0f }, 20000);
+	}
+
 	collider = App->collision->AddCollider({ 0, 0,  28, 32 }, COLLIDER_TYPE::COLLIDER_ENEMY_F, (Module*)App->enemies);
 
 	original_pos.x = x;
@@ -133,7 +175,7 @@ void Enemy_Redbomb::Move()
 	
 }
 
-void Enemy_Redbomb::Shoot()
+void Enemy_Redbomb::Extra_animation()
 {
-	
+	App->render->Blit(App->enemies->sprites, position.x, position.y, &(extra_animation->GetCurrentFrame()));
 }

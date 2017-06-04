@@ -18,6 +18,6 @@ private:
 public:
 	Enemy_Redbomb(int x, int y, int option);
 	void Move();
-	void Shoot();
+	void Extra_animation();
 };
 #endif

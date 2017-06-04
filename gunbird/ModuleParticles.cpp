@@ -328,6 +328,7 @@ bool ModuleParticles::Init()
 	coin.anim.loop = true;
 	coin.life = 10000;
 	coin.anim.speed = 0.25f;
+	coin.speed.y = 0.4f;
 
 	// Pickups
 	bomb.anim.PushBack({ 235, 439, 23, 12 });
@@ -619,7 +620,7 @@ void ModuleParticles::AddParticle(const Particle& particle, int x, int y, COLLID
 void ModuleParticles::OnCollision(Collider* c1, Collider* c2)
 {
 	// Colliders that are deleted on contact are deleted here
-	if (c1->type == COLLIDER_PLAYER_SHOT || c1->type == COLLIDER_PLAYER2_SHOT || c2->type == COLLIDER_WALL)
+	if (c1->type == COLLIDER_PLAYER_SHOT || c1->type == COLLIDER_PLAYER2_SHOT || c1->type == COLLIDER_ENEMY_SHOT || c2->type == COLLIDER_WALL)
 	{
 		for (uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
 		{
@@ -688,6 +689,9 @@ bool Particle::Update()
 	position.y += speed.y;
 	
 
+	if (position.x > SCREEN_WIDTH || position.x < 0 || position.y > SCREEN_HEIGHT || position.y < 0)
+		life = 0;
+
 	if (itemtype == ITEM_POWERUP || itemtype == ITEM_BOMB)
 
 	{
@@ -708,6 +712,18 @@ bool Particle::Update()
 			speed.y = -3;
 		}
 		if (App->player->time_since_last_charged == 31)
+		{
+			speed.y = -7;
+		}
+	}
+
+	if (collider->type == COLLIDER_CHARGEDSHOT2)
+	{
+		if (App->player2->time_since_last_charged == 15)
+		{
+			speed.y = -3;
+		}
+		if (App->player2->time_since_last_charged == 31)
 		{
 			speed.y = -7;
 		}

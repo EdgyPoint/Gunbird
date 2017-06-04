@@ -35,6 +35,7 @@ public:
 	SDL_Texture* ui = nullptr;
 	SDL_Rect p2display;
 	SDL_Rect lifedisplay;
+	SDL_Rect bombdisplay;
 	Collider* player_col = nullptr;
 	Animation* current_animation = nullptr;
 	Animation idle;
@@ -44,6 +45,8 @@ public:
 	Animation tright;
 	Animation dying;
 	Animation tilting; //used for stun
+	Animation completingcharge;
+	Animation shotcharged;
 	iPoint position;
 	int transition, powerup_lv, invincibilitycounter, respawncounter, burst_counter, deathcounter, stuncounter, magicsparks, blinkcounter, score, blink = 0, bombCD = 0;
 	bool _dying, respawning, temp_invincibility, stunned, poweruping, shooting = false;
@@ -51,6 +54,7 @@ public:
 	int bombs = 0;
 	int charge_up = 0;
 	int finishing_charge = 0;
+	int time_since_last_charged = 0; // this variable is to use acceleration on the charged shot
 	bool out = true;
 	char text_score2[10];
 };

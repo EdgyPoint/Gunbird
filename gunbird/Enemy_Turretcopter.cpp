@@ -6,8 +6,6 @@
 #include "SDL/include/SDL_timer.h"
 #include <cmath>
 
-
-
 Enemy_Turretcopter::Enemy_Turretcopter(int x, int y, int option) : Enemy(x, y, option)
 {
 	fly.PushBack({ 0, 58, 32, 35 });
@@ -20,10 +18,19 @@ Enemy_Turretcopter::Enemy_Turretcopter(int x, int y, int option) : Enemy(x, y, o
 
 	animation = &fly;
 
-	path.PushBack({-0.1f, -0.7f }, 100);
-	path.PushBack({-0.1f, 0.7f }, 200);
-	path.PushBack({-0.1f, 1.2f }, 200);
-
+	if (option == 0)
+	{
+		path.PushBack({ 0.0f, 0.4f }, 4000);
+		path.PushBack({ 0.0f, 10.0f }, 200);
+		path.PushBack({ 0.0f, -5.0f }, 350);
+		path.PushBack({ -3.0f, -5.0f }, 2);
+		path.PushBack({ -3.2f, -5.0f }, 2);
+		path.PushBack({ -3.4f, -5.0f }, 2);
+		path.PushBack({ -3.6f, -5.0f }, 2);
+		path.PushBack({ -3.8f, -5.0f }, 2);
+		path.PushBack({ -4.0f, -5.0f }, 20000);
+	}
+	
 	collider = App->collision->AddCollider({ 0, 0, 32, 35 }, COLLIDER_TYPE::COLLIDER_ENEMY_F, (Module*)App->enemies);
 
 	original_pos.x = x;
@@ -38,7 +45,9 @@ Enemy_Turretcopter::Enemy_Turretcopter(int x, int y, int option) : Enemy(x, y, o
 
 void Enemy_Turretcopter::Move()
 {
-	if (pathoption == 2)
+	
+	position = original_pos + path.GetCurrentPosition();
+	/*if (pathoption == 2)
 	{
 		if (going_right)
 		{
@@ -61,30 +70,7 @@ void Enemy_Turretcopter::Move()
 	else
 	{
 		position = original_pos + path.GetCurrentPosition();
-	}
+	}*/
 }
 
-/*void Enemy_Turretcopter::Shoot()
-{
-	distance.x = App->player->position.x - position.x;
-	distance.y = App->player->position.y - position.y;
 
-	aux_float = distance.y / App->particles->balloonshoot.speed.y;
-	speeds.x = distance.x / aux_float;
-	speeds.y = distance.y / aux_float;
-
-	initcounter += 1;
-	if (initcounter > 210 && initcounter < 500)
-	{
-		if (SDL_GetTicks() >= reload)
-		{
-			if (distance.y < 0)
-			{
-				speeds.y *= -1;
-				speeds.x *= -1;
-			}
-			App->particles->AddParticle(App->particles->balloonshoot, position.x + 18, position.y + 53, COLLIDER_ENEMY_SHOT, speeds.x, speeds.y);
-			reload = SDL_GetTicks() + 500;
-		}
-	}
-}*/

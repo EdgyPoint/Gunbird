@@ -117,8 +117,12 @@ void Enemy::OnCollision(Collider* collider, Enemy* enemy)
 		else if (collider->type == COLLIDER_PLAYER2_SHOT && App->player2->powerup_lv == 3)
 			enemy->hp -= 1.25f;
 		else if (collider->type == COLLIDER_BOMBSHOT && enemy->already_hit == false)
-			enemy->hp -= 3;
+			enemy->hp -= 10;
 		else if (collider->type == COLLIDER_CHARGEDSHOT && enemy->already_hit == false)
+			enemy->hp -= 5;
+		else if (collider->type == COLLIDER_BOMBSHOT2 && enemy->already_hit == false)
+			enemy->hp -= 10;
+		else if (collider->type == COLLIDER_CHARGEDSHOT2 && enemy->already_hit == false)
 			enemy->hp -= 5;
 
 	if (hitCD == 0)
@@ -126,14 +130,14 @@ void Enemy::OnCollision(Collider* collider, Enemy* enemy)
 		enemy->already_hit = false;
 	}
 
-	if ((collider->type == COLLIDER_PLAYER_SHOT || collider->type == COLLIDER_PLAYER2_SHOT))
+	if (collider->type == COLLIDER_PLAYER_SHOT || collider->type == COLLIDER_PLAYER2_SHOT)
 	{
 		enemy->status = HIT;
 		App->particles->AddParticle(App->particles->impact, collider->rect.x - 6, collider->rect.y - 47, COLLIDER_NONE);
 		App->audio->sfx = App->audio->LoadSFX("assets/SFX/impact.wav");
 		Mix_PlayChannel(-1, App->audio->sfx, 0);
 	}
-	if ((collider->type == COLLIDER_BOMBSHOT || collider->type == COLLIDER_CHARGEDSHOT) && enemy->already_hit == false)
+	if ((collider->type == COLLIDER_BOMBSHOT || collider->type == COLLIDER_CHARGEDSHOT || collider->type == COLLIDER_BOMBSHOT2 || collider->type == COLLIDER_CHARGEDSHOT2) && enemy->already_hit == false)
 	{
 		enemy->status = HIT;
 		enemy->already_hit = true;
@@ -178,9 +182,9 @@ void Enemy::ToDie(Enemy* enemy, Collider* col)
 		Mix_PlayChannel(-1, App->audio->sfx, 0);
 	}
 
-	if (col->type == COLLIDER_PLAYER_SHOT)
+	if (col->type == COLLIDER_PLAYER_SHOT || col->type == COLLIDER_CHARGEDSHOT || col->type == COLLIDER_BOMBSHOT)
 		App->player->score += enemy->killscore;
 
-	if (col->type == COLLIDER_PLAYER2_SHOT)
+	if (col->type == COLLIDER_PLAYER2_SHOT || col->type == COLLIDER_CHARGEDSHOT2 || col->type == COLLIDER_BOMBSHOT2)
 		App->player2->score += enemy->killscore;
 }
