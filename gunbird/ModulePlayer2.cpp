@@ -135,7 +135,7 @@ update_status ModulePlayer2::Update()
 
 	int speed = 2;
 
-	if (App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_REPEAT && !_dying && !respawning)
+	if (App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_REPEAT && !_dying && !respawning && !App->fade->fading)
 	{
 		position.x -= speed;
 		if (position.x <= 0)
@@ -157,7 +157,7 @@ update_status ModulePlayer2::Update()
 		}
 	}
 
-	if (App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_REPEAT && !_dying && !respawning)
+	if (App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_REPEAT && !_dying && !respawning && !App->fade->fading)
 	{
 		position.x += speed;
 		if (position.x >= 196)
@@ -180,7 +180,7 @@ update_status ModulePlayer2::Update()
 		}
 	}
 
-	if (App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_STATE::KEY_REPEAT && !_dying && !respawning)
+	if (App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_STATE::KEY_REPEAT && !_dying && !respawning && !App->fade->fading)
 	{
 		position.y += speed;
 		if (position.y >= 288)
@@ -190,7 +190,7 @@ update_status ModulePlayer2::Update()
 
 	}
 
-	if (App->input->keyboard[SDL_SCANCODE_UP] == KEY_STATE::KEY_REPEAT && !_dying && !respawning)
+	if (App->input->keyboard[SDL_SCANCODE_UP] == KEY_STATE::KEY_REPEAT && !_dying && !respawning && !App->fade->fading)
 	{
 		position.y -= speed;
 		if (position.y <= 0)
@@ -200,7 +200,34 @@ update_status ModulePlayer2::Update()
 
 	}
 
-	if (App->input->keyboard[SDL_SCANCODE_KP_0] == KEY_STATE::KEY_DOWN && !_dying && !respawning && !stunned)
+	// Charged shot
+	// Charge up
+	if ((App->input->keyboard[SDL_SCANCODE_C] == KEY_STATE::KEY_REPEAT || App->input->controller[SDL_CONTROLLER_BUTTON_A] == BUTTON_STATE::B_REPEAT) && !_dying && !respawning && !stunned && !App->fade->fading && charge_up < 110)
+	{
+		charge_up++;
+	}
+	// Finishing charge
+	if ((App->input->keyboard[SDL_SCANCODE_C] == KEY_STATE::KEY_REPEAT || App->input->controller[SDL_CONTROLLER_BUTTON_A] == BUTTON_STATE::B_REPEAT) && !_dying && !respawning && !stunned && !App->fade->fading && charge_up == 110 && finishing_charge < 26)
+	{
+		finishing_charge++;
+	}
+	// Release
+	if ((App->input->keyboard[SDL_SCANCODE_C] == KEY_STATE::KEY_UP || App->input->controller[SDL_CONTROLLER_BUTTON_A] == BUTTON_STATE::B_UP) && !_dying && !respawning && !stunned && !App->fade->fading)
+	{
+		if (charge_up == 110)
+		{
+			App->audio->sfx = App->audio->LoadSFX("assets/SFX/marionchargedshot.wav");
+			Mix_PlayChannel(-1, App->audio->sfx, 0);
+
+			App->particles->AddParticle(App->particles->chargedbeam, position.x - 2, position.y - 32, COLLIDER_CHARGEDSHOT);
+
+		}
+		charge_up = 0;
+		finishing_charge = 0;
+	}
+	// --------------------------
+
+	if (App->input->keyboard[SDL_SCANCODE_KP_0] == KEY_STATE::KEY_DOWN && !_dying && !respawning && !stunned && !App->fade->fading)
 
 	{
 		if (!shooting)
@@ -215,7 +242,7 @@ update_status ModulePlayer2::Update()
 	}
 
 
-	if (App->input->keyboard[SDL_SCANCODE_KP_1] == KEY_STATE::KEY_DOWN && !_dying && !respawning && !stunned && bombCD == 0)
+	if (App->input->keyboard[SDL_SCANCODE_KP_1] == KEY_STATE::KEY_DOWN && !_dying && !respawning && !stunned && !App->fade->fading && bombCD == 0)
 	{
 		bombCD = 125;
 		App->audio->sfx = App->audio->LoadSFX("assets/SFX/marionbomb.wav");
@@ -362,7 +389,28 @@ update_status ModulePlayer2::Update()
 	//Blit UI
 	if (!out)
 	{
-		App->render->Blit(ui, 116, 6, &p2display, 0, true);
+		// Blit player
+		blink++;
+		if (blink == 6)
+			blink = 0;
+
+		blinkcounter++;
+		if (blinkcounter == 6)
+			blinkcounter = 0;
+
+		if (blinkcounter > 3 && (respawning || temp_invincibility))
+			App->render->Blit(graphics, position.x, position.y, &(current_animation->GetCurrentFrame()));
+
+		else if (!respawning && !temp_invincibility && charge_up != 110)
+			App->render->Blit(graphics, position.x, position.y, &(current_animation->GetCurrentFrame()));
+		// --------------------------
+
+		// Blit shot charging
+		if (charge_up == 110)
+		{
+			App->render->Blit(graphics, position.x, position.y - 5, &(current_animation->GetCurrentFrame()));
+		}
+		// --------------------------
 
 		if (lives == 1)
 			App->render->Blit(ui, 116, 21, &lifedisplay, 0, true);
@@ -372,9 +420,10 @@ update_status ModulePlayer2::Update()
 			App->render->Blit(ui, 116, 21, &lifedisplay, 0, true);
 			App->render->Blit(ui, 132, 21, &lifedisplay, 0, true);
 		}
+
+		sprintf_s(text_score2, 10, "%7d", score);
 	}
 
-	sprintf_s(text_score2, 10, "%7d", score);
 
 	App->fonts->BlitText(132, 6, App->player->font_score, text_score2);
 

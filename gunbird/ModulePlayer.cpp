@@ -320,6 +320,7 @@ if ((App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT || SDL_GameCo
 		charge_up = 0;
 		finishing_charge = 0;
 	}
+	// --------------------------
 
 	// Shoot
 	if ((App->input->keyboard[SDL_SCANCODE_C] == KEY_STATE::KEY_DOWN || App->input->controller1[SDL_CONTROLLER_BUTTON_A] ==BUTTON_STATE::B_DOWN) && !_dying && !respawning && !stunned && !App->fade->fading)
