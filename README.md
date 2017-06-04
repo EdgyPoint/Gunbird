@@ -29,7 +29,7 @@ Github:
 ## Game Controls
 The game can be played with keyboard or with Game Controller (taking XBOX 360/ONE controller as reference)
 
-*KEYBOARD CONTROLS*
+_KEYBOARD CONTROLS_
 
     ### Player 1
     SPACE         ->  Start
