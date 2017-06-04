@@ -195,7 +195,6 @@ Enemy_RotatingTurret::Enemy_RotatingTurret(int x, int y, int option) : Enemy(x, 
 	damaged_hp = 1.0f;
 	death_type = SMALL_ENEMY;
 	flying = false;
-	dead_anim = true;
 	killscore = 500;
 }
 

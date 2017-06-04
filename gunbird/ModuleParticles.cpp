@@ -138,7 +138,7 @@ bool ModuleParticles::Init()
 	chargedbeam.anim.PushBack({ 520, 202, 32, 64 });
 	chargedbeam.anim.loop = true;
 	chargedbeam.anim.speed = 0.5f;
-	chargedbeam.speed.y = -7;
+	chargedbeam.speed.y = -0.45f;
 	chargedbeam.life = 4000;
 
 	smallshot.anim.PushBack({ 31, 425, 6, 6 });
@@ -690,6 +690,18 @@ bool Particle::Update()
 		if (position.y < 45 || position.y > 222)
 		{
 			speed.y = speed.y * -1;
+		}
+	}
+
+	if (collider->type == COLLIDER_CHARGEDSHOT)
+	{
+		if (App->player->time_since_last_charged == 15)
+		{
+			speed.y = -3;
+		}
+		if (App->player->time_since_last_charged == 31)
+		{
+			speed.y = -7;
 		}
 	}
 

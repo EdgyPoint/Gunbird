@@ -295,15 +295,21 @@ if ((App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT || SDL_GameCo
 	{
 		finishing_charge++;
 	}
+	if (time_since_last_charged < 100)
+	time_since_last_charged++;
 		// Release
 	if ((App->input->keyboard[SDL_SCANCODE_C] == KEY_STATE::KEY_UP || App->input->controller[SDL_CONTROLLER_BUTTON_A] == BUTTON_STATE::B_UP) && !_dying && !respawning && !stunned && !App->fade->fading)
 	{
 		if (charge_up == 110)
 		{
-			App->particles->AddParticle(App->particles->chargedbeam, position.x - 2, position.y - 32, COLLIDER_BOMBSHOT);
+			App->audio->sfx = App->audio->LoadSFX("assets/SFX/marionchargedshot.wav");
+			Mix_PlayChannel(-1, App->audio->sfx, 0);
+
+			App->particles->AddParticle(App->particles->chargedbeam, position.x - 2, position.y - 32, COLLIDER_CHARGEDSHOT);
 		}
 		charge_up = 0;
 		finishing_charge = 0;
+		time_since_last_charged = 0;
 	}
 
 	// Shoot
