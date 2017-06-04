@@ -216,6 +216,7 @@ bool ModuleVillageScene::Start()
 
 	//--Adding Turretcopters--
 	App->enemies->AddEnemy(ENEMY_TYPES::TURRETCOPTER, 70, -1400, 0);
+
 	
 	return true;
 }

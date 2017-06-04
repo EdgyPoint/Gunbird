@@ -21,14 +21,13 @@ Enemy_Turretcopter::Enemy_Turretcopter(int x, int y, int option) : Enemy(x, y, o
 	if (option == 0)
 	{
 		path.PushBack({ 0.0f, 0.4f }, 4000);
-		path.PushBack({ 0.0f, 10.0f }, 200);
-		path.PushBack({ 0.0f, -5.0f }, 350);
-		path.PushBack({ -3.0f, -5.0f }, 2);
-		path.PushBack({ -3.2f, -5.0f }, 2);
-		path.PushBack({ -3.4f, -5.0f }, 2);
-		path.PushBack({ -3.6f, -5.0f }, 2);
-		path.PushBack({ -3.8f, -5.0f }, 2);
-		path.PushBack({ -4.0f, -5.0f }, 20000);
+		path.PushBack({ -0.8f, 0.4f }, 4000);
+	}
+
+	if (option == 1)
+	{
+		path.PushBack({ 0.0f, 0.4f }, 4000);
+		path.PushBack({ 0.8f, 0.4f }, 4000);
 	}
 	
 	collider = App->collision->AddCollider({ 0, 0, 32, 35 }, COLLIDER_TYPE::COLLIDER_ENEMY_F, (Module*)App->enemies);
@@ -47,30 +46,7 @@ void Enemy_Turretcopter::Move()
 {
 	
 	position = original_pos + path.GetCurrentPosition();
-	/*if (pathoption == 2)
-	{
-		if (going_right)
-		{
-			if (wave > 1000.0f)
-				going_right = false;
-			else
-				wave += 0.01f;
-		}
-		else
-		{
-			if (wave < -1000.0f)
-				going_right = true;
-			else
-				wave -= 0.01f;
-		}
-
-		position.x = original_x + (200.0f * sinf(wave));
-		position.y += 2;
-	}
-	else
-	{
-		position = original_pos + path.GetCurrentPosition();
-	}*/
+	
 }
 
 

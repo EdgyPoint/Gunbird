@@ -68,6 +68,7 @@ public:
 	bool retardation_needed;
 	bool retard_finished;
 	bool timer_on;
+	bool ending;
 	int ticks;
 
 };
