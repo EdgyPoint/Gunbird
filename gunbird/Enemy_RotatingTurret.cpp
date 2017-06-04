@@ -194,6 +194,7 @@ Enemy_RotatingTurret::Enemy_RotatingTurret(int x, int y, int option) : Enemy(x, 
 	hp = 2.0f;
 	damaged_hp = 1.0f;
 	death_type = SMALL_ENEMY;
+	dead_anim = true;
 	flying = false;
 	killscore = 500;
 }
@@ -576,6 +577,7 @@ void Enemy_RotatingTurret::Extra_animation()
 			animation = &normal_base_anim;
 	}
 
+	if (hp > 0)
 	App->render->Blit(App->enemies->sprites, position.x + 1, position.y - 10, &(extra_animation->GetCurrentFrame()));
 		//flag2.GetCurrentFrame();
 		//flag3.GetCurrentFrame();

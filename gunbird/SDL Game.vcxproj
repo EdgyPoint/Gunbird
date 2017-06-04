@@ -20,13 +20,13 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v120</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v120</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
@@ -79,12 +79,14 @@
     <ClInclude Include="Enemy_4CannonTurret.h" />
     <ClInclude Include="Enemy_Balloon.h" />
     <ClInclude Include="Enemy_CastleMortar.h" />
+    <ClInclude Include="Enemy_FirstTrump.h" />
     <ClInclude Include="Enemy_FlyingGunner.h" />
     <ClInclude Include="Enemy_GreenRobot.h" />
     <ClInclude Include="Enemy_House1.h" />
     <ClInclude Include="Enemy_House2.h" />
     <ClInclude Include="Enemy_Redbomb.h" />
     <ClInclude Include="Enemy_RotatingTurret.h" />
+    <ClInclude Include="Enemy_TrumpFirst.h" />
     <ClInclude Include="Enemy_Turretcopter.h" />
     <ClInclude Include="Enemy_Vase.h" />
     <ClInclude Include="Enemy_WindowGun.h" />
@@ -124,6 +126,7 @@
     <ClCompile Include="Enemy_House2.cpp" />
     <ClCompile Include="Enemy_Redbomb.cpp" />
     <ClCompile Include="Enemy_RotatingTurret.cpp" />
+    <ClCompile Include="Enemy_TrumpFirst.cpp" />
     <ClCompile Include="Enemy_Turretcopter.cpp" />
     <ClCompile Include="Enemy_Vase.cpp" />
     <ClCompile Include="Enemy_WindowGun.cpp" />
