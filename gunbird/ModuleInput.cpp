@@ -47,6 +47,7 @@ bool ModuleInput::Init()
 			{
 				controller_connected == true;
 			}
+			Controller2 = SDL_GameControllerOpen(0);
 		}
 	};
 
