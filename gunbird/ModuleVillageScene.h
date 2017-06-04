@@ -27,10 +27,14 @@ public:
 	SDL_Texture* graphics2 = nullptr;
 	SDL_Texture* graphics3 = nullptr;
 	SDL_Texture* graphics4 = nullptr;
+	SDL_Texture* train = nullptr;
 	SDL_Rect background1;
 	SDL_Rect background2;
 	SDL_Rect npi;
 
+	Animation train_back;
+	Animation train_mid;
+	Animation train_front;
 	float yflag;
 	float xflag;
 	int track_repeat;
@@ -44,6 +48,12 @@ public:
 	bool going_left;
 	bool scroll_timer;
 	bool scrolling;
+	float back_train_y;
+	float mid_train_y;
+	float front_train_y;
+	float train_x;
+	float train_speedy;
+	float train_speedx;
 
 };
 

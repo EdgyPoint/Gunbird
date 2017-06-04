@@ -37,12 +37,31 @@ ModuleVillageScene::ModuleVillageScene()
 	npi.x = 0;
 	npi.y = -10;
 
+	train_back.PushBack({ 9, 801, 75, 187 });
+	train_back.PushBack({ 116, 801, 75, 187 });
+	train_back.speed = 0.5f;
+
+	train_mid.PushBack({ 4, 553, 87, 245 });
+	train_mid.PushBack({ 111, 553, 87, 245 });
+	train_mid.speed = 0.5f;
+
+	train_front.PushBack({ 3,241, 88, 296 });
+	train_front.PushBack({ 116,241 , 88, 296 });
+	train_front.PushBack({ 219,241, 88, 296 });
+	train_front.PushBack({ 338,241, 88, 296 });
+	train_front.PushBack({ 460,241, 88, 296 });
+	train_front.PushBack({ 614,241, 88, 296 });
+	train_front.PushBack({ 730,241, 88, 296 });
+	train_front.PushBack({ 865,241, 88, 296 });
+
+	train_front.speed = 0.5f;
+
 
 
 }
 
 ModuleVillageScene::~ModuleVillageScene()
-{}
+{}    
 
 bool ModuleVillageScene::Start()
 {
@@ -56,6 +75,13 @@ bool ModuleVillageScene::Start()
 	xflag = -320;
 	ycounter = 0;
 	speed = 0.4;
+
+	back_train_y = -730+ 488;
+	mid_train_y = -730 + 261;
+	front_train_y = -730;
+	train_x = -187;
+	
+	
 	cinematic = false;
 	timerup = false;
 	on_rails = false;
@@ -67,7 +93,7 @@ bool ModuleVillageScene::Start()
 	graphics2 = App->textures->Load("assets/images/backgrounds/Village upper background.png");
 	graphics3 = App->textures->Load("assets/images/backgrounds/Village train background.png");
 	graphics4 = App->textures->Load("assets/images/backgrounds/Village train background.png");
-
+	train = App->textures->Load("assets/images/train.png");
 
 	App->collision->AddCollider(npi, COLLIDER_WALL);
 
@@ -147,14 +173,21 @@ update_status ModuleVillageScene::Update()
 		if (yflag <= -4350)
 		{
 			yflag += speed;
+			train_speedy = 0.4f;
+			train_speedx = 0.0f;
 		}
 		if (yflag >= -4350 && xflag < -129)
 		{
 			xflag += 0.66;
-			yflag +=speed;
+			yflag += speed;
+			train_speedx = 0.22;
+			train_speedy = 0.4f;
+			
 		}
 		if (yflag >= -4234 && !cinematic)
 		{
+			train_speedx = 0.0f;
+			train_speedy = 0.0f;
 			if (!timerup)
 			{
 				timer = SDL_GetTicks() + 3500;
@@ -171,15 +204,22 @@ update_status ModuleVillageScene::Update()
 			xflag += 0.66;
 			yflag += speed;
 			timerup = false;
+		
+			if (train_speedy > 0) { train_speedy *= 0.8; }
+			else { train_speedy = -5.4f; }
+			train_speedx = 0.22;
 		}
 		if (xflag >= -60 && !timerup && !scrolling)
 		{
 			timer2 = SDL_GetTicks() + 2000;
 			timerup = true;
+			train_speedx = 0.0f;
+			train_speedy = 0.0f;
 		}
 		if (SDL_GetTicks() > timer2 && xflag >= -60 && speed < 10.0 && !scrolling)
 		{
-			speed *= 1.02;
+			if (train_speedy > -1.0) { train_speedy -= 0.1; }
+			speed *= 1.015;
 			yflag += speed;
 		}
 		if (yflag >= 320.0f)
@@ -196,10 +236,7 @@ update_status ModuleVillageScene::Update()
 
 		
 
-	App->render->Blit(graphics, xflag, yflag, &background1, 10.0f);
-	App->render->Blit(graphics2, xflag, yflag, &background1, 10.0f);
-	App->render->Blit(graphics3, xflag, yflag-4000, &background2, 10.0f);
-
+	
 	}
 
 	if (on_rails)
@@ -233,6 +270,14 @@ update_status ModuleVillageScene::Update()
 	{
 		App->fade->FadeToBlack(this, App->scene_intro, 2.0f);
 	}
+	App->render->Blit(graphics, xflag, yflag, &background1, 10.0f);
+	App->render->Blit(graphics2, xflag, yflag, &background1, 10.0f);
+	App->render->Blit(graphics3, xflag, yflag - 4000, &background2, 10.0f);
+	App->render->Blit(train, train_x += train_speedx, front_train_y += train_speedy, &(train_front.GetCurrentFrame()), 10.0f);
+	App->render->Blit(train, train_x += train_speedx, mid_train_y += train_speedy, &(train_mid.GetCurrentFrame()), 10.0f);
+	App->render->Blit(train, train_x += train_speedx, back_train_y +=train_speedy, &(train_back.GetCurrentFrame()), 10.0f);
+
+	//-167
 
 	return UPDATE_CONTINUE;
 }
@@ -243,6 +288,7 @@ void ModuleVillageScene::Side_scrolling()
 	{
 		yflag += speed;
 		xflag += 0.66;
+		train_speedx = 0.22;
 		if (xflag >= 0)
 		{
 			timer = SDL_GetTicks() + 1000;
@@ -271,6 +317,7 @@ void ModuleVillageScene::Side_scrolling()
 	{
 		yflag += speed;
 		xflag -= 0.66;
+		train_speedx = 0.22;
 		if (xflag <= -60)
 		{
 			timer = SDL_GetTicks() + 1000;
