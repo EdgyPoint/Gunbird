@@ -31,13 +31,13 @@ The game can be played with keyboard or with Game Controller (taking XBOX 360/ON
 
 _KEYBOARD CONTROLS_
 
-### Player 1
+    Player 1
     SPACE         ->  Start
     WASD          ->  Move
     C             ->  Shoot
     V             ->  Bomb
     
-    **Player 2:**
+    Player 2
     NUMPAD INTRO  ->  Start
     ARROW KEYS    ->  Move
     NUMPAD 0      ->  Shoot
@@ -57,6 +57,6 @@ _KEYBOARD CONTROLS_
     F3            ->  Auto-win
     F4            ->  Auto-lose
 
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+### Download our latest version [here]()
+### Check our Game Wiki for more info about the Game [here](https://github.com/EdgyPoint/Gunbird/wiki)
+### Check EdgyPoint's Gunbird repository [here](https://github.com/EdgyPoint/Gunbird)
