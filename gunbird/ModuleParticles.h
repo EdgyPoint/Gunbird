@@ -6,6 +6,7 @@
 #include "Globals.h"
 #include "p2Point.h"
 #include "ModuleCollision.h"
+#include "ModuleEnemies.h"
 
 #define MAX_ACTIVE_PARTICLES 500
 
@@ -63,6 +64,7 @@ private:
 
 public:
 
+	Enemy* target;
 	Particle marionbeam_lv1[3];
 	Particle marionbeam_lv2[3];
 	Particle marionbeamleft_lv1[3];

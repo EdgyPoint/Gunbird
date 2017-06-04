@@ -557,13 +557,7 @@ void Enemy_RotatingTurret::Move()
 	}
 
 	counter++;
-	
 
-
-}
-
-void Enemy_RotatingTurret::Extra_animation()
-{
 	if (status == NORMAL)
 		animation = &normal_base_anim;
 
@@ -576,6 +570,19 @@ void Enemy_RotatingTurret::Extra_animation()
 		else
 			animation = &normal_base_anim;
 	}
+
+	if (hp <= 0)
+	{
+		animation = &dead;
+		collider->rect.h = 0;
+		collider->rect.w = 0;
+	}
+
+}
+
+void Enemy_RotatingTurret::Extra_animation()
+{
+	
 
 	if (hp > 0)
 	App->render->Blit(App->enemies->sprites, position.x + 1, position.y - 10, &(extra_animation->GetCurrentFrame()));
