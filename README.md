@@ -58,6 +58,6 @@ _KEYBOARD CONTROLS_
     F3            ->  Auto-win
     F4            ->  Auto-lose
 
-### Download our latest version [here]()
+### Download our latest version [here](https://github.com/EdgyPoint/Gunbird/releases)
 ### Check our Game Wiki for more info about the Game [here](https://github.com/EdgyPoint/Gunbird/wiki)
 ### Check EdgyPoint's Gunbird repository [here](https://github.com/EdgyPoint/Gunbird)
