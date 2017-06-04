@@ -173,11 +173,17 @@ bool ModuleVillageScene::Start()
 	App->enemies->AddEnemy(ENEMY_TYPES::FOURCANNONTURRET, 160, -460, 0);
 	
 	//--Adding Flying Gunners--
-	if (yflag > -4000)
+	/*if (yflag > -4000)
 	{
 		App->enemies->AddEnemy(ENEMY_TYPES::FLYINGGUNNER, 0, -650, 0);
 		App->enemies->AddEnemy(ENEMY_TYPES::FLYINGGUNNER, 200, -650, 1);
-	}
+	}*/
+	//App->enemies->AddEnemy(ENEMY_TYPES::FLYINGGUNNER, -32, -650, 1);
+	//App->enemies->AddEnemy(ENEMY_TYPES::FLYINGGUNNER, -52, -600, 1);
+	//App->enemies->AddEnemy(ENEMY_TYPES::FLYINGGUNNER, -72, -650, 1);
+	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGGUNNER, 50, -720, 1);
+	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGGUNNER, 30, -670, 1);
+	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGGUNNER, 10, -720, 1);
 
 	return true;
 }

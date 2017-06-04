@@ -11,6 +11,7 @@ class Enemy_FlyingGunner : public Enemy
 private:
 	iPoint original_pos;
 	Animation nothing;
+	Animation arriving_left;
 	Animation arriving_left1;
 	Animation arriving_left2;
 	Animation arriving_left3;
